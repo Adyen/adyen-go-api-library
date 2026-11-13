@@ -183,8 +183,8 @@ func (o PayoutScheduleExecution) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayoutScheduleExecution) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayoutScheduleExecution) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}

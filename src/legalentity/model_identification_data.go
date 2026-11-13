@@ -281,8 +281,8 @@ func (o IdentificationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o IdentificationData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o IdentificationData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CardNumber) {
 		toSerialize["cardNumber"] = o.CardNumber
 	}
@@ -350,3 +350,11 @@ func (o *IdentificationData) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for IdentificationData.Type.
+const (
+	IdentificationDataTypeNationalIdNumber = "nationalIdNumber"
+	IdentificationDataTypePassport         = "passport"
+	IdentificationDataTypeDriversLicense   = "driversLicense"
+	IdentificationDataTypeIdentityCard     = "identityCard"
+)

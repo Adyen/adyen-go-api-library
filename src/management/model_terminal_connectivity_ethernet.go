@@ -148,8 +148,8 @@ func (o TerminalConnectivityEthernet) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalConnectivityEthernet) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalConnectivityEthernet) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.IpAddress) {
 		toSerialize["ipAddress"] = o.IpAddress
 	}

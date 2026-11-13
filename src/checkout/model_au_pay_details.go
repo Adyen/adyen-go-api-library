@@ -228,8 +228,8 @@ func (o AuPayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AuPayDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AuPayDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -293,3 +293,8 @@ func (o *AuPayDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AuPayDetails.Type.
+const (
+	AuPayDetailsTypeAupay = "aupay"
+)

@@ -206,8 +206,8 @@ func (o MbwayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MbwayDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MbwayDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -267,3 +267,8 @@ func (o *MbwayDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for MbwayDetails.Type.
+const (
+	MbwayDetailsTypeMbway = "mbway"
+)

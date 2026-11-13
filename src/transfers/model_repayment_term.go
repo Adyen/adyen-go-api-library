@@ -107,8 +107,8 @@ func (o RepaymentTerm) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RepaymentTerm) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RepaymentTerm) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["estimatedDays"] = o.EstimatedDays
 	if !common.IsNil(o.MaximumDays) {
 		toSerialize["maximumDays"] = o.MaximumDays

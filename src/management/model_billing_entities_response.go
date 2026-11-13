@@ -80,8 +80,8 @@ func (o BillingEntitiesResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BillingEntitiesResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BillingEntitiesResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}

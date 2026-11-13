@@ -73,8 +73,8 @@ func (o ListNonprofitsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ListNonprofitsRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ListNonprofitsRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountHolderIds"] = o.AccountHolderIds
 	return toSerialize, nil
 }

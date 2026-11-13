@@ -11,7 +11,7 @@ package management
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -80,7 +80,7 @@ func (a *TerminalOrdersCompanyLevelApi) CancelOrder(ctx context.Context, r Termi
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -89,7 +89,7 @@ func (a *TerminalOrdersCompanyLevelApi) CancelOrder(ctx context.Context, r Termi
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -98,7 +98,7 @@ func (a *TerminalOrdersCompanyLevelApi) CancelOrder(ctx context.Context, r Termi
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -107,7 +107,7 @@ func (a *TerminalOrdersCompanyLevelApi) CancelOrder(ctx context.Context, r Termi
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -116,7 +116,7 @@ func (a *TerminalOrdersCompanyLevelApi) CancelOrder(ctx context.Context, r Termi
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -187,7 +187,7 @@ func (a *TerminalOrdersCompanyLevelApi) CreateOrder(ctx context.Context, r Termi
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -196,7 +196,7 @@ func (a *TerminalOrdersCompanyLevelApi) CreateOrder(ctx context.Context, r Termi
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -205,7 +205,7 @@ func (a *TerminalOrdersCompanyLevelApi) CreateOrder(ctx context.Context, r Termi
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -214,7 +214,7 @@ func (a *TerminalOrdersCompanyLevelApi) CreateOrder(ctx context.Context, r Termi
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -223,7 +223,7 @@ func (a *TerminalOrdersCompanyLevelApi) CreateOrder(ctx context.Context, r Termi
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -293,7 +293,7 @@ func (a *TerminalOrdersCompanyLevelApi) CreateShippingLocation(ctx context.Conte
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -302,7 +302,7 @@ func (a *TerminalOrdersCompanyLevelApi) CreateShippingLocation(ctx context.Conte
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -311,7 +311,7 @@ func (a *TerminalOrdersCompanyLevelApi) CreateShippingLocation(ctx context.Conte
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -320,7 +320,7 @@ func (a *TerminalOrdersCompanyLevelApi) CreateShippingLocation(ctx context.Conte
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -329,7 +329,7 @@ func (a *TerminalOrdersCompanyLevelApi) CreateShippingLocation(ctx context.Conte
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -397,7 +397,7 @@ func (a *TerminalOrdersCompanyLevelApi) GetOrder(ctx context.Context, r Terminal
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -406,7 +406,7 @@ func (a *TerminalOrdersCompanyLevelApi) GetOrder(ctx context.Context, r Terminal
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -415,7 +415,7 @@ func (a *TerminalOrdersCompanyLevelApi) GetOrder(ctx context.Context, r Terminal
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -424,7 +424,7 @@ func (a *TerminalOrdersCompanyLevelApi) GetOrder(ctx context.Context, r Terminal
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -433,7 +433,7 @@ func (a *TerminalOrdersCompanyLevelApi) GetOrder(ctx context.Context, r Terminal
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -509,7 +509,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListBillingEntities(ctx context.Context,
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -518,7 +518,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListBillingEntities(ctx context.Context,
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -527,7 +527,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListBillingEntities(ctx context.Context,
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -536,7 +536,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListBillingEntities(ctx context.Context,
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -545,7 +545,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListBillingEntities(ctx context.Context,
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -651,7 +651,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListOrders(ctx context.Context, r Termin
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -660,7 +660,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListOrders(ctx context.Context, r Termin
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -669,7 +669,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListOrders(ctx context.Context, r Termin
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -678,7 +678,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListOrders(ctx context.Context, r Termin
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -687,7 +687,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListOrders(ctx context.Context, r Termin
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -783,7 +783,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListShippingLocations(ctx context.Contex
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -792,7 +792,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListShippingLocations(ctx context.Contex
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -801,7 +801,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListShippingLocations(ctx context.Contex
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -810,7 +810,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListShippingLocations(ctx context.Contex
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -819,7 +819,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListShippingLocations(ctx context.Contex
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -885,7 +885,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListTerminalModels(ctx context.Context, 
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -894,7 +894,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListTerminalModels(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -903,7 +903,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListTerminalModels(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -912,7 +912,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListTerminalModels(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -921,7 +921,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListTerminalModels(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -947,7 +947,7 @@ func (r TerminalOrdersCompanyLevelApiListTerminalProductsInput) Country(country 
 	return r
 }
 
-// The terminal model to return products for. Use the ID returned in the [GET &#x60;/terminalModels&#x60;](https://docs.adyen.com/api-explorer/#/ManagementService/latest/get/companies/{companyId}/terminalModels) response. For example, **Verifone.M400**
+// The terminal model to return products for. Use the ID returned in the [GET `/terminalModels`](https://docs.adyen.com/api-explorer/#/ManagementService/latest/get/companies/{companyId}/terminalModels) response. For example, **Verifone.M400**
 func (r TerminalOrdersCompanyLevelApiListTerminalProductsInput) TerminalModelId(terminalModelId string) TerminalOrdersCompanyLevelApiListTerminalProductsInput {
 	r.terminalModelId = &terminalModelId
 	return r
@@ -1026,7 +1026,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListTerminalProducts(ctx context.Context
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -1035,7 +1035,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListTerminalProducts(ctx context.Context
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -1044,7 +1044,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListTerminalProducts(ctx context.Context
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -1053,7 +1053,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListTerminalProducts(ctx context.Context
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -1062,7 +1062,7 @@ func (a *TerminalOrdersCompanyLevelApi) ListTerminalProducts(ctx context.Context
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -1141,7 +1141,7 @@ func (a *TerminalOrdersCompanyLevelApi) UpdateOrder(ctx context.Context, r Termi
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -1150,7 +1150,7 @@ func (a *TerminalOrdersCompanyLevelApi) UpdateOrder(ctx context.Context, r Termi
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -1159,7 +1159,7 @@ func (a *TerminalOrdersCompanyLevelApi) UpdateOrder(ctx context.Context, r Termi
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -1168,7 +1168,7 @@ func (a *TerminalOrdersCompanyLevelApi) UpdateOrder(ctx context.Context, r Termi
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -1177,7 +1177,7 @@ func (a *TerminalOrdersCompanyLevelApi) UpdateOrder(ctx context.Context, r Termi
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError

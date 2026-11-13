@@ -162,8 +162,8 @@ func (o PaymentNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,9 @@ func (o *PaymentNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentNotificationRequest.Type.
+const (
+	PaymentNotificationRequestTypeBalancePlatformPaymentInstrumentCreated = "balancePlatform.paymentInstrument.created"
+	PaymentNotificationRequestTypeBalancePlatformPaymentInstrumentUpdated = "balancePlatform.paymentInstrument.updated"
+)

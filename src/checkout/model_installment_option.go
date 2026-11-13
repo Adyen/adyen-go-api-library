@@ -182,8 +182,8 @@ func (o InstallmentOption) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o InstallmentOption) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o InstallmentOption) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MaxValue) {
 		toSerialize["maxValue"] = o.MaxValue
 	}
@@ -234,3 +234,17 @@ func (v *NullableInstallmentOption) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+// Values allowed for InstallmentOption.Plans items.
+const (
+	InstallmentOptionPlansBonus                = "bonus"
+	InstallmentOptionPlansBuynowPaylater       = "buynow_paylater"
+	InstallmentOptionPlansInteresRefundPrctg   = "interes_refund_prctg"
+	InstallmentOptionPlansInterestBonus        = "interest_bonus"
+	InstallmentOptionPlansNointeresRefundPrctg = "nointeres_refund_prctg"
+	InstallmentOptionPlansNointerestBonus      = "nointerest_bonus"
+	InstallmentOptionPlansRefundPrctg          = "refund_prctg"
+	InstallmentOptionPlansRegular              = "regular"
+	InstallmentOptionPlansRevolving            = "revolving"
+	InstallmentOptionPlansWithInterest         = "with_interest"
+)

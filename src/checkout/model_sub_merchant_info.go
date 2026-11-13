@@ -385,8 +385,8 @@ func (o SubMerchantInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SubMerchantInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SubMerchantInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Address) {
 		toSerialize["address"] = o.Address
 	}

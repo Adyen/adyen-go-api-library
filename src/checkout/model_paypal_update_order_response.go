@@ -100,8 +100,8 @@ func (o PaypalUpdateOrderResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaypalUpdateOrderResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaypalUpdateOrderResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["paymentData"] = o.PaymentData
 	toSerialize["status"] = o.Status
 	return toSerialize, nil
@@ -152,3 +152,9 @@ func (o *PaypalUpdateOrderResponse) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for PaypalUpdateOrderResponse.Status.
+const (
+	PaypalUpdateOrderResponseStatusError   = "error"
+	PaypalUpdateOrderResponseStatusSuccess = "success"
+)

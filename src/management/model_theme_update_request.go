@@ -125,8 +125,8 @@ func (o ThemeUpdateRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThemeUpdateRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThemeUpdateRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Mode) {
 		toSerialize["mode"] = o.Mode
 	}
@@ -181,3 +181,9 @@ func (o *ThemeUpdateRequest) isValidMode() bool {
 	}
 	return false
 }
+
+// Values allowed for ThemeUpdateRequest.Mode.
+const (
+	ThemeUpdateRequestModeDark  = "dark"
+	ThemeUpdateRequestModeLight = "light"
+)

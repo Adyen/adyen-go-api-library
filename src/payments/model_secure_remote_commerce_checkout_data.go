@@ -250,8 +250,8 @@ func (o SecureRemoteCommerceCheckoutData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SecureRemoteCommerceCheckoutData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SecureRemoteCommerceCheckoutData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutPayload) {
 		toSerialize["checkoutPayload"] = o.CheckoutPayload
 	}
@@ -318,3 +318,9 @@ func (o *SecureRemoteCommerceCheckoutData) isValidScheme() bool {
 	}
 	return false
 }
+
+// Values allowed for SecureRemoteCommerceCheckoutData.Scheme.
+const (
+	SecureRemoteCommerceCheckoutDataSchemeMc   = "mc"
+	SecureRemoteCommerceCheckoutDataSchemeVisa = "visa"
+)

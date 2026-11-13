@@ -73,8 +73,8 @@ func (o ApproveTransferLimitRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ApproveTransferLimitRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ApproveTransferLimitRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["transferLimitIds"] = o.TransferLimitIds
 	return toSerialize, nil
 }

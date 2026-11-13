@@ -73,8 +73,8 @@ func (o SubmitScaAssociationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SubmitScaAssociationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SubmitScaAssociationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["entities"] = o.Entities
 	return toSerialize, nil
 }

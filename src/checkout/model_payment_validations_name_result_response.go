@@ -182,8 +182,8 @@ func (o PaymentValidationsNameResultResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentValidationsNameResultResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentValidationsNameResultResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.FirstName) {
 		toSerialize["firstName"] = o.FirstName
 	}

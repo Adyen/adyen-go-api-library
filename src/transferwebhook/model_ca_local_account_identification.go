@@ -194,8 +194,8 @@ func (o CALocalAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CALocalAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CALocalAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	if !common.IsNil(o.AccountType) {
 		toSerialize["accountType"] = o.AccountType
@@ -260,3 +260,14 @@ func (o *CALocalAccountIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CALocalAccountIdentification.AccountType.
+const (
+	CALocalAccountIdentificationAccountTypeChecking = "checking"
+	CALocalAccountIdentificationAccountTypeSavings  = "savings"
+)
+
+// Values allowed for CALocalAccountIdentification.Type.
+const (
+	CALocalAccountIdentificationTypeCaLocal = "caLocal"
+)

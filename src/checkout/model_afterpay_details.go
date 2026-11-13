@@ -321,8 +321,8 @@ func (o AfterpayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AfterpayDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AfterpayDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
 	}
@@ -393,3 +393,12 @@ func (o *AfterpayDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AfterpayDetails.Type.
+const (
+	AfterpayDetailsTypeAfterpayDefault = "afterpay_default"
+	AfterpayDetailsTypeAfterpaytouch   = "afterpaytouch"
+	AfterpayDetailsTypeAfterpaytouchUS = "afterpaytouch_US"
+	AfterpayDetailsTypeAfterpayB2b     = "afterpay_b2b"
+	AfterpayDetailsTypeClearpay        = "clearpay"
+)

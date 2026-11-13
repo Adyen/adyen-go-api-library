@@ -651,8 +651,8 @@ func (o SplitConfigurationLogic) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SplitConfigurationLogic) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SplitConfigurationLogic) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcquiringFees) {
 		toSerialize["acquiringFees"] = o.AcquiringFees
 	}
@@ -870,3 +870,89 @@ func (o *SplitConfigurationLogic) isValidTip() bool {
 	}
 	return false
 }
+
+// Values allowed for SplitConfigurationLogic.AcquiringFees.
+const (
+	SplitConfigurationLogicAcquiringFeesDeductFromLiableAccount     = "deductFromLiableAccount"
+	SplitConfigurationLogicAcquiringFeesDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for SplitConfigurationLogic.AdyenCommission.
+const (
+	SplitConfigurationLogicAdyenCommissionDeductFromLiableAccount     = "deductFromLiableAccount"
+	SplitConfigurationLogicAdyenCommissionDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for SplitConfigurationLogic.AdyenFees.
+const (
+	SplitConfigurationLogicAdyenFeesDeductFromLiableAccount     = "deductFromLiableAccount"
+	SplitConfigurationLogicAdyenFeesDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for SplitConfigurationLogic.AdyenMarkup.
+const (
+	SplitConfigurationLogicAdyenMarkupDeductFromLiableAccount     = "deductFromLiableAccount"
+	SplitConfigurationLogicAdyenMarkupDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for SplitConfigurationLogic.Chargeback.
+const (
+	SplitConfigurationLogicChargebackDeductFromLiableAccount     = "deductFromLiableAccount"
+	SplitConfigurationLogicChargebackDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+	SplitConfigurationLogicChargebackDeductAccordingToSplitRatio = "deductAccordingToSplitRatio"
+)
+
+// Values allowed for SplitConfigurationLogic.ChargebackCostAllocation.
+const (
+	SplitConfigurationLogicChargebackCostAllocationDeductFromLiableAccount     = "deductFromLiableAccount"
+	SplitConfigurationLogicChargebackCostAllocationDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for SplitConfigurationLogic.Interchange.
+const (
+	SplitConfigurationLogicInterchangeDeductFromLiableAccount     = "deductFromLiableAccount"
+	SplitConfigurationLogicInterchangeDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for SplitConfigurationLogic.PaymentFee.
+const (
+	SplitConfigurationLogicPaymentFeeDeductFromLiableAccount     = "deductFromLiableAccount"
+	SplitConfigurationLogicPaymentFeeDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for SplitConfigurationLogic.Refund.
+const (
+	SplitConfigurationLogicRefundDeductFromLiableAccount     = "deductFromLiableAccount"
+	SplitConfigurationLogicRefundDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+	SplitConfigurationLogicRefundDeductAccordingToSplitRatio = "deductAccordingToSplitRatio"
+)
+
+// Values allowed for SplitConfigurationLogic.RefundCostAllocation.
+const (
+	SplitConfigurationLogicRefundCostAllocationDeductFromLiableAccount     = "deductFromLiableAccount"
+	SplitConfigurationLogicRefundCostAllocationDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for SplitConfigurationLogic.Remainder.
+const (
+	SplitConfigurationLogicRemainderAddToLiableAccount     = "addToLiableAccount"
+	SplitConfigurationLogicRemainderAddToOneBalanceAccount = "addToOneBalanceAccount"
+)
+
+// Values allowed for SplitConfigurationLogic.SchemeFee.
+const (
+	SplitConfigurationLogicSchemeFeeDeductFromLiableAccount     = "deductFromLiableAccount"
+	SplitConfigurationLogicSchemeFeeDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for SplitConfigurationLogic.Surcharge.
+const (
+	SplitConfigurationLogicSurchargeAddToLiableAccount     = "addToLiableAccount"
+	SplitConfigurationLogicSurchargeAddToOneBalanceAccount = "addToOneBalanceAccount"
+)
+
+// Values allowed for SplitConfigurationLogic.Tip.
+const (
+	SplitConfigurationLogicTipAddToLiableAccount     = "addToLiableAccount"
+	SplitConfigurationLogicTipAddToOneBalanceAccount = "addToOneBalanceAccount"
+)

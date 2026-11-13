@@ -11,7 +11,7 @@ package balanceplatform
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 
@@ -74,7 +74,7 @@ func (a *ManageCardPINApi) ChangeCardPin(ctx context.Context, r ManageCardPINApi
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -83,7 +83,7 @@ func (a *ManageCardPINApi) ChangeCardPin(ctx context.Context, r ManageCardPINApi
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -92,7 +92,7 @@ func (a *ManageCardPINApi) ChangeCardPin(ctx context.Context, r ManageCardPINApi
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -101,7 +101,7 @@ func (a *ManageCardPINApi) ChangeCardPin(ctx context.Context, r ManageCardPINApi
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -182,7 +182,7 @@ func (a *ManageCardPINApi) PublicKey(ctx context.Context, r ManageCardPINApiPubl
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -191,7 +191,7 @@ func (a *ManageCardPINApi) PublicKey(ctx context.Context, r ManageCardPINApiPubl
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -200,7 +200,7 @@ func (a *ManageCardPINApi) PublicKey(ctx context.Context, r ManageCardPINApiPubl
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -209,7 +209,7 @@ func (a *ManageCardPINApi) PublicKey(ctx context.Context, r ManageCardPINApiPubl
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -273,7 +273,7 @@ func (a *ManageCardPINApi) RevealCardPin(ctx context.Context, r ManageCardPINApi
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -282,7 +282,7 @@ func (a *ManageCardPINApi) RevealCardPin(ctx context.Context, r ManageCardPINApi
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -291,7 +291,7 @@ func (a *ManageCardPINApi) RevealCardPin(ctx context.Context, r ManageCardPINApi
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -300,7 +300,7 @@ func (a *ManageCardPINApi) RevealCardPin(ctx context.Context, r ManageCardPINApi
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError

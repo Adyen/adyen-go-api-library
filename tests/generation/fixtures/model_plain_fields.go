@@ -19,15 +19,17 @@ var _ common.MappedNullable = &PlainFields{}
 
 // PlainFields struct for PlainFields
 type PlainFields struct {
-	Name        *string                `json:"name,omitempty"`
-	Enabled     *bool                  `json:"enabled,omitempty"`
-	Count       *int32                 `json:"count,omitempty"`
-	Amount      *Amount                `json:"amount,omitempty"`
-	Metadata    *map[string]string     `json:"metadata,omitempty"`
-	Amounts     *map[string]Amount     `json:"amounts,omitempty"`
-	RequiredMap map[string]string      `json:"requiredMap"`
-	Tags        []string               `json:"tags,omitempty"`
-	FreeForm    map[string]interface{} `json:"freeForm,omitempty"`
+	Name        *string            `json:"name,omitempty"`
+	Enabled     *bool              `json:"enabled,omitempty"`
+	Count       *int32             `json:"count,omitempty"`
+	Amount      *Amount            `json:"amount,omitempty"`
+	Metadata    *map[string]string `json:"metadata,omitempty"`
+	Amounts     *map[string]Amount `json:"amounts,omitempty"`
+	RequiredMap map[string]string  `json:"requiredMap"`
+	Tags        []string           `json:"tags,omitempty"`
+	FreeForm    map[string]any     `json:"freeForm,omitempty"`
+	Channel     *string            `json:"channel,omitempty"`
+	Channels    []string           `json:"channels,omitempty"`
 }
 
 // NewPlainFields instantiates a new PlainFields object
@@ -301,9 +303,9 @@ func (o *PlainFields) SetTags(v []string) {
 }
 
 // GetFreeForm returns the FreeForm field value if set, zero value otherwise.
-func (o *PlainFields) GetFreeForm() map[string]interface{} {
+func (o *PlainFields) GetFreeForm() map[string]any {
 	if o == nil || common.IsNil(o.FreeForm) {
-		var ret map[string]interface{}
+		var ret map[string]any
 		return ret
 	}
 	return o.FreeForm
@@ -311,9 +313,9 @@ func (o *PlainFields) GetFreeForm() map[string]interface{} {
 
 // GetFreeFormOk returns a tuple with the FreeForm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PlainFields) GetFreeFormOk() (map[string]interface{}, bool) {
+func (o *PlainFields) GetFreeFormOk() (map[string]any, bool) {
 	if o == nil || common.IsNil(o.FreeForm) {
-		return map[string]interface{}{}, false
+		return map[string]any{}, false
 	}
 	return o.FreeForm, true
 }
@@ -327,9 +329,73 @@ func (o *PlainFields) HasFreeForm() bool {
 	return false
 }
 
-// SetFreeForm gets a reference to the given map[string]interface{} and assigns it to the FreeForm field.
-func (o *PlainFields) SetFreeForm(v map[string]interface{}) {
+// SetFreeForm gets a reference to the given map[string]any and assigns it to the FreeForm field.
+func (o *PlainFields) SetFreeForm(v map[string]any) {
 	o.FreeForm = v
+}
+
+// GetChannel returns the Channel field value if set, zero value otherwise.
+func (o *PlainFields) GetChannel() string {
+	if o == nil || common.IsNil(o.Channel) {
+		var ret string
+		return ret
+	}
+	return *o.Channel
+}
+
+// GetChannelOk returns a tuple with the Channel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlainFields) GetChannelOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Channel) {
+		return nil, false
+	}
+	return o.Channel, true
+}
+
+// HasChannel returns a boolean if a field has been set.
+func (o *PlainFields) HasChannel() bool {
+	if o != nil && !common.IsNil(o.Channel) {
+		return true
+	}
+
+	return false
+}
+
+// SetChannel gets a reference to the given string and assigns it to the Channel field.
+func (o *PlainFields) SetChannel(v string) {
+	o.Channel = &v
+}
+
+// GetChannels returns the Channels field value if set, zero value otherwise.
+func (o *PlainFields) GetChannels() []string {
+	if o == nil || common.IsNil(o.Channels) {
+		var ret []string
+		return ret
+	}
+	return o.Channels
+}
+
+// GetChannelsOk returns a tuple with the Channels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PlainFields) GetChannelsOk() ([]string, bool) {
+	if o == nil || common.IsNil(o.Channels) {
+		return nil, false
+	}
+	return o.Channels, true
+}
+
+// HasChannels returns a boolean if a field has been set.
+func (o *PlainFields) HasChannels() bool {
+	if o != nil && !common.IsNil(o.Channels) {
+		return true
+	}
+
+	return false
+}
+
+// SetChannels gets a reference to the given []string and assigns it to the Channels field.
+func (o *PlainFields) SetChannels(v []string) {
+	o.Channels = v
 }
 
 func (o PlainFields) MarshalJSON() ([]byte, error) {
@@ -340,8 +406,8 @@ func (o PlainFields) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PlainFields) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PlainFields) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -366,6 +432,12 @@ func (o PlainFields) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.FreeForm) {
 		toSerialize["freeForm"] = o.FreeForm
+	}
+	if !common.IsNil(o.Channel) {
+		toSerialize["channel"] = o.Channel
+	}
+	if !common.IsNil(o.Channels) {
+		toSerialize["channels"] = o.Channels
 	}
 	return toSerialize, nil
 }
@@ -405,3 +477,31 @@ func (v *NullablePlainFields) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+func (o *PlainFields) isValidChannel() bool {
+	var allowedEnumValues = []string{"iOS", "Android", "POS", "delayedCharge", "TOKEN_SHARING", "ONECLICK,RECURRING", "application/pdf", "[capture-received]"}
+	for _, allowed := range allowedEnumValues {
+		if o.GetChannel() == allowed {
+			return true
+		}
+	}
+	return false
+}
+
+// Values allowed for PlainFields.Channel.
+const (
+	PlainFieldsChannelIOS               = "iOS"
+	PlainFieldsChannelAndroid           = "Android"
+	PlainFieldsChannelPOS               = "POS"
+	PlainFieldsChannelDelayedCharge     = "delayedCharge"
+	PlainFieldsChannelTOKENSHARING      = "TOKEN_SHARING"
+	PlainFieldsChannelONECLICKRECURRING = "ONECLICK,RECURRING"
+	PlainFieldsChannelApplicationPdf    = "application/pdf"
+	PlainFieldsChannel_CaptureReceived  = "[capture-received]"
+)
+
+// Values allowed for PlainFields.Channels items.
+const (
+	PlainFieldsChannelsWeb = "web"
+	PlainFieldsChannelsApp = "app"
+)

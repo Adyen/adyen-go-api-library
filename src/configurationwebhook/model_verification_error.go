@@ -250,8 +250,8 @@ func (o VerificationError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o VerificationError) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o VerificationError) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Capabilities) {
 		toSerialize["capabilities"] = o.Capabilities
 	}
@@ -318,3 +318,70 @@ func (o *VerificationError) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for VerificationError.Capabilities items.
+const (
+	VerificationErrorCapabilitiesAcceptExternalFunding                             = "acceptExternalFunding"
+	VerificationErrorCapabilitiesAcceptPspFunding                                  = "acceptPspFunding"
+	VerificationErrorCapabilitiesAcceptTransactionInRestrictedCountries            = "acceptTransactionInRestrictedCountries"
+	VerificationErrorCapabilitiesAcceptTransactionInRestrictedCountriesCommercial  = "acceptTransactionInRestrictedCountriesCommercial"
+	VerificationErrorCapabilitiesAcceptTransactionInRestrictedCountriesConsumer    = "acceptTransactionInRestrictedCountriesConsumer"
+	VerificationErrorCapabilitiesAcceptTransactionInRestrictedIndustries           = "acceptTransactionInRestrictedIndustries"
+	VerificationErrorCapabilitiesAcceptTransactionInRestrictedIndustriesCommercial = "acceptTransactionInRestrictedIndustriesCommercial"
+	VerificationErrorCapabilitiesAcceptTransactionInRestrictedIndustriesConsumer   = "acceptTransactionInRestrictedIndustriesConsumer"
+	VerificationErrorCapabilitiesAcquiring                                         = "acquiring"
+	VerificationErrorCapabilitiesAtmWithdrawal                                     = "atmWithdrawal"
+	VerificationErrorCapabilitiesAtmWithdrawalCommercial                           = "atmWithdrawalCommercial"
+	VerificationErrorCapabilitiesAtmWithdrawalConsumer                             = "atmWithdrawalConsumer"
+	VerificationErrorCapabilitiesAtmWithdrawalInRestrictedCountries                = "atmWithdrawalInRestrictedCountries"
+	VerificationErrorCapabilitiesAtmWithdrawalInRestrictedCountriesCommercial      = "atmWithdrawalInRestrictedCountriesCommercial"
+	VerificationErrorCapabilitiesAtmWithdrawalInRestrictedCountriesConsumer        = "atmWithdrawalInRestrictedCountriesConsumer"
+	VerificationErrorCapabilitiesAuthorisedPaymentInstrumentUser                   = "authorisedPaymentInstrumentUser"
+	VerificationErrorCapabilitiesGetGrantOffers                                    = "getGrantOffers"
+	VerificationErrorCapabilitiesIssueBankAccount                                  = "issueBankAccount"
+	VerificationErrorCapabilitiesIssueCard                                         = "issueCard"
+	VerificationErrorCapabilitiesIssueCardCommercial                               = "issueCardCommercial"
+	VerificationErrorCapabilitiesIssueCardConsumer                                 = "issueCardConsumer"
+	VerificationErrorCapabilitiesIssueChargeCard                                   = "issueChargeCard"
+	VerificationErrorCapabilitiesIssueChargeCardCommercial                         = "issueChargeCardCommercial"
+	VerificationErrorCapabilitiesIssueCreditLimit                                  = "issueCreditLimit"
+	VerificationErrorCapabilitiesLocalAcceptance                                   = "localAcceptance"
+	VerificationErrorCapabilitiesPayout                                            = "payout"
+	VerificationErrorCapabilitiesPayoutToTransferInstrument                        = "payoutToTransferInstrument"
+	VerificationErrorCapabilitiesProcessing                                        = "processing"
+	VerificationErrorCapabilitiesReceiveFromBalanceAccount                         = "receiveFromBalanceAccount"
+	VerificationErrorCapabilitiesReceiveFromPlatformPayments                       = "receiveFromPlatformPayments"
+	VerificationErrorCapabilitiesReceiveFromThirdParty                             = "receiveFromThirdParty"
+	VerificationErrorCapabilitiesReceiveFromTransferInstrument                     = "receiveFromTransferInstrument"
+	VerificationErrorCapabilitiesReceiveGrants                                     = "receiveGrants"
+	VerificationErrorCapabilitiesReceivePayments                                   = "receivePayments"
+	VerificationErrorCapabilitiesSendToBalanceAccount                              = "sendToBalanceAccount"
+	VerificationErrorCapabilitiesSendToThirdParty                                  = "sendToThirdParty"
+	VerificationErrorCapabilitiesSendToTransferInstrument                          = "sendToTransferInstrument"
+	VerificationErrorCapabilitiesThirdPartyFunding                                 = "thirdPartyFunding"
+	VerificationErrorCapabilitiesUseCard                                           = "useCard"
+	VerificationErrorCapabilitiesUseCardCommercial                                 = "useCardCommercial"
+	VerificationErrorCapabilitiesUseCardConsumer                                   = "useCardConsumer"
+	VerificationErrorCapabilitiesUseCardInRestrictedCountries                      = "useCardInRestrictedCountries"
+	VerificationErrorCapabilitiesUseCardInRestrictedCountriesCommercial            = "useCardInRestrictedCountriesCommercial"
+	VerificationErrorCapabilitiesUseCardInRestrictedCountriesConsumer              = "useCardInRestrictedCountriesConsumer"
+	VerificationErrorCapabilitiesUseCardInRestrictedIndustries                     = "useCardInRestrictedIndustries"
+	VerificationErrorCapabilitiesUseCardInRestrictedIndustriesCommercial           = "useCardInRestrictedIndustriesCommercial"
+	VerificationErrorCapabilitiesUseCardInRestrictedIndustriesConsumer             = "useCardInRestrictedIndustriesConsumer"
+	VerificationErrorCapabilitiesUseChargeCard                                     = "useChargeCard"
+	VerificationErrorCapabilitiesUseChargeCardCommercial                           = "useChargeCardCommercial"
+	VerificationErrorCapabilitiesWithdrawFromAtm                                   = "withdrawFromAtm"
+	VerificationErrorCapabilitiesWithdrawFromAtmCommercial                         = "withdrawFromAtmCommercial"
+	VerificationErrorCapabilitiesWithdrawFromAtmConsumer                           = "withdrawFromAtmConsumer"
+	VerificationErrorCapabilitiesWithdrawFromAtmInRestrictedCountries              = "withdrawFromAtmInRestrictedCountries"
+	VerificationErrorCapabilitiesWithdrawFromAtmInRestrictedCountriesCommercial    = "withdrawFromAtmInRestrictedCountriesCommercial"
+	VerificationErrorCapabilitiesWithdrawFromAtmInRestrictedCountriesConsumer      = "withdrawFromAtmInRestrictedCountriesConsumer"
+)
+
+// Values allowed for VerificationError.Type.
+const (
+	VerificationErrorTypeDataMissing   = "dataMissing"
+	VerificationErrorTypeDataReview    = "dataReview"
+	VerificationErrorTypeInvalidInput  = "invalidInput"
+	VerificationErrorTypePendingStatus = "pendingStatus"
+)

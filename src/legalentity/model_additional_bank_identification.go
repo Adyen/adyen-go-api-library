@@ -114,8 +114,8 @@ func (o AdditionalBankIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalBankIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalBankIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}
@@ -170,3 +170,11 @@ func (o *AdditionalBankIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AdditionalBankIdentification.Type.
+const (
+	AdditionalBankIdentificationTypeAuBsbCode       = "auBsbCode"
+	AdditionalBankIdentificationTypeCaRoutingNumber = "caRoutingNumber"
+	AdditionalBankIdentificationTypeGbSortCode      = "gbSortCode"
+	AdditionalBankIdentificationTypeUsRoutingNumber = "usRoutingNumber"
+)

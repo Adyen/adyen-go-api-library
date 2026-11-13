@@ -254,8 +254,8 @@ func (o PlatformPayment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PlatformPayment) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PlatformPayment) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ModificationMerchantReference) {
 		toSerialize["modificationMerchantReference"] = o.ModificationMerchantReference
 	}
@@ -331,3 +331,30 @@ func (o *PlatformPayment) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PlatformPayment.PlatformPaymentType.
+const (
+	PlatformPaymentPlatformPaymentTypeAcquiringFees         = "AcquiringFees"
+	PlatformPaymentPlatformPaymentTypeAdyenCommission       = "AdyenCommission"
+	PlatformPaymentPlatformPaymentTypeAdyenFees             = "AdyenFees"
+	PlatformPaymentPlatformPaymentTypeAdyenMarkup           = "AdyenMarkup"
+	PlatformPaymentPlatformPaymentTypeBalanceAccount        = "BalanceAccount"
+	PlatformPaymentPlatformPaymentTypeChargebackRemainder   = "ChargebackRemainder"
+	PlatformPaymentPlatformPaymentTypeCommission            = "Commission"
+	PlatformPaymentPlatformPaymentTypeDCCMarkup             = "DCCMarkup"
+	PlatformPaymentPlatformPaymentTypeDCCPlatformCommission = "DCCPlatformCommission"
+	PlatformPaymentPlatformPaymentTypeDefault               = "Default"
+	PlatformPaymentPlatformPaymentTypeInterchange           = "Interchange"
+	PlatformPaymentPlatformPaymentTypePaymentFee            = "PaymentFee"
+	PlatformPaymentPlatformPaymentTypeRemainder             = "Remainder"
+	PlatformPaymentPlatformPaymentTypeSchemeFee             = "SchemeFee"
+	PlatformPaymentPlatformPaymentTypeSurcharge             = "Surcharge"
+	PlatformPaymentPlatformPaymentTypeTip                   = "Tip"
+	PlatformPaymentPlatformPaymentTypeTopUp                 = "TopUp"
+	PlatformPaymentPlatformPaymentTypeVAT                   = "VAT"
+)
+
+// Values allowed for PlatformPayment.Type.
+const (
+	PlatformPaymentTypePlatformPayment = "platformPayment"
+)

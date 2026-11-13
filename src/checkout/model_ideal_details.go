@@ -262,8 +262,8 @@ func (o IdealDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o IdealDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o IdealDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -330,3 +330,8 @@ func (o *IdealDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for IdealDetails.Type.
+const (
+	IdealDetailsTypeIdeal = "ideal"
+)

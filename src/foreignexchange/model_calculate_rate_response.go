@@ -80,8 +80,8 @@ func (o CalculateRateResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CalculateRateResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CalculateRateResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ExchangeCalculations) {
 		toSerialize["exchangeCalculations"] = o.ExchangeCalculations
 	}

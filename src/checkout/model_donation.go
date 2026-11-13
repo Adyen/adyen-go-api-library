@@ -210,8 +210,8 @@ func (o Donation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Donation) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Donation) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["currency"] = o.Currency
 	if !common.IsNil(o.DonationType) {
 		toSerialize["donationType"] = o.DonationType

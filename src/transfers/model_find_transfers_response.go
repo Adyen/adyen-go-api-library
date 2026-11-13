@@ -114,8 +114,8 @@ func (o FindTransfersResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FindTransfersResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o FindTransfersResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Links) {
 		toSerialize["_links"] = o.Links
 	}

@@ -100,8 +100,8 @@ func (o ShopperTaxInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ShopperTaxInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ShopperTaxInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["taxCountryCode"] = o.TaxCountryCode
 	toSerialize["taxIdentificationNumber"] = o.TaxIdentificationNumber
 	return toSerialize, nil

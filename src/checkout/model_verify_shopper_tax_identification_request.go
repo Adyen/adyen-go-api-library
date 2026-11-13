@@ -127,8 +127,8 @@ func (o VerifyShopperTaxIdentificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o VerifyShopperTaxIdentificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o VerifyShopperTaxIdentificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["shopperReference"] = o.ShopperReference
 	toSerialize["shopperTaxIdentification"] = o.ShopperTaxIdentification

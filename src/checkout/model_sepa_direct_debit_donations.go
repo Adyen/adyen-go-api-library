@@ -228,8 +228,8 @@ func (o SepaDirectDebitDonations) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SepaDirectDebitDonations) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SepaDirectDebitDonations) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -293,3 +293,8 @@ func (o *SepaDirectDebitDonations) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for SepaDirectDebitDonations.Type.
+const (
+	SepaDirectDebitDonationsTypeSepadirectdebit = "sepadirectdebit"
+)

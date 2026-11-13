@@ -327,8 +327,8 @@ func (o PixPayByBankDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PixPayByBankDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PixPayByBankDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -401,3 +401,8 @@ func (o *PixPayByBankDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PixPayByBankDetails.Type.
+const (
+	PixPayByBankDetailsTypePaybybankPix = "paybybank_pix"
+)

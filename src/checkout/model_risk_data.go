@@ -182,8 +182,8 @@ func (o RiskData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RiskData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RiskData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ClientData) {
 		toSerialize["clientData"] = o.ClientData
 	}

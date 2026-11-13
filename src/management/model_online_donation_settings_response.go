@@ -216,8 +216,8 @@ func (o OnlineDonationSettingsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OnlineDonationSettingsResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o OnlineDonationSettingsResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Amounts) {
 		toSerialize["amounts"] = o.Amounts
 	}

@@ -162,8 +162,8 @@ func (o AuthenticationNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AuthenticationNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AuthenticationNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,8 @@ func (o *AuthenticationNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AuthenticationNotificationRequest.Type.
+const (
+	AuthenticationNotificationRequestTypeBalancePlatformAuthenticationCreated = "balancePlatform.authentication.created"
+)

@@ -73,8 +73,8 @@ func (o ThresholdRepayment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThresholdRepayment) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThresholdRepayment) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	return toSerialize, nil
 }

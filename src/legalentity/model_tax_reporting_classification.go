@@ -182,8 +182,8 @@ func (o TaxReportingClassification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TaxReportingClassification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TaxReportingClassification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BusinessType) {
 		toSerialize["businessType"] = o.BusinessType
 	}
@@ -262,3 +262,30 @@ func (o *TaxReportingClassification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TaxReportingClassification.BusinessType.
+const (
+	TaxReportingClassificationBusinessTypeOther                           = "other"
+	TaxReportingClassificationBusinessTypeListedPublicCompany             = "listedPublicCompany"
+	TaxReportingClassificationBusinessTypeSubsidiaryOfListedPublicCompany = "subsidiaryOfListedPublicCompany"
+	TaxReportingClassificationBusinessTypeGovernmentalOrganization        = "governmentalOrganization"
+	TaxReportingClassificationBusinessTypeInternationalOrganization       = "internationalOrganization"
+	TaxReportingClassificationBusinessTypeFinancialInstitution            = "financialInstitution"
+)
+
+// Values allowed for TaxReportingClassification.MainSourceOfIncome.
+const (
+	TaxReportingClassificationMainSourceOfIncomeBusinessOperation           = "businessOperation"
+	TaxReportingClassificationMainSourceOfIncomeRealEstateSales             = "realEstateSales"
+	TaxReportingClassificationMainSourceOfIncomeInvestmentInterestOrRoyalty = "investmentInterestOrRoyalty"
+	TaxReportingClassificationMainSourceOfIncomePropertyRental              = "propertyRental"
+	TaxReportingClassificationMainSourceOfIncomeOther                       = "other"
+)
+
+// Values allowed for TaxReportingClassification.Type.
+const (
+	TaxReportingClassificationTypeNonFinancialNonReportable = "nonFinancialNonReportable"
+	TaxReportingClassificationTypeFinancialNonReportable    = "financialNonReportable"
+	TaxReportingClassificationTypeNonFinancialActive        = "nonFinancialActive"
+	TaxReportingClassificationTypeNonFinancialPassive       = "nonFinancialPassive"
+)

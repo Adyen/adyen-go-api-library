@@ -481,8 +481,8 @@ func (o SourceOfFunds) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SourceOfFunds) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SourceOfFunds) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["adyenProcessedFunds"] = o.AdyenProcessedFunds
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
@@ -568,3 +568,22 @@ func (o *SourceOfFunds) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for SourceOfFunds.Type.
+const (
+	SourceOfFundsTypeBusiness             = "business"
+	SourceOfFundsTypeEmployment           = "employment"
+	SourceOfFundsTypeDonations            = "donations"
+	SourceOfFundsTypeInheritance          = "inheritance"
+	SourceOfFundsTypeFinancialAid         = "financialAid"
+	SourceOfFundsTypeRentalIncome         = "rentalIncome"
+	SourceOfFundsTypeDividendIncome       = "dividendIncome"
+	SourceOfFundsTypeRoyaltyIncome        = "royaltyIncome"
+	SourceOfFundsTypeThirdPartyFunding    = "thirdPartyFunding"
+	SourceOfFundsTypePensionIncome        = "pensionIncome"
+	SourceOfFundsTypeInsuranceSettlement  = "insuranceSettlement"
+	SourceOfFundsTypeCryptocurrencyIncome = "cryptocurrencyIncome"
+	SourceOfFundsTypeAssetSale            = "assetSale"
+	SourceOfFundsTypeLoans                = "loans"
+	SourceOfFundsTypeGamblingWinnings     = "gamblingWinnings"
+)

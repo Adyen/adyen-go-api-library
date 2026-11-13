@@ -134,8 +134,8 @@ func (o GetTermsOfServiceDocumentRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetTermsOfServiceDocumentRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GetTermsOfServiceDocumentRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["language"] = o.Language
 	if !common.IsNil(o.TermsOfServiceDocumentFormat) {
 		toSerialize["termsOfServiceDocumentFormat"] = o.TermsOfServiceDocumentFormat
@@ -189,3 +189,19 @@ func (o *GetTermsOfServiceDocumentRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for GetTermsOfServiceDocumentRequest.Type.
+const (
+	GetTermsOfServiceDocumentRequestTypeAdyenAccount              = "adyenAccount"
+	GetTermsOfServiceDocumentRequestTypeAdyenCapital              = "adyenCapital"
+	GetTermsOfServiceDocumentRequestTypeAdyenCapitalCashAdvance   = "adyenCapitalCashAdvance"
+	GetTermsOfServiceDocumentRequestTypeAdyenCard                 = "adyenCard"
+	GetTermsOfServiceDocumentRequestTypeAdyenChargeCard           = "adyenChargeCard"
+	GetTermsOfServiceDocumentRequestTypeAdyenForPlatformsAdvanced = "adyenForPlatformsAdvanced"
+	GetTermsOfServiceDocumentRequestTypeAdyenForPlatformsManage   = "adyenForPlatformsManage"
+	GetTermsOfServiceDocumentRequestTypeAdyenFranchisee           = "adyenFranchisee"
+	GetTermsOfServiceDocumentRequestTypeAdyenIssuing              = "adyenIssuing"
+	GetTermsOfServiceDocumentRequestTypeAdyenPccr                 = "adyenPccr"
+	GetTermsOfServiceDocumentRequestTypeDirectDebit               = "directDebit"
+	GetTermsOfServiceDocumentRequestTypeKycOnInvite               = "kycOnInvite"
+)

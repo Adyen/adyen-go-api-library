@@ -209,8 +209,8 @@ func (o CardDetailsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardDetailsRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CardDetailsRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CardNumber) {
 		toSerialize["cardNumber"] = o.CardNumber
 	}

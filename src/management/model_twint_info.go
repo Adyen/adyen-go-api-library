@@ -73,8 +73,8 @@ func (o TwintInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TwintInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TwintInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["logo"] = o.Logo
 	return toSerialize, nil
 }

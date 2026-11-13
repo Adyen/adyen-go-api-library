@@ -182,8 +182,8 @@ func (o ThreeDSRequestData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThreeDSRequestData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThreeDSRequestData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ChallengeWindowSize) {
 		toSerialize["challengeWindowSize"] = o.ChallengeWindowSize
 	}
@@ -271,3 +271,30 @@ func (o *ThreeDSRequestData) isValidThreeDSVersion() bool {
 	}
 	return false
 }
+
+// Values allowed for ThreeDSRequestData.ChallengeWindowSize.
+const (
+	ThreeDSRequestDataChallengeWindowSize01 = "01"
+	ThreeDSRequestDataChallengeWindowSize02 = "02"
+	ThreeDSRequestDataChallengeWindowSize03 = "03"
+	ThreeDSRequestDataChallengeWindowSize04 = "04"
+	ThreeDSRequestDataChallengeWindowSize05 = "05"
+)
+
+// Values allowed for ThreeDSRequestData.DataOnly.
+const (
+	ThreeDSRequestDataDataOnlyFalse = "false"
+	ThreeDSRequestDataDataOnlyTrue  = "true"
+)
+
+// Values allowed for ThreeDSRequestData.NativeThreeDS.
+const (
+	ThreeDSRequestDataNativeThreeDSPreferred = "preferred"
+	ThreeDSRequestDataNativeThreeDSDisabled  = "disabled"
+)
+
+// Values allowed for ThreeDSRequestData.ThreeDSVersion.
+const (
+	ThreeDSRequestDataThreeDSVersion210 = "2.1.0"
+	ThreeDSRequestDataThreeDSVersion220 = "2.2.0"
+)

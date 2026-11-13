@@ -209,8 +209,8 @@ func (o Healthcare) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Healthcare) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Healthcare) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DentalValue) {
 		toSerialize["dentalValue"] = o.DentalValue
 	}

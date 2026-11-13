@@ -182,8 +182,8 @@ func (o PickupInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PickupInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PickupInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.City) {
 		toSerialize["city"] = o.City
 	}

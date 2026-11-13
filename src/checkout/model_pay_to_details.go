@@ -262,8 +262,8 @@ func (o PayToDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayToDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayToDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -330,3 +330,8 @@ func (o *PayToDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PayToDetails.Type.
+const (
+	PayToDetailsTypePayto = "payto"
+)

@@ -182,8 +182,8 @@ func (o FundingInstrument) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FundingInstrument) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o FundingInstrument) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CardIdentification) {
 		toSerialize["cardIdentification"] = o.CardIdentification
 	}
@@ -244,3 +244,9 @@ func (o *FundingInstrument) isValidSourceOfFunds() bool {
 	}
 	return false
 }
+
+// Values allowed for FundingInstrument.SourceOfFunds.
+const (
+	FundingInstrumentSourceOfFundsDEBIT          = "DEBIT"
+	FundingInstrumentSourceOfFundsDEPOSITACCOUNT = "DEPOSIT_ACCOUNT"
+)

@@ -152,8 +152,8 @@ func (o InternalCategoryData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o InternalCategoryData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o InternalCategoryData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ModificationMerchantReference) {
 		toSerialize["modificationMerchantReference"] = o.ModificationMerchantReference
 	}
@@ -211,3 +211,8 @@ func (o *InternalCategoryData) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for InternalCategoryData.Type.
+const (
+	InternalCategoryDataTypeInternal = "internal"
+)

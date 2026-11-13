@@ -182,8 +182,8 @@ func (o GetAcceptedTermsOfServiceDocumentResponse) MarshalJSON() ([]byte, error)
 	return json.Marshal(toSerialize)
 }
 
-func (o GetAcceptedTermsOfServiceDocumentResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GetAcceptedTermsOfServiceDocumentResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Document) {
 		toSerialize["document"] = o.Document
 	}
@@ -244,3 +244,10 @@ func (o *GetAcceptedTermsOfServiceDocumentResponse) isValidTermsOfServiceDocumen
 	}
 	return false
 }
+
+// Values allowed for GetAcceptedTermsOfServiceDocumentResponse.TermsOfServiceDocumentFormat.
+const (
+	GetAcceptedTermsOfServiceDocumentResponseTermsOfServiceDocumentFormatJSON = "JSON"
+	GetAcceptedTermsOfServiceDocumentResponseTermsOfServiceDocumentFormatPDF  = "PDF"
+	GetAcceptedTermsOfServiceDocumentResponseTermsOfServiceDocumentFormatTXT  = "TXT"
+)

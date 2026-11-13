@@ -188,8 +188,8 @@ func (o StandalonePaymentCancelResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StandalonePaymentCancelResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StandalonePaymentCancelResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["paymentReference"] = o.PaymentReference
 	toSerialize["pspReference"] = o.PspReference
@@ -245,3 +245,8 @@ func (o *StandalonePaymentCancelResponse) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for StandalonePaymentCancelResponse.Status.
+const (
+	StandalonePaymentCancelResponseStatusReceived = "received"
+)

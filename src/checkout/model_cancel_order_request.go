@@ -100,8 +100,8 @@ func (o CancelOrderRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CancelOrderRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CancelOrderRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["order"] = o.Order
 	return toSerialize, nil

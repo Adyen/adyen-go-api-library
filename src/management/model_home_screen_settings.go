@@ -148,8 +148,8 @@ func (o HomeScreenSettings) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o HomeScreenSettings) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o HomeScreenSettings) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.HideNavigationBar) {
 		toSerialize["hideNavigationBar"] = o.HideNavigationBar
 	}

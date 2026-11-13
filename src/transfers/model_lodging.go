@@ -114,8 +114,8 @@ func (o Lodging) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Lodging) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Lodging) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckInDate) {
 		toSerialize["checkInDate"] = o.CheckInDate
 	}

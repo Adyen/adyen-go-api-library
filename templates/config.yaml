@@ -10,6 +10,9 @@ additionalProperties:
   enumClassPrefix: true
   # Absent additionalProperties means "not allowed", as with generator 6.
   disallowAdditionalPropertiesIfNotPresent: true
+typeMappings:
+  AnyType: any
+  object: map[string]any
 files:
   # Rendered only for webhook services; adyen-sdk-automation selects the supporting file per
   # service (GoServiceLayout.supportingFile).

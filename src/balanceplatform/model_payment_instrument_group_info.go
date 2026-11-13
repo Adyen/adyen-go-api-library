@@ -202,8 +202,8 @@ func (o PaymentInstrumentGroupInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentInstrumentGroupInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentInstrumentGroupInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["balancePlatform"] = o.BalancePlatform
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description

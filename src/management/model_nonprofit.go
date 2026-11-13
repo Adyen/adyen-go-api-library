@@ -323,8 +323,8 @@ func (o Nonprofit) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Nonprofit) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Nonprofit) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["causes"] = o.Causes
 	toSerialize["description"] = o.Description
 	toSerialize["goals"] = o.Goals

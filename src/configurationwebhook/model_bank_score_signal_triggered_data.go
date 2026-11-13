@@ -353,8 +353,8 @@ func (o BankScoreSignalTriggeredData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BankScoreSignalTriggeredData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BankScoreSignalTriggeredData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountHolder) {
 		toSerialize["accountHolder"] = o.AccountHolder
 	}

@@ -284,8 +284,8 @@ func (o TemporaryServices) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TemporaryServices) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TemporaryServices) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.EmployeeName) {
 		toSerialize["employeeName"] = o.EmployeeName
 	}

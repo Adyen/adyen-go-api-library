@@ -250,8 +250,8 @@ func (o StoredValueLoadResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredValueLoadResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoredValueLoadResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AuthCode) {
 		toSerialize["authCode"] = o.AuthCode
 	}
@@ -318,3 +318,11 @@ func (o *StoredValueLoadResponse) isValidResultCode() bool {
 	}
 	return false
 }
+
+// Values allowed for StoredValueLoadResponse.ResultCode.
+const (
+	StoredValueLoadResponseResultCodeSuccess          = "Success"
+	StoredValueLoadResponseResultCodeRefused          = "Refused"
+	StoredValueLoadResponseResultCodeError            = "Error"
+	StoredValueLoadResponseResultCodeNotEnoughBalance = "NotEnoughBalance"
+)

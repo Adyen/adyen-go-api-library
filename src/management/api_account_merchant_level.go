@@ -11,7 +11,7 @@ package management
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -77,7 +77,7 @@ func (a *AccountMerchantLevelApi) CreateMerchantAccount(ctx context.Context, r A
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -86,7 +86,7 @@ func (a *AccountMerchantLevelApi) CreateMerchantAccount(ctx context.Context, r A
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -95,7 +95,7 @@ func (a *AccountMerchantLevelApi) CreateMerchantAccount(ctx context.Context, r A
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -104,7 +104,7 @@ func (a *AccountMerchantLevelApi) CreateMerchantAccount(ctx context.Context, r A
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -113,7 +113,7 @@ func (a *AccountMerchantLevelApi) CreateMerchantAccount(ctx context.Context, r A
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -175,7 +175,7 @@ func (a *AccountMerchantLevelApi) GetMerchantAccount(ctx context.Context, r Acco
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -184,7 +184,7 @@ func (a *AccountMerchantLevelApi) GetMerchantAccount(ctx context.Context, r Acco
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -193,7 +193,7 @@ func (a *AccountMerchantLevelApi) GetMerchantAccount(ctx context.Context, r Acco
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -202,7 +202,7 @@ func (a *AccountMerchantLevelApi) GetMerchantAccount(ctx context.Context, r Acco
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -211,7 +211,7 @@ func (a *AccountMerchantLevelApi) GetMerchantAccount(ctx context.Context, r Acco
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -289,7 +289,7 @@ func (a *AccountMerchantLevelApi) ListMerchantAccounts(ctx context.Context, r Ac
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -298,7 +298,7 @@ func (a *AccountMerchantLevelApi) ListMerchantAccounts(ctx context.Context, r Ac
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -307,7 +307,7 @@ func (a *AccountMerchantLevelApi) ListMerchantAccounts(ctx context.Context, r Ac
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -316,7 +316,7 @@ func (a *AccountMerchantLevelApi) ListMerchantAccounts(ctx context.Context, r Ac
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -325,7 +325,7 @@ func (a *AccountMerchantLevelApi) ListMerchantAccounts(ctx context.Context, r Ac
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -391,7 +391,7 @@ func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(ctx context.C
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -400,7 +400,7 @@ func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(ctx context.C
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -409,7 +409,7 @@ func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(ctx context.C
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -418,7 +418,7 @@ func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(ctx context.C
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -427,7 +427,7 @@ func (a *AccountMerchantLevelApi) RequestToActivateMerchantAccount(ctx context.C
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError

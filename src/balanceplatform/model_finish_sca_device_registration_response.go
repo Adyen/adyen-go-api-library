@@ -79,8 +79,8 @@ func (o FinishScaDeviceRegistrationResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FinishScaDeviceRegistrationResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o FinishScaDeviceRegistrationResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ScaDevice) {
 		toSerialize["scaDevice"] = o.ScaDevice
 	}

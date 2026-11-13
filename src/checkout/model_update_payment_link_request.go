@@ -73,8 +73,8 @@ func (o UpdatePaymentLinkRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdatePaymentLinkRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UpdatePaymentLinkRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["status"] = o.Status
 	return toSerialize, nil
 }
@@ -124,3 +124,8 @@ func (o *UpdatePaymentLinkRequest) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for UpdatePaymentLinkRequest.Status.
+const (
+	UpdatePaymentLinkRequestStatusExpired = "expired"
+)

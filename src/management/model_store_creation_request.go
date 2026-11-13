@@ -358,8 +358,8 @@ func (o StoreCreationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoreCreationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoreCreationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["address"] = o.Address
 	if !common.IsNil(o.BusinessLineIds) {
 		toSerialize["businessLineIds"] = o.BusinessLineIds

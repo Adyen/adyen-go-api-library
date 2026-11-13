@@ -134,8 +134,8 @@ func (o RegisterSCARequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RegisterSCARequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RegisterSCARequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}

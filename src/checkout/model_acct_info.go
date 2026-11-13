@@ -590,8 +590,8 @@ func (o AcctInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AcctInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AcctInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ChAccAgeInd) {
 		toSerialize["chAccAgeInd"] = o.ChAccAgeInd
 	}
@@ -742,3 +742,58 @@ func (o *AcctInfo) isValidSuspiciousAccActivity() bool {
 	}
 	return false
 }
+
+// Values allowed for AcctInfo.ChAccAgeInd.
+const (
+	AcctInfoChAccAgeInd01 = "01"
+	AcctInfoChAccAgeInd02 = "02"
+	AcctInfoChAccAgeInd03 = "03"
+	AcctInfoChAccAgeInd04 = "04"
+	AcctInfoChAccAgeInd05 = "05"
+)
+
+// Values allowed for AcctInfo.ChAccChangeInd.
+const (
+	AcctInfoChAccChangeInd01 = "01"
+	AcctInfoChAccChangeInd02 = "02"
+	AcctInfoChAccChangeInd03 = "03"
+	AcctInfoChAccChangeInd04 = "04"
+)
+
+// Values allowed for AcctInfo.ChAccPwChangeInd.
+const (
+	AcctInfoChAccPwChangeInd01 = "01"
+	AcctInfoChAccPwChangeInd02 = "02"
+	AcctInfoChAccPwChangeInd03 = "03"
+	AcctInfoChAccPwChangeInd04 = "04"
+	AcctInfoChAccPwChangeInd05 = "05"
+)
+
+// Values allowed for AcctInfo.PaymentAccInd.
+const (
+	AcctInfoPaymentAccInd01 = "01"
+	AcctInfoPaymentAccInd02 = "02"
+	AcctInfoPaymentAccInd03 = "03"
+	AcctInfoPaymentAccInd04 = "04"
+	AcctInfoPaymentAccInd05 = "05"
+)
+
+// Values allowed for AcctInfo.ShipAddressUsageInd.
+const (
+	AcctInfoShipAddressUsageInd01 = "01"
+	AcctInfoShipAddressUsageInd02 = "02"
+	AcctInfoShipAddressUsageInd03 = "03"
+	AcctInfoShipAddressUsageInd04 = "04"
+)
+
+// Values allowed for AcctInfo.ShipNameIndicator.
+const (
+	AcctInfoShipNameIndicator01 = "01"
+	AcctInfoShipNameIndicator02 = "02"
+)
+
+// Values allowed for AcctInfo.SuspiciousAccActivity.
+const (
+	AcctInfoSuspiciousAccActivity01 = "01"
+	AcctInfoSuspiciousAccActivity02 = "02"
+)

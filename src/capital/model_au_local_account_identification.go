@@ -129,8 +129,8 @@ func (o AULocalAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AULocalAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AULocalAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["type"] = o.Type
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["bsbCode"] = o.BsbCode

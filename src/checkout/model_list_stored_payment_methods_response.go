@@ -148,8 +148,8 @@ func (o ListStoredPaymentMethodsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ListStoredPaymentMethodsResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ListStoredPaymentMethodsResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MerchantAccount) {
 		toSerialize["merchantAccount"] = o.MerchantAccount
 	}

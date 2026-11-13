@@ -11,7 +11,7 @@ package transfers
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -82,7 +82,7 @@ func (a *CapitalApi) GetCapitalAccount(ctx context.Context, r CapitalApiGetCapit
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -91,7 +91,7 @@ func (a *CapitalApi) GetCapitalAccount(ctx context.Context, r CapitalApiGetCapit
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -100,7 +100,7 @@ func (a *CapitalApi) GetCapitalAccount(ctx context.Context, r CapitalApiGetCapit
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -109,7 +109,7 @@ func (a *CapitalApi) GetCapitalAccount(ctx context.Context, r CapitalApiGetCapit
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -118,7 +118,7 @@ func (a *CapitalApi) GetCapitalAccount(ctx context.Context, r CapitalApiGetCapit
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -127,7 +127,7 @@ func (a *CapitalApi) GetCapitalAccount(ctx context.Context, r CapitalApiGetCapit
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -192,7 +192,7 @@ func (a *CapitalApi) GetGrantReferenceDetails(ctx context.Context, r CapitalApiG
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -201,7 +201,7 @@ func (a *CapitalApi) GetGrantReferenceDetails(ctx context.Context, r CapitalApiG
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -210,7 +210,7 @@ func (a *CapitalApi) GetGrantReferenceDetails(ctx context.Context, r CapitalApiG
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -219,7 +219,7 @@ func (a *CapitalApi) GetGrantReferenceDetails(ctx context.Context, r CapitalApiG
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -228,7 +228,7 @@ func (a *CapitalApi) GetGrantReferenceDetails(ctx context.Context, r CapitalApiG
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -237,7 +237,7 @@ func (a *CapitalApi) GetGrantReferenceDetails(ctx context.Context, r CapitalApiG
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -314,7 +314,7 @@ func (a *CapitalApi) RequestGrantPayout(ctx context.Context, r CapitalApiRequest
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -323,7 +323,7 @@ func (a *CapitalApi) RequestGrantPayout(ctx context.Context, r CapitalApiRequest
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -332,7 +332,7 @@ func (a *CapitalApi) RequestGrantPayout(ctx context.Context, r CapitalApiRequest
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -341,7 +341,7 @@ func (a *CapitalApi) RequestGrantPayout(ctx context.Context, r CapitalApiRequest
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -350,7 +350,7 @@ func (a *CapitalApi) RequestGrantPayout(ctx context.Context, r CapitalApiRequest
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -359,7 +359,7 @@ func (a *CapitalApi) RequestGrantPayout(ctx context.Context, r CapitalApiRequest
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError

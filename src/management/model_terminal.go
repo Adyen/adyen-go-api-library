@@ -455,8 +455,8 @@ func (o Terminal) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Terminal) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Terminal) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Assignment) {
 		toSerialize["assignment"] = o.Assignment
 	}

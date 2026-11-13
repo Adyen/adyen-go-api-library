@@ -209,8 +209,8 @@ func (o CheckoutRedirectAction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutRedirectAction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutRedirectAction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
@@ -272,3 +272,8 @@ func (o *CheckoutRedirectAction) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CheckoutRedirectAction.Type.
+const (
+	CheckoutRedirectActionTypeRedirect = "redirect"
+)

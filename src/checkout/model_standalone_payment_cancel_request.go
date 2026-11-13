@@ -168,8 +168,8 @@ func (o StandalonePaymentCancelRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StandalonePaymentCancelRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StandalonePaymentCancelRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ApplicationInfo) {
 		toSerialize["applicationInfo"] = o.ApplicationInfo
 	}

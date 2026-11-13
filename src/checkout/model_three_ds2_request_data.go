@@ -1389,8 +1389,8 @@ func (o ThreeDS2RequestData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThreeDS2RequestData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThreeDS2RequestData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcctInfo) {
 		toSerialize["acctInfo"] = o.AcctInfo
 	}
@@ -1599,3 +1599,52 @@ func (o *ThreeDS2RequestData) isValidTransactionType() bool {
 	}
 	return false
 }
+
+// Values allowed for ThreeDS2RequestData.AcctType.
+const (
+	ThreeDS2RequestDataAcctType01 = "01"
+	ThreeDS2RequestDataAcctType02 = "02"
+	ThreeDS2RequestDataAcctType03 = "03"
+)
+
+// Values allowed for ThreeDS2RequestData.AddrMatch.
+const (
+	ThreeDS2RequestDataAddrMatchY = "Y"
+	ThreeDS2RequestDataAddrMatchN = "N"
+)
+
+// Values allowed for ThreeDS2RequestData.ChallengeIndicator.
+const (
+	ThreeDS2RequestDataChallengeIndicatorNoPreference              = "noPreference"
+	ThreeDS2RequestDataChallengeIndicatorRequestNoChallenge        = "requestNoChallenge"
+	ThreeDS2RequestDataChallengeIndicatorRequestChallenge          = "requestChallenge"
+	ThreeDS2RequestDataChallengeIndicatorRequestChallengeAsMandate = "requestChallengeAsMandate"
+)
+
+// Values allowed for ThreeDS2RequestData.ThreeDSRequestorChallengeInd.
+const (
+	ThreeDS2RequestDataThreeDSRequestorChallengeInd01 = "01"
+	ThreeDS2RequestDataThreeDSRequestorChallengeInd02 = "02"
+	ThreeDS2RequestDataThreeDSRequestorChallengeInd03 = "03"
+	ThreeDS2RequestDataThreeDSRequestorChallengeInd04 = "04"
+	ThreeDS2RequestDataThreeDSRequestorChallengeInd05 = "05"
+	ThreeDS2RequestDataThreeDSRequestorChallengeInd06 = "06"
+)
+
+// Values allowed for ThreeDS2RequestData.TransType.
+const (
+	ThreeDS2RequestDataTransType01 = "01"
+	ThreeDS2RequestDataTransType03 = "03"
+	ThreeDS2RequestDataTransType10 = "10"
+	ThreeDS2RequestDataTransType11 = "11"
+	ThreeDS2RequestDataTransType28 = "28"
+)
+
+// Values allowed for ThreeDS2RequestData.TransactionType.
+const (
+	ThreeDS2RequestDataTransactionTypeGoodsOrServicePurchase   = "goodsOrServicePurchase"
+	ThreeDS2RequestDataTransactionTypeCheckAcceptance          = "checkAcceptance"
+	ThreeDS2RequestDataTransactionTypeAccountFunding           = "accountFunding"
+	ThreeDS2RequestDataTransactionTypeQuasiCashTransaction     = "quasiCashTransaction"
+	ThreeDS2RequestDataTransactionTypePrepaidActivationAndLoad = "prepaidActivationAndLoad"
+)

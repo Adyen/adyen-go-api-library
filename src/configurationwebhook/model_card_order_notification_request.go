@@ -162,8 +162,8 @@ func (o CardOrderNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardOrderNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CardOrderNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,9 @@ func (o *CardOrderNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CardOrderNotificationRequest.Type.
+const (
+	CardOrderNotificationRequestTypeBalancePlatformCardorderCreated = "balancePlatform.cardorder.created"
+	CardOrderNotificationRequestTypeBalancePlatformCardorderUpdated = "balancePlatform.cardorder.updated"
+)

@@ -148,8 +148,8 @@ func (o NetworkTokenTriggeredRiskRule) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NetworkTokenTriggeredRiskRule) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NetworkTokenTriggeredRiskRule) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}

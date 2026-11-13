@@ -251,8 +251,8 @@ func (o TermsOfServiceAcceptanceInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TermsOfServiceAcceptanceInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TermsOfServiceAcceptanceInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcceptedBy) {
 		toSerialize["acceptedBy"] = o.AcceptedBy
 	}
@@ -319,3 +319,19 @@ func (o *TermsOfServiceAcceptanceInfo) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TermsOfServiceAcceptanceInfo.Type.
+const (
+	TermsOfServiceAcceptanceInfoTypeAdyenAccount              = "adyenAccount"
+	TermsOfServiceAcceptanceInfoTypeAdyenCapital              = "adyenCapital"
+	TermsOfServiceAcceptanceInfoTypeAdyenCapitalCashAdvance   = "adyenCapitalCashAdvance"
+	TermsOfServiceAcceptanceInfoTypeAdyenCard                 = "adyenCard"
+	TermsOfServiceAcceptanceInfoTypeAdyenChargeCard           = "adyenChargeCard"
+	TermsOfServiceAcceptanceInfoTypeAdyenForPlatformsAdvanced = "adyenForPlatformsAdvanced"
+	TermsOfServiceAcceptanceInfoTypeAdyenForPlatformsManage   = "adyenForPlatformsManage"
+	TermsOfServiceAcceptanceInfoTypeAdyenFranchisee           = "adyenFranchisee"
+	TermsOfServiceAcceptanceInfoTypeAdyenIssuing              = "adyenIssuing"
+	TermsOfServiceAcceptanceInfoTypeAdyenPccr                 = "adyenPccr"
+	TermsOfServiceAcceptanceInfoTypeDirectDebit               = "directDebit"
+	TermsOfServiceAcceptanceInfoTypeKycOnInvite               = "kycOnInvite"
+)

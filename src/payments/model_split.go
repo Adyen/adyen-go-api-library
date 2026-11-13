@@ -209,8 +209,8 @@ func (o Split) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Split) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Split) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Account) {
 		toSerialize["account"] = o.Account
 	}
@@ -272,3 +272,23 @@ func (o *Split) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for Split.Type.
+const (
+	SplitTypeAcquiringFees   = "AcquiringFees"
+	SplitTypeAdyenCommission = "AdyenCommission"
+	SplitTypeAdyenFees       = "AdyenFees"
+	SplitTypeAdyenMarkup     = "AdyenMarkup"
+	SplitTypeBalanceAccount  = "BalanceAccount"
+	SplitTypeCommission      = "Commission"
+	SplitTypeDefault         = "Default"
+	SplitTypeInterchange     = "Interchange"
+	SplitTypeMarketPlace     = "MarketPlace"
+	SplitTypePaymentFee      = "PaymentFee"
+	SplitTypeRemainder       = "Remainder"
+	SplitTypeSchemeFee       = "SchemeFee"
+	SplitTypeSurcharge       = "Surcharge"
+	SplitTypeTip             = "Tip"
+	SplitTypeTopUp           = "TopUp"
+	SplitTypeVAT             = "VAT"
+)

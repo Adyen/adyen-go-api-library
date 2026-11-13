@@ -717,8 +717,8 @@ func (o AccountInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AccountInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AccountInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountAgeIndicator) {
 		toSerialize["accountAgeIndicator"] = o.AccountAgeIndicator
 	}
@@ -869,3 +869,53 @@ func (o *AccountInfo) isValidPaymentAccountIndicator() bool {
 	}
 	return false
 }
+
+// Values allowed for AccountInfo.AccountAgeIndicator.
+const (
+	AccountInfoAccountAgeIndicatorNotApplicable   = "notApplicable"
+	AccountInfoAccountAgeIndicatorThisTransaction = "thisTransaction"
+	AccountInfoAccountAgeIndicatorLessThan30Days  = "lessThan30Days"
+	AccountInfoAccountAgeIndicatorFrom30To60Days  = "from30To60Days"
+	AccountInfoAccountAgeIndicatorMoreThan60Days  = "moreThan60Days"
+)
+
+// Values allowed for AccountInfo.AccountChangeIndicator.
+const (
+	AccountInfoAccountChangeIndicatorThisTransaction = "thisTransaction"
+	AccountInfoAccountChangeIndicatorLessThan30Days  = "lessThan30Days"
+	AccountInfoAccountChangeIndicatorFrom30To60Days  = "from30To60Days"
+	AccountInfoAccountChangeIndicatorMoreThan60Days  = "moreThan60Days"
+)
+
+// Values allowed for AccountInfo.AccountType.
+const (
+	AccountInfoAccountTypeNotApplicable = "notApplicable"
+	AccountInfoAccountTypeCredit        = "credit"
+	AccountInfoAccountTypeDebit         = "debit"
+)
+
+// Values allowed for AccountInfo.DeliveryAddressUsageIndicator.
+const (
+	AccountInfoDeliveryAddressUsageIndicatorThisTransaction = "thisTransaction"
+	AccountInfoDeliveryAddressUsageIndicatorLessThan30Days  = "lessThan30Days"
+	AccountInfoDeliveryAddressUsageIndicatorFrom30To60Days  = "from30To60Days"
+	AccountInfoDeliveryAddressUsageIndicatorMoreThan60Days  = "moreThan60Days"
+)
+
+// Values allowed for AccountInfo.PasswordChangeIndicator.
+const (
+	AccountInfoPasswordChangeIndicatorNotApplicable   = "notApplicable"
+	AccountInfoPasswordChangeIndicatorThisTransaction = "thisTransaction"
+	AccountInfoPasswordChangeIndicatorLessThan30Days  = "lessThan30Days"
+	AccountInfoPasswordChangeIndicatorFrom30To60Days  = "from30To60Days"
+	AccountInfoPasswordChangeIndicatorMoreThan60Days  = "moreThan60Days"
+)
+
+// Values allowed for AccountInfo.PaymentAccountIndicator.
+const (
+	AccountInfoPaymentAccountIndicatorNotApplicable   = "notApplicable"
+	AccountInfoPaymentAccountIndicatorThisTransaction = "thisTransaction"
+	AccountInfoPaymentAccountIndicatorLessThan30Days  = "lessThan30Days"
+	AccountInfoPaymentAccountIndicatorFrom30To60Days  = "from30To60Days"
+	AccountInfoPaymentAccountIndicatorMoreThan60Days  = "moreThan60Days"
+)

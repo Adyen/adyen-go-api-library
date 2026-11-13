@@ -182,8 +182,8 @@ func (o CapabilityProblemEntity) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CapabilityProblemEntity) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CapabilityProblemEntity) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Documents) {
 		toSerialize["documents"] = o.Documents
 	}
@@ -244,3 +244,10 @@ func (o *CapabilityProblemEntity) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CapabilityProblemEntity.Type.
+const (
+	CapabilityProblemEntityTypeBankAccount = "BankAccount"
+	CapabilityProblemEntityTypeDocument    = "Document"
+	CapabilityProblemEntityTypeLegalEntity = "LegalEntity"
+)

@@ -2303,8 +2303,8 @@ func (o CreateCheckoutSessionResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateCheckoutSessionResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreateCheckoutSessionResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountInfo) {
 		toSerialize["accountInfo"] = o.AccountInfo
 	}
@@ -2587,3 +2587,45 @@ func (o *CreateCheckoutSessionResponse) isValidStorePaymentMethodMode() bool {
 	}
 	return false
 }
+
+// Values allowed for CreateCheckoutSessionResponse.Channel.
+const (
+	CreateCheckoutSessionResponseChannelIOS     = "iOS"
+	CreateCheckoutSessionResponseChannelAndroid = "Android"
+	CreateCheckoutSessionResponseChannelWeb     = "Web"
+)
+
+// Values allowed for CreateCheckoutSessionResponse.Mode.
+const (
+	CreateCheckoutSessionResponseModeEmbedded = "embedded"
+	CreateCheckoutSessionResponseModeHosted   = "hosted"
+)
+
+// Values allowed for CreateCheckoutSessionResponse.RecurringProcessingModel.
+const (
+	CreateCheckoutSessionResponseRecurringProcessingModelCardOnFile            = "CardOnFile"
+	CreateCheckoutSessionResponseRecurringProcessingModelSubscription          = "Subscription"
+	CreateCheckoutSessionResponseRecurringProcessingModelUnscheduledCardOnFile = "UnscheduledCardOnFile"
+)
+
+// Values allowed for CreateCheckoutSessionResponse.ShopperInteraction.
+const (
+	CreateCheckoutSessionResponseShopperInteractionEcommerce = "Ecommerce"
+	CreateCheckoutSessionResponseShopperInteractionContAuth  = "ContAuth"
+	CreateCheckoutSessionResponseShopperInteractionMoto      = "Moto"
+	CreateCheckoutSessionResponseShopperInteractionPOS       = "POS"
+)
+
+// Values allowed for CreateCheckoutSessionResponse.StoreFiltrationMode.
+const (
+	CreateCheckoutSessionResponseStoreFiltrationModeExclusive  = "exclusive"
+	CreateCheckoutSessionResponseStoreFiltrationModeInclusive  = "inclusive"
+	CreateCheckoutSessionResponseStoreFiltrationModeSkipFilter = "skipFilter"
+)
+
+// Values allowed for CreateCheckoutSessionResponse.StorePaymentMethodMode.
+const (
+	CreateCheckoutSessionResponseStorePaymentMethodModeAskForConsent = "askForConsent"
+	CreateCheckoutSessionResponseStorePaymentMethodModeDisabled      = "disabled"
+	CreateCheckoutSessionResponseStorePaymentMethodModeEnabled       = "enabled"
+)

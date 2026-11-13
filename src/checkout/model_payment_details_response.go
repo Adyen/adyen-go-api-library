@@ -657,8 +657,8 @@ func (o PaymentDetailsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentDetailsResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentDetailsResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Action) {
 		toSerialize["action"] = o.Action
 	}
@@ -761,3 +761,21 @@ func (o *PaymentDetailsResponse) isValidResultCode() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentDetailsResponse.ResultCode.
+const (
+	PaymentDetailsResponseResultCodeAuthenticationFinished    = "AuthenticationFinished"
+	PaymentDetailsResponseResultCodeAuthenticationNotRequired = "AuthenticationNotRequired"
+	PaymentDetailsResponseResultCodeAuthorised                = "Authorised"
+	PaymentDetailsResponseResultCodeCancelled                 = "Cancelled"
+	PaymentDetailsResponseResultCodeChallengeShopper          = "ChallengeShopper"
+	PaymentDetailsResponseResultCodeError                     = "Error"
+	PaymentDetailsResponseResultCodeIdentifyShopper           = "IdentifyShopper"
+	PaymentDetailsResponseResultCodePartiallyAuthorised       = "PartiallyAuthorised"
+	PaymentDetailsResponseResultCodePending                   = "Pending"
+	PaymentDetailsResponseResultCodePresentToShopper          = "PresentToShopper"
+	PaymentDetailsResponseResultCodeReceived                  = "Received"
+	PaymentDetailsResponseResultCodeRedirectShopper           = "RedirectShopper"
+	PaymentDetailsResponseResultCodeRefused                   = "Refused"
+	PaymentDetailsResponseResultCodeSuccess                   = "Success"
+)

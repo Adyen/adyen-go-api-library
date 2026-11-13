@@ -399,8 +399,8 @@ func (o PaymentInstrumentInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentInstrumentInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentInstrumentInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["balanceAccountId"] = o.BalanceAccountId
 	if !common.IsNil(o.BankAccount) {
 		toSerialize["bankAccount"] = o.BankAccount
@@ -494,3 +494,30 @@ func (o *PaymentInstrumentInfo) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentInstrumentInfo.Status.
+const (
+	PaymentInstrumentInfoStatusActive    = "active"
+	PaymentInstrumentInfoStatusClosed    = "closed"
+	PaymentInstrumentInfoStatusInactive  = "inactive"
+	PaymentInstrumentInfoStatusSuspended = "suspended"
+)
+
+// Values allowed for PaymentInstrumentInfo.StatusReason.
+const (
+	PaymentInstrumentInfoStatusReasonAccountClosure  = "accountClosure"
+	PaymentInstrumentInfoStatusReasonDamaged         = "damaged"
+	PaymentInstrumentInfoStatusReasonEndOfLife       = "endOfLife"
+	PaymentInstrumentInfoStatusReasonExpired         = "expired"
+	PaymentInstrumentInfoStatusReasonLost            = "lost"
+	PaymentInstrumentInfoStatusReasonOther           = "other"
+	PaymentInstrumentInfoStatusReasonStolen          = "stolen"
+	PaymentInstrumentInfoStatusReasonSuspectedFraud  = "suspectedFraud"
+	PaymentInstrumentInfoStatusReasonTransactionRule = "transactionRule"
+)
+
+// Values allowed for PaymentInstrumentInfo.Type.
+const (
+	PaymentInstrumentInfoTypeBankAccount = "bankAccount"
+	PaymentInstrumentInfoTypeCard        = "card"
+)

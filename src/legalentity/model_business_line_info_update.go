@@ -250,8 +250,8 @@ func (o BusinessLineInfoUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BusinessLineInfoUpdate) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BusinessLineInfoUpdate) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.IndustryCode) {
 		toSerialize["industryCode"] = o.IndustryCode
 	}

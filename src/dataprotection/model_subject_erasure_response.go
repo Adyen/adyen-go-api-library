@@ -80,8 +80,8 @@ func (o SubjectErasureResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SubjectErasureResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SubjectErasureResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Result) {
 		toSerialize["result"] = o.Result
 	}
@@ -133,3 +133,11 @@ func (o *SubjectErasureResponse) isValidResult() bool {
 	}
 	return false
 }
+
+// Values allowed for SubjectErasureResponse.Result.
+const (
+	SubjectErasureResponseResultACTIVERECURRINGTOKENEXISTS = "ACTIVE_RECURRING_TOKEN_EXISTS"
+	SubjectErasureResponseResultALREADYPROCESSED           = "ALREADY_PROCESSED"
+	SubjectErasureResponseResultPAYMENTNOTFOUND            = "PAYMENT_NOT_FOUND"
+	SubjectErasureResponseResultSUCCESS                    = "SUCCESS"
+)

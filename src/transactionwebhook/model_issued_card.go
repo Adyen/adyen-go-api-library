@@ -390,8 +390,8 @@ func (o IssuedCard) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o IssuedCard) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o IssuedCard) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AuthorisationType) {
 		toSerialize["authorisationType"] = o.AuthorisationType
 	}
@@ -497,3 +497,38 @@ func (o *IssuedCard) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for IssuedCard.NetworkVariant.
+const (
+	IssuedCardNetworkVariantMaestroUs  = "maestro_us"
+	IssuedCardNetworkVariantMastercard = "mastercard"
+	IssuedCardNetworkVariantVisa       = "visa"
+)
+
+// Values allowed for IssuedCard.PanEntryMode.
+const (
+	IssuedCardPanEntryModeChip        = "chip"
+	IssuedCardPanEntryModeCof         = "cof"
+	IssuedCardPanEntryModeContactless = "contactless"
+	IssuedCardPanEntryModeEcommerce   = "ecommerce"
+	IssuedCardPanEntryModeMagstripe   = "magstripe"
+	IssuedCardPanEntryModeManual      = "manual"
+	IssuedCardPanEntryModeToken       = "token"
+)
+
+// Values allowed for IssuedCard.ProcessingType.
+const (
+	IssuedCardProcessingTypeAtmWithdraw          = "atmWithdraw"
+	IssuedCardProcessingTypeBalanceInquiry       = "balanceInquiry"
+	IssuedCardProcessingTypeEcommerce            = "ecommerce"
+	IssuedCardProcessingTypeMoto                 = "moto"
+	IssuedCardProcessingTypePos                  = "pos"
+	IssuedCardProcessingTypePurchaseWithCashback = "purchaseWithCashback"
+	IssuedCardProcessingTypeRecurring            = "recurring"
+	IssuedCardProcessingTypeToken                = "token"
+)
+
+// Values allowed for IssuedCard.Type.
+const (
+	IssuedCardTypeIssuedCard = "issuedCard"
+)

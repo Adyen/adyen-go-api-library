@@ -1025,8 +1025,8 @@ func (o AdditionalDataAirline) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalDataAirline) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalDataAirline) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AirlineAgencyInvoiceNumber) {
 		toSerialize["airline.agency_invoice_number"] = o.AirlineAgencyInvoiceNumber
 	}

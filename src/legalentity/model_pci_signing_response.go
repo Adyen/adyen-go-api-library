@@ -114,8 +114,8 @@ func (o PciSigningResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PciSigningResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PciSigningResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.PciQuestionnaireIds) {
 		toSerialize["pciQuestionnaireIds"] = o.PciQuestionnaireIds
 	}

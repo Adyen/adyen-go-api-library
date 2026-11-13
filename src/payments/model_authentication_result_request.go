@@ -100,8 +100,8 @@ func (o AuthenticationResultRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AuthenticationResultRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AuthenticationResultRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["pspReference"] = o.PspReference
 	return toSerialize, nil

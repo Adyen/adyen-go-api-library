@@ -114,8 +114,8 @@ func (o WebhookTopUpTrigger) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WebhookTopUpTrigger) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WebhookTopUpTrigger) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Schedule) {
 		toSerialize["schedule"] = o.Schedule
 	}
@@ -170,3 +170,10 @@ func (o *WebhookTopUpTrigger) isValidSchedule() bool {
 	}
 	return false
 }
+
+// Values allowed for WebhookTopUpTrigger.Schedule.
+const (
+	WebhookTopUpTriggerScheduleMonthly  = "monthly"
+	WebhookTopUpTriggerScheduleWeekdays = "weekdays"
+	WebhookTopUpTriggerScheduleWeekly   = "weekly"
+)

@@ -284,8 +284,8 @@ func (o DonationPaymentResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DonationPaymentResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DonationPaymentResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
@@ -355,3 +355,10 @@ func (o *DonationPaymentResponse) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for DonationPaymentResponse.Status.
+const (
+	DonationPaymentResponseStatusCompleted = "completed"
+	DonationPaymentResponseStatusPending   = "pending"
+	DonationPaymentResponseStatusRefused   = "refused"
+)

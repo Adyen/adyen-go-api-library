@@ -73,8 +73,8 @@ func (o GetDynamicOffersResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetDynamicOffersResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GetDynamicOffersResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["dynamicOffers"] = o.DynamicOffers
 	return toSerialize, nil
 }

@@ -148,8 +148,8 @@ func (o NyceResponseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NyceResponseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NyceResponseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.NetworkProcessingMode) {
 		toSerialize["networkProcessingMode"] = o.NetworkProcessingMode
 	}
@@ -216,3 +216,16 @@ func (o *NyceResponseInfo) isValidProcessingType() bool {
 	}
 	return false
 }
+
+// Values allowed for NyceResponseInfo.NetworkProcessingMode.
+const (
+	NyceResponseInfoNetworkProcessingModeAuth = "auth"
+	NyceResponseInfoNetworkProcessingModeSale = "sale"
+)
+
+// Values allowed for NyceResponseInfo.ProcessingType.
+const (
+	NyceResponseInfoProcessingTypeBillpay = "billpay"
+	NyceResponseInfoProcessingTypeEcom    = "ecom"
+	NyceResponseInfoProcessingTypePos     = "pos"
+)

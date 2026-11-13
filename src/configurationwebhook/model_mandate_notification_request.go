@@ -162,8 +162,8 @@ func (o MandateNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MandateNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MandateNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,9 @@ func (o *MandateNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for MandateNotificationRequest.Type.
+const (
+	MandateNotificationRequestTypeBalancePlatformMandateCreated = "balancePlatform.mandate.created"
+	MandateNotificationRequestTypeBalancePlatformMandateUpdated = "balancePlatform.mandate.updated"
+)

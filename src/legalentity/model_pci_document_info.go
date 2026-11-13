@@ -149,8 +149,8 @@ func (o PciDocumentInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PciDocumentInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PciDocumentInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CreatedAt) {
 		toSerialize["createdAt"] = o.CreatedAt
 	}

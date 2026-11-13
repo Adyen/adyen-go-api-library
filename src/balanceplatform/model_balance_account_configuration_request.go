@@ -478,8 +478,8 @@ func (o BalanceAccountConfigurationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceAccountConfigurationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceAccountConfigurationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["balancePlatformPayoutScheduleId"] = o.BalancePlatformPayoutScheduleId
 	if !common.IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
@@ -563,3 +563,11 @@ func (o *BalanceAccountConfigurationRequest) isValidFrequency() bool {
 	}
 	return false
 }
+
+// Values allowed for BalanceAccountConfigurationRequest.Frequency.
+const (
+	BalanceAccountConfigurationRequestFrequencyDaily    = "daily"
+	BalanceAccountConfigurationRequestFrequencyWeekly   = "weekly"
+	BalanceAccountConfigurationRequestFrequencyWeekdays = "weekdays"
+	BalanceAccountConfigurationRequestFrequencyMonthly  = "monthly"
+)

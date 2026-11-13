@@ -100,8 +100,8 @@ func (o CreateThemeRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateThemeRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreateThemeRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["mode"] = o.Mode
 	toSerialize["name"] = o.Name
 	return toSerialize, nil

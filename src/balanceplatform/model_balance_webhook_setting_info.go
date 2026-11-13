@@ -188,8 +188,8 @@ func (o BalanceWebhookSettingInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceWebhookSettingInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceWebhookSettingInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Conditions) {
 		toSerialize["conditions"] = o.Conditions
 	}
@@ -254,3 +254,14 @@ func (o *BalanceWebhookSettingInfo) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for BalanceWebhookSettingInfo.Status.
+const (
+	BalanceWebhookSettingInfoStatusActive   = "active"
+	BalanceWebhookSettingInfoStatusInactive = "inactive"
+)
+
+// Values allowed for BalanceWebhookSettingInfo.Type.
+const (
+	BalanceWebhookSettingInfoTypeBalance = "balance"
+)

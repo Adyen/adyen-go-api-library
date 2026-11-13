@@ -312,8 +312,8 @@ func (o GrantOffer) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GrantOffer) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GrantOffer) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountHolderId"] = o.AccountHolderId
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
@@ -384,3 +384,9 @@ func (o *GrantOffer) isValidContractType() bool {
 	}
 	return false
 }
+
+// Values allowed for GrantOffer.ContractType.
+const (
+	GrantOfferContractTypeCashAdvance = "cashAdvance"
+	GrantOfferContractTypeLoan        = "loan"
+)

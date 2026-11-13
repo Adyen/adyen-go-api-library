@@ -148,8 +148,8 @@ func (o PulseResponseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PulseResponseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PulseResponseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.NetworkProcessingMode) {
 		toSerialize["networkProcessingMode"] = o.NetworkProcessingMode
 	}
@@ -216,3 +216,16 @@ func (o *PulseResponseInfo) isValidProcessingType() bool {
 	}
 	return false
 }
+
+// Values allowed for PulseResponseInfo.NetworkProcessingMode.
+const (
+	PulseResponseInfoNetworkProcessingModeAuth = "auth"
+	PulseResponseInfoNetworkProcessingModeSale = "sale"
+)
+
+// Values allowed for PulseResponseInfo.ProcessingType.
+const (
+	PulseResponseInfoProcessingTypeBillpay = "billpay"
+	PulseResponseInfoProcessingTypeEcom    = "ecom"
+	PulseResponseInfoProcessingTypePos     = "pos"
+)

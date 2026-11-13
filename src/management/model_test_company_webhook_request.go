@@ -148,8 +148,8 @@ func (o TestCompanyWebhookRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TestCompanyWebhookRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TestCompanyWebhookRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MerchantIds) {
 		toSerialize["merchantIds"] = o.MerchantIds
 	}

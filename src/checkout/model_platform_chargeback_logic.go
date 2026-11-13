@@ -148,8 +148,8 @@ func (o PlatformChargebackLogic) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PlatformChargebackLogic) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PlatformChargebackLogic) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Behavior) {
 		toSerialize["behavior"] = o.Behavior
 	}
@@ -207,3 +207,10 @@ func (o *PlatformChargebackLogic) isValidBehavior() bool {
 	}
 	return false
 }
+
+// Values allowed for PlatformChargebackLogic.Behavior.
+const (
+	PlatformChargebackLogicBehaviorDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+	PlatformChargebackLogicBehaviorDeductAccordingToSplitRatio = "deductAccordingToSplitRatio"
+	PlatformChargebackLogicBehaviorDeductFromLiableAccount     = "deductFromLiableAccount"
+)

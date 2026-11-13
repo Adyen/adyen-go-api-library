@@ -182,8 +182,8 @@ func (o NetworkTokenTransactionRulesResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NetworkTokenTransactionRulesResult) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NetworkTokenTransactionRulesResult) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Advice) {
 		toSerialize["advice"] = o.Advice
 	}

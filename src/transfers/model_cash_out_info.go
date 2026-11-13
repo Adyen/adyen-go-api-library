@@ -308,8 +308,8 @@ func (o CashOutInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CashOutInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CashOutInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.Counterparty) {
 		toSerialize["counterparty"] = o.Counterparty

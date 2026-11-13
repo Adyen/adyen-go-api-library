@@ -358,8 +358,8 @@ func (o BusinessLine) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BusinessLine) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BusinessLine) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["id"] = o.Id
 	toSerialize["industryCode"] = o.IndustryCode
 	if !common.IsNil(o.IndustryCodeDescription) {
@@ -430,3 +430,10 @@ func (o *BusinessLine) isValidService() bool {
 	}
 	return false
 }
+
+// Values allowed for BusinessLine.Service.
+const (
+	BusinessLineServicePaymentProcessing = "paymentProcessing"
+	BusinessLineServiceIssuing           = "issuing"
+	BusinessLineServiceBanking           = "banking"
+)

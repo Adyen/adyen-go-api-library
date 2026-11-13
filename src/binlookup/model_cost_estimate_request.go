@@ -372,8 +372,8 @@ func (o CostEstimateRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CostEstimateRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CostEstimateRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.Assumptions) {
 		toSerialize["assumptions"] = o.Assumptions
@@ -448,3 +448,11 @@ func (o *CostEstimateRequest) isValidShopperInteraction() bool {
 	}
 	return false
 }
+
+// Values allowed for CostEstimateRequest.ShopperInteraction.
+const (
+	CostEstimateRequestShopperInteractionEcommerce = "Ecommerce"
+	CostEstimateRequestShopperInteractionContAuth  = "ContAuth"
+	CostEstimateRequestShopperInteractionMoto      = "Moto"
+	CostEstimateRequestShopperInteractionPOS       = "POS"
+)

@@ -80,8 +80,8 @@ func (o AuthorisedCardUsers) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AuthorisedCardUsers) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AuthorisedCardUsers) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.LegalEntityIds) {
 		toSerialize["legalEntityIds"] = o.LegalEntityIds
 	}

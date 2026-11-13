@@ -80,8 +80,8 @@ func (o UpdateNetworkTokenRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateNetworkTokenRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UpdateNetworkTokenRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
@@ -133,3 +133,10 @@ func (o *UpdateNetworkTokenRequest) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for UpdateNetworkTokenRequest.Status.
+const (
+	UpdateNetworkTokenRequestStatusActive    = "active"
+	UpdateNetworkTokenRequestStatusSuspended = "suspended"
+	UpdateNetworkTokenRequestStatusClosed    = "closed"
+)

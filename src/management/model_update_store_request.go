@@ -318,8 +318,8 @@ func (o UpdateStoreRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateStoreRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UpdateStoreRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Address) {
 		toSerialize["address"] = o.Address
 	}
@@ -392,3 +392,10 @@ func (o *UpdateStoreRequest) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for UpdateStoreRequest.Status.
+const (
+	UpdateStoreRequestStatusActive   = "active"
+	UpdateStoreRequestStatusClosed   = "closed"
+	UpdateStoreRequestStatusInactive = "inactive"
+)

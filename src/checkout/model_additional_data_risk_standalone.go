@@ -556,8 +556,8 @@ func (o AdditionalDataRiskStandalone) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalDataRiskStandalone) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalDataRiskStandalone) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.PayPalCountryCode) {
 		toSerialize["PayPal.CountryCode"] = o.PayPalCountryCode
 	}

@@ -148,8 +148,8 @@ func (o MerchantDevice) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MerchantDevice) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MerchantDevice) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Os) {
 		toSerialize["os"] = o.Os
 	}

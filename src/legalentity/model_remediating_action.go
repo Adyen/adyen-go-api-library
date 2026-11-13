@@ -112,8 +112,8 @@ func (o RemediatingAction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RemediatingAction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RemediatingAction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}

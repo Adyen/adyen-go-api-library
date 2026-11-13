@@ -129,8 +129,8 @@ func (o SELocalAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SELocalAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SELocalAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["type"] = o.Type
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["clearingNumber"] = o.ClearingNumber

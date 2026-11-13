@@ -319,8 +319,8 @@ func (o NegativeBalanceCompensationWarningNotificationData) MarshalJSON() ([]byt
 	return json.Marshal(toSerialize)
 }
 
-func (o NegativeBalanceCompensationWarningNotificationData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NegativeBalanceCompensationWarningNotificationData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountHolder) {
 		toSerialize["accountHolder"] = o.AccountHolder
 	}

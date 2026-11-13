@@ -73,8 +73,8 @@ func (o GenerateClientKeyResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GenerateClientKeyResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GenerateClientKeyResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["clientKey"] = o.ClientKey
 	return toSerialize, nil
 }

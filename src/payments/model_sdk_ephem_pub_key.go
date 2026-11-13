@@ -182,8 +182,8 @@ func (o SDKEphemPubKey) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SDKEphemPubKey) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SDKEphemPubKey) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Crv) {
 		toSerialize["crv"] = o.Crv
 	}

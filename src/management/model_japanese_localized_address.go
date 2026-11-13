@@ -102,8 +102,8 @@ func (o JapaneseLocalizedAddress) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o JapaneseLocalizedAddress) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o JapaneseLocalizedAddress) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["fields"] = o.Fields
 	toSerialize["script"] = o.Script
 	return toSerialize, nil
@@ -154,3 +154,9 @@ func (o *JapaneseLocalizedAddress) isValidScript() bool {
 	}
 	return false
 }
+
+// Values allowed for JapaneseLocalizedAddress.Script.
+const (
+	JapaneseLocalizedAddressScriptJaKana = "ja-Kana"
+	JapaneseLocalizedAddressScriptJaHani = "ja-Hani"
+)

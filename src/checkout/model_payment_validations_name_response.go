@@ -148,8 +148,8 @@ func (o PaymentValidationsNameResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentValidationsNameResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentValidationsNameResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.RawResponse) {
 		toSerialize["rawResponse"] = o.RawResponse
 	}
@@ -207,3 +207,10 @@ func (o *PaymentValidationsNameResponse) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentValidationsNameResponse.Status.
+const (
+	PaymentValidationsNameResponseStatusNotPerformed = "notPerformed"
+	PaymentValidationsNameResponseStatusNotSupported = "notSupported"
+	PaymentValidationsNameResponseStatusPerformed    = "performed"
+)

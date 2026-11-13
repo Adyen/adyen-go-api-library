@@ -99,8 +99,8 @@ func (o MandateBankAccount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MandateBankAccount) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MandateBankAccount) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountHolder"] = o.AccountHolder
 	toSerialize["accountIdentification"] = o.AccountIdentification
 	return toSerialize, nil

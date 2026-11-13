@@ -386,8 +386,8 @@ func (o PixRecurring) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PixRecurring) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PixRecurring) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BillingDate) {
 		toSerialize["billingDate"] = o.BillingDate
 	}
@@ -466,3 +466,12 @@ func (o *PixRecurring) isValidFrequency() bool {
 	}
 	return false
 }
+
+// Values allowed for PixRecurring.Frequency.
+const (
+	PixRecurringFrequencyWeekly     = "weekly"
+	PixRecurringFrequencyMonthly    = "monthly"
+	PixRecurringFrequencyQuarterly  = "quarterly"
+	PixRecurringFrequencyHalfYearly = "half-yearly"
+	PixRecurringFrequencyYearly     = "yearly"
+)

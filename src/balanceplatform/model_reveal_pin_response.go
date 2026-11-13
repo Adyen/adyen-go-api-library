@@ -100,8 +100,8 @@ func (o RevealPinResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RevealPinResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RevealPinResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["encryptedPinBlock"] = o.EncryptedPinBlock
 	toSerialize["token"] = o.Token
 	return toSerialize, nil

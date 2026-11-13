@@ -162,8 +162,8 @@ func (o AccountHolderNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AccountHolderNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AccountHolderNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,9 @@ func (o *AccountHolderNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AccountHolderNotificationRequest.Type.
+const (
+	AccountHolderNotificationRequestTypeBalancePlatformAccountHolderUpdated = "balancePlatform.accountHolder.updated"
+	AccountHolderNotificationRequestTypeBalancePlatformAccountHolderCreated = "balancePlatform.accountHolder.created"
+)

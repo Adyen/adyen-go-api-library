@@ -182,8 +182,8 @@ func (o Passcodes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Passcodes) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Passcodes) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdminMenuPin) {
 		toSerialize["adminMenuPin"] = o.AdminMenuPin
 	}

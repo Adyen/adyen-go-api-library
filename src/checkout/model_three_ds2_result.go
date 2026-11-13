@@ -522,8 +522,8 @@ func (o ThreeDS2Result) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThreeDS2Result) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThreeDS2Result) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AuthenticationValue) {
 		toSerialize["authenticationValue"] = o.AuthenticationValue
 	}
@@ -632,3 +632,32 @@ func (o *ThreeDS2Result) isValidThreeDSRequestorChallengeInd() bool {
 	}
 	return false
 }
+
+// Values allowed for ThreeDS2Result.ChallengeCancel.
+const (
+	ThreeDS2ResultChallengeCancel01 = "01"
+	ThreeDS2ResultChallengeCancel02 = "02"
+	ThreeDS2ResultChallengeCancel03 = "03"
+	ThreeDS2ResultChallengeCancel04 = "04"
+	ThreeDS2ResultChallengeCancel05 = "05"
+	ThreeDS2ResultChallengeCancel06 = "06"
+	ThreeDS2ResultChallengeCancel07 = "07"
+)
+
+// Values allowed for ThreeDS2Result.ExemptionIndicator.
+const (
+	ThreeDS2ResultExemptionIndicatorLowValue                = "lowValue"
+	ThreeDS2ResultExemptionIndicatorSecureCorporate         = "secureCorporate"
+	ThreeDS2ResultExemptionIndicatorTrustedBeneficiary      = "trustedBeneficiary"
+	ThreeDS2ResultExemptionIndicatorTransactionRiskAnalysis = "transactionRiskAnalysis"
+)
+
+// Values allowed for ThreeDS2Result.ThreeDSRequestorChallengeInd.
+const (
+	ThreeDS2ResultThreeDSRequestorChallengeInd01 = "01"
+	ThreeDS2ResultThreeDSRequestorChallengeInd02 = "02"
+	ThreeDS2ResultThreeDSRequestorChallengeInd03 = "03"
+	ThreeDS2ResultThreeDSRequestorChallengeInd04 = "04"
+	ThreeDS2ResultThreeDSRequestorChallengeInd05 = "05"
+	ThreeDS2ResultThreeDSRequestorChallengeInd06 = "06"
+)

@@ -202,8 +202,8 @@ func (o DonationCampaignRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DonationCampaignRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DonationCampaignRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountHolderIds) {
 		toSerialize["accountHolderIds"] = o.AccountHolderIds
 	}

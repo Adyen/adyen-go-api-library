@@ -114,8 +114,8 @@ func (o WebData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WebData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WebData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.WebAddress) {
 		toSerialize["webAddress"] = o.WebAddress
 	}

@@ -100,8 +100,8 @@ func (o Name) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Name) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Name) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["firstName"] = o.FirstName
 	toSerialize["lastName"] = o.LastName
 	return toSerialize, nil

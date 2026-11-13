@@ -155,8 +155,8 @@ func (o TerminalSettingsNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalSettingsNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalSettingsNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
@@ -209,3 +209,8 @@ func (o *TerminalSettingsNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TerminalSettingsNotificationRequest.Type.
+const (
+	TerminalSettingsNotificationRequestTypeTerminalSettingsModified = "terminalSettings.modified"
+)

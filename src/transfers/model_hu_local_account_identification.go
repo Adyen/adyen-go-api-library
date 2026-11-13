@@ -102,8 +102,8 @@ func (o HULocalAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o HULocalAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o HULocalAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
@@ -154,3 +154,8 @@ func (o *HULocalAccountIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for HULocalAccountIdentification.Type.
+const (
+	HULocalAccountIdentificationTypeHuLocal = "huLocal"
+)

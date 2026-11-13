@@ -129,8 +129,8 @@ func (o UKLocalAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UKLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UKLocalAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["sortCode"] = o.SortCode
 	toSerialize["type"] = o.Type
@@ -182,3 +182,8 @@ func (o *UKLocalAccountIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for UKLocalAccountIdentification.Type.
+const (
+	UKLocalAccountIdentificationTypeUkLocal = "ukLocal"
+)

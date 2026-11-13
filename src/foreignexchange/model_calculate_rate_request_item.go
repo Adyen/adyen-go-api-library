@@ -154,8 +154,8 @@ func (o CalculateRateRequestItem) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CalculateRateRequestItem) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CalculateRateRequestItem) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["exchangeSide"] = o.ExchangeSide
 	toSerialize["sourceAmount"] = o.SourceAmount
 	toSerialize["targetCurrency"] = o.TargetCurrency

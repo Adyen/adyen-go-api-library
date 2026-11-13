@@ -80,8 +80,8 @@ func (o OnboardingLink) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OnboardingLink) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o OnboardingLink) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Url) {
 		toSerialize["url"] = o.Url
 	}

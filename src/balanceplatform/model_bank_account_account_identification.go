@@ -169,7 +169,7 @@ func (dst *BankAccountAccountIdentification) UnmarshalJSON(data []byte) error {
 	dst.USLocalAccountIdentification = nil
 
 	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
+	var jsonDict map[string]any
 	err = common.NewStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
@@ -632,7 +632,7 @@ func (src BankAccountAccountIdentification) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *BankAccountAccountIdentification) GetActualInstance() interface{} {
+func (obj *BankAccountAccountIdentification) GetActualInstance() any {
 	if obj == nil {
 		return nil
 	}

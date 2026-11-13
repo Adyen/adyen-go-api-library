@@ -305,8 +305,8 @@ func (o AccountCapabilityData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AccountCapabilityData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AccountCapabilityData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Allowed) {
 		toSerialize["allowed"] = o.Allowed
 	}

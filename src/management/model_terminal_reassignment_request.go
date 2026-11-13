@@ -182,8 +182,8 @@ func (o TerminalReassignmentRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalReassignmentRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalReassignmentRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CompanyId) {
 		toSerialize["companyId"] = o.CompanyId
 	}

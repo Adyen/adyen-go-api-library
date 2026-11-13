@@ -114,8 +114,8 @@ func (o Expiry) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Expiry) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Expiry) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Month) {
 		toSerialize["month"] = o.Month
 	}

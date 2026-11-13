@@ -134,8 +134,8 @@ func (o CheckoutSessionPatchSessionRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutSessionPatchSessionRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutSessionPatchSessionRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.Payable) {
 		toSerialize["payable"] = o.Payable

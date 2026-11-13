@@ -501,8 +501,8 @@ func (o TransferInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransferInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransferInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.BalanceAccountId) {
 		toSerialize["balanceAccountId"] = o.BalanceAccountId
@@ -605,3 +605,40 @@ func (o *TransferInfo) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TransferInfo.Category.
+const (
+	TransferInfoCategoryBank            = "bank"
+	TransferInfoCategoryCard            = "card"
+	TransferInfoCategoryInternal        = "internal"
+	TransferInfoCategoryIssuedCard      = "issuedCard"
+	TransferInfoCategoryPlatformPayment = "platformPayment"
+	TransferInfoCategoryTopUp           = "topUp"
+)
+
+// Values allowed for TransferInfo.Priorities items.
+const (
+	TransferInfoPrioritiesCrossBorder = "crossBorder"
+	TransferInfoPrioritiesFast        = "fast"
+	TransferInfoPrioritiesInstant     = "instant"
+	TransferInfoPrioritiesInternal    = "internal"
+	TransferInfoPrioritiesRegular     = "regular"
+	TransferInfoPrioritiesWire        = "wire"
+)
+
+// Values allowed for TransferInfo.Priority.
+const (
+	TransferInfoPriorityCrossBorder = "crossBorder"
+	TransferInfoPriorityFast        = "fast"
+	TransferInfoPriorityInstant     = "instant"
+	TransferInfoPriorityInternal    = "internal"
+	TransferInfoPriorityRegular     = "regular"
+	TransferInfoPriorityWire        = "wire"
+)
+
+// Values allowed for TransferInfo.Type.
+const (
+	TransferInfoTypeBankTransfer        = "bankTransfer"
+	TransferInfoTypeInternalTransfer    = "internalTransfer"
+	TransferInfoTypeInternalDirectDebit = "internalDirectDebit"
+)

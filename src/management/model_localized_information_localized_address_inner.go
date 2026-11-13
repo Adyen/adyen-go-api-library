@@ -34,7 +34,7 @@ func (dst *LocalizedInformationLocalizedAddressInner) UnmarshalJSON(data []byte)
 	dst.JapaneseLocalizedAddress = nil
 
 	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
+	var jsonDict map[string]any
 	err = common.NewStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
@@ -89,7 +89,7 @@ func (src LocalizedInformationLocalizedAddressInner) MarshalJSON() ([]byte, erro
 }
 
 // Get the actual instance
-func (obj *LocalizedInformationLocalizedAddressInner) GetActualInstance() interface{} {
+func (obj *LocalizedInformationLocalizedAddressInner) GetActualInstance() any {
 	if obj == nil {
 		return nil
 	}

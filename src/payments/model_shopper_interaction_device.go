@@ -148,8 +148,8 @@ func (o ShopperInteractionDevice) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ShopperInteractionDevice) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ShopperInteractionDevice) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Locale) {
 		toSerialize["locale"] = o.Locale
 	}

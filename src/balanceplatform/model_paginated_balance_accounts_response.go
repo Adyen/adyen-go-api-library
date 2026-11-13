@@ -127,8 +127,8 @@ func (o PaginatedBalanceAccountsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaginatedBalanceAccountsResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaginatedBalanceAccountsResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["balanceAccounts"] = o.BalanceAccounts
 	toSerialize["hasNext"] = o.HasNext
 	toSerialize["hasPrevious"] = o.HasPrevious

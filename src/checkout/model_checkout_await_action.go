@@ -175,8 +175,8 @@ func (o CheckoutAwaitAction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutAwaitAction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutAwaitAction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.PaymentData) {
 		toSerialize["paymentData"] = o.PaymentData
 	}
@@ -235,3 +235,8 @@ func (o *CheckoutAwaitAction) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CheckoutAwaitAction.Type.
+const (
+	CheckoutAwaitActionTypeAwait = "await"
+)

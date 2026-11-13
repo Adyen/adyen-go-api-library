@@ -114,8 +114,8 @@ func (o AdditionalSettings) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalSettings) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalSettings) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.IncludeEventCodes) {
 		toSerialize["includeEventCodes"] = o.IncludeEventCodes
 	}

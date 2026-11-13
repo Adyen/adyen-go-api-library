@@ -114,8 +114,8 @@ func (o CarnetInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CarnetInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CarnetInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AddMccAcronym) {
 		toSerialize["addMccAcronym"] = o.AddMccAcronym
 	}

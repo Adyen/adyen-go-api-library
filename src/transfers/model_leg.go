@@ -250,8 +250,8 @@ func (o Leg) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Leg) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Leg) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ArrivalAirportCode) {
 		toSerialize["arrivalAirportCode"] = o.ArrivalAirportCode
 	}

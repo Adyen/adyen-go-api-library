@@ -186,8 +186,8 @@ func (o Surcharge) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Surcharge) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Surcharge) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AskConfirmation) {
 		toSerialize["askConfirmation"] = o.AskConfirmation
 	}

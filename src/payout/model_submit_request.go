@@ -507,8 +507,8 @@ func (o SubmitRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SubmitRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SubmitRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
@@ -588,3 +588,9 @@ func (o *SubmitRequest) isValidEntityType() bool {
 	}
 	return false
 }
+
+// Values allowed for SubmitRequest.EntityType.
+const (
+	SubmitRequestEntityTypeNaturalPerson = "NaturalPerson"
+	SubmitRequestEntityTypeCompany       = "Company"
+)

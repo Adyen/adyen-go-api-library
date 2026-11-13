@@ -352,8 +352,8 @@ func (o PaypalUpdateOrderRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaypalUpdateOrderRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaypalUpdateOrderRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}

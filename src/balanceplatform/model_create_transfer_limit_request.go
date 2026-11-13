@@ -264,8 +264,8 @@ func (o CreateTransferLimitRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateTransferLimitRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreateTransferLimitRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.EndsAt) {
 		toSerialize["endsAt"] = o.EndsAt

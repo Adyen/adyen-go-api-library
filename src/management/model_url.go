@@ -182,8 +182,8 @@ func (o Url) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Url) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Url) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Encrypted) {
 		toSerialize["encrypted"] = o.Encrypted
 	}

@@ -141,8 +141,8 @@ func (o PhoneNumber) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PhoneNumber) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PhoneNumber) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["number"] = o.Number
 	if !common.IsNil(o.PhoneCountryCode) {
 		toSerialize["phoneCountryCode"] = o.PhoneCountryCode

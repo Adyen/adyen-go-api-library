@@ -383,8 +383,8 @@ func (o PaymentRefundRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentRefundRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentRefundRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.ApplicationInfo) {
 		toSerialize["applicationInfo"] = o.ApplicationInfo
@@ -459,3 +459,12 @@ func (o *PaymentRefundRequest) isValidMerchantRefundReason() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentRefundRequest.MerchantRefundReason.
+const (
+	PaymentRefundRequestMerchantRefundReasonFRAUD           = "FRAUD"
+	PaymentRefundRequestMerchantRefundReasonCUSTOMERREQUEST = "CUSTOMER REQUEST"
+	PaymentRefundRequestMerchantRefundReasonRETURN          = "RETURN"
+	PaymentRefundRequestMerchantRefundReasonDUPLICATE       = "DUPLICATE"
+	PaymentRefundRequestMerchantRefundReasonOTHER           = "OTHER"
+)

@@ -80,8 +80,8 @@ func (o Referenced) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Referenced) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Referenced) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.EnableStandaloneRefunds) {
 		toSerialize["enableStandaloneRefunds"] = o.EnableStandaloneRefunds
 	}

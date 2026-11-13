@@ -114,8 +114,8 @@ func (o ValidateShopperIdResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ValidateShopperIdResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ValidateShopperIdResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}

@@ -80,8 +80,8 @@ func (o VisaResponseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o VisaResponseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o VisaResponseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.TransactionDescription) {
 		toSerialize["transactionDescription"] = o.TransactionDescription
 	}

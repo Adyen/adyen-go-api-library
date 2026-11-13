@@ -321,8 +321,8 @@ func (o RatepayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RatepayDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RatepayDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
 	}
@@ -393,3 +393,9 @@ func (o *RatepayDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for RatepayDetails.Type.
+const (
+	RatepayDetailsTypeRatepay            = "ratepay"
+	RatepayDetailsTypeRatepayDirectdebit = "ratepay_directdebit"
+)

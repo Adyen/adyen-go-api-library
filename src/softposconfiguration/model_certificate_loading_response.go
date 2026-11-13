@@ -216,8 +216,8 @@ func (o CertificateLoadingResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CertificateLoadingResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CertificateLoadingResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}

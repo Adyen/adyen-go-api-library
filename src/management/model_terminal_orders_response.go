@@ -80,8 +80,8 @@ func (o TerminalOrdersResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalOrdersResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalOrdersResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}

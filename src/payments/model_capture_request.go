@@ -399,8 +399,8 @@ func (o CaptureRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CaptureRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CaptureRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}

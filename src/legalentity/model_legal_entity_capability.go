@@ -318,8 +318,8 @@ func (o LegalEntityCapability) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o LegalEntityCapability) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o LegalEntityCapability) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Allowed) {
 		toSerialize["allowed"] = o.Allowed
 	}
@@ -401,3 +401,19 @@ func (o *LegalEntityCapability) isValidRequestedLevel() bool {
 	}
 	return false
 }
+
+// Values allowed for LegalEntityCapability.AllowedLevel.
+const (
+	LegalEntityCapabilityAllowedLevelHigh          = "high"
+	LegalEntityCapabilityAllowedLevelLow           = "low"
+	LegalEntityCapabilityAllowedLevelMedium        = "medium"
+	LegalEntityCapabilityAllowedLevelNotApplicable = "notApplicable"
+)
+
+// Values allowed for LegalEntityCapability.RequestedLevel.
+const (
+	LegalEntityCapabilityRequestedLevelHigh          = "high"
+	LegalEntityCapabilityRequestedLevelLow           = "low"
+	LegalEntityCapabilityRequestedLevelMedium        = "medium"
+	LegalEntityCapabilityRequestedLevelNotApplicable = "notApplicable"
+)

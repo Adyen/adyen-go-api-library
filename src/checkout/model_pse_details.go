@@ -256,8 +256,8 @@ func (o PseDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PseDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PseDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["bank"] = o.Bank
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
@@ -319,3 +319,8 @@ func (o *PseDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PseDetails.Type.
+const (
+	PseDetailsTypePsePayulatam = "pse_payulatam"
+)

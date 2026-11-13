@@ -100,8 +100,8 @@ func (o AmountDTO) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AmountDTO) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AmountDTO) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["currency"] = o.Currency
 	toSerialize["value"] = o.Value
 	return toSerialize, nil

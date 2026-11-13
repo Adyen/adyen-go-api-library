@@ -114,8 +114,8 @@ func (o TargetUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TargetUpdate) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TargetUpdate) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -170,3 +170,10 @@ func (o *TargetUpdate) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TargetUpdate.Type.
+const (
+	TargetUpdateTypeBalanceAccount  = "balanceAccount"
+	TargetUpdateTypeAccountHolder   = "accountHolder"
+	TargetUpdateTypeBalancePlatform = "balancePlatform"
+)

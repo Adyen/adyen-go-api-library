@@ -100,8 +100,8 @@ func (o EncryptedOrderData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o EncryptedOrderData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o EncryptedOrderData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["orderData"] = o.OrderData
 	toSerialize["pspReference"] = o.PspReference
 	return toSerialize, nil

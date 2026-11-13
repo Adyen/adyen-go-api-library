@@ -80,8 +80,8 @@ func (o RegisterSCAFinalResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RegisterSCAFinalResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RegisterSCAFinalResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Success) {
 		toSerialize["success"] = o.Success
 	}

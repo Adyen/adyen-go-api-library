@@ -162,8 +162,8 @@ func (o ReleasedBlockedBalanceNotificationRequest) MarshalJSON() ([]byte, error)
 	return json.Marshal(toSerialize)
 }
 
-func (o ReleasedBlockedBalanceNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ReleasedBlockedBalanceNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,8 @@ func (o *ReleasedBlockedBalanceNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for ReleasedBlockedBalanceNotificationRequest.Type.
+const (
+	ReleasedBlockedBalanceNotificationRequestTypeBalancePlatformBalanceAccountBalanceBlockReleased = "balancePlatform.balanceAccount.balance.block.released"
+)

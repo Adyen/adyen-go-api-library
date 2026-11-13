@@ -73,8 +73,8 @@ func (o UtilityRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UtilityRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UtilityRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["originDomains"] = o.OriginDomains
 	return toSerialize, nil
 }

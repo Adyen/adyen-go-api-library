@@ -11,7 +11,7 @@ package balanceplatform
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -61,7 +61,7 @@ Approve transfer limits that are pending SCA authentication.
 @return *http.Response, error
 */
 func (a *TransferLimitsBalanceAccountLevelApi) ApprovePendingTransferLimits(ctx context.Context, r TransferLimitsBalanceAccountLevelApiApprovePendingTransferLimitsInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/balanceAccounts/{id}/transferLimits/approve"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}
@@ -86,7 +86,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) ApprovePendingTransferLimits(ctx 
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -95,7 +95,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) ApprovePendingTransferLimits(ctx 
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -104,7 +104,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) ApprovePendingTransferLimits(ctx 
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -179,7 +179,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) CreateTransferLimit(ctx context.C
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -188,7 +188,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) CreateTransferLimit(ctx context.C
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -197,7 +197,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) CreateTransferLimit(ctx context.C
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -236,7 +236,7 @@ Delete a scheduled or pending transfer limit using its unique `transferLimitId`.
 @return *http.Response, error
 */
 func (a *TransferLimitsBalanceAccountLevelApi) DeletePendingTransferLimit(ctx context.Context, r TransferLimitsBalanceAccountLevelApiDeletePendingTransferLimitInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/balanceAccounts/{id}/transferLimits/{transferLimitId}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	path = strings.Replace(path, "{"+"transferLimitId"+"}", url.PathEscape(common.ParameterValueToString(r.transferLimitId, "transferLimitId")), -1)
@@ -259,7 +259,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) DeletePendingTransferLimit(ctx co
 
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -268,7 +268,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) DeletePendingTransferLimit(ctx co
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -347,7 +347,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) GetCurrentTransferLimits(ctx cont
 
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -356,7 +356,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) GetCurrentTransferLimits(ctx cont
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -418,7 +418,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) GetSpecificTransferLimit(ctx cont
 
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -427,7 +427,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) GetSpecificTransferLimit(ctx cont
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -516,7 +516,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) GetTransferLimits(ctx context.Con
 
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -525,7 +525,7 @@ func (a *TransferLimitsBalanceAccountLevelApi) GetTransferLimits(ctx context.Con
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError

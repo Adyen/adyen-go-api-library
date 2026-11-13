@@ -216,8 +216,8 @@ func (o FundOrigin) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FundOrigin) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o FundOrigin) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
 	}

@@ -148,8 +148,8 @@ func (o RelayedAuthorisationResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RelayedAuthorisationResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RelayedAuthorisationResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AuthorisationDecision) {
 		toSerialize["authorisationDecision"] = o.AuthorisationDecision
 	}

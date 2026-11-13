@@ -114,8 +114,8 @@ func (o NyceInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NyceInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NyceInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ProcessingType) {
 		toSerialize["processingType"] = o.ProcessingType
 	}
@@ -170,3 +170,10 @@ func (o *NyceInfo) isValidProcessingType() bool {
 	}
 	return false
 }
+
+// Values allowed for NyceInfo.ProcessingType.
+const (
+	NyceInfoProcessingTypeBillpay = "billpay"
+	NyceInfoProcessingTypeEcom    = "ecom"
+	NyceInfoProcessingTypePos     = "pos"
+)

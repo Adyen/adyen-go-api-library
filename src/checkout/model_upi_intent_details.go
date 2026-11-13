@@ -321,8 +321,8 @@ func (o UpiIntentDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpiIntentDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UpiIntentDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AppId) {
 		toSerialize["appId"] = o.AppId
 	}
@@ -393,3 +393,8 @@ func (o *UpiIntentDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for UpiIntentDetails.Type.
+const (
+	UpiIntentDetailsTypeUpiIntent = "upi_intent"
+)

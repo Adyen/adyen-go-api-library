@@ -127,8 +127,8 @@ func (o CashOutTransfer) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CashOutTransfer) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CashOutTransfer) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	toSerialize["id"] = o.Id
 	toSerialize["type"] = o.Type
@@ -180,3 +180,9 @@ func (o *CashOutTransfer) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CashOutTransfer.Type.
+const (
+	CashOutTransferTypeCashoutRepayment = "cashoutRepayment"
+	CashOutTransferTypeCashoutFee       = "cashoutFee"
+)

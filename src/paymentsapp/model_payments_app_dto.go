@@ -161,8 +161,8 @@ func (o PaymentsAppDto) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentsAppDto) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentsAppDto) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["installationId"] = o.InstallationId
 	toSerialize["merchantAccountCode"] = o.MerchantAccountCode
 	if !common.IsNil(o.MerchantStoreCode) {

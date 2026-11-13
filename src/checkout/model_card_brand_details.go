@@ -148,8 +148,8 @@ func (o CardBrandDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardBrandDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CardBrandDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Healthcare) {
 		toSerialize["healthcare"] = o.Healthcare
 	}

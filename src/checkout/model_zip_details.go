@@ -262,8 +262,8 @@ func (o ZipDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ZipDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ZipDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -330,3 +330,9 @@ func (o *ZipDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for ZipDetails.Type.
+const (
+	ZipDetailsTypeZip    = "zip"
+	ZipDetailsTypeZipPos = "zip_pos"
+)

@@ -148,8 +148,8 @@ func (o ExternalPlatform) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ExternalPlatform) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ExternalPlatform) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Integrator) {
 		toSerialize["integrator"] = o.Integrator
 	}

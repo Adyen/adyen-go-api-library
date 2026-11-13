@@ -115,7 +115,7 @@ func (dst *TransferRouteRequirementsInner) UnmarshalJSON(data []byte) error {
 	dst.USInternationalAchPriorityRequirement = nil
 
 	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
+	var jsonDict map[string]any
 	err = common.NewStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
@@ -410,7 +410,7 @@ func (src TransferRouteRequirementsInner) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *TransferRouteRequirementsInner) GetActualInstance() interface{} {
+func (obj *TransferRouteRequirementsInner) GetActualInstance() any {
 	if obj == nil {
 		return nil
 	}

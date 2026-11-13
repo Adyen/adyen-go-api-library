@@ -155,8 +155,8 @@ func (o PaymentMethodRequestRemovedNotificationRequest) MarshalJSON() ([]byte, e
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentMethodRequestRemovedNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentMethodRequestRemovedNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
@@ -209,3 +209,8 @@ func (o *PaymentMethodRequestRemovedNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentMethodRequestRemovedNotificationRequest.Type.
+const (
+	PaymentMethodRequestRemovedNotificationRequestTypePaymentMethodRequestRemoved = "paymentMethodRequest.removed"
+)

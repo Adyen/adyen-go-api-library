@@ -73,8 +73,8 @@ func (o SwishInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SwishInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SwishInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["swishNumber"] = o.SwishNumber
 	return toSerialize, nil
 }

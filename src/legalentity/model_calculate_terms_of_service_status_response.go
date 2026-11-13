@@ -80,8 +80,8 @@ func (o CalculateTermsOfServiceStatusResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CalculateTermsOfServiceStatusResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CalculateTermsOfServiceStatusResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.TermsOfServiceTypes) {
 		toSerialize["termsOfServiceTypes"] = o.TermsOfServiceTypes
 	}
@@ -123,3 +123,19 @@ func (v *NullableCalculateTermsOfServiceStatusResponse) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+// Values allowed for CalculateTermsOfServiceStatusResponse.TermsOfServiceTypes items.
+const (
+	CalculateTermsOfServiceStatusResponseTermsOfServiceTypesAdyenAccount              = "adyenAccount"
+	CalculateTermsOfServiceStatusResponseTermsOfServiceTypesAdyenCapital              = "adyenCapital"
+	CalculateTermsOfServiceStatusResponseTermsOfServiceTypesAdyenCapitalCashAdvance   = "adyenCapitalCashAdvance"
+	CalculateTermsOfServiceStatusResponseTermsOfServiceTypesAdyenCard                 = "adyenCard"
+	CalculateTermsOfServiceStatusResponseTermsOfServiceTypesAdyenChargeCard           = "adyenChargeCard"
+	CalculateTermsOfServiceStatusResponseTermsOfServiceTypesAdyenForPlatformsAdvanced = "adyenForPlatformsAdvanced"
+	CalculateTermsOfServiceStatusResponseTermsOfServiceTypesAdyenForPlatformsManage   = "adyenForPlatformsManage"
+	CalculateTermsOfServiceStatusResponseTermsOfServiceTypesAdyenFranchisee           = "adyenFranchisee"
+	CalculateTermsOfServiceStatusResponseTermsOfServiceTypesAdyenIssuing              = "adyenIssuing"
+	CalculateTermsOfServiceStatusResponseTermsOfServiceTypesAdyenPccr                 = "adyenPccr"
+	CalculateTermsOfServiceStatusResponseTermsOfServiceTypesDirectDebit               = "directDebit"
+	CalculateTermsOfServiceStatusResponseTermsOfServiceTypesKycOnInvite               = "kycOnInvite"
+)

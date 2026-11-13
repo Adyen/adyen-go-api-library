@@ -284,8 +284,8 @@ func (o NotifyShopperResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NotifyShopperResult) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NotifyShopperResult) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DisplayedReference) {
 		toSerialize["displayedReference"] = o.DisplayedReference
 	}

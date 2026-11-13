@@ -118,8 +118,8 @@ func (o PayByBankPlaidInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayByBankPlaidInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayByBankPlaidInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Logo) {
 		toSerialize["logo"] = o.Logo
 	}

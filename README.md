@@ -165,7 +165,7 @@ req := service.ListRecurringDetailsInput()
 req = req.RecurringDetailsRequest(recurring.RecurringDetailsRequest{
     MerchantAccount: "your merchant account",
     Recurring: &recurring.Recurring{
-        Contract: common.PtrString("RECURRING"),
+        Contract: common.Ptr(recurring.RecurringContractRECURRING),
     },
     ShopperReference: "ref",
 })
@@ -218,9 +218,9 @@ _, httpRes, err := service.PaymentsApi.Payments(context.Background(), req.Paymen
         Value:    1250,
         Currency: "EUR",
     },
-    CountryCode:     common.PtrString("NL"),
+    CountryCode:     common.Ptr("NL"),
     MerchantAccount: "your merchant account",
-    Channel:         common.PtrString("Web"),
+    Channel:         common.Ptr(checkout.PaymentRequestChannelWeb),
     ReturnUrl:       "http://localhost:3000/redirect",
     PaymentMethod:   paymentMethod,
 }))
@@ -243,6 +243,32 @@ Log5XXError: true,
 })
 
 service := client.Checkout()
+```
+
+By default, error response bodies are printed to stdout and the request and response dumps of `Debug: true` go to the standard `log` package. To route them to your own logger, set `Logger` to a [`*slog.Logger`](https://pkg.go.dev/log/slog). Dumps are logged at debug level with the API key and `Authorization` header masked, error responses at warn level (error level for 5XX):
+
+```go
+import "log/slog"
+
+client := adyen.NewClient(&common.Config{
+    ApiKey:      "your api key",
+    Environment: common.TestEnv,
+    Log4XXError: true,
+    Log5XXError: true,
+    Logger:      slog.Default(),
+})
+```
+
+### Allowed values and optional fields
+
+Fields that accept a fixed set of values have constants named after the model, the field, and the value, for example `checkout.PaymentRequestShopperInteractionEcommerce`. Use `common.Ptr` to set optional fields:
+
+```go
+req := checkout.PaymentRequest{
+    ShopperInteraction:       common.Ptr(checkout.PaymentRequestShopperInteractionEcommerce),
+    RecurringProcessingModel: common.Ptr(checkout.PaymentRequestRecurringProcessingModelCardOnFile),
+    CountryCode:              common.Ptr("NL"),
+}
 ```
 
 ### Configure the HTTP client

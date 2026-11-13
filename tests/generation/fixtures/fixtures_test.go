@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
+	"github.com/adyen/adyen-go-api-library/v21/src/common"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -244,4 +245,23 @@ func TestTopLevelEnumsArePrefixed(t *testing.T) {
 
 	var us USLocalAccountIdentification
 	assert.Error(t, json.Unmarshal([]byte(`{"accountType":"other"}`), &us))
+}
+
+func TestInlineEnumConstants(t *testing.T) {
+	// Names come from the model, the field, and the value in Go case; casing inside the value
+	// is kept, and separators are dropped.
+	assert.Equal(t, "iOS", PlainFieldsChannelIOS)
+	assert.Equal(t, "Android", PlainFieldsChannelAndroid)
+	assert.Equal(t, "POS", PlainFieldsChannelPOS)
+	assert.Equal(t, "delayedCharge", PlainFieldsChannelDelayedCharge)
+	assert.Equal(t, "TOKEN_SHARING", PlainFieldsChannelTOKENSHARING)
+	assert.Equal(t, "ONECLICK,RECURRING", PlainFieldsChannelONECLICKRECURRING)
+	assert.Equal(t, "application/pdf", PlainFieldsChannelApplicationPdf)
+	assert.Equal(t, "[capture-received]", PlainFieldsChannel_CaptureReceived)
+	// Array items get constants too, and the field keeps its plain string type.
+	m := PlainFields{Channel: common.Ptr(PlainFieldsChannelPOS), Channels: []string{PlainFieldsChannelsWeb, PlainFieldsChannelsApp}}
+	assert.Equal(t, "POS", m.GetChannel())
+	assert.Equal(t, []string{"web", "app"}, m.GetChannels())
+	// Discriminator-less oneOf decoding keeps using the type enum check.
+	assert.Equal(t, "applepay", WalletDetailsTypeApplepay)
 }

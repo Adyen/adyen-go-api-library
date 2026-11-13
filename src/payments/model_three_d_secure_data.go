@@ -454,8 +454,8 @@ func (o ThreeDSecureData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThreeDSecureData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThreeDSecureData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AuthenticationResponse) {
 		toSerialize["authenticationResponse"] = o.AuthenticationResponse
 	}
@@ -558,3 +558,34 @@ func (o *ThreeDSecureData) isValidDirectoryResponse() bool {
 	}
 	return false
 }
+
+// Values allowed for ThreeDSecureData.AuthenticationResponse.
+const (
+	ThreeDSecureDataAuthenticationResponseY = "Y"
+	ThreeDSecureDataAuthenticationResponseN = "N"
+	ThreeDSecureDataAuthenticationResponseU = "U"
+	ThreeDSecureDataAuthenticationResponseA = "A"
+)
+
+// Values allowed for ThreeDSecureData.ChallengeCancel.
+const (
+	ThreeDSecureDataChallengeCancel01 = "01"
+	ThreeDSecureDataChallengeCancel02 = "02"
+	ThreeDSecureDataChallengeCancel03 = "03"
+	ThreeDSecureDataChallengeCancel04 = "04"
+	ThreeDSecureDataChallengeCancel05 = "05"
+	ThreeDSecureDataChallengeCancel06 = "06"
+	ThreeDSecureDataChallengeCancel07 = "07"
+)
+
+// Values allowed for ThreeDSecureData.DirectoryResponse.
+const (
+	ThreeDSecureDataDirectoryResponseA = "A"
+	ThreeDSecureDataDirectoryResponseC = "C"
+	ThreeDSecureDataDirectoryResponseD = "D"
+	ThreeDSecureDataDirectoryResponseI = "I"
+	ThreeDSecureDataDirectoryResponseN = "N"
+	ThreeDSecureDataDirectoryResponseR = "R"
+	ThreeDSecureDataDirectoryResponseU = "U"
+	ThreeDSecureDataDirectoryResponseY = "Y"
+)

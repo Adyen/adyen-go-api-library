@@ -167,8 +167,8 @@ func (o USLocalAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o USLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o USLocalAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	if !common.IsNil(o.AccountType) {
 		toSerialize["accountType"] = o.AccountType
@@ -232,3 +232,14 @@ func (o *USLocalAccountIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for USLocalAccountIdentification.AccountType.
+const (
+	USLocalAccountIdentificationAccountTypeChecking = "checking"
+	USLocalAccountIdentificationAccountTypeSavings  = "savings"
+)
+
+// Values allowed for USLocalAccountIdentification.Type.
+const (
+	USLocalAccountIdentificationTypeUsLocal = "usLocal"
+)

@@ -148,8 +148,8 @@ func (o StarResponseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StarResponseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StarResponseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.NetworkProcessingMode) {
 		toSerialize["networkProcessingMode"] = o.NetworkProcessingMode
 	}
@@ -216,3 +216,16 @@ func (o *StarResponseInfo) isValidProcessingType() bool {
 	}
 	return false
 }
+
+// Values allowed for StarResponseInfo.NetworkProcessingMode.
+const (
+	StarResponseInfoNetworkProcessingModeAuth = "auth"
+	StarResponseInfoNetworkProcessingModeSale = "sale"
+)
+
+// Values allowed for StarResponseInfo.ProcessingType.
+const (
+	StarResponseInfoProcessingTypeBillpay = "billpay"
+	StarResponseInfoProcessingTypeEcom    = "ecom"
+	StarResponseInfoProcessingTypePos     = "pos"
+)

@@ -127,8 +127,8 @@ func (o ScaDevice) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ScaDevice) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ScaDevice) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
 	toSerialize["type"] = o.Type

@@ -114,8 +114,8 @@ func (o RelayedAuthorisationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RelayedAuthorisationData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RelayedAuthorisationData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}

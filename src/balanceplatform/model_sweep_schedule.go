@@ -107,8 +107,8 @@ func (o SweepSchedule) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SweepSchedule) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SweepSchedule) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CronExpression) {
 		toSerialize["cronExpression"] = o.CronExpression
 	}
@@ -161,3 +161,12 @@ func (o *SweepSchedule) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for SweepSchedule.Type.
+const (
+	SweepScheduleTypeDaily   = "daily"
+	SweepScheduleTypeWeekly  = "weekly"
+	SweepScheduleTypeMonthly = "monthly"
+	SweepScheduleTypeBalance = "balance"
+	SweepScheduleTypeCron    = "cron"
+)

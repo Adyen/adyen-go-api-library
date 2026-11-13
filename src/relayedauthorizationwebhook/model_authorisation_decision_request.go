@@ -148,8 +148,8 @@ func (o AuthorisationDecisionRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AuthorisationDecisionRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AuthorisationDecisionRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ReasonCode) {
 		toSerialize["reasonCode"] = o.ReasonCode
 	}

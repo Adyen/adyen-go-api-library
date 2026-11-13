@@ -196,8 +196,8 @@ func (o OnboardingTheme) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OnboardingTheme) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o OnboardingTheme) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["createdAt"] = o.CreatedAt
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description

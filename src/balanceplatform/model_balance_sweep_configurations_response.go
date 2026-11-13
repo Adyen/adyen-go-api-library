@@ -127,8 +127,8 @@ func (o BalanceSweepConfigurationsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceSweepConfigurationsResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceSweepConfigurationsResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["hasNext"] = o.HasNext
 	toSerialize["hasPrevious"] = o.HasPrevious
 	toSerialize["sweeps"] = o.Sweeps

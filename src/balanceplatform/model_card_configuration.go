@@ -549,8 +549,8 @@ func (o CardConfiguration) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardConfiguration) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CardConfiguration) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Activation) {
 		toSerialize["activation"] = o.Activation
 	}

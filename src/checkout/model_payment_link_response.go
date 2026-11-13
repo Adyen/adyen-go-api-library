@@ -1577,8 +1577,8 @@ func (o PaymentLinkResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentLinkResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentLinkResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AllowedPaymentMethods) {
 		toSerialize["allowedPaymentMethods"] = o.AllowedPaymentMethods
 	}
@@ -1771,3 +1771,35 @@ func (o *PaymentLinkResponse) isValidStorePaymentMethodMode() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentLinkResponse.RecurringProcessingModel.
+const (
+	PaymentLinkResponseRecurringProcessingModelCardOnFile            = "CardOnFile"
+	PaymentLinkResponseRecurringProcessingModelSubscription          = "Subscription"
+	PaymentLinkResponseRecurringProcessingModelUnscheduledCardOnFile = "UnscheduledCardOnFile"
+)
+
+// Values allowed for PaymentLinkResponse.RequiredShopperFields items.
+const (
+	PaymentLinkResponseRequiredShopperFieldsBillingAddress  = "billingAddress"
+	PaymentLinkResponseRequiredShopperFieldsDeliveryAddress = "deliveryAddress"
+	PaymentLinkResponseRequiredShopperFieldsShopperEmail    = "shopperEmail"
+	PaymentLinkResponseRequiredShopperFieldsShopperName     = "shopperName"
+	PaymentLinkResponseRequiredShopperFieldsTelephoneNumber = "telephoneNumber"
+)
+
+// Values allowed for PaymentLinkResponse.Status.
+const (
+	PaymentLinkResponseStatusActive         = "active"
+	PaymentLinkResponseStatusCompleted      = "completed"
+	PaymentLinkResponseStatusExpired        = "expired"
+	PaymentLinkResponseStatusPaid           = "paid"
+	PaymentLinkResponseStatusPaymentPending = "paymentPending"
+)
+
+// Values allowed for PaymentLinkResponse.StorePaymentMethodMode.
+const (
+	PaymentLinkResponseStorePaymentMethodModeAskForConsent = "askForConsent"
+	PaymentLinkResponseStorePaymentMethodModeDisabled      = "disabled"
+	PaymentLinkResponseStorePaymentMethodModeEnabled       = "enabled"
+)

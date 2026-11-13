@@ -14,8 +14,8 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
+	"log/slog"
 	"mime/multipart"
 	"net/http"
 	"net/http/httputil"
@@ -58,7 +58,7 @@ type Client struct {
 
 // CreateHTTPRequest is used as base to create HTTP request for all methods (GET, POST, PATCH...)
 // Deprecated
-func CreateHTTPRequest(c *Client, httpMethod string, req interface{}, res interface{}, path string, ctxs []context.Context) (*http.Response, error) {
+func CreateHTTPRequest(c *Client, httpMethod string, req any, res any, path string, ctxs []context.Context) (*http.Response, error) {
 	// create path and map variables
 	headerParams := make(map[string]string)
 	queryParams := url.Values{}
@@ -97,7 +97,7 @@ func CreateHTTPRequest(c *Client, httpMethod string, req interface{}, res interf
 		return httpResponse, err
 	}
 
-	body, err := ioutil.ReadAll(httpResponse.Body)
+	body, err := io.ReadAll(httpResponse.Body)
 	httpResponse.Body.Close()
 	if err != nil {
 		return httpResponse, err
@@ -120,7 +120,7 @@ func CreateHTTPRequest(c *Client, httpMethod string, req interface{}, res interf
 func SendAPIRequest(
 	ctx context.Context,
 	c *Client,
-	req, res interface{},
+	req, res any,
 	httpMethod string,
 	path string,
 	queryParams url.Values,
@@ -155,23 +155,23 @@ func SendAPIRequest(
 		return httpResponse, err
 	}
 
-	body, err := ioutil.ReadAll(httpResponse.Body)
+	body, err := io.ReadAll(httpResponse.Body)
 	httpResponse.Body.Close()
-	httpResponse.Body = ioutil.NopCloser(bytes.NewBuffer(body))
+	httpResponse.Body = io.NopCloser(bytes.NewBuffer(body))
 	if err != nil {
 		return httpResponse, err
 	}
 
-	c.logOnError(httpResponse)
+	c.logOnError(httpResponse, body)
 
 	if httpResponse.StatusCode >= 300 {
-		newErr := NewAPIError(body, httpResponse.Status)
+		newErr := c.newAPIError(body, httpResponse.Status)
 		return httpResponse, newErr
 	}
 
 	err = c.Decode(&res, body, httpResponse.Header.Get("Content-Type"))
 	if err != nil {
-		newErr := NewAPIError(body, err.Error())
+		newErr := c.newAPIError(body, err.Error())
 		return httpResponse, newErr
 	}
 
@@ -179,24 +179,24 @@ func SendAPIRequest(
 }
 
 // MakeHTTPPostRequest is a generic method used to make HTTP POST requests
-func (c *Client) MakeHTTPPostRequest(req interface{}, res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
+func (c *Client) MakeHTTPPostRequest(req any, res any, path string, ctxs ...context.Context) (*http.Response, error) {
 	return CreateHTTPRequest(c, http.MethodPost, req, res, path, ctxs)
 }
 
 // MakeHTTPGetRequest is a generic method used to make HTTP GET requests
-func (c *Client) MakeHTTPGetRequest(res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
-	var req interface{}
+func (c *Client) MakeHTTPGetRequest(res any, path string, ctxs ...context.Context) (*http.Response, error) {
+	var req any
 	return CreateHTTPRequest(c, http.MethodGet, req, res, path, ctxs)
 }
 
 // MakeHTTPDeleteRequest is a generic method used to make HTTP DELETE requests
-func (c *Client) MakeHTTPDeleteRequest(res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
-	var req interface{}
+func (c *Client) MakeHTTPDeleteRequest(res any, path string, ctxs ...context.Context) (*http.Response, error) {
+	var req any
 	return CreateHTTPRequest(c, http.MethodDelete, req, res, path, ctxs)
 }
 
 // MakeHTTPPatchRequest is a generic method used to make HTTP PATCH requests
-func (c *Client) MakeHTTPPatchRequest(req interface{}, res interface{}, path string, ctxs ...context.Context) (*http.Response, error) {
+func (c *Client) MakeHTTPPatchRequest(req any, res any, path string, ctxs ...context.Context) (*http.Response, error) {
 	return CreateHTTPRequest(c, http.MethodPatch, req, res, path, ctxs)
 }
 
@@ -211,7 +211,7 @@ func (c *Client) CallAPI(request *http.Request) (*http.Response, error) {
 		if err != nil {
 			return nil, err
 		}
-		log.Printf("\n%s\n", string(dump))
+		c.logDebug("adyen request", request.Method, request.URL.String(), dump)
 	}
 
 	resp, err := c.Cfg.HTTPClient.Do(request)
@@ -224,32 +224,41 @@ func (c *Client) CallAPI(request *http.Request) (*http.Response, error) {
 		if err != nil {
 			return resp, err
 		}
-		log.Printf("\n%s\n", string(dump))
+		c.logDebug("adyen response", request.Method, request.URL.String(), dump)
 	}
 
 	return resp, err
 }
 
-// LogOnError log response body when an error occurs
-// the type of error being logged depends on the Configuration
-func (c *Client) logOnError(httpResponse *http.Response) {
-	if c.Cfg.Log3XXError {
-		if httpResponse.StatusCode >= 300 && httpResponse.StatusCode < 400 {
-			fmt.Println(httpResponse.Body)
-		}
+func (c *Client) logDebug(msg, method, url string, dump []byte) {
+	if c.Cfg.Logger == nil {
+		log.Printf("\n%s\n", string(dump))
+		return
 	}
+	c.Cfg.Logger.Debug(msg, "method", method, "url", url, "dump", string(dump))
+}
 
-	if c.Cfg.Log4XXError {
-		if httpResponse.StatusCode >= 400 && httpResponse.StatusCode < 500 {
-			fmt.Println(httpResponse.Body)
-		}
+// logOnError logs the body of an error response when the Configuration asks for its status class.
+func (c *Client) logOnError(httpResponse *http.Response, body []byte) {
+	status := httpResponse.StatusCode
+	if !(c.Cfg.Log3XXError && status >= 300 && status < 400) &&
+		!(c.Cfg.Log4XXError && status >= 400 && status < 500) &&
+		!(c.Cfg.Log5XXError && status >= 500) {
+		return
 	}
-
-	if c.Cfg.Log5XXError {
-		if httpResponse.StatusCode >= 500 {
-			fmt.Println(httpResponse.Body)
-		}
+	if c.Cfg.Logger == nil {
+		fmt.Println(string(body))
+		return
 	}
+	level := slog.LevelWarn
+	if status >= 500 {
+		level = slog.LevelError
+	}
+	attrs := []any{"status", status, "body", string(body)}
+	if req := httpResponse.Request; req != nil {
+		attrs = append(attrs, "method", req.Method, "url", req.URL.String())
+	}
+	c.Cfg.Logger.Log(context.Background(), level, "adyen error response", attrs...)
 }
 
 func maskApiKey(request *http.Request) {
@@ -282,7 +291,7 @@ func maskAuthorization(request *http.Request) {
 func (c *Client) PrepareRequest(
 	ctx context.Context,
 	path string, method string,
-	postBody interface{},
+	postBody any,
 	headerParams map[string]string,
 	queryParams url.Values) (localVarRequest *http.Request, err error) {
 
@@ -401,7 +410,7 @@ func (c *Client) PrepareRequest(
 	return localVarRequest, nil
 }
 
-func (c *Client) Decode(v interface{}, b []byte, contentType string) (err error) {
+func (c *Client) Decode(v any, b []byte, contentType string) (err error) {
 	if len(b) == 0 {
 		return nil
 	}
@@ -463,7 +472,7 @@ func contains(haystack []string, needle string) bool {
 }
 
 // Verify optional parameters are of the correct type.
-func typeCheckParameter(obj interface{}, expected string, name string) error {
+func typeCheckParameter(obj any, expected string, name string) error {
 	// Make sure there is an object.
 	if obj == nil {
 		return nil
@@ -477,7 +486,7 @@ func typeCheckParameter(obj interface{}, expected string, name string) error {
 }
 
 // parameterToString convert interface{} parameters to string, using a delimiter if format is provided.
-func parameterToString(obj interface{}, collectionFormat string) string {
+func parameterToString(obj any, collectionFormat string) string {
 	var delimiter string
 
 	switch collectionFormat {
@@ -500,7 +509,7 @@ func parameterToString(obj interface{}, collectionFormat string) string {
 	return fmt.Sprintf("%v", obj)
 }
 
-func ParameterValueToString(obj interface{}, key string) string {
+func ParameterValueToString(obj any, key string) string {
 	if reflect.TypeOf(obj).Kind() != reflect.Ptr {
 		return fmt.Sprintf("%v", obj)
 	}
@@ -517,7 +526,7 @@ func ParameterValueToString(obj interface{}, key string) string {
 
 // ParameterAddToHeaderOrQuery adds the provided object to the request header or url query
 // supporting deep object syntax
-func ParameterAddToHeaderOrQuery(headerOrQueryParams interface{}, keyPrefix string, obj interface{}, collectionType string) {
+func ParameterAddToHeaderOrQuery(headerOrQueryParams any, keyPrefix string, obj any, collectionType string) {
 	var v = reflect.ValueOf(obj)
 	var value = ""
 	if v == reflect.ValueOf(nil) {
@@ -604,7 +613,7 @@ func ParameterAddToHeaderOrQuery(headerOrQueryParams interface{}, keyPrefix stri
 
 // ParameterAddToQuery adds the provided object to the url query supporting deep object syntax
 // Deprecated
-func ParameterAddToQuery(queryParams interface{}, keyPrefix string, obj interface{}, collectionType string) {
+func ParameterAddToQuery(queryParams any, keyPrefix string, obj any, collectionType string) {
 	var v = reflect.ValueOf(obj)
 	var value = ""
 	if v == reflect.ValueOf(nil) {
@@ -690,7 +699,7 @@ func ParameterAddToQuery(queryParams interface{}, keyPrefix string, obj interfac
 }
 
 // parameterToJson is helper for converting interface{} parameters to json strings
-func parameterToJson(obj interface{}) (string, error) {
+func parameterToJson(obj any) (string, error) {
 	jsonBuf, err := json.Marshal(obj)
 	if err != nil {
 		return "", err
@@ -752,12 +761,12 @@ func sortedKeys[V any](m map[string]V) []string {
 }
 
 // Prevent trying to import "fmt"
-func reportError(format string, a ...interface{}) error {
+func reportError(format string, a ...any) error {
 	return fmt.Errorf(format, a...)
 }
 
 // Set Request body from an interface{}
-func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err error) {
+func setBody(body any, contentType string) (bodyBuf *bytes.Buffer, err error) {
 	if bodyBuf == nil {
 		bodyBuf = &bytes.Buffer{}
 	}
@@ -788,7 +797,7 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 }
 
 // detectContentType method is used to figure out `Request.Body` content type for Request header
-func detectContentType(body interface{}) string {
+func detectContentType(body any) string {
 	contentType := "text/plain; charset=utf-8"
 	kind := reflect.TypeOf(body).Kind()
 
@@ -874,7 +883,15 @@ type APIError struct {
 
 // NewAPIError returns a new error instance
 func NewAPIError(body []byte, errMsg string) APIError {
-	errBody := map[string]interface{}{}
+	return newAPIError(body, errMsg, nil)
+}
+
+func (c *Client) newAPIError(body []byte, errMsg string) APIError {
+	return newAPIError(body, errMsg, c.Cfg.Logger)
+}
+
+func newAPIError(body []byte, errMsg string, logger *slog.Logger) APIError {
+	errBody := map[string]any{}
 	apiError := APIError{
 		Err:     errMsg,
 		RawBody: body,
@@ -882,7 +899,11 @@ func NewAPIError(body []byte, errMsg string) APIError {
 	if len(body) != 0 {
 		err := json.Unmarshal(body, &errBody)
 		if err != nil {
-			log.Printf("\nError while parsing error body for %s: %s\n", errMsg, err.Error())
+			if logger == nil {
+				log.Printf("\nError while parsing error body for %s: %s\n", errMsg, err.Error())
+			} else {
+				logger.Warn("adyen error body is not JSON", "error", errMsg, "parseError", err.Error())
+			}
 		}
 		if val, ok := errBody["message"]; ok {
 			apiError.Message = val.(string)

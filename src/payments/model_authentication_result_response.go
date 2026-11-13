@@ -114,8 +114,8 @@ func (o AuthenticationResultResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AuthenticationResultResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AuthenticationResultResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ThreeDS1Result) {
 		toSerialize["threeDS1Result"] = o.ThreeDS1Result
 	}

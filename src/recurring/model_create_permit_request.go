@@ -154,8 +154,8 @@ func (o CreatePermitRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreatePermitRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreatePermitRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["permits"] = o.Permits
 	toSerialize["recurringDetailReference"] = o.RecurringDetailReference

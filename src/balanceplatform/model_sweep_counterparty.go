@@ -148,8 +148,8 @@ func (o SweepCounterparty) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SweepCounterparty) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SweepCounterparty) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BalanceAccountId) {
 		toSerialize["balanceAccountId"] = o.BalanceAccountId
 	}

@@ -114,8 +114,8 @@ func (o AndroidAppError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AndroidAppError) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AndroidAppError) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ErrorCode) {
 		toSerialize["errorCode"] = o.ErrorCode
 	}

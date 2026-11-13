@@ -138,8 +138,8 @@ func (o SGLocalAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SGLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SGLocalAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["bic"] = o.Bic
 	if !common.IsNil(o.Type) {
@@ -193,3 +193,8 @@ func (o *SGLocalAccountIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for SGLocalAccountIdentification.Type.
+const (
+	SGLocalAccountIdentificationTypeSgLocal = "sgLocal"
+)

@@ -80,8 +80,8 @@ func (o Unreferenced) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Unreferenced) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Unreferenced) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.EnableUnreferencedRefunds) {
 		toSerialize["enableUnreferencedRefunds"] = o.EnableUnreferencedRefunds
 	}

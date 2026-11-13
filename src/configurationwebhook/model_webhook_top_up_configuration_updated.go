@@ -344,8 +344,8 @@ func (o WebhookTopUpConfigurationUpdated) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WebhookTopUpConfigurationUpdated) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WebhookTopUpConfigurationUpdated) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["counterparty"] = o.Counterparty
 	toSerialize["description"] = o.Description
 	if !common.IsNil(o.DisabledReason) {
@@ -412,3 +412,9 @@ func (o *WebhookTopUpConfigurationUpdated) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for WebhookTopUpConfigurationUpdated.Status.
+const (
+	WebhookTopUpConfigurationUpdatedStatusActive   = "active"
+	WebhookTopUpConfigurationUpdatedStatusInactive = "inactive"
+)

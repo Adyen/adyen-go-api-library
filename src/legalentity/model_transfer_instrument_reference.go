@@ -168,8 +168,8 @@ func (o TransferInstrumentReference) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransferInstrumentReference) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransferInstrumentReference) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountIdentifier"] = o.AccountIdentifier
 	toSerialize["id"] = o.Id
 	if !common.IsNil(o.RealLastFour) {

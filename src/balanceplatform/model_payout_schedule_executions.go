@@ -73,8 +73,8 @@ func (o PayoutScheduleExecutions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayoutScheduleExecutions) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayoutScheduleExecutions) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["payoutScheduleExecutions"] = o.PayoutScheduleExecutions
 	return toSerialize, nil
 }

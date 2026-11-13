@@ -80,8 +80,8 @@ func (o TransactionRuleResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransactionRuleResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransactionRuleResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.TransactionRule) {
 		toSerialize["transactionRule"] = o.TransactionRule
 	}

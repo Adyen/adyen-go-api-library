@@ -289,8 +289,8 @@ func (o ApplePayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ApplePayDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ApplePayDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["applePayToken"] = o.ApplePayToken
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
@@ -367,3 +367,15 @@ func (o *ApplePayDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for ApplePayDetails.FundingSource.
+const (
+	ApplePayDetailsFundingSourceCredit  = "credit"
+	ApplePayDetailsFundingSourceDebit   = "debit"
+	ApplePayDetailsFundingSourcePrepaid = "prepaid"
+)
+
+// Values allowed for ApplePayDetails.Type.
+const (
+	ApplePayDetailsTypeApplepay = "applepay"
+)

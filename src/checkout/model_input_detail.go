@@ -352,8 +352,8 @@ func (o InputDetail) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o InputDetail) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o InputDetail) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Configuration) {
 		toSerialize["configuration"] = o.Configuration
 	}

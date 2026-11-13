@@ -148,8 +148,8 @@ func (o GeneratePciDescriptionResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GeneratePciDescriptionResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GeneratePciDescriptionResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Content) {
 		toSerialize["content"] = o.Content
 	}

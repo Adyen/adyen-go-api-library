@@ -148,8 +148,8 @@ func (o Localization) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Localization) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Localization) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Language) {
 		toSerialize["language"] = o.Language
 	}

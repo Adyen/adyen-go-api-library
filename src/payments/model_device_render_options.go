@@ -118,8 +118,8 @@ func (o DeviceRenderOptions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DeviceRenderOptions) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DeviceRenderOptions) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.SdkInterface) {
 		toSerialize["sdkInterface"] = o.SdkInterface
 	}
@@ -174,3 +174,19 @@ func (o *DeviceRenderOptions) isValidSdkInterface() bool {
 	}
 	return false
 }
+
+// Values allowed for DeviceRenderOptions.SdkInterface.
+const (
+	DeviceRenderOptionsSdkInterfaceNative = "native"
+	DeviceRenderOptionsSdkInterfaceHtml   = "html"
+	DeviceRenderOptionsSdkInterfaceBoth   = "both"
+)
+
+// Values allowed for DeviceRenderOptions.SdkUiType items.
+const (
+	DeviceRenderOptionsSdkUiTypeMultiSelect  = "multiSelect"
+	DeviceRenderOptionsSdkUiTypeOtherHtml    = "otherHtml"
+	DeviceRenderOptionsSdkUiTypeOutOfBand    = "outOfBand"
+	DeviceRenderOptionsSdkUiTypeSingleSelect = "singleSelect"
+	DeviceRenderOptionsSdkUiTypeText         = "text"
+)

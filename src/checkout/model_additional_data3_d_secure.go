@@ -266,8 +266,8 @@ func (o AdditionalData3DSecure) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalData3DSecure) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalData3DSecure) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Allow3DS2) {
 		toSerialize["allow3DS2"] = o.Allow3DS2
 	}
@@ -334,3 +334,12 @@ func (o *AdditionalData3DSecure) isValidChallengeWindowSize() bool {
 	}
 	return false
 }
+
+// Values allowed for AdditionalData3DSecure.ChallengeWindowSize.
+const (
+	AdditionalData3DSecureChallengeWindowSize01 = "01"
+	AdditionalData3DSecureChallengeWindowSize02 = "02"
+	AdditionalData3DSecureChallengeWindowSize03 = "03"
+	AdditionalData3DSecureChallengeWindowSize04 = "04"
+	AdditionalData3DSecureChallengeWindowSize05 = "05"
+)

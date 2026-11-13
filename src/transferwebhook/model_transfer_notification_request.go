@@ -169,8 +169,8 @@ func (o TransferNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransferNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransferNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -227,3 +227,9 @@ func (o *TransferNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TransferNotificationRequest.Type.
+const (
+	TransferNotificationRequestTypeBalancePlatformTransferCreated = "balancePlatform.transfer.created"
+	TransferNotificationRequestTypeBalancePlatformTransferUpdated = "balancePlatform.transfer.updated"
+)

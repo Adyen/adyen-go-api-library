@@ -364,8 +364,8 @@ func (o BacsDirectDebitDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BacsDirectDebitDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BacsDirectDebitDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BankAccountNumber) {
 		toSerialize["bankAccountNumber"] = o.BankAccountNumber
 	}
@@ -441,3 +441,8 @@ func (o *BacsDirectDebitDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for BacsDirectDebitDetails.Type.
+const (
+	BacsDirectDebitDetailsTypeDirectdebitGB = "directdebit_GB"
+)

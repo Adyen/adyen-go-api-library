@@ -15,7 +15,7 @@ import (
 )
 
 // CalculateHmac calculates the SHA-256 HMAC for the given data and key
-func CalculateHmac(data interface{}, secret string) (string, error) {
+func CalculateHmac(data any, secret string) (string, error) {
 	switch val := data.(type) {
 	case string:
 		return encode(val, secret)
@@ -68,7 +68,7 @@ func ValidateHmacPayload(hmacSignature string, key string, payload string) bool 
 }
 
 // GetDataToSign converts a notificationRequestItem to string, which later on can be used for calculating a HMAC
-func GetDataToSign(notificationRequestItem interface{}) string {
+func GetDataToSign(notificationRequestItem any) string {
 	switch item := notificationRequestItem.(type) {
 	case webhook.NotificationRequestItem:
 		signedDataList := []string{

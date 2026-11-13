@@ -105,7 +105,7 @@ type PaymentsApiGetResultOfPaymentSessionInput struct {
 	sessionResult *string
 }
 
-// The &#x60;sessionResult&#x60; value from the Drop-in or Component.
+// The `sessionResult` value from the Drop-in or Component.
 func (r PaymentsApiGetResultOfPaymentSessionInput) SessionResult(sessionResult string) PaymentsApiGetResultOfPaymentSessionInput {
 	r.sessionResult = &sessionResult
 	return r

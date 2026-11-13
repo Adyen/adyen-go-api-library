@@ -100,8 +100,8 @@ func (o Action) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Action) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Action) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["actionCode"] = o.ActionCode
 	toSerialize["resolved"] = o.Resolved
 	return toSerialize, nil

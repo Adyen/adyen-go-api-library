@@ -134,8 +134,8 @@ func (o SplitConfiguration) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SplitConfiguration) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SplitConfiguration) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["description"] = o.Description
 	toSerialize["rules"] = o.Rules
 	if !common.IsNil(o.SplitConfigurationId) {

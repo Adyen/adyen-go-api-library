@@ -1866,8 +1866,8 @@ func (o PaymentRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountInfo) {
 		toSerialize["accountInfo"] = o.AccountInfo
 	}
@@ -2099,3 +2099,31 @@ func (o *PaymentRequest) isValidShopperInteraction() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentRequest.EntityType.
+const (
+	PaymentRequestEntityTypeNaturalPerson = "NaturalPerson"
+	PaymentRequestEntityTypeCompanyName   = "CompanyName"
+)
+
+// Values allowed for PaymentRequest.FundingSource.
+const (
+	PaymentRequestFundingSourceCredit  = "credit"
+	PaymentRequestFundingSourceDebit   = "debit"
+	PaymentRequestFundingSourcePrepaid = "prepaid"
+)
+
+// Values allowed for PaymentRequest.RecurringProcessingModel.
+const (
+	PaymentRequestRecurringProcessingModelCardOnFile            = "CardOnFile"
+	PaymentRequestRecurringProcessingModelSubscription          = "Subscription"
+	PaymentRequestRecurringProcessingModelUnscheduledCardOnFile = "UnscheduledCardOnFile"
+)
+
+// Values allowed for PaymentRequest.ShopperInteraction.
+const (
+	PaymentRequestShopperInteractionEcommerce = "Ecommerce"
+	PaymentRequestShopperInteractionContAuth  = "ContAuth"
+	PaymentRequestShopperInteractionMoto      = "Moto"
+	PaymentRequestShopperInteractionPOS       = "POS"
+)

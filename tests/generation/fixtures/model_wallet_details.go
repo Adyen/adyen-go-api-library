@@ -105,8 +105,8 @@ func (o WalletDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WalletDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WalletDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["type"] = o.Type
 	if !common.IsNil(o.Token) {
 		toSerialize["token"] = o.Token
@@ -159,3 +159,9 @@ func (o *WalletDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for WalletDetails.Type.
+const (
+	WalletDetailsTypePaywithgoogle = "paywithgoogle"
+	WalletDetailsTypeApplepay      = "applepay"
+)

@@ -379,8 +379,8 @@ func (o LegalEntityInfoRequiredType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o LegalEntityInfoRequiredType) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o LegalEntityInfoRequiredType) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Capabilities) {
 		toSerialize["capabilities"] = o.Capabilities
 	}
@@ -457,3 +457,12 @@ func (o *LegalEntityInfoRequiredType) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for LegalEntityInfoRequiredType.Type.
+const (
+	LegalEntityInfoRequiredTypeTypeIndividual                = "individual"
+	LegalEntityInfoRequiredTypeTypeOrganization              = "organization"
+	LegalEntityInfoRequiredTypeTypeSoleProprietorship        = "soleProprietorship"
+	LegalEntityInfoRequiredTypeTypeTrust                     = "trust"
+	LegalEntityInfoRequiredTypeTypeUnincorporatedPartnership = "unincorporatedPartnership"
+)

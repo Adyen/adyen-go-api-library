@@ -624,8 +624,8 @@ func (o OnboardingLinkSettings) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OnboardingLinkSettings) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o OnboardingLinkSettings) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcceptedCountries) {
 		toSerialize["acceptedCountries"] = o.AcceptedCountries
 	}

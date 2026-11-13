@@ -80,8 +80,8 @@ func (o TapToPay) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TapToPay) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TapToPay) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MerchantDisplayName) {
 		toSerialize["merchantDisplayName"] = o.MerchantDisplayName
 	}

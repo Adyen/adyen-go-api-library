@@ -162,8 +162,8 @@ func (o NegativeBalanceCompensationWarningNotificationRequest) MarshalJSON() ([]
 	return json.Marshal(toSerialize)
 }
 
-func (o NegativeBalanceCompensationWarningNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NegativeBalanceCompensationWarningNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,8 @@ func (o *NegativeBalanceCompensationWarningNotificationRequest) isValidType() bo
 	}
 	return false
 }
+
+// Values allowed for NegativeBalanceCompensationWarningNotificationRequest.Type.
+const (
+	NegativeBalanceCompensationWarningNotificationRequestTypeBalancePlatformNegativeBalanceCompensationWarningScheduled = "balancePlatform.negativeBalanceCompensationWarning.scheduled"
+)

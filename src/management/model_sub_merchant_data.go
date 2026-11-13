@@ -154,8 +154,8 @@ func (o SubMerchantData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SubMerchantData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SubMerchantData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["email"] = o.Email
 	toSerialize["id"] = o.Id
 	toSerialize["mcc"] = o.Mcc

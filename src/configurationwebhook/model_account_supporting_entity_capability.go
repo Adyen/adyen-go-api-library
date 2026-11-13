@@ -284,8 +284,8 @@ func (o AccountSupportingEntityCapability) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AccountSupportingEntityCapability) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AccountSupportingEntityCapability) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Allowed) {
 		toSerialize["allowed"] = o.Allowed
 	}
@@ -373,3 +373,27 @@ func (o *AccountSupportingEntityCapability) isValidVerificationStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for AccountSupportingEntityCapability.AllowedLevel.
+const (
+	AccountSupportingEntityCapabilityAllowedLevelHigh          = "high"
+	AccountSupportingEntityCapabilityAllowedLevelLow           = "low"
+	AccountSupportingEntityCapabilityAllowedLevelMedium        = "medium"
+	AccountSupportingEntityCapabilityAllowedLevelNotApplicable = "notApplicable"
+)
+
+// Values allowed for AccountSupportingEntityCapability.RequestedLevel.
+const (
+	AccountSupportingEntityCapabilityRequestedLevelHigh          = "high"
+	AccountSupportingEntityCapabilityRequestedLevelLow           = "low"
+	AccountSupportingEntityCapabilityRequestedLevelMedium        = "medium"
+	AccountSupportingEntityCapabilityRequestedLevelNotApplicable = "notApplicable"
+)
+
+// Values allowed for AccountSupportingEntityCapability.VerificationStatus.
+const (
+	AccountSupportingEntityCapabilityVerificationStatusInvalid  = "invalid"
+	AccountSupportingEntityCapabilityVerificationStatusPending  = "pending"
+	AccountSupportingEntityCapabilityVerificationStatusRejected = "rejected"
+	AccountSupportingEntityCapabilityVerificationStatusValid    = "valid"
+)

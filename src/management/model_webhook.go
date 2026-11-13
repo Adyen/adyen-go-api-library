@@ -766,8 +766,8 @@ func (o Webhook) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Webhook) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Webhook) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Links) {
 		toSerialize["_links"] = o.Links
 	}
@@ -901,3 +901,30 @@ func (o *Webhook) isValidNetworkType() bool {
 	}
 	return false
 }
+
+// Values allowed for Webhook.CommunicationFormat.
+const (
+	WebhookCommunicationFormatHttp = "http"
+	WebhookCommunicationFormatJson = "json"
+	WebhookCommunicationFormatSoap = "soap"
+)
+
+// Values allowed for Webhook.EncryptionProtocol.
+const (
+	WebhookEncryptionProtocolHTTP   = "HTTP"
+	WebhookEncryptionProtocolTLSv12 = "TLSv1.2"
+	WebhookEncryptionProtocolTLSv13 = "TLSv1.3"
+)
+
+// Values allowed for Webhook.FilterMerchantAccountType.
+const (
+	WebhookFilterMerchantAccountTypeAllAccounts     = "allAccounts"
+	WebhookFilterMerchantAccountTypeExcludeAccounts = "excludeAccounts"
+	WebhookFilterMerchantAccountTypeIncludeAccounts = "includeAccounts"
+)
+
+// Values allowed for Webhook.NetworkType.
+const (
+	WebhookNetworkTypeLocal  = "local"
+	WebhookNetworkTypePublic = "public"
+)

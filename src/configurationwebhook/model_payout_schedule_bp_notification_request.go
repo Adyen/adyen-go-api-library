@@ -162,8 +162,8 @@ func (o PayoutScheduleBPNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayoutScheduleBPNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayoutScheduleBPNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,10 @@ func (o *PayoutScheduleBPNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PayoutScheduleBPNotificationRequest.Type.
+const (
+	PayoutScheduleBPNotificationRequestTypeBalancePlatformBalancePlatformPayoutScheduleCreated = "balancePlatform.balancePlatformPayoutSchedule.created"
+	PayoutScheduleBPNotificationRequestTypeBalancePlatformBalancePlatformPayoutScheduleUpdated = "balancePlatform.balancePlatformPayoutSchedule.updated"
+	PayoutScheduleBPNotificationRequestTypeBalancePlatformBalancePlatformPayoutScheduleDeleted = "balancePlatform.balancePlatformPayoutSchedule.deleted"
+)

@@ -80,8 +80,8 @@ func (o SwishResponseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SwishResponseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SwishResponseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.SwishNumber) {
 		toSerialize["swishNumber"] = o.SwishNumber
 	}

@@ -102,7 +102,7 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
     res := &{{{returnType}}}{}
     {{/returnType}}
     {{^returnType}}
-    var res interface{}
+    var res any
     {{/returnType}}
 	path := "{{{path}}}"{{#pathParams}}
     path = strings.Replace(path, "{"+"{{baseName}}"+"}", url.PathEscape(common.ParameterValueToString(r.{{paramName}}, "{{paramName}}")), -1){{/pathParams}}
@@ -159,7 +159,7 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
                     {{/wildcard}}
                 {{/range}}
 	            // Read the response body
-		        body, _ := ioutil.ReadAll(httpRes.Body)
+		        body, _ := io.ReadAll(httpRes.Body)
 		        _ = json.Unmarshal([]byte(body), &serviceError)
 		        return {{#returnType}}*res, {{/returnType}}httpRes, serviceError
                 {{^wildcard}}

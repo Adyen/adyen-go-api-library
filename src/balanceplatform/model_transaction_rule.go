@@ -548,8 +548,8 @@ func (o TransactionRule) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransactionRule) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransactionRule) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AggregationLevel) {
 		toSerialize["aggregationLevel"] = o.AggregationLevel
 	}
@@ -670,3 +670,43 @@ func (o *TransactionRule) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TransactionRule.OutcomeType.
+const (
+	TransactionRuleOutcomeTypeEnforceSCA = "enforceSCA"
+	TransactionRuleOutcomeTypeHardBlock  = "hardBlock"
+	TransactionRuleOutcomeTypeScoreBased = "scoreBased"
+	TransactionRuleOutcomeTypeTimedBlock = "timedBlock"
+)
+
+// Values allowed for TransactionRule.Purpose.
+const (
+	TransactionRulePurposeCompliance     = "compliance"
+	TransactionRulePurposeFraud          = "fraud"
+	TransactionRulePurposeInternalPolicy = "internalPolicy"
+	TransactionRulePurposePolicy         = "policy"
+	TransactionRulePurposeSystem         = "system"
+)
+
+// Values allowed for TransactionRule.RequestType.
+const (
+	TransactionRuleRequestTypeAuthentication = "authentication"
+	TransactionRuleRequestTypeAuthorization  = "authorization"
+	TransactionRuleRequestTypeBankTransfer   = "bankTransfer"
+	TransactionRuleRequestTypeTokenization   = "tokenization"
+)
+
+// Values allowed for TransactionRule.Status.
+const (
+	TransactionRuleStatusActive   = "active"
+	TransactionRuleStatusInactive = "inactive"
+)
+
+// Values allowed for TransactionRule.Type.
+const (
+	TransactionRuleTypeAllowList = "allowList"
+	TransactionRuleTypeBlockList = "blockList"
+	TransactionRuleTypeBypass    = "bypass"
+	TransactionRuleTypeMaxUsage  = "maxUsage"
+	TransactionRuleTypeVelocity  = "velocity"
+)

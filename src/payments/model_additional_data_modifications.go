@@ -80,8 +80,8 @@ func (o AdditionalDataModifications) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalDataModifications) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalDataModifications) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.InstallmentPaymentDataSelectedInstallmentOption) {
 		toSerialize["installmentPaymentData.selectedInstallmentOption"] = o.InstallmentPaymentDataSelectedInstallmentOption
 	}

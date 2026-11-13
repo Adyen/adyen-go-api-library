@@ -129,8 +129,8 @@ func (o CZLocalAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CZLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CZLocalAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["bankCode"] = o.BankCode
 	toSerialize["type"] = o.Type
@@ -182,3 +182,8 @@ func (o *CZLocalAccountIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CZLocalAccountIdentification.Type.
+const (
+	CZLocalAccountIdentificationTypeCzLocal = "czLocal"
+)

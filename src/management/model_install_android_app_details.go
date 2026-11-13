@@ -118,8 +118,8 @@ func (o InstallAndroidAppDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o InstallAndroidAppDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o InstallAndroidAppDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AppId) {
 		toSerialize["appId"] = o.AppId
 	}
@@ -174,3 +174,8 @@ func (o *InstallAndroidAppDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for InstallAndroidAppDetails.Type.
+const (
+	InstallAndroidAppDetailsTypeInstallAndroidApp = "InstallAndroidApp"
+)

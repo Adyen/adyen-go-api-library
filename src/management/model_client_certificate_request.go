@@ -100,8 +100,8 @@ func (o ClientCertificateRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ClientCertificateRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ClientCertificateRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["apiCredential"] = o.ApiCredential
 	toSerialize["certificateSigningRequest"] = o.CertificateSigningRequest
 	return toSerialize, nil

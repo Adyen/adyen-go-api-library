@@ -243,8 +243,8 @@ func (o CheckoutQrCodeAction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutQrCodeAction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutQrCodeAction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ExpiresAt) {
 		toSerialize["expiresAt"] = o.ExpiresAt
 	}
@@ -309,3 +309,8 @@ func (o *CheckoutQrCodeAction) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CheckoutQrCodeAction.Type.
+const (
+	CheckoutQrCodeActionTypeQrCode = "qrCode"
+)

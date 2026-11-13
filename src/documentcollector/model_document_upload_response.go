@@ -182,8 +182,8 @@ func (o DocumentUploadResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DocumentUploadResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DocumentUploadResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Context) {
 		toSerialize["context"] = o.Context
 	}

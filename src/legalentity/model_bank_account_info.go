@@ -219,8 +219,8 @@ func (o BankAccountInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BankAccountInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BankAccountInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountIdentification) {
 		toSerialize["accountIdentification"] = o.AccountIdentification
 	}

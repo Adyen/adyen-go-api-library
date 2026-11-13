@@ -114,8 +114,8 @@ func (o Duration) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Duration) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Duration) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Unit) {
 		toSerialize["unit"] = o.Unit
 	}
@@ -170,3 +170,12 @@ func (o *Duration) isValidUnit() bool {
 	}
 	return false
 }
+
+// Values allowed for Duration.Unit.
+const (
+	DurationUnitDays    = "days"
+	DurationUnitHours   = "hours"
+	DurationUnitMinutes = "minutes"
+	DurationUnitMonths  = "months"
+	DurationUnitWeeks   = "weeks"
+)

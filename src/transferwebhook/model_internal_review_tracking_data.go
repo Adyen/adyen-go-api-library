@@ -136,8 +136,8 @@ func (o InternalReviewTrackingData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o InternalReviewTrackingData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o InternalReviewTrackingData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}
@@ -209,3 +209,19 @@ func (o *InternalReviewTrackingData) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for InternalReviewTrackingData.Reason.
+const (
+	InternalReviewTrackingDataReasonRefusedForRegulatoryReasons = "refusedForRegulatoryReasons"
+)
+
+// Values allowed for InternalReviewTrackingData.Status.
+const (
+	InternalReviewTrackingDataStatusPending = "pending"
+	InternalReviewTrackingDataStatusFailed  = "failed"
+)
+
+// Values allowed for InternalReviewTrackingData.Type.
+const (
+	InternalReviewTrackingDataTypeInternalReview = "internalReview"
+)

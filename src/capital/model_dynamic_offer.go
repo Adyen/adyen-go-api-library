@@ -290,8 +290,8 @@ func (o DynamicOffer) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DynamicOffer) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DynamicOffer) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountHolderId"] = o.AccountHolderId
 	toSerialize["contractType"] = o.ContractType
 	toSerialize["expiresAt"] = o.ExpiresAt
@@ -349,3 +349,9 @@ func (o *DynamicOffer) isValidContractType() bool {
 	}
 	return false
 }
+
+// Values allowed for DynamicOffer.ContractType.
+const (
+	DynamicOfferContractTypeCashAdvance = "cashAdvance"
+	DynamicOfferContractTypeLoan        = "loan"
+)

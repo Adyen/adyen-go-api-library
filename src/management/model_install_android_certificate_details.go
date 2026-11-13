@@ -118,8 +118,8 @@ func (o InstallAndroidCertificateDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o InstallAndroidCertificateDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o InstallAndroidCertificateDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CertificateId) {
 		toSerialize["certificateId"] = o.CertificateId
 	}
@@ -174,3 +174,8 @@ func (o *InstallAndroidCertificateDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for InstallAndroidCertificateDetails.Type.
+const (
+	InstallAndroidCertificateDetailsTypeInstallAndroidCertificate = "InstallAndroidCertificate"
+)

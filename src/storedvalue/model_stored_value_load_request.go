@@ -322,8 +322,8 @@ func (o StoredValueLoadRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredValueLoadRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoredValueLoadRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.LoadType) {
 		toSerialize["loadType"] = o.LoadType
@@ -400,3 +400,17 @@ func (o *StoredValueLoadRequest) isValidShopperInteraction() bool {
 	}
 	return false
 }
+
+// Values allowed for StoredValueLoadRequest.LoadType.
+const (
+	StoredValueLoadRequestLoadTypeMerchandiseReturn = "merchandiseReturn"
+	StoredValueLoadRequestLoadTypeLoad              = "load"
+)
+
+// Values allowed for StoredValueLoadRequest.ShopperInteraction.
+const (
+	StoredValueLoadRequestShopperInteractionEcommerce = "Ecommerce"
+	StoredValueLoadRequestShopperInteractionContAuth  = "ContAuth"
+	StoredValueLoadRequestShopperInteractionMoto      = "Moto"
+	StoredValueLoadRequestShopperInteractionPOS       = "POS"
+)

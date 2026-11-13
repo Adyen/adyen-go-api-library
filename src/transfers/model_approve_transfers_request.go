@@ -80,8 +80,8 @@ func (o ApproveTransfersRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ApproveTransfersRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ApproveTransfersRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.TransferIds) {
 		toSerialize["transferIds"] = o.TransferIds
 	}

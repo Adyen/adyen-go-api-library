@@ -159,8 +159,8 @@ func (o PayAtTable) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayAtTable) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayAtTable) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AuthenticationMethod) {
 		toSerialize["authenticationMethod"] = o.AuthenticationMethod
 	}
@@ -227,3 +227,15 @@ func (o *PayAtTable) isValidPaymentInstrument() bool {
 	}
 	return false
 }
+
+// Values allowed for PayAtTable.AuthenticationMethod.
+const (
+	PayAtTableAuthenticationMethodMAGSWIPE = "MAGSWIPE"
+	PayAtTableAuthenticationMethodMKE      = "MKE"
+)
+
+// Values allowed for PayAtTable.PaymentInstrument.
+const (
+	PayAtTablePaymentInstrumentCash = "Cash"
+	PayAtTablePaymentInstrumentCard = "Card"
+)

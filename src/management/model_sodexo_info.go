@@ -73,8 +73,8 @@ func (o SodexoInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SodexoInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SodexoInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantContactPhone"] = o.MerchantContactPhone
 	return toSerialize, nil
 }

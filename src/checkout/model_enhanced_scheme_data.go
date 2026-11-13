@@ -250,8 +250,8 @@ func (o EnhancedSchemeData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o EnhancedSchemeData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o EnhancedSchemeData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Airline) {
 		toSerialize["airline"] = o.Airline
 	}

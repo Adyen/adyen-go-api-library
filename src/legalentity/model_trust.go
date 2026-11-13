@@ -550,8 +550,8 @@ func (o Trust) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Trust) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Trust) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["countryOfGoverningLaw"] = o.CountryOfGoverningLaw
 	if !common.IsNil(o.DateOfIncorporation) {
 		toSerialize["dateOfIncorporation"] = o.DateOfIncorporation
@@ -646,3 +646,32 @@ func (o *Trust) isValidVatAbsenceReason() bool {
 	}
 	return false
 }
+
+// Values allowed for Trust.Type.
+const (
+	TrustTypeBusinessTrust                        = "businessTrust"
+	TrustTypeCashManagementTrust                  = "cashManagementTrust"
+	TrustTypeCharitableTrust                      = "charitableTrust"
+	TrustTypeCorporateUnitTrust                   = "corporateUnitTrust"
+	TrustTypeDeceasedEstate                       = "deceasedEstate"
+	TrustTypeDiscretionaryTrust                   = "discretionaryTrust"
+	TrustTypeDiscretionaryInvestmentTrust         = "discretionaryInvestmentTrust"
+	TrustTypeDiscretionaryServicesManagementTrust = "discretionaryServicesManagementTrust"
+	TrustTypeDiscretionaryTradingTrust            = "discretionaryTradingTrust"
+	TrustTypeFamilyTrust                          = "familyTrust"
+	TrustTypeFirstHomeSaverAccountsTrust          = "firstHomeSaverAccountsTrust"
+	TrustTypeFixedTrust                           = "fixedTrust"
+	TrustTypeFixedUnitTrust                       = "fixedUnitTrust"
+	TrustTypeHybridTrust                          = "hybridTrust"
+	TrustTypeListedPublicUnitTrust                = "listedPublicUnitTrust"
+	TrustTypeOtherTrust                           = "otherTrust"
+	TrustTypePooledSuperannuationTrust            = "pooledSuperannuationTrust"
+	TrustTypePublicTradingTrust                   = "publicTradingTrust"
+	TrustTypeUnlistedPublicUnitTrust              = "unlistedPublicUnitTrust"
+)
+
+// Values allowed for Trust.VatAbsenceReason.
+const (
+	TrustVatAbsenceReasonIndustryExemption = "industryExemption"
+	TrustVatAbsenceReasonBelowTaxThreshold = "belowTaxThreshold"
+)

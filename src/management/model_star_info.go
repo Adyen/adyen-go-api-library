@@ -114,8 +114,8 @@ func (o StarInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StarInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StarInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ProcessingType) {
 		toSerialize["processingType"] = o.ProcessingType
 	}
@@ -170,3 +170,10 @@ func (o *StarInfo) isValidProcessingType() bool {
 	}
 	return false
 }
+
+// Values allowed for StarInfo.ProcessingType.
+const (
+	StarInfoProcessingTypeBillpay = "billpay"
+	StarInfoProcessingTypeEcom    = "ecom"
+	StarInfoProcessingTypePos     = "pos"
+)

@@ -16,7 +16,7 @@ type {{classname}} struct {
 	{{name}} {{^required}}{{^isNullable}}{{^isArray}}{{#isMap}}*{{/isMap}}{{^isMap}}{{^isFreeFormObject}}*{{/isFreeFormObject}}{{/isMap}}{{/isArray}}{{/isNullable}}{{/required}}{{#isNullable}}{{#isArray}}common.NullableSlice[{{{items.dataType}}}]{{/isArray}}{{^isArray}}{{#isPrimitiveType}}{{^vendorExtensions.x-golang-is-container}}common.{{/vendorExtensions.x-golang-is-container}}{{/isPrimitiveType}}{{{dataType}}}{{/isArray}}{{/isNullable}}{{^isNullable}}{{{dataType}}}{{/isNullable}} `json:"{{baseName}}{{^required}},omitempty{{/required}}"{{#withXml}} xml:"{{baseName}}{{#isXmlAttribute}},attr{{/isXmlAttribute}}"{{/withXml}}{{#vendorExtensions.x-go-custom-tag}} {{{.}}}{{/vendorExtensions.x-go-custom-tag}}`
 {{/allVars}}
 {{#isAdditionalPropertiesTrue}}
-	AdditionalProperties map[string]interface{}
+	AdditionalProperties map[string]any
 {{/isAdditionalPropertiesTrue}}
 }
 
@@ -306,8 +306,8 @@ func (o {{classname}}) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o {{classname}}) ToMap() (map[string]interface{}, error) {
-	toSerialize := {{#isArray}}make([]interface{}, len(o.Items)){{/isArray}}{{^isArray}}map[string]interface{}{}{{/isArray}}
+func (o {{classname}}) ToMap() (map[string]any, error) {
+	toSerialize := {{#isArray}}make([]any, len(o.Items)){{/isArray}}{{^isArray}}map[string]any{}{{/isArray}}
 	{{#allVars}}
 	{{! if argument is nullable, only serialize it if it is set}}
 	{{#isNullable}}
@@ -370,7 +370,7 @@ func (o *{{{classname}}}) UnmarshalJSON(bytes []byte) (err error) {
 		*o = {{{classname}}}(var{{{classname}}})
 	}
 
-	additionalProperties := make(map[string]interface{})
+	additionalProperties := make(map[string]any)
 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		{{#allVars}}
@@ -391,6 +391,7 @@ func (o *{{{classname}}}) UnmarshalJSON(bytes []byte) (err error) {
 {{/isArray}}
 {{>nullable_model}}
 
+{{! oneOf decoding calls isValidType through an interface assertion (model_oneof.mustache)}}
 {{#allVars}}
 {{#allowableValues}}
 {{#isString}}
@@ -405,4 +406,17 @@ func (o *{{classname}}) isValid{{name}}() bool {
 }
 {{/isString}}
 {{/allowableValues}}
+{{/allVars}}
+{{#allVars}}
+{{#isEnum}}
+{{#allowableValues}}
+
+// Values allowed for {{classname}}.{{nameInPascalCase}}{{#isArray}} items{{/isArray}}.
+const (
+{{#values}}
+	{{classname}}{{nameInPascalCase}}{{#lambda.pascalcase}}{{{.}}}{{/lambda.pascalcase}} = {{#isString}}"{{/isString}}{{#items.isString}}"{{/items.isString}}{{{.}}}{{#isString}}"{{/isString}}{{#items.isString}}"{{/items.isString}}
+{{/values}}
+)
+{{/allowableValues}}
+{{/isEnum}}
 {{/allVars}}

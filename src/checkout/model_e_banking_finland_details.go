@@ -177,8 +177,8 @@ func (o EBankingFinlandDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o EBankingFinlandDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o EBankingFinlandDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -237,3 +237,8 @@ func (o *EBankingFinlandDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for EBankingFinlandDetails.Type.
+const (
+	EBankingFinlandDetailsTypeEbankingFI = "ebanking_FI"
+)

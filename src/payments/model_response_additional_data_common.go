@@ -2272,8 +2272,8 @@ func (o ResponseAdditionalDataCommon) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ResponseAdditionalDataCommon) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ResponseAdditionalDataCommon) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcquirerAccountCode) {
 		toSerialize["acquirerAccountCode"] = o.AcquirerAccountCode
 	}
@@ -2544,3 +2544,33 @@ func (o *ResponseAdditionalDataCommon) isValidTokenizationStoreOperationType() b
 	}
 	return false
 }
+
+// Values allowed for ResponseAdditionalDataCommon.FraudResultType.
+const (
+	ResponseAdditionalDataCommonFraudResultTypeAMBER = "AMBER"
+	ResponseAdditionalDataCommonFraudResultTypeGREEN = "GREEN"
+	ResponseAdditionalDataCommonFraudResultTypeRED   = "RED"
+)
+
+// Values allowed for ResponseAdditionalDataCommon.FraudRiskLevel.
+const (
+	ResponseAdditionalDataCommonFraudRiskLevelVeryLow  = "veryLow"
+	ResponseAdditionalDataCommonFraudRiskLevelLow      = "low"
+	ResponseAdditionalDataCommonFraudRiskLevelMedium   = "medium"
+	ResponseAdditionalDataCommonFraudRiskLevelHigh     = "high"
+	ResponseAdditionalDataCommonFraudRiskLevelVeryHigh = "veryHigh"
+)
+
+// Values allowed for ResponseAdditionalDataCommon.RecurringProcessingModel.
+const (
+	ResponseAdditionalDataCommonRecurringProcessingModelCardOnFile            = "CardOnFile"
+	ResponseAdditionalDataCommonRecurringProcessingModelSubscription          = "Subscription"
+	ResponseAdditionalDataCommonRecurringProcessingModelUnscheduledCardOnFile = "UnscheduledCardOnFile"
+)
+
+// Values allowed for ResponseAdditionalDataCommon.TokenizationStoreOperationType.
+const (
+	ResponseAdditionalDataCommonTokenizationStoreOperationTypeCreated         = "created"
+	ResponseAdditionalDataCommonTokenizationStoreOperationTypeUpdated         = "updated"
+	ResponseAdditionalDataCommonTokenizationStoreOperationTypeAlreadyExisting = "alreadyExisting"
+)

@@ -162,8 +162,8 @@ func (o ReportNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ReportNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ReportNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,8 @@ func (o *ReportNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for ReportNotificationRequest.Type.
+const (
+	ReportNotificationRequestTypeBalancePlatformReportCreated = "balancePlatform.report.created"
+)

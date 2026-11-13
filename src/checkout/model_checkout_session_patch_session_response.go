@@ -79,8 +79,8 @@ func (o CheckoutSessionPatchSessionResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutSessionPatchSessionResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutSessionPatchSessionResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.SessionData) {
 		toSerialize["sessionData"] = o.SessionData
 	}

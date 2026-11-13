@@ -420,8 +420,8 @@ func (o CardBin) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardBin) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CardBin) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Bin) {
 		toSerialize["bin"] = o.Bin
 	}

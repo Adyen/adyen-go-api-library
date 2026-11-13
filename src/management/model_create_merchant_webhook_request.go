@@ -494,8 +494,8 @@ func (o CreateMerchantWebhookRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateMerchantWebhookRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreateMerchantWebhookRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcceptsExpiredCertificate) {
 		toSerialize["acceptsExpiredCertificate"] = o.AcceptsExpiredCertificate
 	}
@@ -596,3 +596,23 @@ func (o *CreateMerchantWebhookRequest) isValidNetworkType() bool {
 	}
 	return false
 }
+
+// Values allowed for CreateMerchantWebhookRequest.CommunicationFormat.
+const (
+	CreateMerchantWebhookRequestCommunicationFormatHttp = "http"
+	CreateMerchantWebhookRequestCommunicationFormatJson = "json"
+	CreateMerchantWebhookRequestCommunicationFormatSoap = "soap"
+)
+
+// Values allowed for CreateMerchantWebhookRequest.EncryptionProtocol.
+const (
+	CreateMerchantWebhookRequestEncryptionProtocolHTTP   = "HTTP"
+	CreateMerchantWebhookRequestEncryptionProtocolTLSv12 = "TLSv1.2"
+	CreateMerchantWebhookRequestEncryptionProtocolTLSv13 = "TLSv1.3"
+)
+
+// Values allowed for CreateMerchantWebhookRequest.NetworkType.
+const (
+	CreateMerchantWebhookRequestNetworkTypeLocal  = "local"
+	CreateMerchantWebhookRequestNetworkTypePublic = "public"
+)

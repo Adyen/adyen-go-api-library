@@ -80,8 +80,8 @@ func (o OfflineProcessing) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OfflineProcessing) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o OfflineProcessing) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ChipFloorLimit) {
 		toSerialize["chipFloorLimit"] = o.ChipFloorLimit
 	}

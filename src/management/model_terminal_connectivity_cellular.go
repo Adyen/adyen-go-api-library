@@ -148,8 +148,8 @@ func (o TerminalConnectivityCellular) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalConnectivityCellular) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalConnectivityCellular) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Iccid) {
 		toSerialize["iccid"] = o.Iccid
 	}
@@ -207,3 +207,12 @@ func (o *TerminalConnectivityCellular) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for TerminalConnectivityCellular.Status.
+const (
+	TerminalConnectivityCellularStatusActivated          = "activated"
+	TerminalConnectivityCellularStatusDeactivated        = "deactivated"
+	TerminalConnectivityCellularStatusDeprecated         = "deprecated"
+	TerminalConnectivityCellularStatusInventory          = "inventory"
+	TerminalConnectivityCellularStatusReadyForActivation = "readyForActivation"
+)

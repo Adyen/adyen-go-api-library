@@ -243,8 +243,8 @@ func (o ApiCredentialLinks) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ApiCredentialLinks) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ApiCredentialLinks) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AllowedOrigins) {
 		toSerialize["allowedOrigins"] = o.AllowedOrigins
 	}

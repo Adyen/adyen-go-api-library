@@ -127,8 +127,8 @@ func (o PurchaseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PurchaseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PurchaseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["date"] = o.Date
 	toSerialize["merchantName"] = o.MerchantName
 	toSerialize["originalAmount"] = o.OriginalAmount

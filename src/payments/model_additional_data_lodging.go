@@ -624,8 +624,8 @@ func (o AdditionalDataLodging) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalDataLodging) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalDataLodging) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.LodgingSpecialProgramCode) {
 		toSerialize["lodging.SpecialProgramCode"] = o.LodgingSpecialProgramCode
 	}

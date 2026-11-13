@@ -182,8 +182,8 @@ func (o ReturnTransferResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ReturnTransferResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ReturnTransferResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -244,3 +244,9 @@ func (o *ReturnTransferResponse) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for ReturnTransferResponse.Status.
+const (
+	ReturnTransferResponseStatusAuthorised = "Authorised"
+	ReturnTransferResponseStatusDeclined   = "Declined"
+)

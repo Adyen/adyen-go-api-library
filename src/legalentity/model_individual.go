@@ -376,8 +376,8 @@ func (o Individual) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Individual) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Individual) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BirthData) {
 		toSerialize["birthData"] = o.BirthData
 	}

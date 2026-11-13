@@ -250,8 +250,8 @@ func (o RelayedAuthenticationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RelayedAuthenticationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RelayedAuthenticationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["environment"] = o.Environment
 	toSerialize["id"] = o.Id
 	toSerialize["paymentInstrumentId"] = o.PaymentInstrumentId
@@ -311,3 +311,8 @@ func (o *RelayedAuthenticationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for RelayedAuthenticationRequest.Type.
+const (
+	RelayedAuthenticationRequestTypeBalancePlatformAuthenticationRelayed = "balancePlatform.authentication.relayed"
+)

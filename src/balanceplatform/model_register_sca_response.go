@@ -182,8 +182,8 @@ func (o RegisterSCAResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RegisterSCAResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RegisterSCAResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}

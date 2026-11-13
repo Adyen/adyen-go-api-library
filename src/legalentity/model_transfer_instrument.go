@@ -256,8 +256,8 @@ func (o TransferInstrument) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransferInstrument) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransferInstrument) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["bankAccount"] = o.BankAccount
 	if !common.IsNil(o.Capabilities) {
 		toSerialize["capabilities"] = o.Capabilities
@@ -319,3 +319,9 @@ func (o *TransferInstrument) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TransferInstrument.Type.
+const (
+	TransferInstrumentTypeBankAccount     = "bankAccount"
+	TransferInstrumentTypeRecurringDetail = "recurringDetail"
+)

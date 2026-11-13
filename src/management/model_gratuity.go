@@ -182,8 +182,8 @@ func (o Gratuity) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Gratuity) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Gratuity) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AllowCustomAmount) {
 		toSerialize["allowCustomAmount"] = o.AllowCustomAmount
 	}

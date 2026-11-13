@@ -73,8 +73,8 @@ func (o Schedule) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Schedule) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Schedule) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
 }

@@ -216,8 +216,8 @@ func (o Modification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Modification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Modification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Direction) {
 		toSerialize["direction"] = o.Direction
 	}
@@ -281,3 +281,78 @@ func (o *Modification) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for Modification.Status.
+const (
+	ModificationStatusApprovalPending              = "approvalPending"
+	ModificationStatusAtmWithdrawal                = "atmWithdrawal"
+	ModificationStatusAtmWithdrawalReversalPending = "atmWithdrawalReversalPending"
+	ModificationStatusAtmWithdrawalReversed        = "atmWithdrawalReversed"
+	ModificationStatusAuthAdjustmentAuthorised     = "authAdjustmentAuthorised"
+	ModificationStatusAuthAdjustmentError          = "authAdjustmentError"
+	ModificationStatusAuthAdjustmentRefused        = "authAdjustmentRefused"
+	ModificationStatusAuthorised                   = "authorised"
+	ModificationStatusBankTransfer                 = "bankTransfer"
+	ModificationStatusBankTransferPending          = "bankTransferPending"
+	ModificationStatusBooked                       = "booked"
+	ModificationStatusBookingPending               = "bookingPending"
+	ModificationStatusCancelled                    = "cancelled"
+	ModificationStatusCapturePending               = "capturePending"
+	ModificationStatusCaptureReversalPending       = "captureReversalPending"
+	ModificationStatusCaptureReversed              = "captureReversed"
+	ModificationStatusCaptured                     = "captured"
+	ModificationStatusCapturedExternally           = "capturedExternally"
+	ModificationStatusChargeback                   = "chargeback"
+	ModificationStatusChargebackExternally         = "chargebackExternally"
+	ModificationStatusChargebackPending            = "chargebackPending"
+	ModificationStatusChargebackReversalPending    = "chargebackReversalPending"
+	ModificationStatusChargebackReversed           = "chargebackReversed"
+	ModificationStatusCredited                     = "credited"
+	ModificationStatusDepositCorrection            = "depositCorrection"
+	ModificationStatusDepositCorrectionPending     = "depositCorrectionPending"
+	ModificationStatusDispute                      = "dispute"
+	ModificationStatusDisputeClosed                = "disputeClosed"
+	ModificationStatusDisputeExpired               = "disputeExpired"
+	ModificationStatusDisputeNeedsReview           = "disputeNeedsReview"
+	ModificationStatusError                        = "error"
+	ModificationStatusExpired                      = "expired"
+	ModificationStatusFailed                       = "failed"
+	ModificationStatusFee                          = "fee"
+	ModificationStatusFeePending                   = "feePending"
+	ModificationStatusInterchangeAdjusted          = "interchangeAdjusted"
+	ModificationStatusInternalTransfer             = "internalTransfer"
+	ModificationStatusInternalTransferPending      = "internalTransferPending"
+	ModificationStatusInvoiceDeduction             = "invoiceDeduction"
+	ModificationStatusInvoiceDeductionPending      = "invoiceDeductionPending"
+	ModificationStatusManualCorrectionPending      = "manualCorrectionPending"
+	ModificationStatusManuallyCorrected            = "manuallyCorrected"
+	ModificationStatusMatchedStatement             = "matchedStatement"
+	ModificationStatusMatchedStatementPending      = "matchedStatementPending"
+	ModificationStatusMerchantPayin                = "merchantPayin"
+	ModificationStatusMerchantPayinPending         = "merchantPayinPending"
+	ModificationStatusMerchantPayinReversed        = "merchantPayinReversed"
+	ModificationStatusMerchantPayinReversedPending = "merchantPayinReversedPending"
+	ModificationStatusMiscCost                     = "miscCost"
+	ModificationStatusMiscCostPending              = "miscCostPending"
+	ModificationStatusPaymentCost                  = "paymentCost"
+	ModificationStatusPaymentCostPending           = "paymentCostPending"
+	ModificationStatusPending                      = "pending"
+	ModificationStatusPendingApproval              = "pendingApproval"
+	ModificationStatusPendingExecution             = "pendingExecution"
+	ModificationStatusReceived                     = "received"
+	ModificationStatusRefundPending                = "refundPending"
+	ModificationStatusRefundReversalPending        = "refundReversalPending"
+	ModificationStatusRefundReversed               = "refundReversed"
+	ModificationStatusRefunded                     = "refunded"
+	ModificationStatusRefundedExternally           = "refundedExternally"
+	ModificationStatusRefused                      = "refused"
+	ModificationStatusRejected                     = "rejected"
+	ModificationStatusReserveAdjustment            = "reserveAdjustment"
+	ModificationStatusReserveAdjustmentPending     = "reserveAdjustmentPending"
+	ModificationStatusReturned                     = "returned"
+	ModificationStatusReversalReceived             = "reversalReceived"
+	ModificationStatusReversed                     = "reversed"
+	ModificationStatusSecondChargeback             = "secondChargeback"
+	ModificationStatusSecondChargebackPending      = "secondChargebackPending"
+	ModificationStatusUndefined                    = "undefined"
+)

@@ -182,8 +182,8 @@ func (o CreateCompanyApiCredentialRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateCompanyApiCredentialRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreateCompanyApiCredentialRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AllowedOrigins) {
 		toSerialize["allowedOrigins"] = o.AllowedOrigins
 	}

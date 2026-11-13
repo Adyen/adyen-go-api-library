@@ -1013,8 +1013,8 @@ func (o CardDonations) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardDonations) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CardDonations) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BillingSequenceNumber) {
 		toSerialize["billingSequenceNumber"] = o.BillingSequenceNumber
 	}
@@ -1156,3 +1156,20 @@ func (o *CardDonations) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CardDonations.FundingSource.
+const (
+	CardDonationsFundingSourceCredit  = "credit"
+	CardDonationsFundingSourceDebit   = "debit"
+	CardDonationsFundingSourcePrepaid = "prepaid"
+)
+
+// Values allowed for CardDonations.Type.
+const (
+	CardDonationsTypeBcmc         = "bcmc"
+	CardDonationsTypeScheme       = "scheme"
+	CardDonationsTypeNetworkToken = "networkToken"
+	CardDonationsTypeGiftcard     = "giftcard"
+	CardDonationsTypeCard         = "card"
+	CardDonationsTypeClicktopay   = "clicktopay"
+)

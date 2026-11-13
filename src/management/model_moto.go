@@ -114,8 +114,8 @@ func (o Moto) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Moto) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Moto) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.EnableMoto) {
 		toSerialize["enableMoto"] = o.EnableMoto
 	}

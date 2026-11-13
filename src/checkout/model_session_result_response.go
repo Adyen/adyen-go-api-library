@@ -216,8 +216,8 @@ func (o SessionResultResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SessionResultResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SessionResultResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
@@ -281,3 +281,13 @@ func (o *SessionResultResponse) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for SessionResultResponse.Status.
+const (
+	SessionResultResponseStatusActive         = "active"
+	SessionResultResponseStatusCanceled       = "canceled"
+	SessionResultResponseStatusCompleted      = "completed"
+	SessionResultResponseStatusExpired        = "expired"
+	SessionResultResponseStatusPaymentPending = "paymentPending"
+	SessionResultResponseStatusRefused        = "refused"
+)

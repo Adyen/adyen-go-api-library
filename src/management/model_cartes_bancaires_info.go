@@ -107,8 +107,8 @@ func (o CartesBancairesInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CartesBancairesInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CartesBancairesInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["siret"] = o.Siret
 	if !common.IsNil(o.TransactionDescription) {
 		toSerialize["transactionDescription"] = o.TransactionDescription

@@ -222,8 +222,8 @@ func (o DokuDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DokuDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DokuDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -282,3 +282,18 @@ func (o *DokuDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for DokuDetails.Type.
+const (
+	DokuDetailsTypeDokuMandiriVa      = "doku_mandiri_va"
+	DokuDetailsTypeDokuCimbVa         = "doku_cimb_va"
+	DokuDetailsTypeDokuDanamonVa      = "doku_danamon_va"
+	DokuDetailsTypeDokuBniVa          = "doku_bni_va"
+	DokuDetailsTypeDokuPermataLiteAtm = "doku_permata_lite_atm"
+	DokuDetailsTypeDokuBriVa          = "doku_bri_va"
+	DokuDetailsTypeDokuBcaVa          = "doku_bca_va"
+	DokuDetailsTypeDokuAlfamart       = "doku_alfamart"
+	DokuDetailsTypeDokuIndomaret      = "doku_indomaret"
+	DokuDetailsTypeDokuWallet         = "doku_wallet"
+	DokuDetailsTypeDokuOvo            = "doku_ovo"
+)

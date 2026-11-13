@@ -127,8 +127,8 @@ func (o TransferInstrumentInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransferInstrumentInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransferInstrumentInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["bankAccount"] = o.BankAccount
 	toSerialize["legalEntityId"] = o.LegalEntityId
 	toSerialize["type"] = o.Type
@@ -180,3 +180,9 @@ func (o *TransferInstrumentInfo) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TransferInstrumentInfo.Type.
+const (
+	TransferInstrumentInfoTypeBankAccount     = "bankAccount"
+	TransferInstrumentInfoTypeRecurringDetail = "recurringDetail"
+)

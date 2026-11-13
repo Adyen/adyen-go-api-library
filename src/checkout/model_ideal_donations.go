@@ -262,8 +262,8 @@ func (o IdealDonations) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o IdealDonations) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o IdealDonations) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -330,3 +330,8 @@ func (o *IdealDonations) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for IdealDonations.Type.
+const (
+	IdealDonationsTypeIdeal = "ideal"
+)

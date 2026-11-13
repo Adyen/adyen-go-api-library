@@ -54,7 +54,7 @@ Requests to this endpoint are subject to rate limits:
 @return *http.Response, error
 */
 func (a *DocumentsApi) DeleteDocument(ctx context.Context, r DocumentsApiDeleteDocumentInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/documents/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}

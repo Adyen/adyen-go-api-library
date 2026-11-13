@@ -73,8 +73,8 @@ func (o UpdateSplitConfigurationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateSplitConfigurationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UpdateSplitConfigurationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["description"] = o.Description
 	return toSerialize, nil
 }

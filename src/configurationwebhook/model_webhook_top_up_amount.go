@@ -114,8 +114,8 @@ func (o WebhookTopUpAmount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WebhookTopUpAmount) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WebhookTopUpAmount) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.FixedAmount) {
 		toSerialize["fixedAmount"] = o.FixedAmount
 	}

@@ -148,8 +148,8 @@ func (o NetworkReason) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NetworkReason) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NetworkReason) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}
@@ -207,3 +207,12 @@ func (o *NetworkReason) isValidNamespace() bool {
 	}
 	return false
 }
+
+// Values allowed for NetworkReason.Namespace.
+const (
+	NetworkReasonNamespaceIso8583ResponseCode       = "iso8583ResponseCode"
+	NetworkReasonNamespaceUkFpsRejectionCode        = "ukFpsRejectionCode"
+	NetworkReasonNamespaceUkFpsReturnReasonCode     = "ukFpsReturnReasonCode"
+	NetworkReasonNamespaceUsAchCorrectionReasonCode = "usAchCorrectionReasonCode"
+	NetworkReasonNamespaceUsAchReturnReasonCode     = "usAchReturnReasonCode"
+)

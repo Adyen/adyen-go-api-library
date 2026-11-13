@@ -213,8 +213,8 @@ func (o DonationCampaignUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DonationCampaignUpdate) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DonationCampaignUpdate) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if o.AccountHolderIds.IsSet() {
 		toSerialize["accountHolderIds"] = o.AccountHolderIds.Get()
 	}

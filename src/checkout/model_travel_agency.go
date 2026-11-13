@@ -114,8 +114,8 @@ func (o TravelAgency) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TravelAgency) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TravelAgency) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}

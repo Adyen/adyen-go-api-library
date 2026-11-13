@@ -760,8 +760,8 @@ func (o AdditionalDataRisk) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalDataRisk) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalDataRisk) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.RiskdataCustomFieldName) {
 		toSerialize["riskdata.[customFieldName]"] = o.RiskdataCustomFieldName
 	}

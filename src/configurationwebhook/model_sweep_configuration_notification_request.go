@@ -162,8 +162,8 @@ func (o SweepConfigurationNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SweepConfigurationNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SweepConfigurationNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,10 @@ func (o *SweepConfigurationNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for SweepConfigurationNotificationRequest.Type.
+const (
+	SweepConfigurationNotificationRequestTypeBalancePlatformBalanceAccountSweepCreated = "balancePlatform.balanceAccountSweep.created"
+	SweepConfigurationNotificationRequestTypeBalancePlatformBalanceAccountSweepUpdated = "balancePlatform.balanceAccountSweep.updated"
+	SweepConfigurationNotificationRequestTypeBalancePlatformBalanceAccountSweepDeleted = "balancePlatform.balanceAccountSweep.deleted"
+)

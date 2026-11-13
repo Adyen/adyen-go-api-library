@@ -684,8 +684,8 @@ func (o BalancePlatformConfiguration) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalancePlatformConfiguration) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalancePlatformConfiguration) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AutomaticApplication) {
 		toSerialize["automaticApplication"] = o.AutomaticApplication
 	}

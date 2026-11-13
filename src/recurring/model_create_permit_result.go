@@ -114,8 +114,8 @@ func (o CreatePermitResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreatePermitResult) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreatePermitResult) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.PermitResultList) {
 		toSerialize["permitResultList"] = o.PermitResultList
 	}

@@ -318,8 +318,8 @@ func (o LevelTwoThree) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o LevelTwoThree) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o LevelTwoThree) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CustomerReferenceNumber) {
 		toSerialize["customerReferenceNumber"] = o.CustomerReferenceNumber
 	}

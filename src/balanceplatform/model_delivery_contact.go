@@ -270,8 +270,8 @@ func (o DeliveryContact) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DeliveryContact) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DeliveryContact) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["address"] = o.Address
 	if !common.IsNil(o.Company) {
 		toSerialize["company"] = o.Company

@@ -182,8 +182,8 @@ func (o OnboardingLinkInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OnboardingLinkInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o OnboardingLinkInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Locale) {
 		toSerialize["locale"] = o.Locale
 	}

@@ -257,8 +257,8 @@ func (o PixDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PixDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PixDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -325,3 +325,8 @@ func (o *PixDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PixDetails.Type.
+const (
+	PixDetailsTypePix = "pix"
+)

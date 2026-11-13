@@ -539,8 +539,8 @@ func (o CreateSweepConfigurationV2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateSweepConfigurationV2) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreateSweepConfigurationV2) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Category) {
 		toSerialize["category"] = o.Category
 	}
@@ -655,3 +655,52 @@ func (o *CreateSweepConfigurationV2) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CreateSweepConfigurationV2.Category.
+const (
+	CreateSweepConfigurationV2CategoryBank            = "bank"
+	CreateSweepConfigurationV2CategoryInternal        = "internal"
+	CreateSweepConfigurationV2CategoryPlatformPayment = "platformPayment"
+)
+
+// Values allowed for CreateSweepConfigurationV2.Priorities items.
+const (
+	CreateSweepConfigurationV2PrioritiesCrossBorder = "crossBorder"
+	CreateSweepConfigurationV2PrioritiesFast        = "fast"
+	CreateSweepConfigurationV2PrioritiesInstant     = "instant"
+	CreateSweepConfigurationV2PrioritiesInternal    = "internal"
+	CreateSweepConfigurationV2PrioritiesRegular     = "regular"
+	CreateSweepConfigurationV2PrioritiesWire        = "wire"
+)
+
+// Values allowed for CreateSweepConfigurationV2.Reason.
+const (
+	CreateSweepConfigurationV2ReasonAccountHierarchyNotActive      = "accountHierarchyNotActive"
+	CreateSweepConfigurationV2ReasonAmountLimitExceeded            = "amountLimitExceeded"
+	CreateSweepConfigurationV2ReasonApproved                       = "approved"
+	CreateSweepConfigurationV2ReasonCounterpartyAccountBlocked     = "counterpartyAccountBlocked"
+	CreateSweepConfigurationV2ReasonCounterpartyAccountClosed      = "counterpartyAccountClosed"
+	CreateSweepConfigurationV2ReasonCounterpartyAccountNotFound    = "counterpartyAccountNotFound"
+	CreateSweepConfigurationV2ReasonCounterpartyAddressRequired    = "counterpartyAddressRequired"
+	CreateSweepConfigurationV2ReasonCounterpartyBankTimedOut       = "counterpartyBankTimedOut"
+	CreateSweepConfigurationV2ReasonCounterpartyBankUnavailable    = "counterpartyBankUnavailable"
+	CreateSweepConfigurationV2ReasonDirectDebitNotSupported        = "directDebitNotSupported"
+	CreateSweepConfigurationV2ReasonError                          = "error"
+	CreateSweepConfigurationV2ReasonNotEnoughBalance               = "notEnoughBalance"
+	CreateSweepConfigurationV2ReasonRefusedByCounterpartyBank      = "refusedByCounterpartyBank"
+	CreateSweepConfigurationV2ReasonRouteNotFound                  = "routeNotFound"
+	CreateSweepConfigurationV2ReasonTransferInstrumentDoesNotExist = "transferInstrumentDoesNotExist"
+	CreateSweepConfigurationV2ReasonUnknown                        = "unknown"
+)
+
+// Values allowed for CreateSweepConfigurationV2.Status.
+const (
+	CreateSweepConfigurationV2StatusActive   = "active"
+	CreateSweepConfigurationV2StatusInactive = "inactive"
+)
+
+// Values allowed for CreateSweepConfigurationV2.Type.
+const (
+	CreateSweepConfigurationV2TypePull = "pull"
+	CreateSweepConfigurationV2TypePush = "push"
+)

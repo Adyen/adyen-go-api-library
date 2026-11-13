@@ -148,8 +148,8 @@ func (o AdditionalCommission) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalCommission) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalCommission) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BalanceAccountId) {
 		toSerialize["balanceAccountId"] = o.BalanceAccountId
 	}

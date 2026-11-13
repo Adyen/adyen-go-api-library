@@ -102,8 +102,8 @@ func (o UKFpsTracingData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UKFpsTracingData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UKFpsTracingData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["fpid"] = o.Fpid
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
@@ -154,3 +154,8 @@ func (o *UKFpsTracingData) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for UKFpsTracingData.Type.
+const (
+	UKFpsTracingDataTypeUkFps = "ukFps"
+)

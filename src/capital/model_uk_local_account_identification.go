@@ -129,8 +129,8 @@ func (o UKLocalAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UKLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UKLocalAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["type"] = o.Type
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["sortCode"] = o.SortCode

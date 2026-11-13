@@ -495,8 +495,8 @@ func (o Document) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Document) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Document) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Attachment) {
 		toSerialize["attachment"] = o.Attachment
 	}
@@ -580,3 +580,27 @@ func (o *Document) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for Document.Type.
+const (
+	DocumentTypeBankStatement                = "bankStatement"
+	DocumentTypeDriversLicense               = "driversLicense"
+	DocumentTypeIdentityCard                 = "identityCard"
+	DocumentTypeNationalIdNumber             = "nationalIdNumber"
+	DocumentTypePassport                     = "passport"
+	DocumentTypeProofOfAddress               = "proofOfAddress"
+	DocumentTypeProofOfNationalIdNumber      = "proofOfNationalIdNumber"
+	DocumentTypeProofOfResidency             = "proofOfResidency"
+	DocumentTypeRegistrationDocument         = "registrationDocument"
+	DocumentTypeVatDocument                  = "vatDocument"
+	DocumentTypeProofOfOrganizationTaxInfo   = "proofOfOrganizationTaxInfo"
+	DocumentTypeProofOfIndividualTaxId       = "proofOfIndividualTaxId"
+	DocumentTypeProofOfOwnership             = "proofOfOwnership"
+	DocumentTypeProofOfSignatory             = "proofOfSignatory"
+	DocumentTypeLiveSelfie                   = "liveSelfie"
+	DocumentTypeProofOfIndustry              = "proofOfIndustry"
+	DocumentTypeConstitutionalDocument       = "constitutionalDocument"
+	DocumentTypeProofOfFundingOrWealthSource = "proofOfFundingOrWealthSource"
+	DocumentTypeProofOfRelationship          = "proofOfRelationship"
+	DocumentTypeProofOfDirector              = "proofOfDirector"
+)

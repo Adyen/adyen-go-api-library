@@ -216,8 +216,8 @@ func (o TokenizationUpdatedDetailsNotificationRequest) MarshalJSON() ([]byte, er
 	return json.Marshal(toSerialize)
 }
 
-func (o TokenizationUpdatedDetailsNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TokenizationUpdatedDetailsNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
@@ -283,3 +283,14 @@ func (o *TokenizationUpdatedDetailsNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TokenizationUpdatedDetailsNotificationRequest.Environment.
+const (
+	TokenizationUpdatedDetailsNotificationRequestEnvironmentTest = "test"
+	TokenizationUpdatedDetailsNotificationRequestEnvironmentLive = "live"
+)
+
+// Values allowed for TokenizationUpdatedDetailsNotificationRequest.Type.
+const (
+	TokenizationUpdatedDetailsNotificationRequestTypeRecurringTokenUpdated = "recurring.token.updated"
+)

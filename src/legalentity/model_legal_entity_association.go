@@ -338,8 +338,8 @@ func (o LegalEntityAssociation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o LegalEntityAssociation) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o LegalEntityAssociation) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AssociatorId) {
 		toSerialize["associatorId"] = o.AssociatorId
 	}
@@ -411,3 +411,25 @@ func (o *LegalEntityAssociation) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for LegalEntityAssociation.Type.
+const (
+	LegalEntityAssociationTypeDefinedBeneficiary        = "definedBeneficiary"
+	LegalEntityAssociationTypeDirector                  = "director"
+	LegalEntityAssociationTypeImmediateParentCompany    = "immediateParentCompany"
+	LegalEntityAssociationTypeLegalRepresentative       = "legalRepresentative"
+	LegalEntityAssociationTypePciSignatory              = "pciSignatory"
+	LegalEntityAssociationTypeProtector                 = "protector"
+	LegalEntityAssociationTypeSecondaryPartner          = "secondaryPartner"
+	LegalEntityAssociationTypeSecondaryTrustee          = "secondaryTrustee"
+	LegalEntityAssociationTypeSettlor                   = "settlor"
+	LegalEntityAssociationTypeSignatory                 = "signatory"
+	LegalEntityAssociationTypeSoleProprietorship        = "soleProprietorship"
+	LegalEntityAssociationTypeTrust                     = "trust"
+	LegalEntityAssociationTypeTrustOwnership            = "trustOwnership"
+	LegalEntityAssociationTypeUboThroughControl         = "uboThroughControl"
+	LegalEntityAssociationTypeUboThroughOwnership       = "uboThroughOwnership"
+	LegalEntityAssociationTypeUltimateParentCompany     = "ultimateParentCompany"
+	LegalEntityAssociationTypeUndefinedBeneficiary      = "undefinedBeneficiary"
+	LegalEntityAssociationTypeUnincorporatedPartnership = "unincorporatedPartnership"
+)

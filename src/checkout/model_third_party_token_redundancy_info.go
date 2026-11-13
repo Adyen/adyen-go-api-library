@@ -107,8 +107,8 @@ func (o ThirdPartyTokenRedundancyInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThirdPartyTokenRedundancyInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThirdPartyTokenRedundancyInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.RequestParameters) {
 		toSerialize["requestParameters"] = o.RequestParameters
 	}

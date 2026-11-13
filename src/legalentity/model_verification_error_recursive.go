@@ -216,8 +216,8 @@ func (o VerificationErrorRecursive) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o VerificationErrorRecursive) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o VerificationErrorRecursive) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Capabilities) {
 		toSerialize["capabilities"] = o.Capabilities
 	}
@@ -281,3 +281,71 @@ func (o *VerificationErrorRecursive) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for VerificationErrorRecursive.Capabilities items.
+const (
+	VerificationErrorRecursiveCapabilitiesAcceptExternalFunding                             = "acceptExternalFunding"
+	VerificationErrorRecursiveCapabilitiesAcceptPspFunding                                  = "acceptPspFunding"
+	VerificationErrorRecursiveCapabilitiesAcceptTransactionInRestrictedCountries            = "acceptTransactionInRestrictedCountries"
+	VerificationErrorRecursiveCapabilitiesAcceptTransactionInRestrictedCountriesCommercial  = "acceptTransactionInRestrictedCountriesCommercial"
+	VerificationErrorRecursiveCapabilitiesAcceptTransactionInRestrictedCountriesConsumer    = "acceptTransactionInRestrictedCountriesConsumer"
+	VerificationErrorRecursiveCapabilitiesAcceptTransactionInRestrictedIndustries           = "acceptTransactionInRestrictedIndustries"
+	VerificationErrorRecursiveCapabilitiesAcceptTransactionInRestrictedIndustriesCommercial = "acceptTransactionInRestrictedIndustriesCommercial"
+	VerificationErrorRecursiveCapabilitiesAcceptTransactionInRestrictedIndustriesConsumer   = "acceptTransactionInRestrictedIndustriesConsumer"
+	VerificationErrorRecursiveCapabilitiesAcquiring                                         = "acquiring"
+	VerificationErrorRecursiveCapabilitiesAtmWithdrawal                                     = "atmWithdrawal"
+	VerificationErrorRecursiveCapabilitiesAtmWithdrawalCommercial                           = "atmWithdrawalCommercial"
+	VerificationErrorRecursiveCapabilitiesAtmWithdrawalConsumer                             = "atmWithdrawalConsumer"
+	VerificationErrorRecursiveCapabilitiesAtmWithdrawalInRestrictedCountries                = "atmWithdrawalInRestrictedCountries"
+	VerificationErrorRecursiveCapabilitiesAtmWithdrawalInRestrictedCountriesCommercial      = "atmWithdrawalInRestrictedCountriesCommercial"
+	VerificationErrorRecursiveCapabilitiesAtmWithdrawalInRestrictedCountriesConsumer        = "atmWithdrawalInRestrictedCountriesConsumer"
+	VerificationErrorRecursiveCapabilitiesAuthorisedPaymentInstrumentUser                   = "authorisedPaymentInstrumentUser"
+	VerificationErrorRecursiveCapabilitiesGetGrantOffers                                    = "getGrantOffers"
+	VerificationErrorRecursiveCapabilitiesIssueBankAccount                                  = "issueBankAccount"
+	VerificationErrorRecursiveCapabilitiesIssueCard                                         = "issueCard"
+	VerificationErrorRecursiveCapabilitiesIssueCardCommercial                               = "issueCardCommercial"
+	VerificationErrorRecursiveCapabilitiesIssueCardConsumer                                 = "issueCardConsumer"
+	VerificationErrorRecursiveCapabilitiesIssueChargeCard                                   = "issueChargeCard"
+	VerificationErrorRecursiveCapabilitiesIssueChargeCardCommercial                         = "issueChargeCardCommercial"
+	VerificationErrorRecursiveCapabilitiesIssueCreditLimit                                  = "issueCreditLimit"
+	VerificationErrorRecursiveCapabilitiesLocalAcceptance                                   = "localAcceptance"
+	VerificationErrorRecursiveCapabilitiesPayout                                            = "payout"
+	VerificationErrorRecursiveCapabilitiesPayoutToTransferInstrument                        = "payoutToTransferInstrument"
+	VerificationErrorRecursiveCapabilitiesProcessing                                        = "processing"
+	VerificationErrorRecursiveCapabilitiesReceiveFromBalanceAccount                         = "receiveFromBalanceAccount"
+	VerificationErrorRecursiveCapabilitiesReceiveFromPlatformPayments                       = "receiveFromPlatformPayments"
+	VerificationErrorRecursiveCapabilitiesReceiveFromThirdParty                             = "receiveFromThirdParty"
+	VerificationErrorRecursiveCapabilitiesReceiveFromTransferInstrument                     = "receiveFromTransferInstrument"
+	VerificationErrorRecursiveCapabilitiesReceiveGrants                                     = "receiveGrants"
+	VerificationErrorRecursiveCapabilitiesReceivePayments                                   = "receivePayments"
+	VerificationErrorRecursiveCapabilitiesSendToBalanceAccount                              = "sendToBalanceAccount"
+	VerificationErrorRecursiveCapabilitiesSendToThirdParty                                  = "sendToThirdParty"
+	VerificationErrorRecursiveCapabilitiesSendToTransferInstrument                          = "sendToTransferInstrument"
+	VerificationErrorRecursiveCapabilitiesThirdPartyFunding                                 = "thirdPartyFunding"
+	VerificationErrorRecursiveCapabilitiesUseCard                                           = "useCard"
+	VerificationErrorRecursiveCapabilitiesUseCardCommercial                                 = "useCardCommercial"
+	VerificationErrorRecursiveCapabilitiesUseCardConsumer                                   = "useCardConsumer"
+	VerificationErrorRecursiveCapabilitiesUseCardInRestrictedCountries                      = "useCardInRestrictedCountries"
+	VerificationErrorRecursiveCapabilitiesUseCardInRestrictedCountriesCommercial            = "useCardInRestrictedCountriesCommercial"
+	VerificationErrorRecursiveCapabilitiesUseCardInRestrictedCountriesConsumer              = "useCardInRestrictedCountriesConsumer"
+	VerificationErrorRecursiveCapabilitiesUseCardInRestrictedIndustries                     = "useCardInRestrictedIndustries"
+	VerificationErrorRecursiveCapabilitiesUseCardInRestrictedIndustriesCommercial           = "useCardInRestrictedIndustriesCommercial"
+	VerificationErrorRecursiveCapabilitiesUseCardInRestrictedIndustriesConsumer             = "useCardInRestrictedIndustriesConsumer"
+	VerificationErrorRecursiveCapabilitiesUseChargeCard                                     = "useChargeCard"
+	VerificationErrorRecursiveCapabilitiesUseChargeCardCommercial                           = "useChargeCardCommercial"
+	VerificationErrorRecursiveCapabilitiesWithdrawFromAtm                                   = "withdrawFromAtm"
+	VerificationErrorRecursiveCapabilitiesWithdrawFromAtmCommercial                         = "withdrawFromAtmCommercial"
+	VerificationErrorRecursiveCapabilitiesWithdrawFromAtmConsumer                           = "withdrawFromAtmConsumer"
+	VerificationErrorRecursiveCapabilitiesWithdrawFromAtmInRestrictedCountries              = "withdrawFromAtmInRestrictedCountries"
+	VerificationErrorRecursiveCapabilitiesWithdrawFromAtmInRestrictedCountriesCommercial    = "withdrawFromAtmInRestrictedCountriesCommercial"
+	VerificationErrorRecursiveCapabilitiesWithdrawFromAtmInRestrictedCountriesConsumer      = "withdrawFromAtmInRestrictedCountriesConsumer"
+)
+
+// Values allowed for VerificationErrorRecursive.Type.
+const (
+	VerificationErrorRecursiveTypeDataMissing   = "dataMissing"
+	VerificationErrorRecursiveTypeDataReview    = "dataReview"
+	VerificationErrorRecursiveTypeInvalidInput  = "invalidInput"
+	VerificationErrorRecursiveTypePendingStatus = "pendingStatus"
+	VerificationErrorRecursiveTypeRejected      = "rejected"
+)

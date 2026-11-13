@@ -629,8 +629,8 @@ func (o StoreDetailAndSubmitRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoreDetailAndSubmitRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoreDetailAndSubmitRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
@@ -718,3 +718,9 @@ func (o *StoreDetailAndSubmitRequest) isValidEntityType() bool {
 	}
 	return false
 }
+
+// Values allowed for StoreDetailAndSubmitRequest.EntityType.
+const (
+	StoreDetailAndSubmitRequestEntityTypeNaturalPerson = "NaturalPerson"
+	StoreDetailAndSubmitRequestEntityTypeCompany       = "Company"
+)

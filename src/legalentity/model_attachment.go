@@ -217,8 +217,8 @@ func (o Attachment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Attachment) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Attachment) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["content"] = o.Content
 	if !common.IsNil(o.ContentType) {
 		toSerialize["contentType"] = o.ContentType

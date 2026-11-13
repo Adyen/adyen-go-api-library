@@ -100,8 +100,8 @@ func (o DisputeNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DisputeNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DisputeNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
@@ -152,3 +152,9 @@ func (o *DisputeNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for DisputeNotificationRequest.Type.
+const (
+	DisputeNotificationRequestTypeBalancePlatformDisputeCreated = "balancePlatform.dispute.created"
+	DisputeNotificationRequestTypeBalancePlatformDisputeUpdated = "balancePlatform.dispute.updated"
+)

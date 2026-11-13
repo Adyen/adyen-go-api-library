@@ -143,8 +143,8 @@ func (o AddressRequirement) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AddressRequirement) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AddressRequirement) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -200,3 +200,17 @@ func (o *AddressRequirement) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AddressRequirement.RequiredAddressFields items.
+const (
+	AddressRequirementRequiredAddressFieldsCity            = "city"
+	AddressRequirementRequiredAddressFieldsCountry         = "country"
+	AddressRequirementRequiredAddressFieldsLine1           = "line1"
+	AddressRequirementRequiredAddressFieldsPostalCode      = "postalCode"
+	AddressRequirementRequiredAddressFieldsStateOrProvince = "stateOrProvince"
+)
+
+// Values allowed for AddressRequirement.Type.
+const (
+	AddressRequirementTypeAddressRequirement = "addressRequirement"
+)

@@ -141,8 +141,8 @@ func (o AssociationFinaliseResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AssociationFinaliseResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AssociationFinaliseResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DeviceId) {
 		toSerialize["deviceId"] = o.DeviceId
 	}
@@ -198,3 +198,8 @@ func (o *AssociationFinaliseResponse) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AssociationFinaliseResponse.Type.
+const (
+	AssociationFinaliseResponseTypePAYMENTINSTRUMENT = "PAYMENT_INSTRUMENT"
+)

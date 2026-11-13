@@ -346,8 +346,8 @@ func (o AndroidApp) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AndroidApp) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AndroidApp) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -419,3 +419,12 @@ func (o *AndroidApp) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for AndroidApp.Status.
+const (
+	AndroidAppStatusArchived   = "archived"
+	AndroidAppStatusError      = "error"
+	AndroidAppStatusInvalid    = "invalid"
+	AndroidAppStatusProcessing = "processing"
+	AndroidAppStatusReady      = "ready"
+)

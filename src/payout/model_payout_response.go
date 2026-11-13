@@ -420,8 +420,8 @@ func (o PayoutResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayoutResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayoutResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
@@ -503,3 +503,21 @@ func (o *PayoutResponse) isValidResultCode() bool {
 	}
 	return false
 }
+
+// Values allowed for PayoutResponse.ResultCode.
+const (
+	PayoutResponseResultCodeAuthenticationFinished    = "AuthenticationFinished"
+	PayoutResponseResultCodeAuthenticationNotRequired = "AuthenticationNotRequired"
+	PayoutResponseResultCodeAuthorised                = "Authorised"
+	PayoutResponseResultCodeCancelled                 = "Cancelled"
+	PayoutResponseResultCodeChallengeShopper          = "ChallengeShopper"
+	PayoutResponseResultCodeError                     = "Error"
+	PayoutResponseResultCodeIdentifyShopper           = "IdentifyShopper"
+	PayoutResponseResultCodePartiallyAuthorised       = "PartiallyAuthorised"
+	PayoutResponseResultCodePending                   = "Pending"
+	PayoutResponseResultCodePresentToShopper          = "PresentToShopper"
+	PayoutResponseResultCodeReceived                  = "Received"
+	PayoutResponseResultCodeRedirectShopper           = "RedirectShopper"
+	PayoutResponseResultCodeRefused                   = "Refused"
+	PayoutResponseResultCodeSuccess                   = "Success"
+)

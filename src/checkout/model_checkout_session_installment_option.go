@@ -148,8 +148,8 @@ func (o CheckoutSessionInstallmentOption) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutSessionInstallmentOption) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutSessionInstallmentOption) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Plans) {
 		toSerialize["plans"] = o.Plans
 	}
@@ -197,3 +197,17 @@ func (v *NullableCheckoutSessionInstallmentOption) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+// Values allowed for CheckoutSessionInstallmentOption.Plans items.
+const (
+	CheckoutSessionInstallmentOptionPlansBonus                = "bonus"
+	CheckoutSessionInstallmentOptionPlansBuynowPaylater       = "buynow_paylater"
+	CheckoutSessionInstallmentOptionPlansInteresRefundPrctg   = "interes_refund_prctg"
+	CheckoutSessionInstallmentOptionPlansInterestBonus        = "interest_bonus"
+	CheckoutSessionInstallmentOptionPlansNointeresRefundPrctg = "nointeres_refund_prctg"
+	CheckoutSessionInstallmentOptionPlansNointerestBonus      = "nointerest_bonus"
+	CheckoutSessionInstallmentOptionPlansRefundPrctg          = "refund_prctg"
+	CheckoutSessionInstallmentOptionPlansRegular              = "regular"
+	CheckoutSessionInstallmentOptionPlansRevolving            = "revolving"
+	CheckoutSessionInstallmentOptionPlansWithInterest         = "with_interest"
+)

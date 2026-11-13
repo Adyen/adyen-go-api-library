@@ -202,8 +202,8 @@ func (o TerminalAssignment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalAssignment) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalAssignment) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["companyId"] = o.CompanyId
 	if !common.IsNil(o.MerchantId) {
 		toSerialize["merchantId"] = o.MerchantId
@@ -263,3 +263,11 @@ func (o *TerminalAssignment) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for TerminalAssignment.Status.
+const (
+	TerminalAssignmentStatusBoarded                = "boarded"
+	TerminalAssignmentStatusDeployed               = "deployed"
+	TerminalAssignmentStatusInventory              = "inventory"
+	TerminalAssignmentStatusReassignmentInProgress = "reassignmentInProgress"
+)

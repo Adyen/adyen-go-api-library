@@ -114,8 +114,8 @@ func (o Phone) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Phone) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Phone) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Cc) {
 		toSerialize["cc"] = o.Cc
 	}

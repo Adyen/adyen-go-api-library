@@ -285,8 +285,8 @@ func (o SweepExecutionNotificationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SweepExecutionNotificationData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SweepExecutionNotificationData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BalanceAccountId) {
 		toSerialize["balanceAccountId"] = o.BalanceAccountId
 	}
@@ -356,3 +356,10 @@ func (o *SweepExecutionNotificationData) isValidResult() bool {
 	}
 	return false
 }
+
+// Values allowed for SweepExecutionNotificationData.Result.
+const (
+	SweepExecutionNotificationDataResultFailed    = "failed"
+	SweepExecutionNotificationDataResultSkipped   = "skipped"
+	SweepExecutionNotificationDataResultSucceeded = "succeeded"
+)

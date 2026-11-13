@@ -91,8 +91,8 @@ func (o MandateUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MandateUpdate) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MandateUpdate) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if o.PaymentInstrumentId.IsSet() {
 		toSerialize["paymentInstrumentId"] = o.PaymentInstrumentId.Get()
 	}

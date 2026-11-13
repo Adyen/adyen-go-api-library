@@ -100,8 +100,8 @@ func (o LrsContext) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o LrsContext) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o LrsContext) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["remittancePurpose"] = o.RemittancePurpose
 	toSerialize["sublimitStatus"] = o.SublimitStatus
 	return toSerialize, nil

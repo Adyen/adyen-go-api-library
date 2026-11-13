@@ -116,8 +116,8 @@ func (o CardDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CardDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Type) {
 		toSerialize["type"] = o.Type
 	}
@@ -172,3 +172,8 @@ func (o *CardDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CardDetails.Type.
+const (
+	CardDetailsTypeScheme = "scheme"
+)

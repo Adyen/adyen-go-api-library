@@ -199,8 +199,8 @@ func (o ValidateShopperIdRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ValidateShopperIdRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ValidateShopperIdRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["paymentMethod"] = o.PaymentMethod
 	if !common.IsNil(o.ShopperEmail) {

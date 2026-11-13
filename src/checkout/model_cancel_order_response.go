@@ -100,8 +100,8 @@ func (o CancelOrderResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CancelOrderResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CancelOrderResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["pspReference"] = o.PspReference
 	toSerialize["resultCode"] = o.ResultCode
 	return toSerialize, nil
@@ -152,3 +152,8 @@ func (o *CancelOrderResponse) isValidResultCode() bool {
 	}
 	return false
 }
+
+// Values allowed for CancelOrderResponse.ResultCode.
+const (
+	CancelOrderResponseResultCodeReceived = "Received"
+)

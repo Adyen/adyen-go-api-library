@@ -250,8 +250,8 @@ func (o UpdateCompanyApiCredentialRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateCompanyApiCredentialRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UpdateCompanyApiCredentialRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Active) {
 		toSerialize["active"] = o.Active
 	}

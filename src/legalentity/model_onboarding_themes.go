@@ -141,8 +141,8 @@ func (o OnboardingThemes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OnboardingThemes) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o OnboardingThemes) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Next) {
 		toSerialize["next"] = o.Next
 	}

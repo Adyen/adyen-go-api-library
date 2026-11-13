@@ -216,8 +216,8 @@ func (o CounterpartyV3) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CounterpartyV3) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CounterpartyV3) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BalanceAccountId) {
 		toSerialize["balanceAccountId"] = o.BalanceAccountId
 	}

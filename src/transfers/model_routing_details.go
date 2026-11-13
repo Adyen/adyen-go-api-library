@@ -182,8 +182,8 @@ func (o RoutingDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RoutingDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RoutingDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Detail) {
 		toSerialize["detail"] = o.Detail
 	}
@@ -244,3 +244,13 @@ func (o *RoutingDetails) isValidPriority() bool {
 	}
 	return false
 }
+
+// Values allowed for RoutingDetails.Priority.
+const (
+	RoutingDetailsPriorityCrossBorder = "crossBorder"
+	RoutingDetailsPriorityFast        = "fast"
+	RoutingDetailsPriorityInstant     = "instant"
+	RoutingDetailsPriorityInternal    = "internal"
+	RoutingDetailsPriorityRegular     = "regular"
+	RoutingDetailsPriorityWire        = "wire"
+)

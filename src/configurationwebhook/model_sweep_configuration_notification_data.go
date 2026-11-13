@@ -148,8 +148,8 @@ func (o SweepConfigurationNotificationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SweepConfigurationNotificationData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SweepConfigurationNotificationData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountId) {
 		toSerialize["accountId"] = o.AccountId
 	}

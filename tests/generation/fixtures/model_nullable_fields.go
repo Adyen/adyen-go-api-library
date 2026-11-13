@@ -31,9 +31,9 @@ type NullableFields struct {
 	UnionArray   common.NullableSlice[Amount] `json:"unionArray,omitempty"`
 	UnionEnum    common.NullableString        `json:"unionEnum,omitempty"`
 	UnionRef     NullableAmount               `json:"unionRef,omitempty"`
-	LegacyObject map[string]interface{}       `json:"legacyObject,omitempty"`
+	LegacyObject map[string]any               `json:"legacyObject,omitempty"`
 	UnionMap     *map[string]string           `json:"unionMap,omitempty"`
-	UnionAny     *map[string]interface{}      `json:"unionAny,omitempty"`
+	UnionAny     *map[string]any              `json:"unionAny,omitempty"`
 }
 
 // NewNullableFields instantiates a new NullableFields object
@@ -559,9 +559,9 @@ func (o *NullableFields) UnsetUnionRef() {
 }
 
 // GetLegacyObject returns the LegacyObject field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *NullableFields) GetLegacyObject() map[string]interface{} {
+func (o *NullableFields) GetLegacyObject() map[string]any {
 	if o == nil {
-		var ret map[string]interface{}
+		var ret map[string]any
 		return ret
 	}
 	return o.LegacyObject
@@ -570,9 +570,9 @@ func (o *NullableFields) GetLegacyObject() map[string]interface{} {
 // GetLegacyObjectOk returns a tuple with the LegacyObject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *NullableFields) GetLegacyObjectOk() (map[string]interface{}, bool) {
+func (o *NullableFields) GetLegacyObjectOk() (map[string]any, bool) {
 	if o == nil || common.IsNil(o.LegacyObject) {
-		return map[string]interface{}{}, false
+		return map[string]any{}, false
 	}
 	return o.LegacyObject, true
 }
@@ -586,8 +586,8 @@ func (o *NullableFields) HasLegacyObject() bool {
 	return false
 }
 
-// SetLegacyObject gets a reference to the given map[string]interface{} and assigns it to the LegacyObject field.
-func (o *NullableFields) SetLegacyObject(v map[string]interface{}) {
+// SetLegacyObject gets a reference to the given map[string]any and assigns it to the LegacyObject field.
+func (o *NullableFields) SetLegacyObject(v map[string]any) {
 	o.LegacyObject = v
 }
 
@@ -624,9 +624,9 @@ func (o *NullableFields) SetUnionMap(v map[string]string) {
 }
 
 // GetUnionAny returns the UnionAny field value if set, zero value otherwise.
-func (o *NullableFields) GetUnionAny() map[string]interface{} {
+func (o *NullableFields) GetUnionAny() map[string]any {
 	if o == nil || common.IsNil(o.UnionAny) {
-		var ret map[string]interface{}
+		var ret map[string]any
 		return ret
 	}
 	return *o.UnionAny
@@ -634,7 +634,7 @@ func (o *NullableFields) GetUnionAny() map[string]interface{} {
 
 // GetUnionAnyOk returns a tuple with the UnionAny field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NullableFields) GetUnionAnyOk() (*map[string]interface{}, bool) {
+func (o *NullableFields) GetUnionAnyOk() (*map[string]any, bool) {
 	if o == nil || common.IsNil(o.UnionAny) {
 		return nil, false
 	}
@@ -650,8 +650,8 @@ func (o *NullableFields) HasUnionAny() bool {
 	return false
 }
 
-// SetUnionAny gets a reference to the given map[string]interface{} and assigns it to the UnionAny field.
-func (o *NullableFields) SetUnionAny(v map[string]interface{}) {
+// SetUnionAny gets a reference to the given map[string]any and assigns it to the UnionAny field.
+func (o *NullableFields) SetUnionAny(v map[string]any) {
 	o.UnionAny = &v
 }
 
@@ -663,8 +663,8 @@ func (o NullableFields) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NullableFields) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NullableFields) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if o.LegacyBool.IsSet() {
 		toSerialize["legacyBool"] = o.LegacyBool.Get()
 	}
@@ -758,3 +758,9 @@ func (o *NullableFields) isValidUnionEnum() bool {
 	}
 	return false
 }
+
+// Values allowed for NullableFields.UnionEnum.
+const (
+	NullableFieldsUnionEnumActive   = "active"
+	NullableFieldsUnionEnumInactive = "inactive"
+)

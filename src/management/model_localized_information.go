@@ -141,8 +141,8 @@ func (o LocalizedInformation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o LocalizedInformation) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o LocalizedInformation) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["localShopperStatement"] = o.LocalShopperStatement
 	if !common.IsNil(o.LocalStoreName) {
 		toSerialize["localStoreName"] = o.LocalStoreName

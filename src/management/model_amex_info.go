@@ -145,8 +145,8 @@ func (o AmexInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AmexInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AmexInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MidNumber) {
 		toSerialize["midNumber"] = o.MidNumber
 	}
@@ -202,3 +202,10 @@ func (o *AmexInfo) isValidServiceLevel() bool {
 	}
 	return false
 }
+
+// Values allowed for AmexInfo.ServiceLevel.
+const (
+	AmexInfoServiceLevelNoContract                = "noContract"
+	AmexInfoServiceLevelGatewayContract           = "gatewayContract"
+	AmexInfoServiceLevelPaymentDesignatorContract = "paymentDesignatorContract"
+)

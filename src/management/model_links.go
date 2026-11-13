@@ -73,8 +73,8 @@ func (o Links) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Links) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Links) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["self"] = o.Self
 	return toSerialize, nil
 }

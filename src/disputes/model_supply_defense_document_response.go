@@ -73,8 +73,8 @@ func (o SupplyDefenseDocumentResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SupplyDefenseDocumentResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SupplyDefenseDocumentResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["disputeServiceResult"] = o.DisputeServiceResult
 	return toSerialize, nil
 }

@@ -123,7 +123,7 @@ Requests to this endpoint are subject to rate limits:
 @return *http.Response, error
 */
 func (a *TransferInstrumentsApi) DeleteTransferInstrument(ctx context.Context, r TransferInstrumentsApiDeleteTransferInstrumentInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/transferInstruments/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}

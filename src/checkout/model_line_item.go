@@ -930,8 +930,8 @@ func (o LineItem) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o LineItem) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o LineItem) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AmountExcludingTax) {
 		toSerialize["amountExcludingTax"] = o.AmountExcludingTax
 	}

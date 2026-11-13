@@ -162,8 +162,8 @@ func (o PayoutScheduleStateNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayoutScheduleStateNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayoutScheduleStateNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,10 @@ func (o *PayoutScheduleStateNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PayoutScheduleStateNotificationRequest.Type.
+const (
+	PayoutScheduleStateNotificationRequestTypeBalancePlatformBalanceAccountPayoutScheduleExecutionSucceeded = "balancePlatform.balanceAccountPayoutScheduleExecution.succeeded"
+	PayoutScheduleStateNotificationRequestTypeBalancePlatformBalanceAccountPayoutScheduleExecutionFailed    = "balancePlatform.balanceAccountPayoutScheduleExecution.failed"
+	PayoutScheduleStateNotificationRequestTypeBalancePlatformBalanceAccountPayoutScheduleExecutionSkipped   = "balancePlatform.balanceAccountPayoutScheduleExecution.skipped"
+)

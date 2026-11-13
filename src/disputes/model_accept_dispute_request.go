@@ -100,8 +100,8 @@ func (o AcceptDisputeRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AcceptDisputeRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AcceptDisputeRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["disputePspReference"] = o.DisputePspReference
 	toSerialize["merchantAccountCode"] = o.MerchantAccountCode
 	return toSerialize, nil

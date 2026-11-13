@@ -30,19 +30,19 @@ type TerminalThemesMerchantLevelApiAddTerminalThemeAssetForMerchantInput struct 
 	file       *os.File
 }
 
-// The screen type or screen element that the asset is for:  - **logo**: your logo. Only supported if &#x60;model&#x60; is **All**. - **homeScreen**: the default background screen. - **idleScreen**: a screensaver shown when the terminal is inactive. Only supported if &#x60;model&#x60; is **SFO1** or **M450**. - **afterPaymentScreen**: a screen shown after the payment is completed. - **shopperEngagementScreen**: a screen shown during a [shopper engagement](https://docs.adyen.com/point-of-sale/shopper-engagement) request. Only supported if &#x60;model&#x60; is **SFO1** or **M450**.
+// The screen type or screen element that the asset is for:  - **logo**: your logo. Only supported if `model` is **All**. - **homeScreen**: the default background screen. - **idleScreen**: a screensaver shown when the terminal is inactive. Only supported if `model` is **SFO1** or **M450**. - **afterPaymentScreen**: a screen shown after the payment is completed. - **shopperEngagementScreen**: a screen shown during a [shopper engagement](https://docs.adyen.com/point-of-sale/shopper-engagement) request. Only supported if `model` is **SFO1** or **M450**.
 func (r TerminalThemesMerchantLevelApiAddTerminalThemeAssetForMerchantInput) Type_(type_ string) TerminalThemesMerchantLevelApiAddTerminalThemeAssetForMerchantInput {
 	r.type_ = &type_
 	return r
 }
 
-// The Android terminal model that the asset is for. Use **All** only if the &#x60;type&#x60; is **logo**. For every other screen type specify a single Android terminal model such as **AMS1**.
+// The Android terminal model that the asset is for. Use **All** only if the `type` is **logo**. For every other screen type specify a single Android terminal model such as **AMS1**.
 func (r TerminalThemesMerchantLevelApiAddTerminalThemeAssetForMerchantInput) Model(model string) TerminalThemesMerchantLevelApiAddTerminalThemeAssetForMerchantInput {
 	r.model = &model
 	return r
 }
 
-// The asset file. The part must declare a specific supported Content-Type; which Content-Type is accepted depends on the asset &#x60;type&#x60; and terminal &#x60;model&#x60; (see the endpoint description for the full mapping). The file extension is derived from it. A request with a generic or missing Content-Type such as application/octet-stream is rejected with response code **422**. The maximum asset size depends on the terminal model: up to 100 MB for SFO1 and M450, or 10 MB for all other models.
+// The asset file. The part must declare a specific supported Content-Type; which Content-Type is accepted depends on the asset `type` and terminal `model` (see the endpoint description for the full mapping). The file extension is derived from it. A request with a generic or missing Content-Type such as application/octet-stream is rejected with response code **422**. The maximum asset size depends on the terminal model: up to 100 MB for SFO1 and M450, or 10 MB for all other models.
 func (r TerminalThemesMerchantLevelApiAddTerminalThemeAssetForMerchantInput) File(file *os.File) TerminalThemesMerchantLevelApiAddTerminalThemeAssetForMerchantInput {
 	r.file = file
 	return r
@@ -156,7 +156,7 @@ To make this request, your API credential must have the following [role](https:/
 @return *http.Response, error
 */
 func (a *TerminalThemesMerchantLevelApi) ApplyTerminalThemeForMerchant(ctx context.Context, r TerminalThemesMerchantLevelApiApplyTerminalThemeForMerchantInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/merchants/{merchantId}/terminalThemes/{id}/apply"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
@@ -251,13 +251,13 @@ type TerminalThemesMerchantLevelApiDeleteTerminalThemeAssetForMerchantInput stru
 	model      *string
 }
 
-// The screen type or screen element that the asset is for:  - **logo**: your logo. Only supported if &#x60;model&#x60; is **All**. - **homeScreen**: the default background screen. - **idleScreen**: a screensaver shown when the terminal is inactive. Only supported if &#x60;model&#x60; is **SFO1** or **M450**. - **afterPaymentScreen**: a screen shown after the payment is completed. - **shopperEngagementScreen**: a screen shown during [shopper engagement](https://docs.adyen.com/point-of-sale/shopper-engagement) requests. Only supported if &#x60;model&#x60; is **SFO1** or **M450**.
+// The screen type or screen element that the asset is for:  - **logo**: your logo. Only supported if `model` is **All**. - **homeScreen**: the default background screen. - **idleScreen**: a screensaver shown when the terminal is inactive. Only supported if `model` is **SFO1** or **M450**. - **afterPaymentScreen**: a screen shown after the payment is completed. - **shopperEngagementScreen**: a screen shown during [shopper engagement](https://docs.adyen.com/point-of-sale/shopper-engagement) requests. Only supported if `model` is **SFO1** or **M450**.
 func (r TerminalThemesMerchantLevelApiDeleteTerminalThemeAssetForMerchantInput) Type_(type_ string) TerminalThemesMerchantLevelApiDeleteTerminalThemeAssetForMerchantInput {
 	r.type_ = &type_
 	return r
 }
 
-// The Android terminal model that the asset is for. Use **All** only if the &#x60;type&#x60; is **logo**. For every other screen type specify a single Android terminal model such as **AMS1**.
+// The Android terminal model that the asset is for. Use **All** only if the `type` is **logo**. For every other screen type specify a single Android terminal model such as **AMS1**.
 func (r TerminalThemesMerchantLevelApiDeleteTerminalThemeAssetForMerchantInput) Model(model string) TerminalThemesMerchantLevelApiDeleteTerminalThemeAssetForMerchantInput {
 	r.model = &model
 	return r
@@ -290,7 +290,7 @@ To make this request, your API credential must have the following [role](https:/
 @return *http.Response, error
 */
 func (a *TerminalThemesMerchantLevelApi) DeleteTerminalThemeAssetForMerchant(ctx context.Context, r TerminalThemesMerchantLevelApiDeleteTerminalThemeAssetForMerchantInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/merchants/{merchantId}/terminalThemes/{id}/assets"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
@@ -351,7 +351,7 @@ To make this request, your API credential must have the following [role](https:/
 @return *http.Response, error
 */
 func (a *TerminalThemesMerchantLevelApi) DeleteTerminalThemeForMerchant(ctx context.Context, r TerminalThemesMerchantLevelApiDeleteTerminalThemeForMerchantInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/merchants/{merchantId}/terminalThemes/{id}"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
@@ -384,19 +384,19 @@ type TerminalThemesMerchantLevelApiEditTerminalThemeAssetForMerchantInput struct
 	file       *os.File
 }
 
-// The screen type or screen element that the asset is for:  - **logo**: your logo. Only supported if &#x60;model&#x60; is **All**. - **homeScreen**: the default background screen. - **idleScreen**: a screensaver shown when the terminal is inactive. Only supported if &#x60;model&#x60; is **SFO1** or **M450**. - **afterPaymentScreen**: a screen shown after the payment is completed. - **shopperEngagementScreen**: a screen shown during [shopper engagement](https://docs.adyen.com/point-of-sale/shopper-engagement) requests. Only supported if &#x60;model&#x60; is **SFO1** or **M450**.
+// The screen type or screen element that the asset is for:  - **logo**: your logo. Only supported if `model` is **All**. - **homeScreen**: the default background screen. - **idleScreen**: a screensaver shown when the terminal is inactive. Only supported if `model` is **SFO1** or **M450**. - **afterPaymentScreen**: a screen shown after the payment is completed. - **shopperEngagementScreen**: a screen shown during [shopper engagement](https://docs.adyen.com/point-of-sale/shopper-engagement) requests. Only supported if `model` is **SFO1** or **M450**.
 func (r TerminalThemesMerchantLevelApiEditTerminalThemeAssetForMerchantInput) Type_(type_ string) TerminalThemesMerchantLevelApiEditTerminalThemeAssetForMerchantInput {
 	r.type_ = &type_
 	return r
 }
 
-// The Android terminal model that the asset is for. Use **All** only if the &#x60;type&#x60; is **logo**. For every other screen type specify a single Android terminal model such as **AMS1**.
+// The Android terminal model that the asset is for. Use **All** only if the `type` is **logo**. For every other screen type specify a single Android terminal model such as **AMS1**.
 func (r TerminalThemesMerchantLevelApiEditTerminalThemeAssetForMerchantInput) Model(model string) TerminalThemesMerchantLevelApiEditTerminalThemeAssetForMerchantInput {
 	r.model = &model
 	return r
 }
 
-// The asset file. The part must declare a specific supported Content-Type; which Content-Type is accepted depends on the asset &#x60;type&#x60; and terminal &#x60;model&#x60; (see the endpoint description for the full mapping). The file extension is derived from it. A request with a generic or missing Content-Type such as application/octet-stream is rejected with response code **422**. The maximum asset size depends on the terminal model: up to 100 MB for SFO1 and M450, or 10 MB for all other models.
+// The asset file. The part must declare a specific supported Content-Type; which Content-Type is accepted depends on the asset `type` and terminal `model` (see the endpoint description for the full mapping). The file extension is derived from it. A request with a generic or missing Content-Type such as application/octet-stream is rejected with response code **422**. The maximum asset size depends on the terminal model: up to 100 MB for SFO1 and M450, or 10 MB for all other models.
 func (r TerminalThemesMerchantLevelApiEditTerminalThemeAssetForMerchantInput) File(file *os.File) TerminalThemesMerchantLevelApiEditTerminalThemeAssetForMerchantInput {
 	r.file = file
 	return r
@@ -652,7 +652,7 @@ To make this request, your API credential must have the following [role](https:/
 @return *http.Response, error
 */
 func (a *TerminalThemesMerchantLevelApi) UnapplyTerminalThemeForMerchant(ctx context.Context, r TerminalThemesMerchantLevelApiUnapplyTerminalThemeForMerchantInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/merchants/{merchantId}/terminalThemes/unapply"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	queryParams := url.Values{}

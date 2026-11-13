@@ -1534,8 +1534,8 @@ func (o BalanceCheckRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceCheckRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceCheckRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountInfo) {
 		toSerialize["accountInfo"] = o.AccountInfo
 	}
@@ -1719,3 +1719,18 @@ func (o *BalanceCheckRequest) isValidShopperInteraction() bool {
 	}
 	return false
 }
+
+// Values allowed for BalanceCheckRequest.RecurringProcessingModel.
+const (
+	BalanceCheckRequestRecurringProcessingModelCardOnFile            = "CardOnFile"
+	BalanceCheckRequestRecurringProcessingModelSubscription          = "Subscription"
+	BalanceCheckRequestRecurringProcessingModelUnscheduledCardOnFile = "UnscheduledCardOnFile"
+)
+
+// Values allowed for BalanceCheckRequest.ShopperInteraction.
+const (
+	BalanceCheckRequestShopperInteractionEcommerce = "Ecommerce"
+	BalanceCheckRequestShopperInteractionContAuth  = "ContAuth"
+	BalanceCheckRequestShopperInteractionMoto      = "Moto"
+	BalanceCheckRequestShopperInteractionPOS       = "POS"
+)

@@ -148,8 +148,8 @@ func (o ValidationFacts) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ValidationFacts) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ValidationFacts) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Reasons) {
 		toSerialize["reasons"] = o.Reasons
 	}
@@ -207,3 +207,11 @@ func (o *ValidationFacts) isValidResult() bool {
 	}
 	return false
 }
+
+// Values allowed for ValidationFacts.Result.
+const (
+	ValidationFactsResultInvalid       = "invalid"
+	ValidationFactsResultNotApplicable = "notApplicable"
+	ValidationFactsResultNotValidated  = "notValidated"
+	ValidationFactsResultValid         = "valid"
+)

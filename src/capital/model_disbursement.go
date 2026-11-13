@@ -296,8 +296,8 @@ func (o Disbursement) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Disbursement) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Disbursement) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountHolderId"] = o.AccountHolderId
 	toSerialize["amount"] = o.Amount
 	toSerialize["balanceAccountId"] = o.BalanceAccountId

@@ -289,8 +289,8 @@ func (o ApplePayDonations) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ApplePayDonations) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ApplePayDonations) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["applePayToken"] = o.ApplePayToken
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
@@ -367,3 +367,15 @@ func (o *ApplePayDonations) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for ApplePayDonations.FundingSource.
+const (
+	ApplePayDonationsFundingSourceCredit  = "credit"
+	ApplePayDonationsFundingSourceDebit   = "debit"
+	ApplePayDonationsFundingSourcePrepaid = "prepaid"
+)
+
+// Values allowed for ApplePayDonations.Type.
+const (
+	ApplePayDonationsTypeApplepay = "applepay"
+)

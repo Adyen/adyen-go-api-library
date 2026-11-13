@@ -651,8 +651,8 @@ func (o UpdateSplitConfigurationLogicRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateSplitConfigurationLogicRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UpdateSplitConfigurationLogicRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcquiringFees) {
 		toSerialize["acquiringFees"] = o.AcquiringFees
 	}
@@ -870,3 +870,89 @@ func (o *UpdateSplitConfigurationLogicRequest) isValidTip() bool {
 	}
 	return false
 }
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.AcquiringFees.
+const (
+	UpdateSplitConfigurationLogicRequestAcquiringFeesDeductFromLiableAccount     = "deductFromLiableAccount"
+	UpdateSplitConfigurationLogicRequestAcquiringFeesDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.AdyenCommission.
+const (
+	UpdateSplitConfigurationLogicRequestAdyenCommissionDeductFromLiableAccount     = "deductFromLiableAccount"
+	UpdateSplitConfigurationLogicRequestAdyenCommissionDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.AdyenFees.
+const (
+	UpdateSplitConfigurationLogicRequestAdyenFeesDeductFromLiableAccount     = "deductFromLiableAccount"
+	UpdateSplitConfigurationLogicRequestAdyenFeesDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.AdyenMarkup.
+const (
+	UpdateSplitConfigurationLogicRequestAdyenMarkupDeductFromLiableAccount     = "deductFromLiableAccount"
+	UpdateSplitConfigurationLogicRequestAdyenMarkupDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.Chargeback.
+const (
+	UpdateSplitConfigurationLogicRequestChargebackDeductFromLiableAccount     = "deductFromLiableAccount"
+	UpdateSplitConfigurationLogicRequestChargebackDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+	UpdateSplitConfigurationLogicRequestChargebackDeductAccordingToSplitRatio = "deductAccordingToSplitRatio"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.ChargebackCostAllocation.
+const (
+	UpdateSplitConfigurationLogicRequestChargebackCostAllocationDeductFromLiableAccount     = "deductFromLiableAccount"
+	UpdateSplitConfigurationLogicRequestChargebackCostAllocationDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.Interchange.
+const (
+	UpdateSplitConfigurationLogicRequestInterchangeDeductFromLiableAccount     = "deductFromLiableAccount"
+	UpdateSplitConfigurationLogicRequestInterchangeDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.PaymentFee.
+const (
+	UpdateSplitConfigurationLogicRequestPaymentFeeDeductFromLiableAccount     = "deductFromLiableAccount"
+	UpdateSplitConfigurationLogicRequestPaymentFeeDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.Refund.
+const (
+	UpdateSplitConfigurationLogicRequestRefundDeductFromLiableAccount     = "deductFromLiableAccount"
+	UpdateSplitConfigurationLogicRequestRefundDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+	UpdateSplitConfigurationLogicRequestRefundDeductAccordingToSplitRatio = "deductAccordingToSplitRatio"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.RefundCostAllocation.
+const (
+	UpdateSplitConfigurationLogicRequestRefundCostAllocationDeductFromLiableAccount     = "deductFromLiableAccount"
+	UpdateSplitConfigurationLogicRequestRefundCostAllocationDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.Remainder.
+const (
+	UpdateSplitConfigurationLogicRequestRemainderAddToLiableAccount     = "addToLiableAccount"
+	UpdateSplitConfigurationLogicRequestRemainderAddToOneBalanceAccount = "addToOneBalanceAccount"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.SchemeFee.
+const (
+	UpdateSplitConfigurationLogicRequestSchemeFeeDeductFromLiableAccount     = "deductFromLiableAccount"
+	UpdateSplitConfigurationLogicRequestSchemeFeeDeductFromOneBalanceAccount = "deductFromOneBalanceAccount"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.Surcharge.
+const (
+	UpdateSplitConfigurationLogicRequestSurchargeAddToLiableAccount     = "addToLiableAccount"
+	UpdateSplitConfigurationLogicRequestSurchargeAddToOneBalanceAccount = "addToOneBalanceAccount"
+)
+
+// Values allowed for UpdateSplitConfigurationLogicRequest.Tip.
+const (
+	UpdateSplitConfigurationLogicRequestTipAddToLiableAccount     = "addToLiableAccount"
+	UpdateSplitConfigurationLogicRequestTipAddToOneBalanceAccount = "addToOneBalanceAccount"
+)

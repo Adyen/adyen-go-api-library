@@ -186,8 +186,8 @@ func (o JCBInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o JCBInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o JCBInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MidNumber) {
 		toSerialize["midNumber"] = o.MidNumber
 	}
@@ -248,3 +248,10 @@ func (o *JCBInfo) isValidServiceLevel() bool {
 	}
 	return false
 }
+
+// Values allowed for JCBInfo.ServiceLevel.
+const (
+	JCBInfoServiceLevelNoContract                = "noContract"
+	JCBInfoServiceLevelGatewayContract           = "gatewayContract"
+	JCBInfoServiceLevelPaymentDesignatorContract = "paymentDesignatorContract"
+)

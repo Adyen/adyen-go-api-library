@@ -386,8 +386,8 @@ func (o CheckoutBankAccount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutBankAccount) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutBankAccount) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountType) {
 		toSerialize["accountType"] = o.AccountType
 	}
@@ -466,3 +466,14 @@ func (o *CheckoutBankAccount) isValidAccountType() bool {
 	}
 	return false
 }
+
+// Values allowed for CheckoutBankAccount.AccountType.
+const (
+	CheckoutBankAccountAccountTypeBalance  = "balance"
+	CheckoutBankAccountAccountTypeChecking = "checking"
+	CheckoutBankAccountAccountTypeDeposit  = "deposit"
+	CheckoutBankAccountAccountTypeGeneral  = "general"
+	CheckoutBankAccountAccountTypeOther    = "other"
+	CheckoutBankAccountAccountTypePayment  = "payment"
+	CheckoutBankAccountAccountTypeSavings  = "savings"
+)

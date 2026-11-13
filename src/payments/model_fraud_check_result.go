@@ -127,8 +127,8 @@ func (o FraudCheckResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FraudCheckResult) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o FraudCheckResult) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountScore"] = o.AccountScore
 	toSerialize["checkId"] = o.CheckId
 	toSerialize["name"] = o.Name

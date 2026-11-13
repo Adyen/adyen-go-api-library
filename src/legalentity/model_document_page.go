@@ -145,8 +145,8 @@ func (o DocumentPage) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DocumentPage) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DocumentPage) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.PageName) {
 		toSerialize["pageName"] = o.PageName
 	}
@@ -204,3 +204,10 @@ func (o *DocumentPage) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for DocumentPage.Type.
+const (
+	DocumentPageTypeBACK      = "BACK"
+	DocumentPageTypeFRONT     = "FRONT"
+	DocumentPageTypeUNDEFINED = "UNDEFINED"
+)

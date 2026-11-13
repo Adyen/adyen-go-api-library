@@ -355,8 +355,8 @@ func (o KlarnaNetworkDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o KlarnaNetworkDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o KlarnaNetworkDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -439,3 +439,14 @@ func (o *KlarnaNetworkDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for KlarnaNetworkDetails.Subtype.
+const (
+	KlarnaNetworkDetailsSubtypeRedirect = "redirect"
+	KlarnaNetworkDetailsSubtypeSdk      = "sdk"
+)
+
+// Values allowed for KlarnaNetworkDetails.Type.
+const (
+	KlarnaNetworkDetailsTypeKlarnaNetwork = "klarna_network"
+)

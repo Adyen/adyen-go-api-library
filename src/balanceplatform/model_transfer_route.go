@@ -216,8 +216,8 @@ func (o TransferRoute) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransferRoute) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransferRoute) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Category) {
 		toSerialize["category"] = o.Category
 	}
@@ -290,3 +290,27 @@ func (o *TransferRoute) isValidPriority() bool {
 	}
 	return false
 }
+
+// Values allowed for TransferRoute.Category.
+const (
+	TransferRouteCategoryBank            = "bank"
+	TransferRouteCategoryCard            = "card"
+	TransferRouteCategoryGrants          = "grants"
+	TransferRouteCategoryInterest        = "interest"
+	TransferRouteCategoryInternal        = "internal"
+	TransferRouteCategoryIssuedCard      = "issuedCard"
+	TransferRouteCategoryMigration       = "migration"
+	TransferRouteCategoryPlatformPayment = "platformPayment"
+	TransferRouteCategoryTopUp           = "topUp"
+	TransferRouteCategoryUpgrade         = "upgrade"
+)
+
+// Values allowed for TransferRoute.Priority.
+const (
+	TransferRoutePriorityCrossBorder = "crossBorder"
+	TransferRoutePriorityFast        = "fast"
+	TransferRoutePriorityInstant     = "instant"
+	TransferRoutePriorityInternal    = "internal"
+	TransferRoutePriorityRegular     = "regular"
+	TransferRoutePriorityWire        = "wire"
+)

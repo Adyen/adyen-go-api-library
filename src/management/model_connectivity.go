@@ -114,8 +114,8 @@ func (o Connectivity) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Connectivity) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Connectivity) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.SimcardStatus) {
 		toSerialize["simcardStatus"] = o.SimcardStatus
 	}
@@ -170,3 +170,9 @@ func (o *Connectivity) isValidSimcardStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for Connectivity.SimcardStatus.
+const (
+	ConnectivitySimcardStatusACTIVATED = "ACTIVATED"
+	ConnectivitySimcardStatusINVENTORY = "INVENTORY"
+)

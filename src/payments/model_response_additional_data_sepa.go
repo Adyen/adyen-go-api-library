@@ -182,8 +182,8 @@ func (o ResponseAdditionalDataSepa) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ResponseAdditionalDataSepa) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ResponseAdditionalDataSepa) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.SepadirectdebitDateOfSignature) {
 		toSerialize["sepadirectdebit.dateOfSignature"] = o.SepadirectdebitDateOfSignature
 	}

@@ -127,8 +127,8 @@ func (o InvalidField) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o InvalidField) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o InvalidField) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["name"] = o.Name
 	toSerialize["value"] = o.Value
 	toSerialize["message"] = o.Message

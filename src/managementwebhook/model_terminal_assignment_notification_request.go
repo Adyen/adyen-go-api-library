@@ -222,8 +222,8 @@ func (o TerminalAssignmentNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalAssignmentNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalAssignmentNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["assignedToAccount"] = o.AssignedToAccount
 	if !common.IsNil(o.AssignedToStore) {
 		toSerialize["assignedToStore"] = o.AssignedToStore

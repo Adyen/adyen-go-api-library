@@ -168,8 +168,8 @@ func (o MolPayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MolPayDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MolPayDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -226,3 +226,9 @@ func (o *MolPayDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for MolPayDetails.Type.
+const (
+	MolPayDetailsTypeMolpayEbankingFpxMY = "molpay_ebanking_fpx_MY"
+	MolPayDetailsTypeMolpayEbankingTH    = "molpay_ebanking_TH"
+)

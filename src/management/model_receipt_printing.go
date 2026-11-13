@@ -590,8 +590,8 @@ func (o ReceiptPrinting) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ReceiptPrinting) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ReceiptPrinting) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MerchantApproved) {
 		toSerialize["merchantApproved"] = o.MerchantApproved
 	}

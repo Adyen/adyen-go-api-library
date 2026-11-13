@@ -149,8 +149,8 @@ func (o InstalledAPKs) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o InstalledAPKs) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o InstalledAPKs) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ConfirmationDate) {
 		toSerialize["confirmationDate"] = o.ConfirmationDate
 	}

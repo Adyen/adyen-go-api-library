@@ -80,8 +80,8 @@ func (o AffirmResponseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AffirmResponseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AffirmResponseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.PublicApiKey) {
 		toSerialize["publicApiKey"] = o.PublicApiKey
 	}

@@ -1031,8 +1031,8 @@ func (o TerminalSettings) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalSettings) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalSettings) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CardholderReceipt) {
 		toSerialize["cardholderReceipt"] = o.CardholderReceipt
 	}

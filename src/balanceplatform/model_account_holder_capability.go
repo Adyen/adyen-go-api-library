@@ -386,8 +386,8 @@ func (o AccountHolderCapability) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AccountHolderCapability) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AccountHolderCapability) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Allowed) {
 		toSerialize["allowed"] = o.Allowed
 	}
@@ -484,3 +484,27 @@ func (o *AccountHolderCapability) isValidVerificationStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for AccountHolderCapability.AllowedLevel.
+const (
+	AccountHolderCapabilityAllowedLevelHigh          = "high"
+	AccountHolderCapabilityAllowedLevelLow           = "low"
+	AccountHolderCapabilityAllowedLevelMedium        = "medium"
+	AccountHolderCapabilityAllowedLevelNotApplicable = "notApplicable"
+)
+
+// Values allowed for AccountHolderCapability.RequestedLevel.
+const (
+	AccountHolderCapabilityRequestedLevelHigh          = "high"
+	AccountHolderCapabilityRequestedLevelLow           = "low"
+	AccountHolderCapabilityRequestedLevelMedium        = "medium"
+	AccountHolderCapabilityRequestedLevelNotApplicable = "notApplicable"
+)
+
+// Values allowed for AccountHolderCapability.VerificationStatus.
+const (
+	AccountHolderCapabilityVerificationStatusInvalid  = "invalid"
+	AccountHolderCapabilityVerificationStatusPending  = "pending"
+	AccountHolderCapabilityVerificationStatusRejected = "rejected"
+	AccountHolderCapabilityVerificationStatusValid    = "valid"
+)

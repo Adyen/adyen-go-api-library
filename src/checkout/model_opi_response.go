@@ -114,8 +114,8 @@ func (o OpiResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OpiResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o OpiResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.IssuerId) {
 		toSerialize["issuerId"] = o.IssuerId
 	}

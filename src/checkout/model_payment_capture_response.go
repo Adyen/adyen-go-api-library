@@ -351,8 +351,8 @@ func (o PaymentCaptureResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentCaptureResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentCaptureResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.LineItems) {
 		toSerialize["lineItems"] = o.LineItems
@@ -421,3 +421,8 @@ func (o *PaymentCaptureResponse) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentCaptureResponse.Status.
+const (
+	PaymentCaptureResponseStatusReceived = "received"
+)

@@ -11,7 +11,7 @@ package management
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -79,7 +79,7 @@ func (a *DonationCampaignsApi) CreateDonationCampaign(ctx context.Context, r Don
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -88,7 +88,7 @@ func (a *DonationCampaignsApi) CreateDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -97,7 +97,7 @@ func (a *DonationCampaignsApi) CreateDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -106,7 +106,7 @@ func (a *DonationCampaignsApi) CreateDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -115,7 +115,7 @@ func (a *DonationCampaignsApi) CreateDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -124,7 +124,7 @@ func (a *DonationCampaignsApi) CreateDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 503 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -166,7 +166,7 @@ To make this request, your API credential must have the following [role](https:/
 @return *http.Response, error
 */
 func (a *DonationCampaignsApi) DeleteDonationCampaign(ctx context.Context, r DonationCampaignsApiDeleteDonationCampaignInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/companies/{companyId}/campaignManagement/{donationCampaignId}"
 	path = strings.Replace(path, "{"+"companyId"+"}", url.PathEscape(common.ParameterValueToString(r.companyId, "companyId")), -1)
 	path = strings.Replace(path, "{"+"donationCampaignId"+"}", url.PathEscape(common.ParameterValueToString(r.donationCampaignId, "donationCampaignId")), -1)
@@ -189,7 +189,7 @@ func (a *DonationCampaignsApi) DeleteDonationCampaign(ctx context.Context, r Don
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -198,7 +198,7 @@ func (a *DonationCampaignsApi) DeleteDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -207,7 +207,7 @@ func (a *DonationCampaignsApi) DeleteDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -216,7 +216,7 @@ func (a *DonationCampaignsApi) DeleteDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -225,7 +225,7 @@ func (a *DonationCampaignsApi) DeleteDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -234,7 +234,7 @@ func (a *DonationCampaignsApi) DeleteDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 503 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -330,7 +330,7 @@ func (a *DonationCampaignsApi) ListDonationCampaignsForAccountHolder(ctx context
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -339,7 +339,7 @@ func (a *DonationCampaignsApi) ListDonationCampaignsForAccountHolder(ctx context
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -348,7 +348,7 @@ func (a *DonationCampaignsApi) ListDonationCampaignsForAccountHolder(ctx context
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -357,7 +357,7 @@ func (a *DonationCampaignsApi) ListDonationCampaignsForAccountHolder(ctx context
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -366,7 +366,7 @@ func (a *DonationCampaignsApi) ListDonationCampaignsForAccountHolder(ctx context
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -375,7 +375,7 @@ func (a *DonationCampaignsApi) ListDonationCampaignsForAccountHolder(ctx context
 	}
 	if httpRes.StatusCode == 503 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -396,7 +396,7 @@ type DonationCampaignsApiListNonprofitsInput struct {
 	listNonprofitsRequest *ListNonprofitsRequest
 }
 
-// A query to return nonprofit organizations for, maximum 100 characters. For example, &#x60;&amp;searchTerm&#x3D;clean%20water&#x60;.
+// A query to return nonprofit organizations for, maximum 100 characters. For example, `&searchTerm=clean%20water`.
 func (r DonationCampaignsApiListNonprofitsInput) SearchTerm(searchTerm string) DonationCampaignsApiListNonprofitsInput {
 	r.searchTerm = &searchTerm
 	return r
@@ -414,7 +414,7 @@ func (r DonationCampaignsApiListNonprofitsInput) PageSize(pageSize int32) Donati
 	return r
 }
 
-// One or more United Nations Sustainable Development Goals to return nonprofit organizations for. Format: &#x60;unsdg_&lt;number&gt;&#x60;, for example, &#x60;&amp;goal&#x3D;unsdg_6&amp;goal&#x3D;unsdg_2&#x60;.
+// One or more United Nations Sustainable Development Goals to return nonprofit organizations for. Format: `unsdg_<number>`, for example, `&goal=unsdg_6&goal=unsdg_2`.
 func (r DonationCampaignsApiListNonprofitsInput) Goal(goal []string) DonationCampaignsApiListNonprofitsInput {
 	r.goal = &goal
 	return r
@@ -480,7 +480,7 @@ func (a *DonationCampaignsApi) ListNonprofits(ctx context.Context, r DonationCam
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -489,7 +489,7 @@ func (a *DonationCampaignsApi) ListNonprofits(ctx context.Context, r DonationCam
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -498,7 +498,7 @@ func (a *DonationCampaignsApi) ListNonprofits(ctx context.Context, r DonationCam
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -507,7 +507,7 @@ func (a *DonationCampaignsApi) ListNonprofits(ctx context.Context, r DonationCam
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -516,7 +516,7 @@ func (a *DonationCampaignsApi) ListNonprofits(ctx context.Context, r DonationCam
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -525,7 +525,7 @@ func (a *DonationCampaignsApi) ListNonprofits(ctx context.Context, r DonationCam
 	}
 	if httpRes.StatusCode == 503 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -599,7 +599,7 @@ func (a *DonationCampaignsApi) UpdateDonationCampaign(ctx context.Context, r Don
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -608,7 +608,7 @@ func (a *DonationCampaignsApi) UpdateDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -617,7 +617,7 @@ func (a *DonationCampaignsApi) UpdateDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -626,7 +626,7 @@ func (a *DonationCampaignsApi) UpdateDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -635,7 +635,7 @@ func (a *DonationCampaignsApi) UpdateDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -644,7 +644,7 @@ func (a *DonationCampaignsApi) UpdateDonationCampaign(ctx context.Context, r Don
 	}
 	if httpRes.StatusCode == 503 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -713,7 +713,7 @@ func (a *DonationCampaignsApi) UpdateDonationCampaignStatus(ctx context.Context,
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -722,7 +722,7 @@ func (a *DonationCampaignsApi) UpdateDonationCampaignStatus(ctx context.Context,
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -731,7 +731,7 @@ func (a *DonationCampaignsApi) UpdateDonationCampaignStatus(ctx context.Context,
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -740,7 +740,7 @@ func (a *DonationCampaignsApi) UpdateDonationCampaignStatus(ctx context.Context,
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -749,7 +749,7 @@ func (a *DonationCampaignsApi) UpdateDonationCampaignStatus(ctx context.Context,
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -758,7 +758,7 @@ func (a *DonationCampaignsApi) UpdateDonationCampaignStatus(ctx context.Context,
 	}
 	if httpRes.StatusCode == 503 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError

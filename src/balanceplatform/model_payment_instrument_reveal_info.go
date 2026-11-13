@@ -127,8 +127,8 @@ func (o PaymentInstrumentRevealInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentInstrumentRevealInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentInstrumentRevealInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["cvc"] = o.Cvc
 	toSerialize["expiration"] = o.Expiration
 	toSerialize["pan"] = o.Pan

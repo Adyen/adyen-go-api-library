@@ -113,8 +113,8 @@ func (o BalanceAccountNotificationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceAccountNotificationData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceAccountNotificationData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BalanceAccount) {
 		toSerialize["balanceAccount"] = o.BalanceAccount
 	}

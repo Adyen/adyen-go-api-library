@@ -216,8 +216,8 @@ func (o TokenizationAlreadyExistingDetailsNotificationRequest) MarshalJSON() ([]
 	return json.Marshal(toSerialize)
 }
 
-func (o TokenizationAlreadyExistingDetailsNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TokenizationAlreadyExistingDetailsNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
@@ -283,3 +283,14 @@ func (o *TokenizationAlreadyExistingDetailsNotificationRequest) isValidType() bo
 	}
 	return false
 }
+
+// Values allowed for TokenizationAlreadyExistingDetailsNotificationRequest.Environment.
+const (
+	TokenizationAlreadyExistingDetailsNotificationRequestEnvironmentTest = "test"
+	TokenizationAlreadyExistingDetailsNotificationRequestEnvironmentLive = "live"
+)
+
+// Values allowed for TokenizationAlreadyExistingDetailsNotificationRequest.Type.
+const (
+	TokenizationAlreadyExistingDetailsNotificationRequestTypeRecurringTokenAlreadyExisting = "recurring.token.alreadyExisting"
+)

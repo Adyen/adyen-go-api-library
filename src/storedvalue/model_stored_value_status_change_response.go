@@ -250,8 +250,8 @@ func (o StoredValueStatusChangeResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredValueStatusChangeResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoredValueStatusChangeResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AuthCode) {
 		toSerialize["authCode"] = o.AuthCode
 	}
@@ -318,3 +318,11 @@ func (o *StoredValueStatusChangeResponse) isValidResultCode() bool {
 	}
 	return false
 }
+
+// Values allowed for StoredValueStatusChangeResponse.ResultCode.
+const (
+	StoredValueStatusChangeResponseResultCodeSuccess          = "Success"
+	StoredValueStatusChangeResponseResultCodeRefused          = "Refused"
+	StoredValueStatusChangeResponseResultCodeError            = "Error"
+	StoredValueStatusChangeResponseResultCodeNotEnoughBalance = "NotEnoughBalance"
+)

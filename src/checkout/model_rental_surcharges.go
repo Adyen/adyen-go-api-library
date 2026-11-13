@@ -148,8 +148,8 @@ func (o RentalSurcharges) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RentalSurcharges) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RentalSurcharges) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Fuel) {
 		toSerialize["fuel"] = o.Fuel
 	}

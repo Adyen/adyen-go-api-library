@@ -34,7 +34,7 @@ func (dst *PaymentDetailsResponseAction) UnmarshalJSON(data []byte) error {
 	dst.CheckoutThreeDS2Action = nil
 
 	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
+	var jsonDict map[string]any
 	err = common.NewStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
@@ -77,7 +77,7 @@ func (src PaymentDetailsResponseAction) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *PaymentDetailsResponseAction) GetActualInstance() interface{} {
+func (obj *PaymentDetailsResponseAction) GetActualInstance() any {
 	if obj == nil {
 		return nil
 	}

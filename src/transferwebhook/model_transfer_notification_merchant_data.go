@@ -318,8 +318,8 @@ func (o TransferNotificationMerchantData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransferNotificationMerchantData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransferNotificationMerchantData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcquirerId) {
 		toSerialize["acquirerId"] = o.AcquirerId
 	}

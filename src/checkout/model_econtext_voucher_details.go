@@ -249,8 +249,8 @@ func (o EcontextVoucherDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o EcontextVoucherDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o EcontextVoucherDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -310,3 +310,12 @@ func (o *EcontextVoucherDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for EcontextVoucherDetails.Type.
+const (
+	EcontextVoucherDetailsTypeEcontextSevenEleven = "econtext_seven_eleven"
+	EcontextVoucherDetailsTypeEcontextOnline      = "econtext_online"
+	EcontextVoucherDetailsTypeEcontext            = "econtext"
+	EcontextVoucherDetailsTypeEcontextStores      = "econtext_stores"
+	EcontextVoucherDetailsTypeEcontextAtm         = "econtext_atm"
+)

@@ -73,8 +73,8 @@ func (o ApplePayInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ApplePayInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ApplePayInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["domains"] = o.Domains
 	return toSerialize, nil
 }

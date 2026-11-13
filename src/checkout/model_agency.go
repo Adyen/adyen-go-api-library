@@ -114,8 +114,8 @@ func (o Agency) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Agency) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Agency) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.InvoiceNumber) {
 		toSerialize["invoiceNumber"] = o.InvoiceNumber
 	}

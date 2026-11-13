@@ -11,7 +11,7 @@ package balanceplatform
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -78,7 +78,7 @@ func (a *CustomPayoutSchedulesSweepsApi) CreateSweep(ctx context.Context, r Cust
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -87,7 +87,7 @@ func (a *CustomPayoutSchedulesSweepsApi) CreateSweep(ctx context.Context, r Cust
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -96,7 +96,7 @@ func (a *CustomPayoutSchedulesSweepsApi) CreateSweep(ctx context.Context, r Cust
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -105,7 +105,7 @@ func (a *CustomPayoutSchedulesSweepsApi) CreateSweep(ctx context.Context, r Cust
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -114,7 +114,7 @@ func (a *CustomPayoutSchedulesSweepsApi) CreateSweep(ctx context.Context, r Cust
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -153,7 +153,7 @@ Deletes a sweep for a balance account.
 @return *http.Response, error
 */
 func (a *CustomPayoutSchedulesSweepsApi) DeleteSweep(ctx context.Context, r CustomPayoutSchedulesSweepsApiDeleteSweepInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/balanceAccounts/{balanceAccountId}/sweeps/{sweepId}"
 	path = strings.Replace(path, "{"+"balanceAccountId"+"}", url.PathEscape(common.ParameterValueToString(r.balanceAccountId, "balanceAccountId")), -1)
 	path = strings.Replace(path, "{"+"sweepId"+"}", url.PathEscape(common.ParameterValueToString(r.sweepId, "sweepId")), -1)
@@ -176,7 +176,7 @@ func (a *CustomPayoutSchedulesSweepsApi) DeleteSweep(ctx context.Context, r Cust
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -185,7 +185,7 @@ func (a *CustomPayoutSchedulesSweepsApi) DeleteSweep(ctx context.Context, r Cust
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -194,7 +194,7 @@ func (a *CustomPayoutSchedulesSweepsApi) DeleteSweep(ctx context.Context, r Cust
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -203,7 +203,7 @@ func (a *CustomPayoutSchedulesSweepsApi) DeleteSweep(ctx context.Context, r Cust
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -212,7 +212,7 @@ func (a *CustomPayoutSchedulesSweepsApi) DeleteSweep(ctx context.Context, r Cust
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -293,7 +293,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetAllSweepsForBalanceAccount(ctx conte
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -302,7 +302,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetAllSweepsForBalanceAccount(ctx conte
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -311,7 +311,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetAllSweepsForBalanceAccount(ctx conte
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -320,7 +320,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetAllSweepsForBalanceAccount(ctx conte
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -329,7 +329,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetAllSweepsForBalanceAccount(ctx conte
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -391,7 +391,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetSweep(ctx context.Context, r CustomP
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -400,7 +400,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetSweep(ctx context.Context, r CustomP
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -409,7 +409,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetSweep(ctx context.Context, r CustomP
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -418,7 +418,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetSweep(ctx context.Context, r CustomP
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -427,7 +427,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetSweep(ctx context.Context, r CustomP
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -459,7 +459,7 @@ func (r CustomPayoutSchedulesSweepsApiGetSweepExecutionsInput) Limit(limit int32
 	return r
 }
 
-// The cursor from the &#x60;next&#x60; or &#x60;previous&#x60; pagination link in the previous response.
+// The cursor from the `next` or `previous` pagination link in the previous response.
 func (r CustomPayoutSchedulesSweepsApiGetSweepExecutionsInput) Cursor(cursor string) CustomPayoutSchedulesSweepsApiGetSweepExecutionsInput {
 	r.cursor = &cursor
 	return r
@@ -519,7 +519,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetSweepExecutions(ctx context.Context,
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -528,7 +528,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetSweepExecutions(ctx context.Context,
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -537,7 +537,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetSweepExecutions(ctx context.Context,
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -546,7 +546,7 @@ func (a *CustomPayoutSchedulesSweepsApi) GetSweepExecutions(ctx context.Context,
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -614,7 +614,7 @@ func (a *CustomPayoutSchedulesSweepsApi) UpdateSweep(ctx context.Context, r Cust
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -623,7 +623,7 @@ func (a *CustomPayoutSchedulesSweepsApi) UpdateSweep(ctx context.Context, r Cust
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -632,7 +632,7 @@ func (a *CustomPayoutSchedulesSweepsApi) UpdateSweep(ctx context.Context, r Cust
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -641,7 +641,7 @@ func (a *CustomPayoutSchedulesSweepsApi) UpdateSweep(ctx context.Context, r Cust
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -650,7 +650,7 @@ func (a *CustomPayoutSchedulesSweepsApi) UpdateSweep(ctx context.Context, r Cust
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError

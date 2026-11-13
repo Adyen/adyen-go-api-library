@@ -188,8 +188,8 @@ func (o UpdateSplitConfigurationRuleRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateSplitConfigurationRuleRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UpdateSplitConfigurationRuleRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CardUsageType) {
 		toSerialize["cardUsageType"] = o.CardUsageType
 	}
@@ -245,3 +245,10 @@ func (o *UpdateSplitConfigurationRuleRequest) isValidCardUsageType() bool {
 	}
 	return false
 }
+
+// Values allowed for UpdateSplitConfigurationRuleRequest.CardUsageType.
+const (
+	UpdateSplitConfigurationRuleRequestCardUsageTypeCommercial = "commercial"
+	UpdateSplitConfigurationRuleRequestCardUsageTypeConsumer   = "consumer"
+	UpdateSplitConfigurationRuleRequestCardUsageTypeANY        = "ANY"
+)

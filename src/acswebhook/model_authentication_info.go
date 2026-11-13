@@ -480,8 +480,8 @@ func (o AuthenticationInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AuthenticationInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AuthenticationInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["acsTransId"] = o.AcsTransId
 	if !common.IsNil(o.Challenge) {
 		toSerialize["challenge"] = o.Challenge
@@ -607,3 +607,95 @@ func (o *AuthenticationInfo) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AuthenticationInfo.ChallengeIndicator.
+const (
+	AuthenticationInfoChallengeIndicator01 = "01"
+	AuthenticationInfoChallengeIndicator02 = "02"
+	AuthenticationInfoChallengeIndicator03 = "03"
+	AuthenticationInfoChallengeIndicator04 = "04"
+	AuthenticationInfoChallengeIndicator05 = "05"
+	AuthenticationInfoChallengeIndicator07 = "07"
+	AuthenticationInfoChallengeIndicator08 = "08"
+	AuthenticationInfoChallengeIndicator09 = "09"
+	AuthenticationInfoChallengeIndicator80 = "80"
+	AuthenticationInfoChallengeIndicator82 = "82"
+)
+
+// Values allowed for AuthenticationInfo.DeviceChannel.
+const (
+	AuthenticationInfoDeviceChannelApp                       = "app"
+	AuthenticationInfoDeviceChannelBrowser                   = "browser"
+	AuthenticationInfoDeviceChannelThreeDSRequestorInitiated = "ThreeDSRequestorInitiated"
+)
+
+// Values allowed for AuthenticationInfo.ExemptionIndicator.
+const (
+	AuthenticationInfoExemptionIndicatorLowValue                = "lowValue"
+	AuthenticationInfoExemptionIndicatorSecureCorporate         = "secureCorporate"
+	AuthenticationInfoExemptionIndicatorTrustedBeneficiary      = "trustedBeneficiary"
+	AuthenticationInfoExemptionIndicatorTransactionRiskAnalysis = "transactionRiskAnalysis"
+	AuthenticationInfoExemptionIndicatorAcquirerExemption       = "acquirerExemption"
+	AuthenticationInfoExemptionIndicatorNoExemptionApplied      = "noExemptionApplied"
+	AuthenticationInfoExemptionIndicatorVisaDAFExemption        = "visaDAFExemption"
+)
+
+// Values allowed for AuthenticationInfo.MessageCategory.
+const (
+	AuthenticationInfoMessageCategoryPayment    = "payment"
+	AuthenticationInfoMessageCategoryNonPayment = "nonPayment"
+)
+
+// Values allowed for AuthenticationInfo.TransStatus.
+const (
+	AuthenticationInfoTransStatusY = "Y"
+	AuthenticationInfoTransStatusN = "N"
+	AuthenticationInfoTransStatusR = "R"
+	AuthenticationInfoTransStatusI = "I"
+	AuthenticationInfoTransStatusU = "U"
+)
+
+// Values allowed for AuthenticationInfo.TransStatusReason.
+const (
+	AuthenticationInfoTransStatusReason01 = "01"
+	AuthenticationInfoTransStatusReason02 = "02"
+	AuthenticationInfoTransStatusReason03 = "03"
+	AuthenticationInfoTransStatusReason04 = "04"
+	AuthenticationInfoTransStatusReason05 = "05"
+	AuthenticationInfoTransStatusReason06 = "06"
+	AuthenticationInfoTransStatusReason07 = "07"
+	AuthenticationInfoTransStatusReason08 = "08"
+	AuthenticationInfoTransStatusReason09 = "09"
+	AuthenticationInfoTransStatusReason10 = "10"
+	AuthenticationInfoTransStatusReason11 = "11"
+	AuthenticationInfoTransStatusReason12 = "12"
+	AuthenticationInfoTransStatusReason13 = "13"
+	AuthenticationInfoTransStatusReason14 = "14"
+	AuthenticationInfoTransStatusReason15 = "15"
+	AuthenticationInfoTransStatusReason16 = "16"
+	AuthenticationInfoTransStatusReason17 = "17"
+	AuthenticationInfoTransStatusReason18 = "18"
+	AuthenticationInfoTransStatusReason19 = "19"
+	AuthenticationInfoTransStatusReason20 = "20"
+	AuthenticationInfoTransStatusReason21 = "21"
+	AuthenticationInfoTransStatusReason22 = "22"
+	AuthenticationInfoTransStatusReason23 = "23"
+	AuthenticationInfoTransStatusReason24 = "24"
+	AuthenticationInfoTransStatusReason25 = "25"
+	AuthenticationInfoTransStatusReason26 = "26"
+	AuthenticationInfoTransStatusReason80 = "80"
+	AuthenticationInfoTransStatusReason81 = "81"
+	AuthenticationInfoTransStatusReason82 = "82"
+	AuthenticationInfoTransStatusReason83 = "83"
+	AuthenticationInfoTransStatusReason84 = "84"
+	AuthenticationInfoTransStatusReason85 = "85"
+	AuthenticationInfoTransStatusReason86 = "86"
+	AuthenticationInfoTransStatusReason87 = "87"
+	AuthenticationInfoTransStatusReason88 = "88"
+)
+
+// Values allowed for AuthenticationInfo.Type.
+const (
+	AuthenticationInfoTypeFrictionless = "frictionless"
+	AuthenticationInfoTypeChallenge    = "challenge"
+)

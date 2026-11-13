@@ -114,8 +114,8 @@ func (o DisablePermitResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DisablePermitResult) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DisablePermitResult) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.PspReference) {
 		toSerialize["pspReference"] = o.PspReference
 	}

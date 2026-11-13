@@ -154,8 +154,8 @@ func (o ThemeWithAssetDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThemeWithAssetDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThemeWithAssetDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["assets"] = o.Assets
 	toSerialize["id"] = o.Id
 	toSerialize["mode"] = o.Mode

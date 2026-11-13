@@ -73,8 +73,8 @@ func (o RelayedAuthenticationResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RelayedAuthenticationResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RelayedAuthenticationResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["authenticationDecision"] = o.AuthenticationDecision
 	return toSerialize, nil
 }

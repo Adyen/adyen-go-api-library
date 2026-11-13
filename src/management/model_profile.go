@@ -664,8 +664,8 @@ func (o Profile) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Profile) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Profile) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["authType"] = o.AuthType
 	if !common.IsNil(o.AutoWifi) {
 		toSerialize["autoWifi"] = o.AutoWifi

@@ -318,8 +318,8 @@ func (o TerminalOrder) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalOrder) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalOrder) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BillingEntity) {
 		toSerialize["billingEntity"] = o.BillingEntity
 	}

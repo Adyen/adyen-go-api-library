@@ -107,8 +107,8 @@ func (o FraudResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FraudResult) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o FraudResult) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountScore"] = o.AccountScore
 	if !common.IsNil(o.Results) {
 		toSerialize["results"] = o.Results

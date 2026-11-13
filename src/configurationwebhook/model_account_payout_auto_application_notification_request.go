@@ -162,8 +162,8 @@ func (o AccountPayoutAutoApplicationNotificationRequest) MarshalJSON() ([]byte, 
 	return json.Marshal(toSerialize)
 }
 
-func (o AccountPayoutAutoApplicationNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AccountPayoutAutoApplicationNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,8 @@ func (o *AccountPayoutAutoApplicationNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AccountPayoutAutoApplicationNotificationRequest.Type.
+const (
+	AccountPayoutAutoApplicationNotificationRequestTypeBalancePlatformBalanceAccountPayoutScheduleAutoApplicationFailed = "balancePlatform.balanceAccountPayoutScheduleAutoApplication.failed"
+)

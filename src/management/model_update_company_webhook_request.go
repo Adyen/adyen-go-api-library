@@ -556,8 +556,8 @@ func (o UpdateCompanyWebhookRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateCompanyWebhookRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UpdateCompanyWebhookRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcceptsExpiredCertificate) {
 		toSerialize["acceptsExpiredCertificate"] = o.AcceptsExpiredCertificate
 	}
@@ -678,3 +678,30 @@ func (o *UpdateCompanyWebhookRequest) isValidNetworkType() bool {
 	}
 	return false
 }
+
+// Values allowed for UpdateCompanyWebhookRequest.CommunicationFormat.
+const (
+	UpdateCompanyWebhookRequestCommunicationFormatHttp = "http"
+	UpdateCompanyWebhookRequestCommunicationFormatJson = "json"
+	UpdateCompanyWebhookRequestCommunicationFormatSoap = "soap"
+)
+
+// Values allowed for UpdateCompanyWebhookRequest.EncryptionProtocol.
+const (
+	UpdateCompanyWebhookRequestEncryptionProtocolHTTP   = "HTTP"
+	UpdateCompanyWebhookRequestEncryptionProtocolTLSv12 = "TLSv1.2"
+	UpdateCompanyWebhookRequestEncryptionProtocolTLSv13 = "TLSv1.3"
+)
+
+// Values allowed for UpdateCompanyWebhookRequest.FilterMerchantAccountType.
+const (
+	UpdateCompanyWebhookRequestFilterMerchantAccountTypeAllAccounts     = "allAccounts"
+	UpdateCompanyWebhookRequestFilterMerchantAccountTypeExcludeAccounts = "excludeAccounts"
+	UpdateCompanyWebhookRequestFilterMerchantAccountTypeIncludeAccounts = "includeAccounts"
+)
+
+// Values allowed for UpdateCompanyWebhookRequest.NetworkType.
+const (
+	UpdateCompanyWebhookRequestNetworkTypeLocal  = "local"
+	UpdateCompanyWebhookRequestNetworkTypePublic = "public"
+)

@@ -28,8 +28,8 @@ type RestServiceError struct {
 	// Detailed explanation of each validation error, when applicable.
 	InvalidFields []InvalidField `json:"invalidFields,omitempty"`
 	// A unique reference for the request, essentially the same as `pspReference`.
-	RequestId *string                `json:"requestId,omitempty"`
-	Response  map[string]interface{} `json:"response,omitempty"`
+	RequestId *string        `json:"requestId,omitempty"`
+	Response  map[string]any `json:"response,omitempty"`
 	// The HTTP status code.
 	Status int32 `json:"status"`
 	// A short, human-readable summary of the problem type.
@@ -205,9 +205,9 @@ func (o *RestServiceError) SetRequestId(v string) {
 }
 
 // GetResponse returns the Response field value if set, zero value otherwise.
-func (o *RestServiceError) GetResponse() map[string]interface{} {
+func (o *RestServiceError) GetResponse() map[string]any {
 	if o == nil || common.IsNil(o.Response) {
-		var ret map[string]interface{}
+		var ret map[string]any
 		return ret
 	}
 	return o.Response
@@ -215,9 +215,9 @@ func (o *RestServiceError) GetResponse() map[string]interface{} {
 
 // GetResponseOk returns a tuple with the Response field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RestServiceError) GetResponseOk() (map[string]interface{}, bool) {
+func (o *RestServiceError) GetResponseOk() (map[string]any, bool) {
 	if o == nil || common.IsNil(o.Response) {
-		return map[string]interface{}{}, false
+		return map[string]any{}, false
 	}
 	return o.Response, true
 }
@@ -231,8 +231,8 @@ func (o *RestServiceError) HasResponse() bool {
 	return false
 }
 
-// SetResponse gets a reference to the given map[string]interface{} and assigns it to the Response field.
-func (o *RestServiceError) SetResponse(v map[string]interface{}) {
+// SetResponse gets a reference to the given map[string]any and assigns it to the Response field.
+func (o *RestServiceError) SetResponse(v map[string]any) {
 	o.Response = v
 }
 
@@ -316,8 +316,8 @@ func (o RestServiceError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RestServiceError) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RestServiceError) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["detail"] = o.Detail
 	toSerialize["errorCode"] = o.ErrorCode
 	if !common.IsNil(o.Instance) {

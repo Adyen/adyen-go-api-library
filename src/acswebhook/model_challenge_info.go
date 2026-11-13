@@ -237,8 +237,8 @@ func (o ChallengeInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ChallengeInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ChallengeInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ChallengeCancel) {
 		toSerialize["challengeCancel"] = o.ChallengeCancel
 	}
@@ -310,3 +310,25 @@ func (o *ChallengeInfo) isValidFlow() bool {
 	}
 	return false
 }
+
+// Values allowed for ChallengeInfo.ChallengeCancel.
+const (
+	ChallengeInfoChallengeCancel00 = "00"
+	ChallengeInfoChallengeCancel01 = "01"
+	ChallengeInfoChallengeCancel02 = "02"
+	ChallengeInfoChallengeCancel03 = "03"
+	ChallengeInfoChallengeCancel04 = "04"
+	ChallengeInfoChallengeCancel05 = "05"
+	ChallengeInfoChallengeCancel06 = "06"
+	ChallengeInfoChallengeCancel07 = "07"
+	ChallengeInfoChallengeCancel08 = "08"
+)
+
+// Values allowed for ChallengeInfo.Flow.
+const (
+	ChallengeInfoFlowPWDOTPPHONEFL    = "PWD_OTP_PHONE_FL"
+	ChallengeInfoFlowPWDOTPEMAILFL    = "PWD_OTP_EMAIL_FL"
+	ChallengeInfoFlowOOBTRIGGERFL     = "OOB_TRIGGER_FL"
+	ChallengeInfoFlowOTPPHONEFL       = "OTP_PHONE_FL"
+	ChallengeInfoFlowPASSKEYTRIGGERFL = "PASSKEY_TRIGGER_FL"
+)

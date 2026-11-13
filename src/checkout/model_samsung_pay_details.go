@@ -289,8 +289,8 @@ func (o SamsungPayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SamsungPayDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SamsungPayDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -367,3 +367,15 @@ func (o *SamsungPayDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for SamsungPayDetails.FundingSource.
+const (
+	SamsungPayDetailsFundingSourceCredit  = "credit"
+	SamsungPayDetailsFundingSourceDebit   = "debit"
+	SamsungPayDetailsFundingSourcePrepaid = "prepaid"
+)
+
+// Values allowed for SamsungPayDetails.Type.
+const (
+	SamsungPayDetailsTypeSamsungpay = "samsungpay"
+)

@@ -250,8 +250,8 @@ func (o GetTermsOfServiceDocumentResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetTermsOfServiceDocumentResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GetTermsOfServiceDocumentResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Document) {
 		toSerialize["document"] = o.Document
 	}
@@ -318,3 +318,19 @@ func (o *GetTermsOfServiceDocumentResponse) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for GetTermsOfServiceDocumentResponse.Type.
+const (
+	GetTermsOfServiceDocumentResponseTypeAdyenAccount              = "adyenAccount"
+	GetTermsOfServiceDocumentResponseTypeAdyenCapital              = "adyenCapital"
+	GetTermsOfServiceDocumentResponseTypeAdyenCapitalCashAdvance   = "adyenCapitalCashAdvance"
+	GetTermsOfServiceDocumentResponseTypeAdyenCard                 = "adyenCard"
+	GetTermsOfServiceDocumentResponseTypeAdyenChargeCard           = "adyenChargeCard"
+	GetTermsOfServiceDocumentResponseTypeAdyenForPlatformsAdvanced = "adyenForPlatformsAdvanced"
+	GetTermsOfServiceDocumentResponseTypeAdyenForPlatformsManage   = "adyenForPlatformsManage"
+	GetTermsOfServiceDocumentResponseTypeAdyenFranchisee           = "adyenFranchisee"
+	GetTermsOfServiceDocumentResponseTypeAdyenIssuing              = "adyenIssuing"
+	GetTermsOfServiceDocumentResponseTypeAdyenPccr                 = "adyenPccr"
+	GetTermsOfServiceDocumentResponseTypeDirectDebit               = "directDebit"
+	GetTermsOfServiceDocumentResponseTypeKycOnInvite               = "kycOnInvite"
+)

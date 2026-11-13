@@ -73,8 +73,8 @@ func (o DeleteDefenseDocumentResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DeleteDefenseDocumentResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DeleteDefenseDocumentResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["disputeServiceResult"] = o.DisputeServiceResult
 	return toSerialize, nil
 }

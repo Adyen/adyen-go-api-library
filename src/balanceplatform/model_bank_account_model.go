@@ -95,8 +95,8 @@ func (o BankAccountModel) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BankAccountModel) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BankAccountModel) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if o.FormFactor.IsSet() {
 		toSerialize["formFactor"] = o.FormFactor.Get()
 	}
@@ -148,3 +148,10 @@ func (o *BankAccountModel) isValidFormFactor() bool {
 	}
 	return false
 }
+
+// Values allowed for BankAccountModel.FormFactor.
+const (
+	BankAccountModelFormFactorPhysical = "physical"
+	BankAccountModelFormFactorUnknown  = "unknown"
+	BankAccountModelFormFactorVirtual  = "virtual"
+)

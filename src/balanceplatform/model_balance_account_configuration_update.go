@@ -512,8 +512,8 @@ func (o BalanceAccountConfigurationUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceAccountConfigurationUpdate) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceAccountConfigurationUpdate) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
 	}
@@ -595,3 +595,11 @@ func (o *BalanceAccountConfigurationUpdate) isValidFrequency() bool {
 	}
 	return false
 }
+
+// Values allowed for BalanceAccountConfigurationUpdate.Frequency.
+const (
+	BalanceAccountConfigurationUpdateFrequencyDaily    = "daily"
+	BalanceAccountConfigurationUpdateFrequencyWeekly   = "weekly"
+	BalanceAccountConfigurationUpdateFrequencyWeekdays = "weekdays"
+	BalanceAccountConfigurationUpdateFrequencyMonthly  = "monthly"
+)

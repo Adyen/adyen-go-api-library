@@ -323,8 +323,8 @@ func (o DirectDebitAuDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DirectDebitAuDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DirectDebitAuDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BankAccountNumber) {
 		toSerialize["bankAccountNumber"] = o.BankAccountNumber
 	}
@@ -395,3 +395,8 @@ func (o *DirectDebitAuDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for DirectDebitAuDetails.Type.
+const (
+	DirectDebitAuDetailsTypeDirectdebitAU = "directdebit_AU"
+)

@@ -351,8 +351,8 @@ func (o CreateOrderResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateOrderResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreateOrderResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
@@ -421,3 +421,8 @@ func (o *CreateOrderResponse) isValidResultCode() bool {
 	}
 	return false
 }
+
+// Values allowed for CreateOrderResponse.ResultCode.
+const (
+	CreateOrderResponseResultCodeSuccess = "Success"
+)

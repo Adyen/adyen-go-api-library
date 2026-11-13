@@ -3,6 +3,7 @@ package tests
 import (
 	"context"
 	"fmt"
+	"log/slog"
 	"net/http"
 	"net/url"
 	"time"
@@ -74,7 +75,7 @@ func BasicAuth() {
 	req = req.RecurringDetailsRequest(recurring.RecurringDetailsRequest{
 		MerchantAccount: "your merchant account",
 		Recurring: &recurring.Recurring{
-			Contract: common.PtrString("RECURRING"),
+			Contract: common.Ptr(recurring.RecurringContractRECURRING),
 		},
 		ShopperReference: "ref",
 	})
@@ -105,9 +106,9 @@ func Error() {
 			Value:    1250,
 			Currency: "EUR",
 		},
-		CountryCode:     common.PtrString("NL"),
+		CountryCode:     common.Ptr("NL"),
 		MerchantAccount: "your merchant account",
-		Channel:         common.PtrString("Web"),
+		Channel:         common.Ptr(checkout.PaymentRequestChannelWeb),
 		ReturnUrl:       "http://localhost:3000/redirect",
 		PaymentMethod:   paymentMethod,
 	}))
@@ -122,6 +123,26 @@ func Error() {
 	// Output:
 	// 401 HTTP Status Response - Unauthorized 000 security
 	// 401 Unauthorized: HTTP Status Response - Unauthorized (security: 000)
+}
+
+func Logging() {
+	client := adyen.NewClient(&common.Config{
+		ApiKey:      "your api key",
+		Environment: common.TestEnv,
+		Log4XXError: true,
+		Log5XXError: true,
+		Logger:      slog.Default(),
+	})
+	_ = client
+}
+
+func AllowedValues() {
+	req := checkout.PaymentRequest{
+		ShopperInteraction:       common.Ptr(checkout.PaymentRequestShopperInteractionEcommerce),
+		RecurringProcessingModel: common.Ptr(checkout.PaymentRequestRecurringProcessingModelCardOnFile),
+		CountryCode:              common.Ptr("NL"),
+	}
+	_ = req
 }
 
 func CustomHTTPClientConfiguration() {

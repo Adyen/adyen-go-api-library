@@ -141,8 +141,8 @@ func (o Installments) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Installments) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Installments) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Extra) {
 		toSerialize["extra"] = o.Extra
 	}
@@ -198,3 +198,17 @@ func (o *Installments) isValidPlan() bool {
 	}
 	return false
 }
+
+// Values allowed for Installments.Plan.
+const (
+	InstallmentsPlanBonus                = "bonus"
+	InstallmentsPlanBuynowPaylater       = "buynow_paylater"
+	InstallmentsPlanInteresRefundPrctg   = "interes_refund_prctg"
+	InstallmentsPlanInterestBonus        = "interest_bonus"
+	InstallmentsPlanNointeresRefundPrctg = "nointeres_refund_prctg"
+	InstallmentsPlanNointerestBonus      = "nointerest_bonus"
+	InstallmentsPlanRefundPrctg          = "refund_prctg"
+	InstallmentsPlanRegular              = "regular"
+	InstallmentsPlanRevolving            = "revolving"
+	InstallmentsPlanWithInterest         = "with_interest"
+)

@@ -107,8 +107,8 @@ func (o AfterpayTouchInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AfterpayTouchInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AfterpayTouchInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.SupportEmail) {
 		toSerialize["supportEmail"] = o.SupportEmail
 	}

@@ -109,8 +109,8 @@ func (o IssuingTransactionData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o IssuingTransactionData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o IssuingTransactionData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CaptureCycleId) {
 		toSerialize["captureCycleId"] = o.CaptureCycleId
 	}
@@ -163,3 +163,8 @@ func (o *IssuingTransactionData) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for IssuingTransactionData.Type.
+const (
+	IssuingTransactionDataTypeIssuingTransactionData = "issuingTransactionData"
+)

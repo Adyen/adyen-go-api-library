@@ -216,8 +216,8 @@ func (o StoredValueVoidResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredValueVoidResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoredValueVoidResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CurrentBalance) {
 		toSerialize["currentBalance"] = o.CurrentBalance
 	}
@@ -281,3 +281,11 @@ func (o *StoredValueVoidResponse) isValidResultCode() bool {
 	}
 	return false
 }
+
+// Values allowed for StoredValueVoidResponse.ResultCode.
+const (
+	StoredValueVoidResponseResultCodeSuccess          = "Success"
+	StoredValueVoidResponseResultCodeRefused          = "Refused"
+	StoredValueVoidResponseResultCodeError            = "Error"
+	StoredValueVoidResponseResultCodeNotEnoughBalance = "NotEnoughBalance"
+)

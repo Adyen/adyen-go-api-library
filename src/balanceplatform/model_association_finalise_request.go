@@ -127,8 +127,8 @@ func (o AssociationFinaliseRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AssociationFinaliseRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AssociationFinaliseRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["ids"] = o.Ids
 	toSerialize["strongCustomerAuthentication"] = o.StrongCustomerAuthentication
 	toSerialize["type"] = o.Type
@@ -180,3 +180,8 @@ func (o *AssociationFinaliseRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AssociationFinaliseRequest.Type.
+const (
+	AssociationFinaliseRequestTypePaymentInstrument = "PaymentInstrument"
+)

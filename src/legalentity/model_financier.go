@@ -154,8 +154,8 @@ func (o Financier) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Financier) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Financier) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	toSerialize["firstName"] = o.FirstName
 	toSerialize["lastName"] = o.LastName

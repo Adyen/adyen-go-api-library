@@ -73,8 +73,8 @@ func (o BalancePlatformConfigurations) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalancePlatformConfigurations) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalancePlatformConfigurations) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["balancePlatformPayoutSchedules"] = o.BalancePlatformPayoutSchedules
 	return toSerialize, nil
 }

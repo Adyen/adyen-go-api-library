@@ -181,8 +181,8 @@ func (o RecurringTokenStoreOperation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RecurringTokenStoreOperation) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RecurringTokenStoreOperation) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["operation"] = o.Operation
 	toSerialize["shopperReference"] = o.ShopperReference

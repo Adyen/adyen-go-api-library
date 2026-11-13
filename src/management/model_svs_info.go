@@ -100,8 +100,8 @@ func (o SvsInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SvsInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SvsInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["authorisationMid"] = o.AuthorisationMid
 	toSerialize["currencyCode"] = o.CurrencyCode
 	return toSerialize, nil

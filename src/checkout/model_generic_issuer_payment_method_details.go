@@ -244,8 +244,8 @@ func (o GenericIssuerPaymentMethodDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GenericIssuerPaymentMethodDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GenericIssuerPaymentMethodDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -308,3 +308,12 @@ func (o *GenericIssuerPaymentMethodDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for GenericIssuerPaymentMethodDetails.Type.
+const (
+	GenericIssuerPaymentMethodDetailsTypeOnlineBankingPL = "onlineBanking_PL"
+	GenericIssuerPaymentMethodDetailsTypeEps             = "eps"
+	GenericIssuerPaymentMethodDetailsTypeOnlineBankingSK = "onlineBanking_SK"
+	GenericIssuerPaymentMethodDetailsTypeOnlineBankingCZ = "onlineBanking_CZ"
+	GenericIssuerPaymentMethodDetailsTypeOnlinebankingIN = "onlinebanking_IN"
+)

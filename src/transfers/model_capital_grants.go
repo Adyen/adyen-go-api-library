@@ -73,8 +73,8 @@ func (o CapitalGrants) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CapitalGrants) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CapitalGrants) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["grants"] = o.Grants
 	return toSerialize, nil
 }

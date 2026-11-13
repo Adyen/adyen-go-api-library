@@ -129,8 +129,8 @@ func (o HKLocalAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o HKLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o HKLocalAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["clearingCode"] = o.ClearingCode
 	toSerialize["type"] = o.Type
@@ -182,3 +182,8 @@ func (o *HKLocalAccountIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for HKLocalAccountIdentification.Type.
+const (
+	HKLocalAccountIdentificationTypeHkLocal = "hkLocal"
+)

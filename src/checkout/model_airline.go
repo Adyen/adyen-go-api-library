@@ -477,8 +477,8 @@ func (o Airline) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Airline) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Airline) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Agency) {
 		toSerialize["agency"] = o.Agency
 	}

@@ -148,8 +148,8 @@ func (o ThreeDSRequestorAuthenticationInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThreeDSRequestorAuthenticationInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThreeDSRequestorAuthenticationInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ThreeDSReqAuthData) {
 		toSerialize["threeDSReqAuthData"] = o.ThreeDSReqAuthData
 	}
@@ -207,3 +207,13 @@ func (o *ThreeDSRequestorAuthenticationInfo) isValidThreeDSReqAuthMethod() bool 
 	}
 	return false
 }
+
+// Values allowed for ThreeDSRequestorAuthenticationInfo.ThreeDSReqAuthMethod.
+const (
+	ThreeDSRequestorAuthenticationInfoThreeDSReqAuthMethod01 = "01"
+	ThreeDSRequestorAuthenticationInfoThreeDSReqAuthMethod02 = "02"
+	ThreeDSRequestorAuthenticationInfoThreeDSReqAuthMethod03 = "03"
+	ThreeDSRequestorAuthenticationInfoThreeDSReqAuthMethod04 = "04"
+	ThreeDSRequestorAuthenticationInfoThreeDSReqAuthMethod05 = "05"
+	ThreeDSRequestorAuthenticationInfoThreeDSReqAuthMethod06 = "06"
+)

@@ -52,7 +52,7 @@ func (dst *TransferEventEventsDataInner) UnmarshalJSON(data []byte) error {
 	dst.MerchantPurchaseData = nil
 
 	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
+	var jsonDict map[string]any
 	err = common.NewStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
@@ -151,7 +151,7 @@ func (src TransferEventEventsDataInner) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *TransferEventEventsDataInner) GetActualInstance() interface{} {
+func (obj *TransferEventEventsDataInner) GetActualInstance() any {
 	if obj == nil {
 		return nil
 	}

@@ -243,8 +243,8 @@ func (o CheckoutForwardResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutForwardResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutForwardResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountUpdate) {
 		toSerialize["accountUpdate"] = o.AccountUpdate
 	}

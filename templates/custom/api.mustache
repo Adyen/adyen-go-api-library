@@ -26,7 +26,7 @@ type {{#structPrefix}}{{&classname}}{{/structPrefix}}{{#lambda.titlecase}}{{oper
 {{#allParams}}
 {{^isPathParam}}
 {{#description}}
-// {{.}}
+// {{{.}}}
 {{/description}}
 {{#isDeprecated}}
 //
@@ -81,7 +81,7 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
     res := &{{{returnType}}}{}
     {{/returnType}}
     {{^returnType}}
-    var res interface{}
+    var res any
     {{/returnType}}
 	path := "{{{path}}}"{{#pathParams}}
     path = strings.Replace(path, "{"+"{{baseName}}"+"}", url.PathEscape(common.ParameterValueToString(r.{{paramName}}, "{{paramName}}")), -1){{/pathParams}}
@@ -160,7 +160,7 @@ func (a *{{{classname}}}) {{#lambda.titlecase}}{{operationId}}{{/lambda.titlecas
                     {{/wildcard}}
                 {{/range}}
                             var serviceError common.RestServiceError
-                            body, _ := ioutil.ReadAll(httpRes.Body)
+                            body, _ := io.ReadAll(httpRes.Body)
                             decodeError := json.Unmarshal([]byte(body), &serviceError)
                             if decodeError != nil {
                                 return {{#returnType}}*res, {{/returnType}}httpRes, decodeError

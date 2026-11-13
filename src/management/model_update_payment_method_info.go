@@ -1168,8 +1168,8 @@ func (o UpdatePaymentMethodInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdatePaymentMethodInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UpdatePaymentMethodInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Accel) {
 		toSerialize["accel"] = o.Accel
 	}

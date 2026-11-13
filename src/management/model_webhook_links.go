@@ -195,8 +195,8 @@ func (o WebhookLinks) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WebhookLinks) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WebhookLinks) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Company) {
 		toSerialize["company"] = o.Company
 	}

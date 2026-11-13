@@ -80,8 +80,8 @@ func (o BirthData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BirthData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BirthData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DateOfBirth) {
 		toSerialize["dateOfBirth"] = o.DateOfBirth
 	}

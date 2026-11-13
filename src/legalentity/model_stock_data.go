@@ -148,8 +148,8 @@ func (o StockData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StockData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StockData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MarketIdentifier) {
 		toSerialize["marketIdentifier"] = o.MarketIdentifier
 	}

@@ -163,8 +163,8 @@ func (o NumberAndBicAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NumberAndBicAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NumberAndBicAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	if !common.IsNil(o.AdditionalBankIdentification) {
 		toSerialize["additionalBankIdentification"] = o.AdditionalBankIdentification
@@ -219,3 +219,8 @@ func (o *NumberAndBicAccountIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for NumberAndBicAccountIdentification.Type.
+const (
+	NumberAndBicAccountIdentificationTypeNumberAndBic = "numberAndBic"
+)

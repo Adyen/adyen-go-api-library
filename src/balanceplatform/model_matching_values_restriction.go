@@ -106,8 +106,8 @@ func (o MatchingValuesRestriction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MatchingValuesRestriction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MatchingValuesRestriction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["operation"] = o.Operation
 	if !common.IsNil(o.Value) {
 		toSerialize["value"] = o.Value
@@ -150,3 +150,12 @@ func (v *NullableMatchingValuesRestriction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+// Values allowed for MatchingValuesRestriction.Value items.
+const (
+	MatchingValuesRestrictionValueAcquirerId   = "acquirerId"
+	MatchingValuesRestrictionValueAmount       = "amount"
+	MatchingValuesRestrictionValueCurrency     = "currency"
+	MatchingValuesRestrictionValueMerchantId   = "merchantId"
+	MatchingValuesRestrictionValueMerchantName = "merchantName"
+)

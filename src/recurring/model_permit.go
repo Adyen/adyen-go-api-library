@@ -217,8 +217,8 @@ func (o Permit) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Permit) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Permit) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.PartnerId) {
 		toSerialize["partnerId"] = o.PartnerId
 	}

@@ -322,8 +322,8 @@ func (o StoredValueStatusChangeRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredValueStatusChangeRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoredValueStatusChangeRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
@@ -400,3 +400,17 @@ func (o *StoredValueStatusChangeRequest) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for StoredValueStatusChangeRequest.ShopperInteraction.
+const (
+	StoredValueStatusChangeRequestShopperInteractionEcommerce = "Ecommerce"
+	StoredValueStatusChangeRequestShopperInteractionContAuth  = "ContAuth"
+	StoredValueStatusChangeRequestShopperInteractionMoto      = "Moto"
+	StoredValueStatusChangeRequestShopperInteractionPOS       = "POS"
+)
+
+// Values allowed for StoredValueStatusChangeRequest.Status.
+const (
+	StoredValueStatusChangeRequestStatusActive   = "active"
+	StoredValueStatusChangeRequestStatusInactive = "inactive"
+)

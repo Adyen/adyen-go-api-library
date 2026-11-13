@@ -134,8 +134,8 @@ func (o TopUpAmountUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TopUpAmountUpdate) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TopUpAmountUpdate) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if o.Fixed.IsSet() {
 		toSerialize["fixed"] = o.Fixed.Get()
 	}

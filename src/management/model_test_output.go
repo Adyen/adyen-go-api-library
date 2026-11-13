@@ -243,8 +243,8 @@ func (o TestOutput) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TestOutput) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TestOutput) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MerchantId) {
 		toSerialize["merchantId"] = o.MerchantId
 	}

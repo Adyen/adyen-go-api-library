@@ -80,8 +80,8 @@ func (o GirocardResponseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GirocardResponseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GirocardResponseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.TransactionDescription) {
 		toSerialize["transactionDescription"] = o.TransactionDescription
 	}

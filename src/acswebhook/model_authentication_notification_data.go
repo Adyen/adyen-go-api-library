@@ -215,8 +215,8 @@ func (o AuthenticationNotificationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AuthenticationNotificationData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AuthenticationNotificationData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["authentication"] = o.Authentication
 	if !common.IsNil(o.BalancePlatform) {
 		toSerialize["balancePlatform"] = o.BalancePlatform
@@ -273,3 +273,10 @@ func (o *AuthenticationNotificationData) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for AuthenticationNotificationData.Status.
+const (
+	AuthenticationNotificationDataStatusAuthenticated = "authenticated"
+	AuthenticationNotificationDataStatusRejected      = "rejected"
+	AuthenticationNotificationDataStatusError         = "error"
+)

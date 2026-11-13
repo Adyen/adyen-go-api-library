@@ -1560,8 +1560,8 @@ func (o PaymentRequest3d) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentRequest3d) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentRequest3d) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountInfo) {
 		toSerialize["accountInfo"] = o.AccountInfo
 	}
@@ -1748,3 +1748,18 @@ func (o *PaymentRequest3d) isValidShopperInteraction() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentRequest3d.RecurringProcessingModel.
+const (
+	PaymentRequest3dRecurringProcessingModelCardOnFile            = "CardOnFile"
+	PaymentRequest3dRecurringProcessingModelSubscription          = "Subscription"
+	PaymentRequest3dRecurringProcessingModelUnscheduledCardOnFile = "UnscheduledCardOnFile"
+)
+
+// Values allowed for PaymentRequest3d.ShopperInteraction.
+const (
+	PaymentRequest3dShopperInteractionEcommerce = "Ecommerce"
+	PaymentRequest3dShopperInteractionContAuth  = "ContAuth"
+	PaymentRequest3dShopperInteractionMoto      = "Moto"
+	PaymentRequest3dShopperInteractionPOS       = "POS"
+)

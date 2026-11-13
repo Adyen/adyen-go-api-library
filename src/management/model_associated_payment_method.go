@@ -127,8 +127,8 @@ func (o AssociatedPaymentMethod) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AssociatedPaymentMethod) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AssociatedPaymentMethod) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["enabled"] = o.Enabled
 	toSerialize["id"] = o.Id
 	toSerialize["type"] = o.Type

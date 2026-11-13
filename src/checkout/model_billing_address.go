@@ -215,8 +215,8 @@ func (o BillingAddress) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BillingAddress) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BillingAddress) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["city"] = o.City
 	toSerialize["country"] = o.Country
 	toSerialize["houseNumberOrName"] = o.HouseNumberOrName

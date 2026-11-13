@@ -100,8 +100,8 @@ func (o LocalStoreName) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o LocalStoreName) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o LocalStoreName) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["script"] = o.Script
 	toSerialize["value"] = o.Value
 	return toSerialize, nil

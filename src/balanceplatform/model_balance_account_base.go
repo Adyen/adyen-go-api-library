@@ -372,8 +372,8 @@ func (o BalanceAccountBase) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceAccountBase) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceAccountBase) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountHolderId"] = o.AccountHolderId
 	if !common.IsNil(o.DefaultCurrencyCode) {
 		toSerialize["defaultCurrencyCode"] = o.DefaultCurrencyCode
@@ -448,3 +448,11 @@ func (o *BalanceAccountBase) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for BalanceAccountBase.Status.
+const (
+	BalanceAccountBaseStatusActive    = "active"
+	BalanceAccountBaseStatusClosed    = "closed"
+	BalanceAccountBaseStatusInactive  = "inactive"
+	BalanceAccountBaseStatusSuspended = "suspended"
+)

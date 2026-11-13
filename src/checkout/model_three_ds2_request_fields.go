@@ -1298,8 +1298,8 @@ func (o ThreeDS2RequestFields) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThreeDS2RequestFields) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThreeDS2RequestFields) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcctInfo) {
 		toSerialize["acctInfo"] = o.AcctInfo
 	}
@@ -1501,3 +1501,52 @@ func (o *ThreeDS2RequestFields) isValidTransactionType() bool {
 	}
 	return false
 }
+
+// Values allowed for ThreeDS2RequestFields.AcctType.
+const (
+	ThreeDS2RequestFieldsAcctType01 = "01"
+	ThreeDS2RequestFieldsAcctType02 = "02"
+	ThreeDS2RequestFieldsAcctType03 = "03"
+)
+
+// Values allowed for ThreeDS2RequestFields.AddrMatch.
+const (
+	ThreeDS2RequestFieldsAddrMatchY = "Y"
+	ThreeDS2RequestFieldsAddrMatchN = "N"
+)
+
+// Values allowed for ThreeDS2RequestFields.ChallengeIndicator.
+const (
+	ThreeDS2RequestFieldsChallengeIndicatorNoPreference              = "noPreference"
+	ThreeDS2RequestFieldsChallengeIndicatorRequestNoChallenge        = "requestNoChallenge"
+	ThreeDS2RequestFieldsChallengeIndicatorRequestChallenge          = "requestChallenge"
+	ThreeDS2RequestFieldsChallengeIndicatorRequestChallengeAsMandate = "requestChallengeAsMandate"
+)
+
+// Values allowed for ThreeDS2RequestFields.ThreeDSRequestorChallengeInd.
+const (
+	ThreeDS2RequestFieldsThreeDSRequestorChallengeInd01 = "01"
+	ThreeDS2RequestFieldsThreeDSRequestorChallengeInd02 = "02"
+	ThreeDS2RequestFieldsThreeDSRequestorChallengeInd03 = "03"
+	ThreeDS2RequestFieldsThreeDSRequestorChallengeInd04 = "04"
+	ThreeDS2RequestFieldsThreeDSRequestorChallengeInd05 = "05"
+	ThreeDS2RequestFieldsThreeDSRequestorChallengeInd06 = "06"
+)
+
+// Values allowed for ThreeDS2RequestFields.TransType.
+const (
+	ThreeDS2RequestFieldsTransType01 = "01"
+	ThreeDS2RequestFieldsTransType03 = "03"
+	ThreeDS2RequestFieldsTransType10 = "10"
+	ThreeDS2RequestFieldsTransType11 = "11"
+	ThreeDS2RequestFieldsTransType28 = "28"
+)
+
+// Values allowed for ThreeDS2RequestFields.TransactionType.
+const (
+	ThreeDS2RequestFieldsTransactionTypeGoodsOrServicePurchase   = "goodsOrServicePurchase"
+	ThreeDS2RequestFieldsTransactionTypeCheckAcceptance          = "checkAcceptance"
+	ThreeDS2RequestFieldsTransactionTypeAccountFunding           = "accountFunding"
+	ThreeDS2RequestFieldsTransactionTypeQuasiCashTransaction     = "quasiCashTransaction"
+	ThreeDS2RequestFieldsTransactionTypePrepaidActivationAndLoad = "prepaidActivationAndLoad"
+)

@@ -270,8 +270,8 @@ func (o PayoutSettings) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayoutSettings) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayoutSettings) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Allowed) {
 		toSerialize["allowed"] = o.Allowed
 	}
@@ -346,3 +346,18 @@ func (o *PayoutSettings) isValidVerificationStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for PayoutSettings.Priority.
+const (
+	PayoutSettingsPriorityFirst  = "first"
+	PayoutSettingsPriorityNormal = "normal"
+	PayoutSettingsPriorityUrgent = "urgent"
+)
+
+// Values allowed for PayoutSettings.VerificationStatus.
+const (
+	PayoutSettingsVerificationStatusInvalid  = "invalid"
+	PayoutSettingsVerificationStatusPending  = "pending"
+	PayoutSettingsVerificationStatusRejected = "rejected"
+	PayoutSettingsVerificationStatusValid    = "valid"
+)

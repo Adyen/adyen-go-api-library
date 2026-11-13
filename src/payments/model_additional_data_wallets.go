@@ -250,8 +250,8 @@ func (o AdditionalDataWallets) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalDataWallets) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalDataWallets) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AndroidpayToken) {
 		toSerialize["androidpay.token"] = o.AndroidpayToken
 	}

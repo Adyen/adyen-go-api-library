@@ -331,8 +331,8 @@ func (o Mandate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Mandate) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Mandate) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.AmountRule) {
 		toSerialize["amountRule"] = o.AmountRule
@@ -420,3 +420,28 @@ func (o *Mandate) isValidFrequency() bool {
 	}
 	return false
 }
+
+// Values allowed for Mandate.AmountRule.
+const (
+	MandateAmountRuleMax   = "max"
+	MandateAmountRuleExact = "exact"
+)
+
+// Values allowed for Mandate.BillingAttemptsRule.
+const (
+	MandateBillingAttemptsRuleOn     = "on"
+	MandateBillingAttemptsRuleBefore = "before"
+	MandateBillingAttemptsRuleAfter  = "after"
+)
+
+// Values allowed for Mandate.Frequency.
+const (
+	MandateFrequencyAdhoc      = "adhoc"
+	MandateFrequencyDaily      = "daily"
+	MandateFrequencyWeekly     = "weekly"
+	MandateFrequencyBiWeekly   = "biWeekly"
+	MandateFrequencyMonthly    = "monthly"
+	MandateFrequencyQuarterly  = "quarterly"
+	MandateFrequencyHalfYearly = "halfYearly"
+	MandateFrequencyYearly     = "yearly"
+)

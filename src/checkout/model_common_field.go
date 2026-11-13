@@ -114,8 +114,8 @@ func (o CommonField) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CommonField) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CommonField) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}

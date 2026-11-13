@@ -324,8 +324,8 @@ func (o MidServiceNotificationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MidServiceNotificationData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MidServiceNotificationData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Allowed) {
 		toSerialize["allowed"] = o.Allowed
 	}
@@ -402,3 +402,20 @@ func (o *MidServiceNotificationData) isValidVerificationStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for MidServiceNotificationData.Status.
+const (
+	MidServiceNotificationDataStatusSuccess           = "success"
+	MidServiceNotificationDataStatusFailure           = "failure"
+	MidServiceNotificationDataStatusCapabilityPending = "capabilityPending"
+	MidServiceNotificationDataStatusDataRequired      = "dataRequired"
+	MidServiceNotificationDataStatusUpdatesExpected   = "updatesExpected"
+)
+
+// Values allowed for MidServiceNotificationData.VerificationStatus.
+const (
+	MidServiceNotificationDataVerificationStatusValid    = "valid"
+	MidServiceNotificationDataVerificationStatusPending  = "pending"
+	MidServiceNotificationDataVerificationStatusInvalid  = "invalid"
+	MidServiceNotificationDataVerificationStatusRejected = "rejected"
+)

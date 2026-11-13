@@ -11,7 +11,7 @@ package balanceplatform
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -78,7 +78,7 @@ func (a *RecurringTopUpsApi) CreateRecurringTopUp(ctx context.Context, r Recurri
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -87,7 +87,7 @@ func (a *RecurringTopUpsApi) CreateRecurringTopUp(ctx context.Context, r Recurri
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -96,7 +96,7 @@ func (a *RecurringTopUpsApi) CreateRecurringTopUp(ctx context.Context, r Recurri
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -105,7 +105,7 @@ func (a *RecurringTopUpsApi) CreateRecurringTopUp(ctx context.Context, r Recurri
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -146,7 +146,7 @@ For more information, refer to [Manage recurring top-ups](https://docs.adyen.com
 @return *http.Response, error
 */
 func (a *RecurringTopUpsApi) DeleteRecurringTopUp(ctx context.Context, r RecurringTopUpsApiDeleteRecurringTopUpInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/balanceAccounts/{balanceAccountId}/recurringTopUps/{topUpId}"
 	path = strings.Replace(path, "{"+"balanceAccountId"+"}", url.PathEscape(common.ParameterValueToString(r.balanceAccountId, "balanceAccountId")), -1)
 	path = strings.Replace(path, "{"+"topUpId"+"}", url.PathEscape(common.ParameterValueToString(r.topUpId, "topUpId")), -1)
@@ -169,7 +169,7 @@ func (a *RecurringTopUpsApi) DeleteRecurringTopUp(ctx context.Context, r Recurri
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -178,7 +178,7 @@ func (a *RecurringTopUpsApi) DeleteRecurringTopUp(ctx context.Context, r Recurri
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -187,7 +187,7 @@ func (a *RecurringTopUpsApi) DeleteRecurringTopUp(ctx context.Context, r Recurri
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -196,7 +196,7 @@ func (a *RecurringTopUpsApi) DeleteRecurringTopUp(ctx context.Context, r Recurri
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -205,7 +205,7 @@ func (a *RecurringTopUpsApi) DeleteRecurringTopUp(ctx context.Context, r Recurri
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -214,7 +214,7 @@ func (a *RecurringTopUpsApi) DeleteRecurringTopUp(ctx context.Context, r Recurri
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -295,7 +295,7 @@ func (a *RecurringTopUpsApi) GetRecurringTopUps(ctx context.Context, r Recurring
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -304,7 +304,7 @@ func (a *RecurringTopUpsApi) GetRecurringTopUps(ctx context.Context, r Recurring
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -313,7 +313,7 @@ func (a *RecurringTopUpsApi) GetRecurringTopUps(ctx context.Context, r Recurring
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -322,7 +322,7 @@ func (a *RecurringTopUpsApi) GetRecurringTopUps(ctx context.Context, r Recurring
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -392,7 +392,7 @@ func (a *RecurringTopUpsApi) UpdateRecurringTopUps(ctx context.Context, r Recurr
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -401,7 +401,7 @@ func (a *RecurringTopUpsApi) UpdateRecurringTopUps(ctx context.Context, r Recurr
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -410,7 +410,7 @@ func (a *RecurringTopUpsApi) UpdateRecurringTopUps(ctx context.Context, r Recurr
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -419,7 +419,7 @@ func (a *RecurringTopUpsApi) UpdateRecurringTopUps(ctx context.Context, r Recurr
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError

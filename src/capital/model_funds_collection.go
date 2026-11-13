@@ -114,8 +114,8 @@ func (o FundsCollection) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FundsCollection) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o FundsCollection) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountIdentification) {
 		toSerialize["accountIdentification"] = o.AccountIdentification
 	}

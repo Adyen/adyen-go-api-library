@@ -114,8 +114,8 @@ func (o StringMatch) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StringMatch) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StringMatch) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Operation) {
 		toSerialize["operation"] = o.Operation
 	}
@@ -170,3 +170,11 @@ func (o *StringMatch) isValidOperation() bool {
 	}
 	return false
 }
+
+// Values allowed for StringMatch.Operation.
+const (
+	StringMatchOperationContains   = "contains"
+	StringMatchOperationEndsWith   = "endsWith"
+	StringMatchOperationIsEqualTo  = "isEqualTo"
+	StringMatchOperationStartsWith = "startsWith"
+)

@@ -195,8 +195,8 @@ func (o PaginationLinks) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaginationLinks) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaginationLinks) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["first"] = o.First
 	toSerialize["last"] = o.Last
 	if !common.IsNil(o.Next) {

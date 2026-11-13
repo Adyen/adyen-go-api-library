@@ -278,8 +278,8 @@ func (o AndroidCertificate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AndroidCertificate) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AndroidCertificate) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}

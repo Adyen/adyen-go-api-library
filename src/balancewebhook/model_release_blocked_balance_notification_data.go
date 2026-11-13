@@ -366,8 +366,8 @@ func (o ReleaseBlockedBalanceNotificationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ReleaseBlockedBalanceNotificationData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ReleaseBlockedBalanceNotificationData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountHolder"] = o.AccountHolder
 	toSerialize["amount"] = o.Amount
 	toSerialize["balanceAccount"] = o.BalanceAccount

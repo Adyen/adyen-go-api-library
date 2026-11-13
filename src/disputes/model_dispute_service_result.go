@@ -107,8 +107,8 @@ func (o DisputeServiceResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DisputeServiceResult) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DisputeServiceResult) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ErrorMessage) {
 		toSerialize["errorMessage"] = o.ErrorMessage
 	}

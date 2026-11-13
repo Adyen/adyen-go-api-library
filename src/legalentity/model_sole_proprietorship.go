@@ -541,8 +541,8 @@ func (o SoleProprietorship) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SoleProprietorship) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SoleProprietorship) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CountryOfGoverningLaw) {
 		toSerialize["countryOfGoverningLaw"] = o.CountryOfGoverningLaw
 	}
@@ -629,3 +629,9 @@ func (o *SoleProprietorship) isValidVatAbsenceReason() bool {
 	}
 	return false
 }
+
+// Values allowed for SoleProprietorship.VatAbsenceReason.
+const (
+	SoleProprietorshipVatAbsenceReasonIndustryExemption = "industryExemption"
+	SoleProprietorshipVatAbsenceReasonBelowTaxThreshold = "belowTaxThreshold"
+)

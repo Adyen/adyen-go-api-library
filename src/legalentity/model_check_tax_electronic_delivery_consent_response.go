@@ -80,8 +80,8 @@ func (o CheckTaxElectronicDeliveryConsentResponse) MarshalJSON() ([]byte, error)
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckTaxElectronicDeliveryConsentResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckTaxElectronicDeliveryConsentResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.US1099k) {
 		toSerialize["US1099k"] = o.US1099k
 	}

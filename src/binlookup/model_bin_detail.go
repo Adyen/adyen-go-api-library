@@ -80,8 +80,8 @@ func (o BinDetail) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BinDetail) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BinDetail) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.IssuerCountry) {
 		toSerialize["issuerCountry"] = o.IssuerCountry
 	}

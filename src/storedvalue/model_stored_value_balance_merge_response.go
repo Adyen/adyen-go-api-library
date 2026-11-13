@@ -250,8 +250,8 @@ func (o StoredValueBalanceMergeResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredValueBalanceMergeResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoredValueBalanceMergeResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AuthCode) {
 		toSerialize["authCode"] = o.AuthCode
 	}
@@ -318,3 +318,11 @@ func (o *StoredValueBalanceMergeResponse) isValidResultCode() bool {
 	}
 	return false
 }
+
+// Values allowed for StoredValueBalanceMergeResponse.ResultCode.
+const (
+	StoredValueBalanceMergeResponseResultCodeSuccess          = "Success"
+	StoredValueBalanceMergeResponseResultCodeRefused          = "Refused"
+	StoredValueBalanceMergeResponseResultCodeError            = "Error"
+	StoredValueBalanceMergeResponseResultCodeNotEnoughBalance = "NotEnoughBalance"
+)

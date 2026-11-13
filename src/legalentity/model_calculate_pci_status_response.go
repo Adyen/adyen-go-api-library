@@ -80,8 +80,8 @@ func (o CalculatePciStatusResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CalculatePciStatusResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CalculatePciStatusResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.SigningRequired) {
 		toSerialize["signingRequired"] = o.SigningRequired
 	}

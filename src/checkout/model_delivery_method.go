@@ -216,8 +216,8 @@ func (o DeliveryMethod) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DeliveryMethod) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DeliveryMethod) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
@@ -281,3 +281,8 @@ func (o *DeliveryMethod) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for DeliveryMethod.Type.
+const (
+	DeliveryMethodTypeShipping = "Shipping"
+)

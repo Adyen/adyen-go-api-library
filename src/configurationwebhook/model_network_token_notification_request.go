@@ -162,8 +162,8 @@ func (o NetworkTokenNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NetworkTokenNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NetworkTokenNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,9 @@ func (o *NetworkTokenNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for NetworkTokenNotificationRequest.Type.
+const (
+	NetworkTokenNotificationRequestTypeBalancePlatformNetworkTokenCreated = "balancePlatform.networkToken.created"
+	NetworkTokenNotificationRequestTypeBalancePlatformNetworkTokenUpdated = "balancePlatform.networkToken.updated"
+)

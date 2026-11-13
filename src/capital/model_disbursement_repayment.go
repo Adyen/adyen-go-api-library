@@ -103,8 +103,8 @@ func (o DisbursementRepayment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DisbursementRepayment) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DisbursementRepayment) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["basisPoints"] = o.BasisPoints
 	toSerialize["updateDescription"] = o.UpdateDescription
 	return toSerialize, nil

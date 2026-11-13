@@ -256,8 +256,8 @@ func (o StoredPaymentMethodRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredPaymentMethodRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoredPaymentMethodRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	if !common.IsNil(o.Opi) {
 		toSerialize["opi"] = o.Opi
@@ -319,3 +319,10 @@ func (o *StoredPaymentMethodRequest) isValidRecurringProcessingModel() bool {
 	}
 	return false
 }
+
+// Values allowed for StoredPaymentMethodRequest.RecurringProcessingModel.
+const (
+	StoredPaymentMethodRequestRecurringProcessingModelCardOnFile            = "CardOnFile"
+	StoredPaymentMethodRequestRecurringProcessingModelSubscription          = "Subscription"
+	StoredPaymentMethodRequestRecurringProcessingModelUnscheduledCardOnFile = "UnscheduledCardOnFile"
+)

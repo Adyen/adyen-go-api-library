@@ -155,8 +155,8 @@ func (o PaymentMethodCreatedNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentMethodCreatedNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentMethodCreatedNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
@@ -209,3 +209,8 @@ func (o *PaymentMethodCreatedNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentMethodCreatedNotificationRequest.Type.
+const (
+	PaymentMethodCreatedNotificationRequestTypePaymentMethodCreated = "paymentMethod.created"
+)

@@ -100,8 +100,8 @@ func (o PublicKeyResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PublicKeyResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PublicKeyResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["publicKey"] = o.PublicKey
 	toSerialize["publicKeyExpiryDate"] = o.PublicKeyExpiryDate
 	return toSerialize, nil

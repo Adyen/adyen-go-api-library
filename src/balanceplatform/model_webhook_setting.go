@@ -180,8 +180,8 @@ func (o WebhookSetting) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WebhookSetting) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WebhookSetting) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["currency"] = o.Currency
 	toSerialize["id"] = o.Id
 	toSerialize["status"] = o.Status

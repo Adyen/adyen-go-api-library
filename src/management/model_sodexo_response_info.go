@@ -80,8 +80,8 @@ func (o SodexoResponseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SodexoResponseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SodexoResponseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MerchantContactPhone) {
 		toSerialize["merchantContactPhone"] = o.MerchantContactPhone
 	}

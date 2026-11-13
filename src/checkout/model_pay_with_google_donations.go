@@ -323,8 +323,8 @@ func (o PayWithGoogleDonations) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayWithGoogleDonations) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayWithGoogleDonations) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -404,3 +404,15 @@ func (o *PayWithGoogleDonations) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PayWithGoogleDonations.FundingSource.
+const (
+	PayWithGoogleDonationsFundingSourceCredit  = "credit"
+	PayWithGoogleDonationsFundingSourceDebit   = "debit"
+	PayWithGoogleDonationsFundingSourcePrepaid = "prepaid"
+)
+
+// Values allowed for PayWithGoogleDonations.Type.
+const (
+	PayWithGoogleDonationsTypePaywithgoogle = "paywithgoogle"
+)

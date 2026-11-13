@@ -243,8 +243,8 @@ func (o AssociationListing) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AssociationListing) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AssociationListing) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["entityId"] = o.EntityId
 	toSerialize["entityType"] = o.EntityType

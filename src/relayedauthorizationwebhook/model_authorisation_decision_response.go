@@ -107,8 +107,8 @@ func (o AuthorisationDecisionResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AuthorisationDecisionResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AuthorisationDecisionResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.RefusalReason) {
 		toSerialize["refusalReason"] = o.RefusalReason
 	}
@@ -161,3 +161,9 @@ func (o *AuthorisationDecisionResponse) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for AuthorisationDecisionResponse.Status.
+const (
+	AuthorisationDecisionResponseStatusAuthorised = "Authorised"
+	AuthorisationDecisionResponseStatusRefused    = "Refused"
+)

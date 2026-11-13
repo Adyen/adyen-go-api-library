@@ -127,8 +127,8 @@ func (o CalculateTaxRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CalculateTaxRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CalculateTaxRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["taxCalculationContext"] = o.TaxCalculationContext
 	toSerialize["taxableAmount"] = o.TaxableAmount

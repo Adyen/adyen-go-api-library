@@ -284,8 +284,8 @@ func (o BalanceAccountUpdateRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceAccountUpdateRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceAccountUpdateRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountHolderId) {
 		toSerialize["accountHolderId"] = o.AccountHolderId
 	}
@@ -355,3 +355,11 @@ func (o *BalanceAccountUpdateRequest) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for BalanceAccountUpdateRequest.Status.
+const (
+	BalanceAccountUpdateRequestStatusActive    = "active"
+	BalanceAccountUpdateRequestStatusClosed    = "closed"
+	BalanceAccountUpdateRequestStatusInactive  = "inactive"
+	BalanceAccountUpdateRequestStatusSuspended = "suspended"
+)

@@ -127,8 +127,8 @@ func (o DefenseDocumentType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DefenseDocumentType) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DefenseDocumentType) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["available"] = o.Available
 	toSerialize["defenseDocumentTypeCode"] = o.DefenseDocumentTypeCode
 	toSerialize["requirementLevel"] = o.RequirementLevel

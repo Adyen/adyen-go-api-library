@@ -143,8 +143,8 @@ func (o InterchangeData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o InterchangeData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o InterchangeData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.InterchangeAmount) {
 		toSerialize["interchangeAmount"] = o.InterchangeAmount
 	}
@@ -200,3 +200,8 @@ func (o *InterchangeData) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for InterchangeData.Type.
+const (
+	InterchangeDataTypeInterchangeData = "interchangeData"
+)

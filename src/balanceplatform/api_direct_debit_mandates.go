@@ -11,7 +11,7 @@ package balanceplatform
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -48,7 +48,7 @@ Cancel a specified [direct debit mandate](https://docs.adyen.com/business-accoun
 @return *http.Response, error
 */
 func (a *DirectDebitMandatesApi) CancelMandate(ctx context.Context, r DirectDebitMandatesApiCancelMandateInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/mandates/{mandateId}/cancel"
 	path = strings.Replace(path, "{"+"mandateId"+"}", url.PathEscape(common.ParameterValueToString(r.mandateId, "mandateId")), -1)
 	queryParams := url.Values{}
@@ -70,7 +70,7 @@ func (a *DirectDebitMandatesApi) CancelMandate(ctx context.Context, r DirectDebi
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -79,7 +79,7 @@ func (a *DirectDebitMandatesApi) CancelMandate(ctx context.Context, r DirectDebi
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -88,7 +88,7 @@ func (a *DirectDebitMandatesApi) CancelMandate(ctx context.Context, r DirectDebi
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -97,7 +97,7 @@ func (a *DirectDebitMandatesApi) CancelMandate(ctx context.Context, r DirectDebi
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -106,7 +106,7 @@ func (a *DirectDebitMandatesApi) CancelMandate(ctx context.Context, r DirectDebi
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -136,7 +136,7 @@ func (r DirectDebitMandatesApiGetListOfMandatesInput) PaymentInstrumentId(paymen
 	return r
 }
 
-// The pagination cursor returned in a previous GET &#x60;/mandates&#x60; request.
+// The pagination cursor returned in a previous GET `/mandates` request.
 func (r DirectDebitMandatesApiGetListOfMandatesInput) Cursor(cursor string) DirectDebitMandatesApiGetListOfMandatesInput {
 	r.cursor = &cursor
 	return r
@@ -191,7 +191,7 @@ func (a *DirectDebitMandatesApi) GetListOfMandates(ctx context.Context, r Direct
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -200,7 +200,7 @@ func (a *DirectDebitMandatesApi) GetListOfMandates(ctx context.Context, r Direct
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -209,7 +209,7 @@ func (a *DirectDebitMandatesApi) GetListOfMandates(ctx context.Context, r Direct
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -218,7 +218,7 @@ func (a *DirectDebitMandatesApi) GetListOfMandates(ctx context.Context, r Direct
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -277,7 +277,7 @@ func (a *DirectDebitMandatesApi) GetMandateById(ctx context.Context, r DirectDeb
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -286,7 +286,7 @@ func (a *DirectDebitMandatesApi) GetMandateById(ctx context.Context, r DirectDeb
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -295,7 +295,7 @@ func (a *DirectDebitMandatesApi) GetMandateById(ctx context.Context, r DirectDeb
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -304,7 +304,7 @@ func (a *DirectDebitMandatesApi) GetMandateById(ctx context.Context, r DirectDeb
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -313,7 +313,7 @@ func (a *DirectDebitMandatesApi) GetMandateById(ctx context.Context, r DirectDeb
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -356,7 +356,7 @@ Amend the specified [direct debit mandate](https://docs.adyen.com/business-accou
 @return *http.Response, error
 */
 func (a *DirectDebitMandatesApi) UpdateMandate(ctx context.Context, r DirectDebitMandatesApiUpdateMandateInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/mandates/{mandateId}"
 	path = strings.Replace(path, "{"+"mandateId"+"}", url.PathEscape(common.ParameterValueToString(r.mandateId, "mandateId")), -1)
 	queryParams := url.Values{}
@@ -378,7 +378,7 @@ func (a *DirectDebitMandatesApi) UpdateMandate(ctx context.Context, r DirectDebi
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -387,7 +387,7 @@ func (a *DirectDebitMandatesApi) UpdateMandate(ctx context.Context, r DirectDebi
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -396,7 +396,7 @@ func (a *DirectDebitMandatesApi) UpdateMandate(ctx context.Context, r DirectDebi
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -405,7 +405,7 @@ func (a *DirectDebitMandatesApi) UpdateMandate(ctx context.Context, r DirectDebi
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -414,7 +414,7 @@ func (a *DirectDebitMandatesApi) UpdateMandate(ctx context.Context, r DirectDebi
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError

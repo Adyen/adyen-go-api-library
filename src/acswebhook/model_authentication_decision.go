@@ -73,8 +73,8 @@ func (o AuthenticationDecision) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AuthenticationDecision) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AuthenticationDecision) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["status"] = o.Status
 	return toSerialize, nil
 }
@@ -124,3 +124,9 @@ func (o *AuthenticationDecision) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for AuthenticationDecision.Status.
+const (
+	AuthenticationDecisionStatusProceed = "proceed"
+	AuthenticationDecisionStatusRefused = "refused"
+)

@@ -216,8 +216,8 @@ func (o CalculateRateResponseItem) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CalculateRateResponseItem) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CalculateRateResponseItem) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AppliedExchangeRate) {
 		toSerialize["appliedExchangeRate"] = o.AppliedExchangeRate
 	}

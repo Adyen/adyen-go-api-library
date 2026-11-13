@@ -73,8 +73,8 @@ func (o EbtInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o EbtInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o EbtInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["fnaNumber"] = o.FnaNumber
 	return toSerialize, nil
 }

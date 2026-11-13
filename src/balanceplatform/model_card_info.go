@@ -324,8 +324,8 @@ func (o CardInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CardInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Authentication) {
 		toSerialize["authentication"] = o.Authentication
 	}
@@ -393,3 +393,10 @@ func (o *CardInfo) isValidFormFactor() bool {
 	}
 	return false
 }
+
+// Values allowed for CardInfo.FormFactor.
+const (
+	CardInfoFormFactorPhysical = "physical"
+	CardInfoFormFactorUnknown  = "unknown"
+	CardInfoFormFactorVirtual  = "virtual"
+)

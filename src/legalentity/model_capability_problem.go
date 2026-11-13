@@ -112,8 +112,8 @@ func (o CapabilityProblem) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CapabilityProblem) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CapabilityProblem) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Entity) {
 		toSerialize["entity"] = o.Entity
 	}

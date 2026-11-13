@@ -154,8 +154,8 @@ func (o ListAssociationsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ListAssociationsResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ListAssociationsResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["_links"] = o.Links
 	toSerialize["data"] = o.Data
 	toSerialize["itemsTotal"] = o.ItemsTotal

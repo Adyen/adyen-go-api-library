@@ -228,8 +228,8 @@ func (o DBaraiDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DBaraiDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DBaraiDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -293,3 +293,8 @@ func (o *DBaraiDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for DBaraiDetails.Type.
+const (
+	DBaraiDetailsTypeDbarai = "dbarai"
+)

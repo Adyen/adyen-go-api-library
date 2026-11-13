@@ -219,8 +219,8 @@ func (o PayByBankCADirectDebitDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayByBankCADirectDebitDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayByBankCADirectDebitDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -282,3 +282,8 @@ func (o *PayByBankCADirectDebitDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PayByBankCADirectDebitDetails.Type.
+const (
+	PayByBankCADirectDebitDetailsTypePaybybankCa = "paybybank_ca"
+)

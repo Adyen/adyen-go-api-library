@@ -143,8 +143,8 @@ func (o BankAccountIdentificationTypeRequirement) MarshalJSON() ([]byte, error) 
 	return json.Marshal(toSerialize)
 }
 
-func (o BankAccountIdentificationTypeRequirement) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BankAccountIdentificationTypeRequirement) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BankAccountIdentificationTypes) {
 		toSerialize["bankAccountIdentificationTypes"] = o.BankAccountIdentificationTypes
 	}
@@ -200,3 +200,33 @@ func (o *BankAccountIdentificationTypeRequirement) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for BankAccountIdentificationTypeRequirement.BankAccountIdentificationTypes items.
+const (
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesAuLocal      = "auLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesBrLocal      = "brLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesCaLocal      = "caLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesCzLocal      = "czLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesDkLocal      = "dkLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesHkLocal      = "hkLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesHuLocal      = "huLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesIban         = "iban"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesInLocal      = "inLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesJpLocal      = "jpLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesLegacy       = "legacy"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesMxLocal      = "mxLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesMyLocal      = "myLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesNoLocal      = "noLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesNumberAndBic = "numberAndBic"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesNzLocal      = "nzLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesPlLocal      = "plLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesSeLocal      = "seLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesSgLocal      = "sgLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesUkLocal      = "ukLocal"
+	BankAccountIdentificationTypeRequirementBankAccountIdentificationTypesUsLocal      = "usLocal"
+)
+
+// Values allowed for BankAccountIdentificationTypeRequirement.Type.
+const (
+	BankAccountIdentificationTypeRequirementTypeBankAccountIdentificationTypeRequirement = "bankAccountIdentificationTypeRequirement"
+)

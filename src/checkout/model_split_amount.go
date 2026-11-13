@@ -107,8 +107,8 @@ func (o SplitAmount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SplitAmount) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SplitAmount) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
 	}

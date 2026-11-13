@@ -297,8 +297,8 @@ func (o CreateCompanyUserRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateCompanyUserRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreateCompanyUserRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountGroups) {
 		toSerialize["accountGroups"] = o.AccountGroups
 	}

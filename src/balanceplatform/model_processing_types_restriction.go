@@ -107,8 +107,8 @@ func (o ProcessingTypesRestriction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ProcessingTypesRestriction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ProcessingTypesRestriction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["operation"] = o.Operation
 	if !common.IsNil(o.Value) {
 		toSerialize["value"] = o.Value
@@ -151,3 +151,15 @@ func (v *NullableProcessingTypesRestriction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+// Values allowed for ProcessingTypesRestriction.Value items.
+const (
+	ProcessingTypesRestrictionValueAtmWithdraw    = "atmWithdraw"
+	ProcessingTypesRestrictionValueBalanceInquiry = "balanceInquiry"
+	ProcessingTypesRestrictionValueEcommerce      = "ecommerce"
+	ProcessingTypesRestrictionValueMoto           = "moto"
+	ProcessingTypesRestrictionValuePos            = "pos"
+	ProcessingTypesRestrictionValueRecurring      = "recurring"
+	ProcessingTypesRestrictionValueToken          = "token"
+	ProcessingTypesRestrictionValueUnknown        = "unknown"
+)

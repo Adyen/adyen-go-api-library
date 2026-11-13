@@ -202,8 +202,8 @@ func (o CheckoutOutgoingForwardRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutOutgoingForwardRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutOutgoingForwardRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["body"] = o.Body
 	if !common.IsNil(o.Credentials) {
 		toSerialize["credentials"] = o.Credentials
@@ -263,3 +263,10 @@ func (o *CheckoutOutgoingForwardRequest) isValidHttpMethod() bool {
 	}
 	return false
 }
+
+// Values allowed for CheckoutOutgoingForwardRequest.HttpMethod.
+const (
+	CheckoutOutgoingForwardRequestHttpMethodPost  = "post"
+	CheckoutOutgoingForwardRequestHttpMethodPut   = "put"
+	CheckoutOutgoingForwardRequestHttpMethodPatch = "patch"
+)

@@ -107,8 +107,8 @@ func (o DefenseReasonsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DefenseReasonsResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DefenseReasonsResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DefenseReasons) {
 		toSerialize["defenseReasons"] = o.DefenseReasons
 	}

@@ -318,8 +318,8 @@ func (o AdditionalDataRatepay) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalDataRatepay) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalDataRatepay) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.RatepayInstallmentAmount) {
 		toSerialize["ratepay.installmentAmount"] = o.RatepayInstallmentAmount
 	}

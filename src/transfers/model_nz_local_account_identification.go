@@ -102,8 +102,8 @@ func (o NZLocalAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NZLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NZLocalAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
@@ -154,3 +154,8 @@ func (o *NZLocalAccountIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for NZLocalAccountIdentification.Type.
+const (
+	NZLocalAccountIdentificationTypeNzLocal = "nzLocal"
+)

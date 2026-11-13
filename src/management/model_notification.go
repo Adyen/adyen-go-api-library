@@ -216,8 +216,8 @@ func (o Notification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Notification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Notification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Category) {
 		toSerialize["category"] = o.Category
 	}
@@ -281,3 +281,10 @@ func (o *Notification) isValidCategory() bool {
 	}
 	return false
 }
+
+// Values allowed for Notification.Category.
+const (
+	NotificationCategorySaleWakeUp = "SaleWakeUp"
+	NotificationCategoryKeyPressed = "KeyPressed"
+	NotificationCategory           = ""
+)

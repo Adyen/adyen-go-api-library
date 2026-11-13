@@ -162,8 +162,8 @@ func (o SweepExecutionNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SweepExecutionNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SweepExecutionNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,10 @@ func (o *SweepExecutionNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for SweepExecutionNotificationRequest.Type.
+const (
+	SweepExecutionNotificationRequestTypeBalancePlatformBalanceAccountSweepExecutionSucceeded = "balancePlatform.balanceAccountSweepExecution.succeeded"
+	SweepExecutionNotificationRequestTypeBalancePlatformBalanceAccountSweepExecutionSkipped   = "balancePlatform.balanceAccountSweepExecution.skipped"
+	SweepExecutionNotificationRequestTypeBalancePlatformBalanceAccountSweepExecutionFailed    = "balancePlatform.balanceAccountSweepExecution.failed"
+)

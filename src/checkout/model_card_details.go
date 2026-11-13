@@ -1013,8 +1013,8 @@ func (o CardDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CardDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BillingSequenceNumber) {
 		toSerialize["billingSequenceNumber"] = o.BillingSequenceNumber
 	}
@@ -1156,3 +1156,20 @@ func (o *CardDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CardDetails.FundingSource.
+const (
+	CardDetailsFundingSourceCredit  = "credit"
+	CardDetailsFundingSourceDebit   = "debit"
+	CardDetailsFundingSourcePrepaid = "prepaid"
+)
+
+// Values allowed for CardDetails.Type.
+const (
+	CardDetailsTypeBcmc         = "bcmc"
+	CardDetailsTypeScheme       = "scheme"
+	CardDetailsTypeNetworkToken = "networkToken"
+	CardDetailsTypeGiftcard     = "giftcard"
+	CardDetailsTypeCard         = "card"
+	CardDetailsTypeClicktopay   = "clicktopay"
+)

@@ -319,8 +319,8 @@ func (o CardOrder) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardOrder) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CardOrder) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BeginDate) {
 		toSerialize["beginDate"] = o.BeginDate
 	}
@@ -393,3 +393,9 @@ func (o *CardOrder) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for CardOrder.Status.
+const (
+	CardOrderStatusClosed = "closed"
+	CardOrderStatusOpen   = "open"
+)

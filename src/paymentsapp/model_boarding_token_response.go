@@ -100,8 +100,8 @@ func (o BoardingTokenResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BoardingTokenResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BoardingTokenResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["boardingToken"] = o.BoardingToken
 	toSerialize["installationId"] = o.InstallationId
 	return toSerialize, nil

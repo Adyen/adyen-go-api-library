@@ -213,8 +213,8 @@ func (o VisaCheckoutDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o VisaCheckoutDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o VisaCheckoutDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -285,3 +285,15 @@ func (o *VisaCheckoutDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for VisaCheckoutDetails.FundingSource.
+const (
+	VisaCheckoutDetailsFundingSourceCredit  = "credit"
+	VisaCheckoutDetailsFundingSourceDebit   = "debit"
+	VisaCheckoutDetailsFundingSourcePrepaid = "prepaid"
+)
+
+// Values allowed for VisaCheckoutDetails.Type.
+const (
+	VisaCheckoutDetailsTypeVisacheckout = "visacheckout"
+)

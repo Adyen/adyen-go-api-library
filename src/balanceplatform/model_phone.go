@@ -100,8 +100,8 @@ func (o Phone) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Phone) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Phone) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["number"] = o.Number
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
@@ -152,3 +152,9 @@ func (o *Phone) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for Phone.Type.
+const (
+	PhoneTypeLandline = "landline"
+	PhoneTypeMobile   = "mobile"
+)

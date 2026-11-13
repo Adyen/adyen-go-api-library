@@ -106,8 +106,8 @@ func (o MerchantNamesRestriction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MerchantNamesRestriction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MerchantNamesRestriction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["operation"] = o.Operation
 	if !common.IsNil(o.Value) {
 		toSerialize["value"] = o.Value

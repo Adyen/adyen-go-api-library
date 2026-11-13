@@ -251,8 +251,8 @@ func (o PayoutStateWebhookData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayoutStateWebhookData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayoutStateWebhookData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BalanceAccountId) {
 		toSerialize["balanceAccountId"] = o.BalanceAccountId
 	}
@@ -319,3 +319,10 @@ func (o *PayoutStateWebhookData) isValidResult() bool {
 	}
 	return false
 }
+
+// Values allowed for PayoutStateWebhookData.Result.
+const (
+	PayoutStateWebhookDataResultFailed    = "failed"
+	PayoutStateWebhookDataResultSkipped   = "skipped"
+	PayoutStateWebhookDataResultSucceeded = "succeeded"
+)

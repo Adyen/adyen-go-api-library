@@ -396,8 +396,8 @@ func (o PaymentRefundResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentRefundResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentRefundResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.CapturePspReference) {
 		toSerialize["capturePspReference"] = o.CapturePspReference
@@ -478,3 +478,17 @@ func (o *PaymentRefundResponse) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentRefundResponse.MerchantRefundReason.
+const (
+	PaymentRefundResponseMerchantRefundReasonFRAUD           = "FRAUD"
+	PaymentRefundResponseMerchantRefundReasonCUSTOMERREQUEST = "CUSTOMER REQUEST"
+	PaymentRefundResponseMerchantRefundReasonRETURN          = "RETURN"
+	PaymentRefundResponseMerchantRefundReasonDUPLICATE       = "DUPLICATE"
+	PaymentRefundResponseMerchantRefundReasonOTHER           = "OTHER"
+)
+
+// Values allowed for PaymentRefundResponse.Status.
+const (
+	PaymentRefundResponseStatusReceived = "received"
+)

@@ -284,8 +284,8 @@ func (o CardIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CardIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ExpiryMonth) {
 		toSerialize["expiryMonth"] = o.ExpiryMonth
 	}

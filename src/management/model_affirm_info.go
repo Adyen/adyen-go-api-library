@@ -107,8 +107,8 @@ func (o AffirmInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AffirmInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AffirmInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.PricePlan) {
 		toSerialize["pricePlan"] = o.PricePlan
 	}

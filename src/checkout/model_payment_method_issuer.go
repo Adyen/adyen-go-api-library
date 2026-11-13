@@ -138,8 +138,8 @@ func (o PaymentMethodIssuer) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentMethodIssuer) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentMethodIssuer) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Disabled) {
 		toSerialize["disabled"] = o.Disabled
 	}

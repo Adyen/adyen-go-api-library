@@ -220,8 +220,8 @@ func (o AmazonPayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AmazonPayDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AmazonPayDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AmazonPayToken) {
 		toSerialize["amazonPayToken"] = o.AmazonPayToken
 	}
@@ -285,3 +285,8 @@ func (o *AmazonPayDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AmazonPayDetails.Type.
+const (
+	AmazonPayDetailsTypeAmazonpay = "amazonpay"
+)

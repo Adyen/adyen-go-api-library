@@ -300,8 +300,8 @@ func (o BrowserInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BrowserInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BrowserInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["acceptHeader"] = o.AcceptHeader
 	toSerialize["colorDepth"] = o.ColorDepth
 	toSerialize["javaEnabled"] = o.JavaEnabled

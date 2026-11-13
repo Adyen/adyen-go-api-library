@@ -161,8 +161,8 @@ func (o KlarnaInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o KlarnaInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o KlarnaInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AutoCapture) {
 		toSerialize["autoCapture"] = o.AutoCapture
 	}
@@ -217,3 +217,11 @@ func (o *KlarnaInfo) isValidRegion() bool {
 	}
 	return false
 }
+
+// Values allowed for KlarnaInfo.Region.
+const (
+	KlarnaInfoRegionNA = "NA"
+	KlarnaInfoRegionEU = "EU"
+	KlarnaInfoRegionCH = "CH"
+	KlarnaInfoRegionAU = "AU"
+)

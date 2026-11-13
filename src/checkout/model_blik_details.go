@@ -258,8 +258,8 @@ func (o BlikDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BlikDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BlikDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BlikCode) {
 		toSerialize["blikCode"] = o.BlikCode
 	}
@@ -326,3 +326,8 @@ func (o *BlikDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for BlikDetails.Type.
+const (
+	BlikDetailsTypeBlik = "blik"
+)

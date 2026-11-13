@@ -432,8 +432,8 @@ func (o CashAppDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CashAppDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CashAppDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Cashtag) {
 		toSerialize["cashtag"] = o.Cashtag
 	}
@@ -515,3 +515,8 @@ func (o *CashAppDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CashAppDetails.Type.
+const (
+	CashAppDetailsTypeCashapp = "cashapp"
+)

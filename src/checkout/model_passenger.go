@@ -216,8 +216,8 @@ func (o Passenger) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Passenger) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Passenger) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DateOfBirth) {
 		toSerialize["dateOfBirth"] = o.DateOfBirth
 	}

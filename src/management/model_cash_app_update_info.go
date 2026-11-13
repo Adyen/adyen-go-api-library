@@ -114,8 +114,8 @@ func (o CashAppUpdateInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CashAppUpdateInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CashAppUpdateInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.LogoUrl) {
 		toSerialize["logoUrl"] = o.LogoUrl
 	}

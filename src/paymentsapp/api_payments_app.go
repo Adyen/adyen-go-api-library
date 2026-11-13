@@ -321,7 +321,7 @@ To make this request, your API credential must have the following [role](https:/
 @return *http.Response, error
 */
 func (a *PaymentsAppApi) RevokePaymentsApp(ctx context.Context, r PaymentsAppApiRevokePaymentsAppInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/merchants/{merchantId}/paymentsApps/{installationId}/revoke"
 	path = strings.Replace(path, "{"+"merchantId"+"}", url.PathEscape(common.ParameterValueToString(r.merchantId, "merchantId")), -1)
 	path = strings.Replace(path, "{"+"installationId"+"}", url.PathEscape(common.ParameterValueToString(r.installationId, "installationId")), -1)

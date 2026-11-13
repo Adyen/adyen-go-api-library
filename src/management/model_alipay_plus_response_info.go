@@ -80,8 +80,8 @@ func (o AlipayPlusResponseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AlipayPlusResponseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AlipayPlusResponseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.SettlementCurrencyCode) {
 		toSerialize["settlementCurrencyCode"] = o.SettlementCurrencyCode
 	}

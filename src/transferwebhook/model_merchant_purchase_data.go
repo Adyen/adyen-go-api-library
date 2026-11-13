@@ -143,8 +143,8 @@ func (o MerchantPurchaseData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MerchantPurchaseData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MerchantPurchaseData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Airline) {
 		toSerialize["airline"] = o.Airline
 	}
@@ -200,3 +200,8 @@ func (o *MerchantPurchaseData) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for MerchantPurchaseData.Type.
+const (
+	MerchantPurchaseDataTypeMerchantPurchaseData = "merchantPurchaseData"
+)

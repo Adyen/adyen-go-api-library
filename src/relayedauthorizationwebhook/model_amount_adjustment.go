@@ -250,8 +250,8 @@ func (o AmountAdjustment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AmountAdjustment) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AmountAdjustment) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
@@ -318,3 +318,11 @@ func (o *AmountAdjustment) isValidAmountAdjustmentType() bool {
 	}
 	return false
 }
+
+// Values allowed for AmountAdjustment.AmountAdjustmentType.
+const (
+	AmountAdjustmentAmountAdjustmentTypeAtmMarkup       = "atmMarkup"
+	AmountAdjustmentAmountAdjustmentTypeAuthHoldReserve = "authHoldReserve"
+	AmountAdjustmentAmountAdjustmentTypeExchange        = "exchange"
+	AmountAdjustmentAmountAdjustmentTypeForexMarkup     = "forexMarkup"
+)

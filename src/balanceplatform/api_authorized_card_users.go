@@ -11,7 +11,7 @@ package balanceplatform
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -54,7 +54,7 @@ Assigns authorized users to a card. Users must have the **authorisedPaymentInstr
 @return *http.Response, error
 */
 func (a *AuthorizedCardUsersApi) CreateAuthorisedCardUsers(ctx context.Context, r AuthorizedCardUsersApiCreateAuthorisedCardUsersInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/paymentInstruments/{paymentInstrumentId}/authorisedCardUsers"
 	path = strings.Replace(path, "{"+"paymentInstrumentId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentInstrumentId, "paymentInstrumentId")), -1)
 	queryParams := url.Values{}
@@ -76,7 +76,7 @@ func (a *AuthorizedCardUsersApi) CreateAuthorisedCardUsers(ctx context.Context, 
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -85,7 +85,7 @@ func (a *AuthorizedCardUsersApi) CreateAuthorisedCardUsers(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -94,7 +94,7 @@ func (a *AuthorizedCardUsersApi) CreateAuthorisedCardUsers(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -103,7 +103,7 @@ func (a *AuthorizedCardUsersApi) CreateAuthorisedCardUsers(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -140,7 +140,7 @@ Deletes the list of authorized users assigned to a card.
 @return *http.Response, error
 */
 func (a *AuthorizedCardUsersApi) DeleteAuthorisedCardUsers(ctx context.Context, r AuthorizedCardUsersApiDeleteAuthorisedCardUsersInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/paymentInstruments/{paymentInstrumentId}/authorisedCardUsers"
 	path = strings.Replace(path, "{"+"paymentInstrumentId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentInstrumentId, "paymentInstrumentId")), -1)
 	queryParams := url.Values{}
@@ -162,7 +162,7 @@ func (a *AuthorizedCardUsersApi) DeleteAuthorisedCardUsers(ctx context.Context, 
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -171,7 +171,7 @@ func (a *AuthorizedCardUsersApi) DeleteAuthorisedCardUsers(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -230,7 +230,7 @@ func (a *AuthorizedCardUsersApi) GetAllAuthorisedCardUsers(ctx context.Context, 
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -239,7 +239,7 @@ func (a *AuthorizedCardUsersApi) GetAllAuthorisedCardUsers(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -248,7 +248,7 @@ func (a *AuthorizedCardUsersApi) GetAllAuthorisedCardUsers(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -257,7 +257,7 @@ func (a *AuthorizedCardUsersApi) GetAllAuthorisedCardUsers(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -302,7 +302,7 @@ Updates the list of authorized users for a card.
 @return *http.Response, error
 */
 func (a *AuthorizedCardUsersApi) UpdateAuthorisedCardUsers(ctx context.Context, r AuthorizedCardUsersApiUpdateAuthorisedCardUsersInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/paymentInstruments/{paymentInstrumentId}/authorisedCardUsers"
 	path = strings.Replace(path, "{"+"paymentInstrumentId"+"}", url.PathEscape(common.ParameterValueToString(r.paymentInstrumentId, "paymentInstrumentId")), -1)
 	queryParams := url.Values{}
@@ -324,7 +324,7 @@ func (a *AuthorizedCardUsersApi) UpdateAuthorisedCardUsers(ctx context.Context, 
 
 	if httpRes.StatusCode == 400 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -333,7 +333,7 @@ func (a *AuthorizedCardUsersApi) UpdateAuthorisedCardUsers(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -342,7 +342,7 @@ func (a *AuthorizedCardUsersApi) UpdateAuthorisedCardUsers(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -351,7 +351,7 @@ func (a *AuthorizedCardUsersApi) UpdateAuthorisedCardUsers(ctx context.Context, 
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError

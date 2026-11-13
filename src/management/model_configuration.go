@@ -202,8 +202,8 @@ func (o Configuration) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Configuration) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Configuration) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["brand"] = o.Brand
 	if !common.IsNil(o.Commercial) {
 		toSerialize["commercial"] = o.Commercial

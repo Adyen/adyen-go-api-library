@@ -127,8 +127,8 @@ func (o UpdateThemeResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpdateThemeResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UpdateThemeResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["id"] = o.Id
 	toSerialize["mode"] = o.Mode
 	toSerialize["name"] = o.Name

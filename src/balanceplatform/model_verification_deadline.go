@@ -135,8 +135,8 @@ func (o VerificationDeadline) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o VerificationDeadline) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o VerificationDeadline) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["capabilities"] = o.Capabilities
 	if !common.IsNil(o.EntityIds) {
 		toSerialize["entityIds"] = o.EntityIds
@@ -180,3 +180,62 @@ func (v *NullableVerificationDeadline) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+// Values allowed for VerificationDeadline.Capabilities items.
+const (
+	VerificationDeadlineCapabilitiesAcceptExternalFunding                             = "acceptExternalFunding"
+	VerificationDeadlineCapabilitiesAcceptPspFunding                                  = "acceptPspFunding"
+	VerificationDeadlineCapabilitiesAcceptTransactionInRestrictedCountries            = "acceptTransactionInRestrictedCountries"
+	VerificationDeadlineCapabilitiesAcceptTransactionInRestrictedCountriesCommercial  = "acceptTransactionInRestrictedCountriesCommercial"
+	VerificationDeadlineCapabilitiesAcceptTransactionInRestrictedCountriesConsumer    = "acceptTransactionInRestrictedCountriesConsumer"
+	VerificationDeadlineCapabilitiesAcceptTransactionInRestrictedIndustries           = "acceptTransactionInRestrictedIndustries"
+	VerificationDeadlineCapabilitiesAcceptTransactionInRestrictedIndustriesCommercial = "acceptTransactionInRestrictedIndustriesCommercial"
+	VerificationDeadlineCapabilitiesAcceptTransactionInRestrictedIndustriesConsumer   = "acceptTransactionInRestrictedIndustriesConsumer"
+	VerificationDeadlineCapabilitiesAcquiring                                         = "acquiring"
+	VerificationDeadlineCapabilitiesAtmWithdrawal                                     = "atmWithdrawal"
+	VerificationDeadlineCapabilitiesAtmWithdrawalCommercial                           = "atmWithdrawalCommercial"
+	VerificationDeadlineCapabilitiesAtmWithdrawalConsumer                             = "atmWithdrawalConsumer"
+	VerificationDeadlineCapabilitiesAtmWithdrawalInRestrictedCountries                = "atmWithdrawalInRestrictedCountries"
+	VerificationDeadlineCapabilitiesAtmWithdrawalInRestrictedCountriesCommercial      = "atmWithdrawalInRestrictedCountriesCommercial"
+	VerificationDeadlineCapabilitiesAtmWithdrawalInRestrictedCountriesConsumer        = "atmWithdrawalInRestrictedCountriesConsumer"
+	VerificationDeadlineCapabilitiesAuthorisedPaymentInstrumentUser                   = "authorisedPaymentInstrumentUser"
+	VerificationDeadlineCapabilitiesGetGrantOffers                                    = "getGrantOffers"
+	VerificationDeadlineCapabilitiesIssueBankAccount                                  = "issueBankAccount"
+	VerificationDeadlineCapabilitiesIssueCard                                         = "issueCard"
+	VerificationDeadlineCapabilitiesIssueCardCommercial                               = "issueCardCommercial"
+	VerificationDeadlineCapabilitiesIssueCardConsumer                                 = "issueCardConsumer"
+	VerificationDeadlineCapabilitiesIssueChargeCard                                   = "issueChargeCard"
+	VerificationDeadlineCapabilitiesIssueChargeCardCommercial                         = "issueChargeCardCommercial"
+	VerificationDeadlineCapabilitiesIssueCreditLimit                                  = "issueCreditLimit"
+	VerificationDeadlineCapabilitiesLocalAcceptance                                   = "localAcceptance"
+	VerificationDeadlineCapabilitiesPayout                                            = "payout"
+	VerificationDeadlineCapabilitiesPayoutToTransferInstrument                        = "payoutToTransferInstrument"
+	VerificationDeadlineCapabilitiesProcessing                                        = "processing"
+	VerificationDeadlineCapabilitiesReceiveFromBalanceAccount                         = "receiveFromBalanceAccount"
+	VerificationDeadlineCapabilitiesReceiveFromPlatformPayments                       = "receiveFromPlatformPayments"
+	VerificationDeadlineCapabilitiesReceiveFromThirdParty                             = "receiveFromThirdParty"
+	VerificationDeadlineCapabilitiesReceiveFromTransferInstrument                     = "receiveFromTransferInstrument"
+	VerificationDeadlineCapabilitiesReceiveGrants                                     = "receiveGrants"
+	VerificationDeadlineCapabilitiesReceivePayments                                   = "receivePayments"
+	VerificationDeadlineCapabilitiesSendToBalanceAccount                              = "sendToBalanceAccount"
+	VerificationDeadlineCapabilitiesSendToThirdParty                                  = "sendToThirdParty"
+	VerificationDeadlineCapabilitiesSendToTransferInstrument                          = "sendToTransferInstrument"
+	VerificationDeadlineCapabilitiesThirdPartyFunding                                 = "thirdPartyFunding"
+	VerificationDeadlineCapabilitiesUseCard                                           = "useCard"
+	VerificationDeadlineCapabilitiesUseCardCommercial                                 = "useCardCommercial"
+	VerificationDeadlineCapabilitiesUseCardConsumer                                   = "useCardConsumer"
+	VerificationDeadlineCapabilitiesUseCardInRestrictedCountries                      = "useCardInRestrictedCountries"
+	VerificationDeadlineCapabilitiesUseCardInRestrictedCountriesCommercial            = "useCardInRestrictedCountriesCommercial"
+	VerificationDeadlineCapabilitiesUseCardInRestrictedCountriesConsumer              = "useCardInRestrictedCountriesConsumer"
+	VerificationDeadlineCapabilitiesUseCardInRestrictedIndustries                     = "useCardInRestrictedIndustries"
+	VerificationDeadlineCapabilitiesUseCardInRestrictedIndustriesCommercial           = "useCardInRestrictedIndustriesCommercial"
+	VerificationDeadlineCapabilitiesUseCardInRestrictedIndustriesConsumer             = "useCardInRestrictedIndustriesConsumer"
+	VerificationDeadlineCapabilitiesUseChargeCard                                     = "useChargeCard"
+	VerificationDeadlineCapabilitiesUseChargeCardCommercial                           = "useChargeCardCommercial"
+	VerificationDeadlineCapabilitiesWithdrawFromAtm                                   = "withdrawFromAtm"
+	VerificationDeadlineCapabilitiesWithdrawFromAtmCommercial                         = "withdrawFromAtmCommercial"
+	VerificationDeadlineCapabilitiesWithdrawFromAtmConsumer                           = "withdrawFromAtmConsumer"
+	VerificationDeadlineCapabilitiesWithdrawFromAtmInRestrictedCountries              = "withdrawFromAtmInRestrictedCountries"
+	VerificationDeadlineCapabilitiesWithdrawFromAtmInRestrictedCountriesCommercial    = "withdrawFromAtmInRestrictedCountriesCommercial"
+	VerificationDeadlineCapabilitiesWithdrawFromAtmInRestrictedCountriesConsumer      = "withdrawFromAtmInRestrictedCountriesConsumer"
+)

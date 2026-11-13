@@ -11,7 +11,7 @@ package transfers
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -72,7 +72,7 @@ Reach out to your Adyen contact to set up these permissions.
 @return *http.Response, error
 */
 func (a *TransfersApi) ApproveInitiatedTransfers(ctx context.Context, r TransfersApiApproveInitiatedTransfersInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/transfers/approve"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
@@ -99,7 +99,7 @@ func (a *TransfersApi) ApproveInitiatedTransfers(ctx context.Context, r Transfer
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -108,7 +108,7 @@ func (a *TransfersApi) ApproveInitiatedTransfers(ctx context.Context, r Transfer
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -117,7 +117,7 @@ func (a *TransfersApi) ApproveInitiatedTransfers(ctx context.Context, r Transfer
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -126,7 +126,7 @@ func (a *TransfersApi) ApproveInitiatedTransfers(ctx context.Context, r Transfer
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -179,7 +179,7 @@ Reach out to your Adyen contact to set up these permissions.
 @return *http.Response, error
 */
 func (a *TransfersApi) CancelInitiatedTransfers(ctx context.Context, r TransfersApiCancelInitiatedTransfersInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/transfers/cancel"
 	queryParams := url.Values{}
 	headerParams := make(map[string]string)
@@ -203,7 +203,7 @@ func (a *TransfersApi) CancelInitiatedTransfers(ctx context.Context, r Transfers
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -212,7 +212,7 @@ func (a *TransfersApi) CancelInitiatedTransfers(ctx context.Context, r Transfers
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -221,7 +221,7 @@ func (a *TransfersApi) CancelInitiatedTransfers(ctx context.Context, r Transfers
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -230,7 +230,7 @@ func (a *TransfersApi) CancelInitiatedTransfers(ctx context.Context, r Transfers
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -256,37 +256,37 @@ type TransfersApiGetAllTransfersInput struct {
 	limit               *int32
 }
 
-// Only include transfers that have been created on or after this point in time. The value must be in ISO 8601 format and not earlier than 6 months before the &#x60;createdUntil&#x60; date. For example, **2021-05-30T15:07:40Z**.
+// Only include transfers that have been created on or after this point in time. The value must be in ISO 8601 format and not earlier than 6 months before the `createdUntil` date. For example, **2021-05-30T15:07:40Z**.
 func (r TransfersApiGetAllTransfersInput) CreatedSince(createdSince time.Time) TransfersApiGetAllTransfersInput {
 	r.createdSince = &createdSince
 	return r
 }
 
-// Only include transfers that have been created on or before this point in time. The value must be in ISO 8601 format and not later than 6 months after the &#x60;createdSince&#x60; date. For example, **2021-05-30T15:07:40Z**.
+// Only include transfers that have been created on or before this point in time. The value must be in ISO 8601 format and not later than 6 months after the `createdSince` date. For example, **2021-05-30T15:07:40Z**.
 func (r TransfersApiGetAllTransfersInput) CreatedUntil(createdUntil time.Time) TransfersApiGetAllTransfersInput {
 	r.createdUntil = &createdUntil
 	return r
 }
 
-// The unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id).  Required if you don&#39;t provide a &#x60;balanceAccountId&#x60; or &#x60;accountHolderId&#x60;.
+// The unique identifier of the [balance platform](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balancePlatforms/{id}__queryParam_id).  Required if you don't provide a `balanceAccountId` or `accountHolderId`.
 func (r TransfersApiGetAllTransfersInput) BalancePlatform(balancePlatform string) TransfersApiGetAllTransfersInput {
 	r.balancePlatform = &balancePlatform
 	return r
 }
 
-// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/accountHolders/{id}__queryParam_id).  Required if you don&#39;t provide a &#x60;balanceAccountId&#x60; or &#x60;balancePlatform&#x60;.  If you provide a &#x60;balanceAccountId&#x60;, the &#x60;accountHolderId&#x60; must be related to the &#x60;balanceAccountId&#x60;.
+// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/accountHolders/{id}__queryParam_id).  Required if you don't provide a `balanceAccountId` or `balancePlatform`.  If you provide a `balanceAccountId`, the `accountHolderId` must be related to the `balanceAccountId`.
 func (r TransfersApiGetAllTransfersInput) AccountHolderId(accountHolderId string) TransfersApiGetAllTransfersInput {
 	r.accountHolderId = &accountHolderId
 	return r
 }
 
-// The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id).  Required if you don&#39;t provide an &#x60;accountHolderId&#x60; or &#x60;balancePlatform&#x60;.  If you provide an &#x60;accountHolderId&#x60;, the &#x60;balanceAccountId&#x60; must be related to the &#x60;accountHolderId&#x60;.
+// The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/get/balanceAccounts/{id}__queryParam_id).  Required if you don't provide an `accountHolderId` or `balancePlatform`.  If you provide an `accountHolderId`, the `balanceAccountId` must be related to the `accountHolderId`.
 func (r TransfersApiGetAllTransfersInput) BalanceAccountId(balanceAccountId string) TransfersApiGetAllTransfersInput {
 	r.balanceAccountId = &balanceAccountId
 	return r
 }
 
-// The unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/balanceplatform/latest/get/paymentInstruments/_id_).  To use this parameter, you must also provide a &#x60;balanceAccountId&#x60;, &#x60;accountHolderId&#x60;, or &#x60;balancePlatform&#x60;.  The &#x60;paymentInstrumentId&#x60; must be related to the &#x60;balanceAccountId&#x60; or &#x60;accountHolderId&#x60; that you provide.
+// The unique identifier of the [payment instrument](https://docs.adyen.com/api-explorer/balanceplatform/latest/get/paymentInstruments/_id_).  To use this parameter, you must also provide a `balanceAccountId`, `accountHolderId`, or `balancePlatform`.  The `paymentInstrumentId` must be related to the `balanceAccountId` or `accountHolderId` that you provide.
 func (r TransfersApiGetAllTransfersInput) PaymentInstrumentId(paymentInstrumentId string) TransfersApiGetAllTransfersInput {
 	r.paymentInstrumentId = &paymentInstrumentId
 	return r
@@ -310,7 +310,7 @@ func (r TransfersApiGetAllTransfersInput) SortOrder(sortOrder string) TransfersA
 	return r
 }
 
-// The &#x60;cursor&#x60; returned in the links of the previous response.
+// The `cursor` returned in the links of the previous response.
 func (r TransfersApiGetAllTransfersInput) Cursor(cursor string) TransfersApiGetAllTransfersInput {
 	r.cursor = &cursor
 	return r
@@ -402,7 +402,7 @@ func (a *TransfersApi) GetAllTransfers(ctx context.Context, r TransfersApiGetAll
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -411,7 +411,7 @@ func (a *TransfersApi) GetAllTransfers(ctx context.Context, r TransfersApiGetAll
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -420,7 +420,7 @@ func (a *TransfersApi) GetAllTransfers(ctx context.Context, r TransfersApiGetAll
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -429,7 +429,7 @@ func (a *TransfersApi) GetAllTransfers(ctx context.Context, r TransfersApiGetAll
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -488,7 +488,7 @@ func (a *TransfersApi) GetTransfer(ctx context.Context, r TransfersApiGetTransfe
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -497,7 +497,7 @@ func (a *TransfersApi) GetTransfer(ctx context.Context, r TransfersApiGetTransfe
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -506,7 +506,7 @@ func (a *TransfersApi) GetTransfer(ctx context.Context, r TransfersApiGetTransfe
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -515,7 +515,7 @@ func (a *TransfersApi) GetTransfer(ctx context.Context, r TransfersApiGetTransfe
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -590,7 +590,7 @@ func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnT
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -599,7 +599,7 @@ func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnT
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -608,7 +608,7 @@ func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnT
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -617,7 +617,7 @@ func (a *TransfersApi) ReturnTransfer(ctx context.Context, r TransfersApiReturnT
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -712,7 +712,7 @@ func (a *TransfersApi) TransferFunds(ctx context.Context, r TransfersApiTransfer
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -721,7 +721,7 @@ func (a *TransfersApi) TransferFunds(ctx context.Context, r TransfersApiTransfer
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -730,7 +730,7 @@ func (a *TransfersApi) TransferFunds(ctx context.Context, r TransfersApiTransfer
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -739,7 +739,7 @@ func (a *TransfersApi) TransferFunds(ctx context.Context, r TransfersApiTransfer
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError

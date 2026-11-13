@@ -80,8 +80,8 @@ func (o CalculatePciStatusRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CalculatePciStatusRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CalculatePciStatusRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdditionalSalesChannels) {
 		toSerialize["additionalSalesChannels"] = o.AdditionalSalesChannels
 	}
@@ -123,3 +123,11 @@ func (v *NullableCalculatePciStatusRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+// Values allowed for CalculatePciStatusRequest.AdditionalSalesChannels items.
+const (
+	CalculatePciStatusRequestAdditionalSalesChannelsECommerce = "eCommerce"
+	CalculatePciStatusRequestAdditionalSalesChannelsEcomMoto  = "ecomMoto"
+	CalculatePciStatusRequestAdditionalSalesChannelsPos       = "pos"
+	CalculatePciStatusRequestAdditionalSalesChannelsPosMoto   = "posMoto"
+)

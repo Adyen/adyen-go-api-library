@@ -148,8 +148,8 @@ func (o VerifiedShopperTaxIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o VerifiedShopperTaxIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o VerifiedShopperTaxIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MaskedName) {
 		toSerialize["maskedName"] = o.MaskedName
 	}

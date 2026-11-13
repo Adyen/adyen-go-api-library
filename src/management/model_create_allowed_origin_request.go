@@ -141,8 +141,8 @@ func (o CreateAllowedOriginRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateAllowedOriginRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreateAllowedOriginRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Links) {
 		toSerialize["_links"] = o.Links
 	}

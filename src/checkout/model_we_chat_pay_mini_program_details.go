@@ -294,8 +294,8 @@ func (o WeChatPayMiniProgramDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WeChatPayMiniProgramDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WeChatPayMiniProgramDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AppId) {
 		toSerialize["appId"] = o.AppId
 	}
@@ -365,3 +365,8 @@ func (o *WeChatPayMiniProgramDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for WeChatPayMiniProgramDetails.Type.
+const (
+	WeChatPayMiniProgramDetailsTypeWechatpayMiniProgram = "wechatpayMiniProgram"
+)

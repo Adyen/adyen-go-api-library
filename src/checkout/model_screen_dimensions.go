@@ -112,8 +112,8 @@ func (o ScreenDimensions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ScreenDimensions) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ScreenDimensions) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Height) {
 		toSerialize["height"] = o.Height
 	}

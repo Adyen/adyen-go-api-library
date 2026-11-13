@@ -321,8 +321,8 @@ func (o UpiCollectDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UpiCollectDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UpiCollectDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BillingSequenceNumber) {
 		toSerialize["billingSequenceNumber"] = o.BillingSequenceNumber
 	}
@@ -393,3 +393,8 @@ func (o *UpiCollectDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for UpiCollectDetails.Type.
+const (
+	UpiCollectDetailsTypeUpiCollect = "upi_collect"
+)

@@ -80,8 +80,8 @@ func (o NyceUpdateInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NyceUpdateInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NyceUpdateInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.TransactionDescription) {
 		toSerialize["transactionDescription"] = o.TransactionDescription
 	}

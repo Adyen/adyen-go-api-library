@@ -270,8 +270,8 @@ func (o BalanceCheckResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceCheckResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceCheckResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
@@ -337,3 +337,10 @@ func (o *BalanceCheckResponse) isValidResultCode() bool {
 	}
 	return false
 }
+
+// Values allowed for BalanceCheckResponse.ResultCode.
+const (
+	BalanceCheckResponseResultCodeSuccess          = "Success"
+	BalanceCheckResponseResultCodeNotEnoughBalance = "NotEnoughBalance"
+	BalanceCheckResponseResultCodeFailed           = "Failed"
+)

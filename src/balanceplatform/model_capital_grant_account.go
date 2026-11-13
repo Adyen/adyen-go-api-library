@@ -182,8 +182,8 @@ func (o CapitalGrantAccount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CapitalGrantAccount) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CapitalGrantAccount) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Balances) {
 		toSerialize["balances"] = o.Balances
 	}

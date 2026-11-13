@@ -102,8 +102,8 @@ func (o ConfirmationTrackingData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ConfirmationTrackingData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ConfirmationTrackingData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["status"] = o.Status
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
@@ -163,3 +163,14 @@ func (o *ConfirmationTrackingData) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for ConfirmationTrackingData.Status.
+const (
+	ConfirmationTrackingDataStatusCredited = "credited"
+	ConfirmationTrackingDataStatusAccepted = "accepted"
+)
+
+// Values allowed for ConfirmationTrackingData.Type.
+const (
+	ConfirmationTrackingDataTypeConfirmation = "confirmation"
+)

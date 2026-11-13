@@ -100,8 +100,8 @@ func (o Card) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Card) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Card) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["cardHolder"] = o.CardHolder
 	toSerialize["cardIdentification"] = o.CardIdentification
 	return toSerialize, nil

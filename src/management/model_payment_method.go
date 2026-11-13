@@ -2253,8 +2253,8 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentMethod) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Accel) {
 		toSerialize["accel"] = o.Accel
 	}
@@ -2496,3 +2496,11 @@ func (o *PaymentMethod) isValidVerificationStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentMethod.VerificationStatus.
+const (
+	PaymentMethodVerificationStatusValid    = "valid"
+	PaymentMethodVerificationStatusPending  = "pending"
+	PaymentMethodVerificationStatusInvalid  = "invalid"
+	PaymentMethodVerificationStatusRejected = "rejected"
+)

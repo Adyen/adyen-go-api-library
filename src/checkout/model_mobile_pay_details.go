@@ -152,8 +152,8 @@ func (o MobilePayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MobilePayDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MobilePayDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -211,3 +211,8 @@ func (o *MobilePayDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for MobilePayDetails.Type.
+const (
+	MobilePayDetailsTypeMobilepay = "mobilepay"
+)

@@ -80,8 +80,8 @@ func (o Timeouts) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Timeouts) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Timeouts) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.FromActiveToSleep) {
 		toSerialize["fromActiveToSleep"] = o.FromActiveToSleep
 	}

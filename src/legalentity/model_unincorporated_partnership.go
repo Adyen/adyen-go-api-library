@@ -523,8 +523,8 @@ func (o UnincorporatedPartnership) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UnincorporatedPartnership) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UnincorporatedPartnership) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["countryOfGoverningLaw"] = o.CountryOfGoverningLaw
 	if !common.IsNil(o.DateOfIncorporation) {
 		toSerialize["dateOfIncorporation"] = o.DateOfIncorporation
@@ -618,3 +618,41 @@ func (o *UnincorporatedPartnership) isValidVatAbsenceReason() bool {
 	}
 	return false
 }
+
+// Values allowed for UnincorporatedPartnership.Type.
+const (
+	UnincorporatedPartnershipTypeLimitedPartnership            = "limitedPartnership"
+	UnincorporatedPartnershipTypeGeneralPartnership            = "generalPartnership"
+	UnincorporatedPartnershipTypeFamilyPartnership             = "familyPartnership"
+	UnincorporatedPartnershipTypeCommercialPartnership         = "commercialPartnership"
+	UnincorporatedPartnershipTypePublicPartnership             = "publicPartnership"
+	UnincorporatedPartnershipTypeOtherPartnership              = "otherPartnership"
+	UnincorporatedPartnershipTypeGbr                           = "gbr"
+	UnincorporatedPartnershipTypeGmbh                          = "gmbh"
+	UnincorporatedPartnershipTypeKgaa                          = "kgaa"
+	UnincorporatedPartnershipTypeCv                            = "cv"
+	UnincorporatedPartnershipTypeVof                           = "vof"
+	UnincorporatedPartnershipTypeMaatschap                     = "maatschap"
+	UnincorporatedPartnershipTypePrivateFundLimitedPartnership = "privateFundLimitedPartnership"
+	UnincorporatedPartnershipTypeBusinessTrustEntity           = "businessTrustEntity"
+	UnincorporatedPartnershipTypeBusinessPartnership           = "businessPartnership"
+	UnincorporatedPartnershipTypeLimitedLiabilityPartnership   = "limitedLiabilityPartnership"
+	UnincorporatedPartnershipTypeEg                            = "eg"
+	UnincorporatedPartnershipTypeCooperative                   = "cooperative"
+	UnincorporatedPartnershipTypeVos                           = "vos"
+	UnincorporatedPartnershipTypeComunidadDeBienes             = "comunidadDeBienes"
+	UnincorporatedPartnershipTypeHerenciaYacente               = "herenciaYacente"
+	UnincorporatedPartnershipTypeComunidadDePropietarios       = "comunidadDePropietarios"
+	UnincorporatedPartnershipTypeSep                           = "sep"
+	UnincorporatedPartnershipTypeSca                           = "sca"
+	UnincorporatedPartnershipTypeBt                            = "bt"
+	UnincorporatedPartnershipTypeKkt                           = "kkt"
+	UnincorporatedPartnershipTypeScs                           = "scs"
+	UnincorporatedPartnershipTypeSnc                           = "snc"
+)
+
+// Values allowed for UnincorporatedPartnership.VatAbsenceReason.
+const (
+	UnincorporatedPartnershipVatAbsenceReasonIndustryExemption = "industryExemption"
+	UnincorporatedPartnershipVatAbsenceReasonBelowTaxThreshold = "belowTaxThreshold"
+)

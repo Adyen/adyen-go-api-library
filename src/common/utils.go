@@ -16,6 +16,9 @@ func NewStrictDecoder(data []byte) *json.Decoder {
 	return dec
 }
 
+// Ptr returns a pointer to v, for example common.Ptr("EUR") or common.Ptr(int64(1000)).
+func Ptr[T any](v T) *T { return &v }
+
 // PtrBool is a helper routine that returns a pointer to given boolean value.
 func PtrBool(v bool) *bool { return &v }
 
@@ -367,7 +370,7 @@ func (v *NullableTime) UnmarshalJSON(src []byte) error {
 }
 
 // IsNil checks if an input is nil
-func IsNil(i interface{}) bool {
+func IsNil(i any) bool {
 	if i == nil {
 		return true
 	}
@@ -381,5 +384,5 @@ func IsNil(i interface{}) bool {
 }
 
 type MappedNullable interface {
-	ToMap() (map[string]interface{}, error)
+	ToMap() (map[string]any, error)
 }

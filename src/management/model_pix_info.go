@@ -122,8 +122,8 @@ func (o PixInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PixInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PixInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AllowRecurring) {
 		toSerialize["allowRecurring"] = o.AllowRecurring
 	}

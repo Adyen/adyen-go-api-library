@@ -100,8 +100,8 @@ func (o Summary) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Summary) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Summary) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["legalEntityId"] = o.LegalEntityId
 	toSerialize["taxYears"] = o.TaxYears
 	return toSerialize, nil

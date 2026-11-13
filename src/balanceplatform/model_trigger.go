@@ -107,8 +107,8 @@ func (o Trigger) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Trigger) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Trigger) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Schedule) {
 		toSerialize["schedule"] = o.Schedule
 	}

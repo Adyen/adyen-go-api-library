@@ -133,8 +133,8 @@ func (o BankAccountV3) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BankAccountV3) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BankAccountV3) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountHolder"] = o.AccountHolder
 	toSerialize["accountIdentification"] = o.AccountIdentification
 	if !common.IsNil(o.StoredPaymentMethodId) {

@@ -134,8 +134,8 @@ func (o RecurringDetailsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RecurringDetailsRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RecurringDetailsRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	if !common.IsNil(o.Recurring) {
 		toSerialize["recurring"] = o.Recurring

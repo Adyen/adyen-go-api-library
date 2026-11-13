@@ -228,8 +228,8 @@ func (o RakutenPayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RakutenPayDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RakutenPayDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -293,3 +293,8 @@ func (o *RakutenPayDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for RakutenPayDetails.Type.
+const (
+	RakutenPayDetailsTypeRakutenpay = "rakutenpay"
+)

@@ -236,8 +236,8 @@ func (o TerminalSettingsData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalSettingsData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalSettingsData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CompanyId) {
 		toSerialize["companyId"] = o.CompanyId
 	}
@@ -300,3 +300,9 @@ func (o *TerminalSettingsData) isValidUpdateSource() bool {
 	}
 	return false
 }
+
+// Values allowed for TerminalSettingsData.UpdateSource.
+const (
+	TerminalSettingsDataUpdateSourceCustomerArea  = "Customer Area"
+	TerminalSettingsDataUpdateSourceManagementApi = "Management Api"
+)

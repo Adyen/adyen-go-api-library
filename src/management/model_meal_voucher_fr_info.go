@@ -127,8 +127,8 @@ func (o MealVoucherFRInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MealVoucherFRInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MealVoucherFRInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["conecsId"] = o.ConecsId
 	toSerialize["siret"] = o.Siret
 	toSerialize["subTypes"] = o.SubTypes

@@ -317,8 +317,8 @@ func (o CapitalGrant) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CapitalGrant) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CapitalGrant) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
@@ -384,3 +384,13 @@ func (o *CapitalGrant) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for CapitalGrant.Status.
+const (
+	CapitalGrantStatusPending    = "Pending"
+	CapitalGrantStatusActive     = "Active"
+	CapitalGrantStatusRepaid     = "Repaid"
+	CapitalGrantStatusFailed     = "Failed"
+	CapitalGrantStatusWrittenOff = "WrittenOff"
+	CapitalGrantStatusRevoked    = "Revoked"
+)

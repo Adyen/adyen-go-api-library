@@ -344,8 +344,8 @@ func (o PaymentAmountUpdateResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentAmountUpdateResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentAmountUpdateResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdjustAuthorisationData) {
 		toSerialize["adjustAuthorisationData"] = o.AdjustAuthorisationData
 	}
@@ -421,3 +421,17 @@ func (o *PaymentAmountUpdateResponse) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentAmountUpdateResponse.IndustryUsage.
+const (
+	PaymentAmountUpdateResponseIndustryUsageDelayedCharge = "delayedCharge"
+	PaymentAmountUpdateResponseIndustryUsageInstallment   = "installment"
+	PaymentAmountUpdateResponseIndustryUsageNoShow        = "noShow"
+)
+
+// Values allowed for PaymentAmountUpdateResponse.Status.
+const (
+	PaymentAmountUpdateResponseStatusAuthorised = "authorised"
+	PaymentAmountUpdateResponseStatusReceived   = "received"
+	PaymentAmountUpdateResponseStatusRefused    = "refused"
+)

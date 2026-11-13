@@ -79,8 +79,8 @@ func (o TaxTotal) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TaxTotal) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TaxTotal) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}

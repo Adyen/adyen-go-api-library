@@ -114,8 +114,8 @@ func (o NetworkTokenRiskRuleSource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NetworkTokenRiskRuleSource) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NetworkTokenRiskRuleSource) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}

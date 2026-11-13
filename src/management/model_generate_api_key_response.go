@@ -73,8 +73,8 @@ func (o GenerateApiKeyResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GenerateApiKeyResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GenerateApiKeyResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["apiKey"] = o.ApiKey
 	return toSerialize, nil
 }

@@ -107,8 +107,8 @@ func (o Status) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Status) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Status) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Actions) {
 		toSerialize["actions"] = o.Actions
 	}
@@ -161,3 +161,18 @@ func (o *Status) isValidCode() bool {
 	}
 	return false
 }
+
+// Values allowed for Status.Code.
+const (
+	StatusCodePending    = "Pending"
+	StatusCodeActive     = "Active"
+	StatusCodeRepaid     = "Repaid"
+	StatusCodeWrittenOff = "WrittenOff"
+	StatusCodeFailed     = "Failed"
+	StatusCodeRevoked    = "Revoked"
+	StatusCodeRequested  = "Requested"
+	StatusCodeReviewing  = "Reviewing"
+	StatusCodeApproved   = "Approved"
+	StatusCodeRejected   = "Rejected"
+	StatusCodeCancelled  = "Cancelled"
+)

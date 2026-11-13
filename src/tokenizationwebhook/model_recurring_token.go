@@ -154,8 +154,8 @@ func (o RecurringToken) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RecurringToken) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RecurringToken) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["shopperReference"] = o.ShopperReference
 	toSerialize["storedPaymentMethodId"] = o.StoredPaymentMethodId

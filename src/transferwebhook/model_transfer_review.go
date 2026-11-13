@@ -114,8 +114,8 @@ func (o TransferReview) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransferReview) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransferReview) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.NumberOfApprovalsRequired) {
 		toSerialize["numberOfApprovalsRequired"] = o.NumberOfApprovalsRequired
 	}
@@ -170,3 +170,10 @@ func (o *TransferReview) isValidScaOnApproval() bool {
 	}
 	return false
 }
+
+// Values allowed for TransferReview.ScaOnApproval.
+const (
+	TransferReviewScaOnApprovalCompleted     = "completed"
+	TransferReviewScaOnApprovalNotApplicable = "notApplicable"
+	TransferReviewScaOnApprovalRequired      = "required"
+)

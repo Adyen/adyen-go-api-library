@@ -183,8 +183,8 @@ func (o PaymentDetailsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentDetailsRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentDetailsRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AuthenticationData) {
 		toSerialize["authenticationData"] = o.AuthenticationData
 	}

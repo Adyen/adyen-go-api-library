@@ -258,8 +258,8 @@ func (o Wallet) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Wallet) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Wallet) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountScore) {
 		toSerialize["accountScore"] = o.AccountScore
 	}
@@ -316,3 +316,48 @@ func (v *NullableWallet) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+// Values allowed for Wallet.RecommendationReasons items.
+const (
+	WalletRecommendationReasonsAccountCardTooNew                                                                                                                             = "accountCardTooNew"
+	WalletRecommendationReasonsAccountHighRisk                                                                                                                               = "accountHighRisk"
+	WalletRecommendationReasonsAccountRecentlyChanged                                                                                                                        = "accountRecentlyChanged"
+	WalletRecommendationReasonsAccountTooNew                                                                                                                                 = "accountTooNew"
+	WalletRecommendationReasonsAccountTooNewSinceLaunch                                                                                                                      = "accountTooNewSinceLaunch"
+	WalletRecommendationReasonsCardholderPanAssociatedToAccountWithinThresholdDays                                                                                           = "cardholderPanAssociatedToAccountWithinThresholdDays"
+	WalletRecommendationReasonsChangesMadeToAccountDataWithinThresholdDays                                                                                                   = "changesMadeToAccountDataWithinThresholdDays"
+	WalletRecommendationReasonsDeviceProvisioningLocationOutsideOfCardholdersWalletAccountHomeCountry                                                                        = "deviceProvisioningLocationOutsideOfCardholdersWalletAccountHomeCountry"
+	WalletRecommendationReasonsDeviceRecentlyLost                                                                                                                            = "deviceRecentlyLost"
+	WalletRecommendationReasonsEncryptedPaymentInstrumentDataIsBeingPushedByTheIssuerToTheSameDeviceThatIssuerApplicationAuthenticatedButWithSuccessfulUpfrontAuthentication = "encryptedPaymentInstrumentDataIsBeingPushedByTheIssuerToTheSameDeviceThatIssuerApplicationAuthenticatedButWithSuccessfulUpfrontAuthentication"
+	WalletRecommendationReasonsEncryptedPaymentInstrumentDataIsBeingPushedByTheIssuerToTheSameDeviceThatIssuerApplicationAuthenticatedButWithoutAnyUpfrontAuthentication     = "encryptedPaymentInstrumentDataIsBeingPushedByTheIssuerToTheSameDeviceThatIssuerApplicationAuthenticatedButWithoutAnyUpfrontAuthentication"
+	WalletRecommendationReasonsEncryptedPaymentInstrumentDataIsPushedToADifferentDeviceThanTheOneThatIssuerApplicationAuthenticated                                          = "encryptedPaymentInstrumentDataIsPushedToADifferentDeviceThanTheOneThatIssuerApplicationAuthenticated"
+	WalletRecommendationReasonsEncryptedPaymentInstrumentDataIsPushedToADifferentUserThanTheCardHolder                                                                       = "encryptedPaymentInstrumentDataIsPushedToADifferentUserThanTheCardHolder"
+	WalletRecommendationReasonsHasSuspendedTokens                                                                                                                            = "hasSuspendedTokens"
+	WalletRecommendationReasonsInactiveAccount                                                                                                                               = "inactiveAccount"
+	WalletRecommendationReasonsIssuerDeferredIDVDecision                                                                                                                     = "issuerDeferredIDVDecision"
+	WalletRecommendationReasonsIssuerEncryptedPaymentInstrumentDataExpired                                                                                                   = "issuerEncryptedPaymentInstrumentDataExpired"
+	WalletRecommendationReasonsLowAccountScore                                                                                                                               = "lowAccountScore"
+	WalletRecommendationReasonsLowDeviceScore                                                                                                                                = "lowDeviceScore"
+	WalletRecommendationReasonsLowPhoneNumberScore                                                                                                                           = "lowPhoneNumberScore"
+	WalletRecommendationReasonsNumberOfActiveTokensGreaterThanThreshold                                                                                                      = "numberOfActiveTokensGreaterThanThreshold"
+	WalletRecommendationReasonsNumberOfActiveTokensOnAllDevicesIsGreaterThanThreshold                                                                                        = "numberOfActiveTokensOnAllDevicesIsGreaterThanThreshold"
+	WalletRecommendationReasonsNumberOfDaysSinceDeviceWasLastReportedLostIsLessThanThresholdDays                                                                             = "numberOfDaysSinceDeviceWasLastReportedLostIsLessThanThresholdDays"
+	WalletRecommendationReasonsNumberOfDevicesWithSameUseridWithTokenIsGreaterThanThreshold                                                                                  = "numberOfDevicesWithSameUseridWithTokenIsGreaterThanThreshold"
+	WalletRecommendationReasonsNumberOfTransactionsInLast12MonthsLessThanThresholdNumber                                                                                     = "numberOfTransactionsInLast12MonthsLessThanThresholdNumber"
+	WalletRecommendationReasonsOutSideHomeTerritory                                                                                                                          = "outSideHomeTerritory"
+	WalletRecommendationReasonsSuspendedCardsInTheWALLETAccountIsGreaterThanThreshold                                                                                        = "suspendedCardsInTheWALLETAccountIsGreaterThanThreshold"
+	WalletRecommendationReasonsSuspiciousActivity                                                                                                                            = "suspiciousActivity"
+	WalletRecommendationReasonsTheNumberOfProvisioningAttemptsAcrossAllCardsOnThisDeviceInTheLast24HoursExceedsTheThreshold                                                  = "theNumberOfProvisioningAttemptsAcrossAllCardsOnThisDeviceInTheLast24HoursExceedsTheThreshold"
+	WalletRecommendationReasonsTheWALLETAccountIntoWhichTheCardIsBeingProvisionedContainDistinctNamesGreaterThanThreshold                                                    = "theWALLETAccountIntoWhichTheCardIsBeingProvisionedContainDistinctNamesGreaterThanThreshold"
+	WalletRecommendationReasonsThisAccountHasNotHadActivityWithinThresholdPeriod                                                                                             = "thisAccountHasNotHadActivityWithinThresholdPeriod"
+	WalletRecommendationReasonsTooManyDifferentCardholders                                                                                                                   = "tooManyDifferentCardholders"
+	WalletRecommendationReasonsTooManyRecentAttempts                                                                                                                         = "tooManyRecentAttempts"
+	WalletRecommendationReasonsTooManyRecentTokens                                                                                                                           = "tooManyRecentTokens"
+	WalletRecommendationReasonsUnableToAssess                                                                                                                                = "unableToAssess"
+	WalletRecommendationReasonsUnknown                                                                                                                                       = "unknown"
+	WalletRecommendationReasonsUserAccountWasCreatedWithinThresholdDays                                                                                                      = "userAccountWasCreatedWithinThresholdDays"
+	WalletRecommendationReasonsUserDeviceReceivingEncryptedPaymentInstrumentDataIsDifferentThanTheOneThatIsProvisioningTheToken                                              = "userDeviceReceivingEncryptedPaymentInstrumentDataIsDifferentThanTheOneThatIsProvisioningTheToken"
+	WalletRecommendationReasonsUsersAccountOnDeviceLessThanThresholdDays                                                                                                     = "usersAccountOnDeviceLessThanThresholdDays"
+	WalletRecommendationReasonsWalletAccountCreatedWithinThresholdDays                                                                                                       = "walletAccountCreatedWithinThresholdDays"
+	WalletRecommendationReasonsWalletAccountHolderNameOnFileDoesNotMatchCardholderEnteredName                                                                                = "walletAccountHolderNameOnFileDoesNotMatchCardholderEnteredName"
+)

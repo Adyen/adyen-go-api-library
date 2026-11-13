@@ -181,8 +181,8 @@ func (o ClientCertificateWithChain) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ClientCertificateWithChain) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ClientCertificateWithChain) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["caChain"] = o.CaChain
 	toSerialize["id"] = o.Id
 	toSerialize["leaf"] = o.Leaf

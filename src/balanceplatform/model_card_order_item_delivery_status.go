@@ -148,8 +148,8 @@ func (o CardOrderItemDeliveryStatus) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CardOrderItemDeliveryStatus) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CardOrderItemDeliveryStatus) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ErrorMessage) {
 		toSerialize["errorMessage"] = o.ErrorMessage
 	}
@@ -207,3 +207,15 @@ func (o *CardOrderItemDeliveryStatus) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for CardOrderItemDeliveryStatus.Status.
+const (
+	CardOrderItemDeliveryStatusStatusCreated       = "created"
+	CardOrderItemDeliveryStatusStatusDelivered     = "delivered"
+	CardOrderItemDeliveryStatusStatusNotApplicable = "notApplicable"
+	CardOrderItemDeliveryStatusStatusProcessing    = "processing"
+	CardOrderItemDeliveryStatusStatusProduced      = "produced"
+	CardOrderItemDeliveryStatusStatusRejected      = "rejected"
+	CardOrderItemDeliveryStatusStatusShipped       = "shipped"
+	CardOrderItemDeliveryStatusStatusUnknown       = "unknown"
+)

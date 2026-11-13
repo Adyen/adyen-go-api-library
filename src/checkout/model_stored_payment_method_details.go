@@ -224,8 +224,8 @@ func (o StoredPaymentMethodDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredPaymentMethodDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoredPaymentMethodDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -289,3 +289,39 @@ func (o *StoredPaymentMethodDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for StoredPaymentMethodDetails.Type.
+const (
+	StoredPaymentMethodDetailsTypeAlipayPlus              = "alipay_plus"
+	StoredPaymentMethodDetailsTypeAlipayPlusAlipayCn      = "alipay_plus_alipay_cn"
+	StoredPaymentMethodDetailsTypeAlipayPlusAlipayHk      = "alipay_plus_alipay_hk"
+	StoredPaymentMethodDetailsTypeAlipayPlusDana          = "alipay_plus_dana"
+	StoredPaymentMethodDetailsTypeAlipayPlusGcash         = "alipay_plus_gcash"
+	StoredPaymentMethodDetailsTypeAlipayPlusKakaopay      = "alipay_plus_kakaopay"
+	StoredPaymentMethodDetailsTypeAlipayPlusKplus         = "alipay_plus_kplus"
+	StoredPaymentMethodDetailsTypeAlipayPlusNaverpay      = "alipay_plus_naverpay"
+	StoredPaymentMethodDetailsTypeAlipayPlusRabbitlinepay = "alipay_plus_rabbitlinepay"
+	StoredPaymentMethodDetailsTypeAlipayPlusTosspay       = "alipay_plus_tosspay"
+	StoredPaymentMethodDetailsTypeAlipayPlusTouchngo      = "alipay_plus_touchngo"
+	StoredPaymentMethodDetailsTypeAlipayPlusTruemoney     = "alipay_plus_truemoney"
+	StoredPaymentMethodDetailsTypeBcmcMobile              = "bcmc_mobile"
+	StoredPaymentMethodDetailsTypeBcmcMobileQR            = "bcmc_mobile_QR"
+	StoredPaymentMethodDetailsTypeBcmcMobileApp           = "bcmc_mobile_app"
+	StoredPaymentMethodDetailsTypeMomoWallet              = "momo_wallet"
+	StoredPaymentMethodDetailsTypeMomoWalletApp           = "momo_wallet_app"
+	StoredPaymentMethodDetailsTypeRevolutpay              = "revolutpay"
+	StoredPaymentMethodDetailsTypePaymayaWallet           = "paymaya_wallet"
+	StoredPaymentMethodDetailsTypeGrabpaySG               = "grabpay_SG"
+	StoredPaymentMethodDetailsTypeGrabpayMY               = "grabpay_MY"
+	StoredPaymentMethodDetailsTypeGrabpayTH               = "grabpay_TH"
+	StoredPaymentMethodDetailsTypeGrabpayID               = "grabpay_ID"
+	StoredPaymentMethodDetailsTypeGrabpayVN               = "grabpay_VN"
+	StoredPaymentMethodDetailsTypeGrabpayPH               = "grabpay_PH"
+	StoredPaymentMethodDetailsTypeOxxo                    = "oxxo"
+	StoredPaymentMethodDetailsTypeGcash                   = "gcash"
+	StoredPaymentMethodDetailsTypeDana                    = "dana"
+	StoredPaymentMethodDetailsTypeKakaopay                = "kakaopay"
+	StoredPaymentMethodDetailsTypeTruemoney               = "truemoney"
+	StoredPaymentMethodDetailsTypePaysafecard             = "paysafecard"
+	StoredPaymentMethodDetailsTypeGopayWallet             = "gopay_wallet"
+)

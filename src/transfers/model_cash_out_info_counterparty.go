@@ -80,8 +80,8 @@ func (o CashOutInfoCounterparty) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CashOutInfoCounterparty) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CashOutInfoCounterparty) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.TransferInstrumentId) {
 		toSerialize["transferInstrumentId"] = o.TransferInstrumentId
 	}

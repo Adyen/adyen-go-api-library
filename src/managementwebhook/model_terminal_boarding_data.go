@@ -168,8 +168,8 @@ func (o TerminalBoardingData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalBoardingData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalBoardingData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["companyId"] = o.CompanyId
 	if !common.IsNil(o.MerchantId) {
 		toSerialize["merchantId"] = o.MerchantId

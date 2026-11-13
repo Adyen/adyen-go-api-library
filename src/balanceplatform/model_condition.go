@@ -127,8 +127,8 @@ func (o Condition) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Condition) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Condition) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["balanceType"] = o.BalanceType
 	toSerialize["conditionType"] = o.ConditionType
 	toSerialize["value"] = o.Value
@@ -189,3 +189,19 @@ func (o *Condition) isValidConditionType() bool {
 	}
 	return false
 }
+
+// Values allowed for Condition.BalanceType.
+const (
+	ConditionBalanceTypeBalance   = "balance"
+	ConditionBalanceTypeAvailable = "available"
+	ConditionBalanceTypePending   = "pending"
+	ConditionBalanceTypeReserved  = "reserved"
+)
+
+// Values allowed for Condition.ConditionType.
+const (
+	ConditionConditionTypeGreaterThan        = "greaterThan"
+	ConditionConditionTypeGreaterThanOrEqual = "greaterThanOrEqual"
+	ConditionConditionTypeLessThan           = "lessThan"
+	ConditionConditionTypeLessThanOrEqual    = "lessThanOrEqual"
+)

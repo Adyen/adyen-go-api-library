@@ -152,8 +152,8 @@ func (o WeChatPayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WeChatPayDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WeChatPayDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -211,3 +211,9 @@ func (o *WeChatPayDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for WeChatPayDetails.Type.
+const (
+	WeChatPayDetailsTypeWechatpay    = "wechatpay"
+	WeChatPayDetailsTypeWechatpayPos = "wechatpay_pos"
+)

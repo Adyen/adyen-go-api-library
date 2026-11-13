@@ -148,8 +148,8 @@ func (o DeviceInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DeviceInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DeviceInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.FormFactor) {
 		toSerialize["formFactor"] = o.FormFactor
 	}

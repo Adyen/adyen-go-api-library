@@ -182,8 +182,8 @@ func (o Payment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Payment) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Payment) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
@@ -244,3 +244,10 @@ func (o *Payment) isValidResultCode() bool {
 	}
 	return false
 }
+
+// Values allowed for Payment.ResultCode.
+const (
+	PaymentResultCodeAuthorised = "Authorised"
+	PaymentResultCodeReceived   = "Received"
+	PaymentResultCodePending    = "Pending"
+)

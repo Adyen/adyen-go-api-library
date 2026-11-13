@@ -148,8 +148,8 @@ func (o StoreAndForward) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoreAndForward) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoreAndForward) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MaxAmount) {
 		toSerialize["maxAmount"] = o.MaxAmount
 	}

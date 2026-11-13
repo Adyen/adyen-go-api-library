@@ -127,8 +127,8 @@ func (o DeleteDefenseDocumentRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DeleteDefenseDocumentRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DeleteDefenseDocumentRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["defenseDocumentType"] = o.DefenseDocumentType
 	toSerialize["disputePspReference"] = o.DisputePspReference
 	toSerialize["merchantAccountCode"] = o.MerchantAccountCode

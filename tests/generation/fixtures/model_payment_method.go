@@ -43,7 +43,7 @@ func (dst *PaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonCardDetails, _ := json.Marshal(dst.CardDetails)
 		// members without a "type" enum have no isValidType and match on structure alone
 		validType := true
-		if v, ok := interface{}(dst.CardDetails).(interface{ isValidType() bool }); ok {
+		if v, ok := any(dst.CardDetails).(interface{ isValidType() bool }); ok {
 			validType = v.isValidType()
 		}
 		if string(jsonCardDetails) == "{}" || !validType { // empty struct
@@ -61,7 +61,7 @@ func (dst *PaymentMethod) UnmarshalJSON(data []byte) error {
 		jsonWalletDetails, _ := json.Marshal(dst.WalletDetails)
 		// members without a "type" enum have no isValidType and match on structure alone
 		validType := true
-		if v, ok := interface{}(dst.WalletDetails).(interface{ isValidType() bool }); ok {
+		if v, ok := any(dst.WalletDetails).(interface{ isValidType() bool }); ok {
 			validType = v.isValidType()
 		}
 		if string(jsonWalletDetails) == "{}" || !validType { // empty struct
@@ -100,7 +100,7 @@ func (src PaymentMethod) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *PaymentMethod) GetActualInstance() interface{} {
+func (obj *PaymentMethod) GetActualInstance() any {
 	if obj == nil {
 		return nil
 	}

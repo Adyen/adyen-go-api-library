@@ -114,8 +114,8 @@ func (o TokenAuthentication) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TokenAuthentication) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TokenAuthentication) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Method) {
 		toSerialize["method"] = o.Method
 	}

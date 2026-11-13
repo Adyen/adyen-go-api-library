@@ -114,8 +114,8 @@ func (o WeChatPayPosResponseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WeChatPayPosResponseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WeChatPayPosResponseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ContactPersonName) {
 		toSerialize["contactPersonName"] = o.ContactPersonName
 	}

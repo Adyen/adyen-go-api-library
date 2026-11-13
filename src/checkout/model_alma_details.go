@@ -182,8 +182,8 @@ func (o AlmaDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AlmaDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AlmaDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -253,3 +253,14 @@ func (o *AlmaDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AlmaDetails.FeeType.
+const (
+	AlmaDetailsFeeTypeMerchantPays = "merchantPays"
+	AlmaDetailsFeeTypeShopperPays  = "shopperPays"
+)
+
+// Values allowed for AlmaDetails.Type.
+const (
+	AlmaDetailsTypeAlma = "alma"
+)

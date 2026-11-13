@@ -243,8 +243,8 @@ func (o CheckoutDelegatedAuthenticationAction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutDelegatedAuthenticationAction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutDelegatedAuthenticationAction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AuthorisationToken) {
 		toSerialize["authorisationToken"] = o.AuthorisationToken
 	}
@@ -309,3 +309,8 @@ func (o *CheckoutDelegatedAuthenticationAction) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CheckoutDelegatedAuthenticationAction.Type.
+const (
+	CheckoutDelegatedAuthenticationActionTypeDelegatedAuthentication = "delegatedAuthentication"
+)

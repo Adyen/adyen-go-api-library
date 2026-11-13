@@ -188,8 +188,8 @@ func (o NonprofitCause) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NonprofitCause) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NonprofitCause) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["bannerUrl"] = o.BannerUrl
 	toSerialize["description"] = o.Description
 	if !common.IsNil(o.Id) {

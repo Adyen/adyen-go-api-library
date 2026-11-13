@@ -522,8 +522,8 @@ func (o Store) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Store) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Store) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Links) {
 		toSerialize["_links"] = o.Links
 	}
@@ -614,3 +614,10 @@ func (o *Store) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for Store.Status.
+const (
+	StoreStatusActive   = "active"
+	StoreStatusClosed   = "closed"
+	StoreStatusInactive = "inactive"
+)

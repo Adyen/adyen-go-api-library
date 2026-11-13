@@ -389,8 +389,8 @@ func (o KlarnaDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o KlarnaDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o KlarnaDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
 	}
@@ -467,3 +467,14 @@ func (o *KlarnaDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for KlarnaDetails.Type.
+const (
+	KlarnaDetailsTypeKlarna                = "klarna"
+	KlarnaDetailsTypeKlarnapayments        = "klarnapayments"
+	KlarnaDetailsTypeKlarnapaymentsAccount = "klarnapayments_account"
+	KlarnaDetailsTypeKlarnapaymentsB2b     = "klarnapayments_b2b"
+	KlarnaDetailsTypeKlarnaPaynow          = "klarna_paynow"
+	KlarnaDetailsTypeKlarnaAccount         = "klarna_account"
+	KlarnaDetailsTypeKlarnaB2b             = "klarna_b2b"
+)

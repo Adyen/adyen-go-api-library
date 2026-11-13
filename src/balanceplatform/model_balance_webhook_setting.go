@@ -214,8 +214,8 @@ func (o BalanceWebhookSetting) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceWebhookSetting) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceWebhookSetting) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["currency"] = o.Currency
 	toSerialize["id"] = o.Id
 	toSerialize["status"] = o.Status

@@ -80,8 +80,8 @@ func (o Dcc) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Dcc) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Dcc) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.EnableDcc) {
 		toSerialize["enableDcc"] = o.EnableDcc
 	}

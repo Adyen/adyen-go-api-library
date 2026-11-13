@@ -80,8 +80,8 @@ func (o ThreeDS2ResultResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThreeDS2ResultResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThreeDS2ResultResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ThreeDS2Result) {
 		toSerialize["threeDS2Result"] = o.ThreeDS2Result
 	}

@@ -311,8 +311,8 @@ func (o BalanceAccountInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceAccountInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceAccountInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountHolderId"] = o.AccountHolderId
 	if !common.IsNil(o.DefaultCurrencyCode) {
 		toSerialize["defaultCurrencyCode"] = o.DefaultCurrencyCode

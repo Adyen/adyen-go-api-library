@@ -134,8 +134,8 @@ func (o ModificationResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ModificationResult) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ModificationResult) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
@@ -189,3 +189,18 @@ func (o *ModificationResult) isValidResponse() bool {
 	}
 	return false
 }
+
+// Values allowed for ModificationResult.Response.
+const (
+	ModificationResultResponse_CaptureReceived             = "[capture-received]"
+	ModificationResultResponse_CancelReceived              = "[cancel-received]"
+	ModificationResultResponse_RefundReceived              = "[refund-received]"
+	ModificationResultResponse_CancelOrRefundReceived      = "[cancelOrRefund-received]"
+	ModificationResultResponse_AdjustAuthorisationReceived = "[adjustAuthorisation-received]"
+	ModificationResultResponse_DonationReceived            = "[donation-received]"
+	ModificationResultResponse_TechnicalCancelReceived     = "[technical-cancel-received]"
+	ModificationResultResponse_VoidPendingRefundReceived   = "[voidPendingRefund-received]"
+	ModificationResultResponseAuthorised                   = "Authorised"
+	ModificationResultResponseRefused                      = "Refused"
+	ModificationResultResponseError                        = "Error"
+)

@@ -229,8 +229,8 @@ func (o DonationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DonationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DonationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["donationAccount"] = o.DonationAccount
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["modificationAmount"] = o.ModificationAmount

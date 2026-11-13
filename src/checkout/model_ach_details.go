@@ -500,8 +500,8 @@ func (o AchDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AchDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AchDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountHolderType) {
 		toSerialize["accountHolderType"] = o.AccountHolderType
 	}
@@ -607,3 +607,26 @@ func (o *AchDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AchDetails.AccountHolderType.
+const (
+	AchDetailsAccountHolderTypeBusiness = "business"
+	AchDetailsAccountHolderTypePersonal = "personal"
+)
+
+// Values allowed for AchDetails.BankAccountType.
+const (
+	AchDetailsBankAccountTypeBalance  = "balance"
+	AchDetailsBankAccountTypeChecking = "checking"
+	AchDetailsBankAccountTypeDeposit  = "deposit"
+	AchDetailsBankAccountTypeGeneral  = "general"
+	AchDetailsBankAccountTypeOther    = "other"
+	AchDetailsBankAccountTypePayment  = "payment"
+	AchDetailsBankAccountTypeSavings  = "savings"
+)
+
+// Values allowed for AchDetails.Type.
+const (
+	AchDetailsTypeAch      = "ach"
+	AchDetailsTypeAchPlaid = "ach_plaid"
+)

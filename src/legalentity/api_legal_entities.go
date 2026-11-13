@@ -325,7 +325,7 @@ Requests a periodic data review for the legal entity of the user specified in th
 @return *http.Response, error
 */
 func (a *LegalEntitiesApi) RequestPeriodicReview(ctx context.Context, r LegalEntitiesApiRequestPeriodicReviewInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/legalEntities/{id}/requestPeriodicReview"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}

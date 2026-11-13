@@ -330,8 +330,8 @@ func (o OpenInvoiceDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OpenInvoiceDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o OpenInvoiceDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
 	}
@@ -404,3 +404,10 @@ func (o *OpenInvoiceDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for OpenInvoiceDetails.Type.
+const (
+	OpenInvoiceDetailsTypeOpeninvoice         = "openinvoice"
+	OpenInvoiceDetailsTypeAfterpayDirectdebit = "afterpay_directdebit"
+	OpenInvoiceDetailsTypeAtomePos            = "atome_pos"
+)

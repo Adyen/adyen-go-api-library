@@ -107,8 +107,8 @@ func (o BoardingTokenRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BoardingTokenRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BoardingTokenRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["boardingRequestToken"] = o.BoardingRequestToken
 	if !common.IsNil(o.SubMerchantData) {
 		toSerialize["subMerchantData"] = o.SubMerchantData

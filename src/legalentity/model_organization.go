@@ -1055,8 +1055,8 @@ func (o Organization) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Organization) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Organization) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CountryOfGoverningLaw) {
 		toSerialize["countryOfGoverningLaw"] = o.CountryOfGoverningLaw
 	}
@@ -1215,3 +1215,48 @@ func (o *Organization) isValidVatAbsenceReason() bool {
 	}
 	return false
 }
+
+// Values allowed for Organization.InstitutionalSector.
+const (
+	OrganizationInstitutionalSectorNonFinancialCorporation                     = "nonFinancialCorporation"
+	OrganizationInstitutionalSectorCentralBank                                 = "centralBank"
+	OrganizationInstitutionalSectorCreditInstitutions                          = "creditInstitutions"
+	OrganizationInstitutionalSectorDepositTakingCorporations                   = "depositTakingCorporations"
+	OrganizationInstitutionalSectorMoneyMarketFunds                            = "moneyMarketFunds"
+	OrganizationInstitutionalSectorNonMMFInvestmentFunds                       = "nonMMFInvestmentFunds"
+	OrganizationInstitutionalSectorFinancialVehicleCorporation                 = "financialVehicleCorporation"
+	OrganizationInstitutionalSectorOtherFinancialIntermediaries                = "otherFinancialIntermediaries"
+	OrganizationInstitutionalSectorFinancialAuxiliaries                        = "financialAuxiliaries"
+	OrganizationInstitutionalSectorCaptiveFinancialInstitutionsAndMoneyLenders = "captiveFinancialInstitutionsAndMoneyLenders"
+	OrganizationInstitutionalSectorInsuranceCorporations                       = "insuranceCorporations"
+	OrganizationInstitutionalSectorPensionFunds                                = "pensionFunds"
+	OrganizationInstitutionalSectorCentralGovernment                           = "centralGovernment"
+	OrganizationInstitutionalSectorStateGovernment                             = "stateGovernment"
+	OrganizationInstitutionalSectorLocalGovernment                             = "localGovernment"
+	OrganizationInstitutionalSectorSocialSecurityFunds                         = "socialSecurityFunds"
+	OrganizationInstitutionalSectorNonProfitInstitutionsServingHouseholds      = "nonProfitInstitutionsServingHouseholds"
+)
+
+// Values allowed for Organization.StatusOfLegalProceeding.
+const (
+	OrganizationStatusOfLegalProceedingNoLegalActionsTaken         = "noLegalActionsTaken"
+	OrganizationStatusOfLegalProceedingUnderJudicialAdministration = "underJudicialAdministration"
+	OrganizationStatusOfLegalProceedingBankruptcyInsolvency        = "bankruptcyInsolvency"
+	OrganizationStatusOfLegalProceedingOtherLegalMeasures          = "otherLegalMeasures"
+)
+
+// Values allowed for Organization.Type.
+const (
+	OrganizationTypeAssociationIncorporated  = "associationIncorporated"
+	OrganizationTypeGovernmentalOrganization = "governmentalOrganization"
+	OrganizationTypeListedPublicCompany      = "listedPublicCompany"
+	OrganizationTypeNonProfit                = "nonProfit"
+	OrganizationTypePartnershipIncorporated  = "partnershipIncorporated"
+	OrganizationTypePrivateCompany           = "privateCompany"
+)
+
+// Values allowed for Organization.VatAbsenceReason.
+const (
+	OrganizationVatAbsenceReasonIndustryExemption = "industryExemption"
+	OrganizationVatAbsenceReasonBelowTaxThreshold = "belowTaxThreshold"
+)

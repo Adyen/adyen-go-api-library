@@ -100,8 +100,8 @@ func (o BeginScaDeviceRegistrationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BeginScaDeviceRegistrationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BeginScaDeviceRegistrationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["name"] = o.Name
 	toSerialize["sdkOutput"] = o.SdkOutput
 	return toSerialize, nil

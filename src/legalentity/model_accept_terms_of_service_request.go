@@ -107,8 +107,8 @@ func (o AcceptTermsOfServiceRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AcceptTermsOfServiceRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AcceptTermsOfServiceRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["acceptedBy"] = o.AcceptedBy
 	if !common.IsNil(o.IpAddress) {
 		toSerialize["ipAddress"] = o.IpAddress

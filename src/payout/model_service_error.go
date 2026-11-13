@@ -250,8 +250,8 @@ func (o ServiceError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ServiceError) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ServiceError) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}

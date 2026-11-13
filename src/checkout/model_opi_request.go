@@ -114,8 +114,8 @@ func (o OpiRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OpiRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o OpiRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.IncludeIssuerId) {
 		toSerialize["includeIssuerId"] = o.IncludeIssuerId
 	}

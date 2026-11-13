@@ -522,8 +522,8 @@ func (o NetworkTokenNotificationDataV2) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NetworkTokenNotificationDataV2) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NetworkTokenNotificationDataV2) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Authentication) {
 		toSerialize["authentication"] = o.Authentication
 	}

@@ -134,8 +134,8 @@ func (o PaginatedGetCardOrderResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaginatedGetCardOrderResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaginatedGetCardOrderResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CardOrders) {
 		toSerialize["cardOrders"] = o.CardOrders
 	}

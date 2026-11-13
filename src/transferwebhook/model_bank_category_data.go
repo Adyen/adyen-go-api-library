@@ -118,8 +118,8 @@ func (o BankCategoryData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BankCategoryData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BankCategoryData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Priority) {
 		toSerialize["priority"] = o.Priority
 	}
@@ -183,3 +183,18 @@ func (o *BankCategoryData) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for BankCategoryData.Priority.
+const (
+	BankCategoryDataPriorityCrossBorder = "crossBorder"
+	BankCategoryDataPriorityFast        = "fast"
+	BankCategoryDataPriorityInstant     = "instant"
+	BankCategoryDataPriorityInternal    = "internal"
+	BankCategoryDataPriorityRegular     = "regular"
+	BankCategoryDataPriorityWire        = "wire"
+)
+
+// Values allowed for BankCategoryData.Type.
+const (
+	BankCategoryDataTypeBank = "bank"
+)

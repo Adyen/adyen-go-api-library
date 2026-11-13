@@ -304,8 +304,8 @@ func (o BalanceTransferResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceTransferResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceTransferResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	toSerialize["createdAt"] = o.CreatedAt
 	if !common.IsNil(o.Description) {
@@ -376,3 +376,21 @@ func (o *BalanceTransferResponse) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for BalanceTransferResponse.Status.
+const (
+	BalanceTransferResponseStatusError            = "error"
+	BalanceTransferResponseStatusFailed           = "failed"
+	BalanceTransferResponseStatusNotEnoughBalance = "notEnoughBalance"
+	BalanceTransferResponseStatusTransferred      = "transferred"
+)
+
+// Values allowed for BalanceTransferResponse.Type.
+const (
+	BalanceTransferResponseTypeTax          = "tax"
+	BalanceTransferResponseTypeFee          = "fee"
+	BalanceTransferResponseTypeTerminalSale = "terminalSale"
+	BalanceTransferResponseTypeCredit       = "credit"
+	BalanceTransferResponseTypeDebit        = "debit"
+	BalanceTransferResponseTypeAdjustment   = "adjustment"
+)

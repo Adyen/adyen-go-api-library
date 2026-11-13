@@ -277,8 +277,8 @@ func (o RestServiceError) Error() string {
 	return "{" + o.GetType() + "," + o.GetDetail() + "," + o.GetErrorCode() + "," + o.GetRequestId() + "," + string(o.GetStatus()) + "," + o.GetErrorCode() + "," + o.GetTitle() + "}"
 }
 
-func (o RestServiceError) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RestServiceError) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["detail"] = o.Detail
 	toSerialize["errorCode"] = o.ErrorCode
 	if !IsNil(o.Instance) {

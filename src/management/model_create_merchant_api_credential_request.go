@@ -148,8 +148,8 @@ func (o CreateMerchantApiCredentialRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateMerchantApiCredentialRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreateMerchantApiCredentialRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AllowedOrigins) {
 		toSerialize["allowedOrigins"] = o.AllowedOrigins
 	}

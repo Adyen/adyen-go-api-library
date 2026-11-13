@@ -80,8 +80,8 @@ func (o PaymentMethodNotificationResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentMethodNotificationResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentMethodNotificationResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.NotificationResponse) {
 		toSerialize["notificationResponse"] = o.NotificationResponse
 	}

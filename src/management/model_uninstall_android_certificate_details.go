@@ -118,8 +118,8 @@ func (o UninstallAndroidCertificateDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UninstallAndroidCertificateDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UninstallAndroidCertificateDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CertificateId) {
 		toSerialize["certificateId"] = o.CertificateId
 	}
@@ -174,3 +174,8 @@ func (o *UninstallAndroidCertificateDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for UninstallAndroidCertificateDetails.Type.
+const (
+	UninstallAndroidCertificateDetailsTypeUninstallAndroidCertificate = "UninstallAndroidCertificate"
+)

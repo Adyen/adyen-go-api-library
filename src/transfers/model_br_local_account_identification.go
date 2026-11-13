@@ -190,8 +190,8 @@ func (o BRLocalAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BRLocalAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BRLocalAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountNumber"] = o.AccountNumber
 	toSerialize["bankCode"] = o.BankCode
 	toSerialize["branchNumber"] = o.BranchNumber
@@ -247,3 +247,8 @@ func (o *BRLocalAccountIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for BRLocalAccountIdentification.Type.
+const (
+	BRLocalAccountIdentificationTypeBrLocal = "brLocal"
+)

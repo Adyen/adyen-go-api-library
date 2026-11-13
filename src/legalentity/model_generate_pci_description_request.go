@@ -114,8 +114,8 @@ func (o GeneratePciDescriptionRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GeneratePciDescriptionRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GeneratePciDescriptionRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdditionalSalesChannels) {
 		toSerialize["additionalSalesChannels"] = o.AdditionalSalesChannels
 	}
@@ -160,3 +160,11 @@ func (v *NullableGeneratePciDescriptionRequest) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+// Values allowed for GeneratePciDescriptionRequest.AdditionalSalesChannels items.
+const (
+	GeneratePciDescriptionRequestAdditionalSalesChannelsECommerce = "eCommerce"
+	GeneratePciDescriptionRequestAdditionalSalesChannelsEcomMoto  = "ecomMoto"
+	GeneratePciDescriptionRequestAdditionalSalesChannelsPos       = "pos"
+	GeneratePciDescriptionRequestAdditionalSalesChannelsPosMoto   = "posMoto"
+)

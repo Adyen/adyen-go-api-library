@@ -102,8 +102,8 @@ func (o USAchTracingData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o USAchTracingData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o USAchTracingData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["traceNumber"] = o.TraceNumber
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
@@ -154,3 +154,8 @@ func (o *USAchTracingData) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for USAchTracingData.Type.
+const (
+	USAchTracingDataTypeUsAch = "usAch"
+)

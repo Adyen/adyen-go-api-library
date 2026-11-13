@@ -168,8 +168,8 @@ func (o PaymentRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	toSerialize["paymentMethod"] = o.PaymentMethod
 	if !common.IsNil(o.ThreeDSAuthenticationOnly) {

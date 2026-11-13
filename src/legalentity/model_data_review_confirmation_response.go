@@ -80,8 +80,8 @@ func (o DataReviewConfirmationResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DataReviewConfirmationResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DataReviewConfirmationResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DataReviewedAt) {
 		toSerialize["dataReviewedAt"] = o.DataReviewedAt
 	}

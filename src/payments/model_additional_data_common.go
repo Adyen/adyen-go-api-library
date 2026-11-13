@@ -794,8 +794,8 @@ func (o AdditionalDataCommon) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalDataCommon) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalDataCommon) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.RequestedTestAcquirerResponseCode) {
 		toSerialize["RequestedTestAcquirerResponseCode"] = o.RequestedTestAcquirerResponseCode
 	}
@@ -910,3 +910,9 @@ func (o *AdditionalDataCommon) isValidIndustryUsage() bool {
 	}
 	return false
 }
+
+// Values allowed for AdditionalDataCommon.IndustryUsage.
+const (
+	AdditionalDataCommonIndustryUsageNoShow        = "NoShow"
+	AdditionalDataCommonIndustryUsageDelayedCharge = "DelayedCharge"
+)

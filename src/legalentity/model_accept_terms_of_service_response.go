@@ -250,8 +250,8 @@ func (o AcceptTermsOfServiceResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AcceptTermsOfServiceResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AcceptTermsOfServiceResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcceptedBy) {
 		toSerialize["acceptedBy"] = o.AcceptedBy
 	}
@@ -318,3 +318,19 @@ func (o *AcceptTermsOfServiceResponse) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AcceptTermsOfServiceResponse.Type.
+const (
+	AcceptTermsOfServiceResponseTypeAdyenAccount              = "adyenAccount"
+	AcceptTermsOfServiceResponseTypeAdyenCapital              = "adyenCapital"
+	AcceptTermsOfServiceResponseTypeAdyenCapitalCashAdvance   = "adyenCapitalCashAdvance"
+	AcceptTermsOfServiceResponseTypeAdyenCard                 = "adyenCard"
+	AcceptTermsOfServiceResponseTypeAdyenChargeCard           = "adyenChargeCard"
+	AcceptTermsOfServiceResponseTypeAdyenForPlatformsAdvanced = "adyenForPlatformsAdvanced"
+	AcceptTermsOfServiceResponseTypeAdyenForPlatformsManage   = "adyenForPlatformsManage"
+	AcceptTermsOfServiceResponseTypeAdyenFranchisee           = "adyenFranchisee"
+	AcceptTermsOfServiceResponseTypeAdyenIssuing              = "adyenIssuing"
+	AcceptTermsOfServiceResponseTypeAdyenPccr                 = "adyenPccr"
+	AcceptTermsOfServiceResponseTypeDirectDebit               = "directDebit"
+	AcceptTermsOfServiceResponseTypeKycOnInvite               = "kycOnInvite"
+)

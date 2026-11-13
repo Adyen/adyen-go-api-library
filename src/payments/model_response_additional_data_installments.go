@@ -454,8 +454,8 @@ func (o ResponseAdditionalDataInstallments) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ResponseAdditionalDataInstallments) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ResponseAdditionalDataInstallments) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.InstallmentPaymentDataInstallmentType) {
 		toSerialize["installmentPaymentData.installmentType"] = o.InstallmentPaymentDataInstallmentType
 	}

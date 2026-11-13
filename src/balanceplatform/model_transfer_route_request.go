@@ -263,8 +263,8 @@ func (o TransferRouteRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransferRouteRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransferRouteRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BalanceAccountId) {
 		toSerialize["balanceAccountId"] = o.BalanceAccountId
 	}
@@ -328,3 +328,18 @@ func (o *TransferRouteRequest) isValidCategory() bool {
 	}
 	return false
 }
+
+// Values allowed for TransferRouteRequest.Category.
+const (
+	TransferRouteRequestCategoryBank = "bank"
+)
+
+// Values allowed for TransferRouteRequest.Priorities items.
+const (
+	TransferRouteRequestPrioritiesCrossBorder = "crossBorder"
+	TransferRouteRequestPrioritiesFast        = "fast"
+	TransferRouteRequestPrioritiesInstant     = "instant"
+	TransferRouteRequestPrioritiesInternal    = "internal"
+	TransferRouteRequestPrioritiesRegular     = "regular"
+	TransferRouteRequestPrioritiesWire        = "wire"
+)

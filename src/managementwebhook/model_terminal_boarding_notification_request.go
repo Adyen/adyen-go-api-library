@@ -155,8 +155,8 @@ func (o TerminalBoardingNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalBoardingNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalBoardingNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["createdAt"] = o.CreatedAt
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
@@ -209,3 +209,8 @@ func (o *TerminalBoardingNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TerminalBoardingNotificationRequest.Type.
+const (
+	TerminalBoardingNotificationRequestTypeTerminalBoardingTriggered = "terminalBoarding.triggered"
+)

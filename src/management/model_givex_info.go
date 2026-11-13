@@ -154,8 +154,8 @@ func (o GivexInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GivexInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GivexInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["currencyCode"] = o.CurrencyCode
 	toSerialize["password"] = o.Password
 	toSerialize["paymentFlow"] = o.PaymentFlow
@@ -208,3 +208,9 @@ func (o *GivexInfo) isValidPaymentFlow() bool {
 	}
 	return false
 }
+
+// Values allowed for GivexInfo.PaymentFlow.
+const (
+	GivexInfoPaymentFlowEcommerce = "Ecommerce"
+	GivexInfoPaymentFlowPOS       = "POS"
+)

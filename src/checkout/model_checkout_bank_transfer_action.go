@@ -549,8 +549,8 @@ func (o CheckoutBankTransferAction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutBankTransferAction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutBankTransferAction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountNumber) {
 		toSerialize["accountNumber"] = o.AccountNumber
 	}
@@ -642,3 +642,8 @@ func (o *CheckoutBankTransferAction) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CheckoutBankTransferAction.Type.
+const (
+	CheckoutBankTransferActionTypeBankTransfer = "bankTransfer"
+)

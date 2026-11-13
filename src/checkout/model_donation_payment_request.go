@@ -1344,8 +1344,8 @@ func (o DonationPaymentRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DonationPaymentRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DonationPaymentRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountInfo) {
 		toSerialize["accountInfo"] = o.AccountInfo
 	}
@@ -1521,3 +1521,25 @@ func (o *DonationPaymentRequest) isValidShopperInteraction() bool {
 	}
 	return false
 }
+
+// Values allowed for DonationPaymentRequest.Channel.
+const (
+	DonationPaymentRequestChannelIOS     = "iOS"
+	DonationPaymentRequestChannelAndroid = "Android"
+	DonationPaymentRequestChannelWeb     = "Web"
+)
+
+// Values allowed for DonationPaymentRequest.RecurringProcessingModel.
+const (
+	DonationPaymentRequestRecurringProcessingModelCardOnFile            = "CardOnFile"
+	DonationPaymentRequestRecurringProcessingModelSubscription          = "Subscription"
+	DonationPaymentRequestRecurringProcessingModelUnscheduledCardOnFile = "UnscheduledCardOnFile"
+)
+
+// Values allowed for DonationPaymentRequest.ShopperInteraction.
+const (
+	DonationPaymentRequestShopperInteractionEcommerce = "Ecommerce"
+	DonationPaymentRequestShopperInteractionContAuth  = "ContAuth"
+	DonationPaymentRequestShopperInteractionMoto      = "Moto"
+	DonationPaymentRequestShopperInteractionPOS       = "POS"
+)

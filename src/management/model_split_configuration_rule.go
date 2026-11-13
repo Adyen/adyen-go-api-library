@@ -283,8 +283,8 @@ func (o SplitConfigurationRule) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SplitConfigurationRule) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SplitConfigurationRule) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CardRegion) {
 		toSerialize["cardRegion"] = o.CardRegion
 	}
@@ -374,3 +374,39 @@ func (o *SplitConfigurationRule) isValidShopperInteraction() bool {
 	}
 	return false
 }
+
+// Values allowed for SplitConfigurationRule.CardRegion.
+const (
+	SplitConfigurationRuleCardRegionInternational = "international"
+	SplitConfigurationRuleCardRegionIntraEEA      = "intraEEA"
+	SplitConfigurationRuleCardRegionIntraRegional = "intraRegional"
+	SplitConfigurationRuleCardRegionInterRegional = "interRegional"
+	SplitConfigurationRuleCardRegionDomestic      = "domestic"
+	SplitConfigurationRuleCardRegionANY           = "ANY"
+)
+
+// Values allowed for SplitConfigurationRule.CardUsageType.
+const (
+	SplitConfigurationRuleCardUsageTypeCommercial = "commercial"
+	SplitConfigurationRuleCardUsageTypeConsumer   = "consumer"
+	SplitConfigurationRuleCardUsageTypeANY        = "ANY"
+)
+
+// Values allowed for SplitConfigurationRule.FundingSource.
+const (
+	SplitConfigurationRuleFundingSourceCharged       = "charged"
+	SplitConfigurationRuleFundingSourceCredit        = "credit"
+	SplitConfigurationRuleFundingSourceDebit         = "debit"
+	SplitConfigurationRuleFundingSourceDeferredDebit = "deferred_debit"
+	SplitConfigurationRuleFundingSourcePrepaid       = "prepaid"
+	SplitConfigurationRuleFundingSourceANY           = "ANY"
+)
+
+// Values allowed for SplitConfigurationRule.ShopperInteraction.
+const (
+	SplitConfigurationRuleShopperInteractionEcommerce = "Ecommerce"
+	SplitConfigurationRuleShopperInteractionContAuth  = "ContAuth"
+	SplitConfigurationRuleShopperInteractionMoto      = "Moto"
+	SplitConfigurationRuleShopperInteractionPOS       = "POS"
+	SplitConfigurationRuleShopperInteractionANY       = "ANY"
+)

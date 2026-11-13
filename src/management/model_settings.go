@@ -148,8 +148,8 @@ func (o Settings) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Settings) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Settings) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Band) {
 		toSerialize["band"] = o.Band
 	}

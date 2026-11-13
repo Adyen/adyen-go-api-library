@@ -73,8 +73,8 @@ func (o GetNetworkTokenResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetNetworkTokenResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GetNetworkTokenResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["token"] = o.Token
 	return toSerialize, nil
 }

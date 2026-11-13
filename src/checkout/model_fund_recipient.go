@@ -454,8 +454,8 @@ func (o FundRecipient) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FundRecipient) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o FundRecipient) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.IBAN) {
 		toSerialize["IBAN"] = o.IBAN
 	}
@@ -540,3 +540,12 @@ func (o *FundRecipient) isValidWalletPurpose() bool {
 	}
 	return false
 }
+
+// Values allowed for FundRecipient.WalletPurpose.
+const (
+	FundRecipientWalletPurposeIdentifiedBoleto        = "identifiedBoleto"
+	FundRecipientWalletPurposeTransferDifferentWallet = "transferDifferentWallet"
+	FundRecipientWalletPurposeTransferOwnWallet       = "transferOwnWallet"
+	FundRecipientWalletPurposeTransferSameWallet      = "transferSameWallet"
+	FundRecipientWalletPurposeUnidentifiedBoleto      = "unidentifiedBoleto"
+)

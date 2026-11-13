@@ -127,8 +127,8 @@ func (o PaginatedPaymentInstrumentsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaginatedPaymentInstrumentsResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaginatedPaymentInstrumentsResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["hasNext"] = o.HasNext
 	toSerialize["hasPrevious"] = o.HasPrevious
 	toSerialize["paymentInstruments"] = o.PaymentInstruments

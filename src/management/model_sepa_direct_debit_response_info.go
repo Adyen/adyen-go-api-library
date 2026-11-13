@@ -114,8 +114,8 @@ func (o SepaDirectDebitResponseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SepaDirectDebitResponseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SepaDirectDebitResponseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CreditorId) {
 		toSerialize["creditorId"] = o.CreditorId
 	}

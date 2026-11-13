@@ -152,8 +152,8 @@ func (o AuthenticationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AuthenticationData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AuthenticationData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AttemptAuthentication) {
 		toSerialize["attemptAuthentication"] = o.AttemptAuthentication
 	}
@@ -211,3 +211,9 @@ func (o *AuthenticationData) isValidAttemptAuthentication() bool {
 	}
 	return false
 }
+
+// Values allowed for AuthenticationData.AttemptAuthentication.
+const (
+	AuthenticationDataAttemptAuthenticationAlways = "always"
+	AuthenticationDataAttemptAuthenticationNever  = "never"
+)

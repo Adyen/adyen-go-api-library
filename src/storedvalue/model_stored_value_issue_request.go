@@ -295,8 +295,8 @@ func (o StoredValueIssueRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredValueIssueRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoredValueIssueRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
@@ -363,3 +363,11 @@ func (o *StoredValueIssueRequest) isValidShopperInteraction() bool {
 	}
 	return false
 }
+
+// Values allowed for StoredValueIssueRequest.ShopperInteraction.
+const (
+	StoredValueIssueRequestShopperInteractionEcommerce = "Ecommerce"
+	StoredValueIssueRequestShopperInteractionContAuth  = "ContAuth"
+	StoredValueIssueRequestShopperInteractionMoto      = "Moto"
+	StoredValueIssueRequestShopperInteractionPOS       = "POS"
+)

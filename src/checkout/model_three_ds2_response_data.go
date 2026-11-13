@@ -673,8 +673,8 @@ func (o ThreeDS2ResponseData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThreeDS2ResponseData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThreeDS2ResponseData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcsChallengeMandated) {
 		toSerialize["acsChallengeMandated"] = o.AcsChallengeMandated
 	}

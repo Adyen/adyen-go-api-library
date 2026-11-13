@@ -444,8 +444,8 @@ func (o CarRental) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CarRental) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CarRental) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CustomerServicePhoneNumber) {
 		toSerialize["customerServicePhoneNumber"] = o.CustomerServicePhoneNumber
 	}
@@ -528,3 +528,9 @@ func (o *CarRental) isValidRateType() bool {
 	}
 	return false
 }
+
+// Values allowed for CarRental.RateType.
+const (
+	CarRentalRateTypeDaily  = "daily"
+	CarRentalRateTypeWeekly = "weekly"
+)

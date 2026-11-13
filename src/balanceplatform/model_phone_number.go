@@ -148,8 +148,8 @@ func (o PhoneNumber) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PhoneNumber) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PhoneNumber) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.PhoneCountryCode) {
 		toSerialize["phoneCountryCode"] = o.PhoneCountryCode
 	}
@@ -207,3 +207,11 @@ func (o *PhoneNumber) isValidPhoneType() bool {
 	}
 	return false
 }
+
+// Values allowed for PhoneNumber.PhoneType.
+const (
+	PhoneNumberPhoneTypeFax      = "Fax"
+	PhoneNumberPhoneTypeLandline = "Landline"
+	PhoneNumberPhoneTypeMobile   = "Mobile"
+	PhoneNumberPhoneTypeSIP      = "SIP"
+)

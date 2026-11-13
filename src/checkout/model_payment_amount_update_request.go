@@ -372,8 +372,8 @@ func (o PaymentAmountUpdateRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentAmountUpdateRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentAmountUpdateRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdjustAuthType) {
 		toSerialize["adjustAuthType"] = o.AdjustAuthType
 	}
@@ -457,3 +457,16 @@ func (o *PaymentAmountUpdateRequest) isValidIndustryUsage() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentAmountUpdateRequest.AdjustAuthType.
+const (
+	PaymentAmountUpdateRequestAdjustAuthTypeCardholderInitiatedTransaction = "cardholderInitiatedTransaction"
+	PaymentAmountUpdateRequestAdjustAuthTypeMerchantInitiatedTransaction   = "merchantInitiatedTransaction"
+)
+
+// Values allowed for PaymentAmountUpdateRequest.IndustryUsage.
+const (
+	PaymentAmountUpdateRequestIndustryUsageDelayedCharge = "delayedCharge"
+	PaymentAmountUpdateRequestIndustryUsageInstallment   = "installment"
+	PaymentAmountUpdateRequestIndustryUsageNoShow        = "noShow"
+)

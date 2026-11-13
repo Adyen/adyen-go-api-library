@@ -658,8 +658,8 @@ func (o AdditionalDataOpenInvoice) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalDataOpenInvoice) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalDataOpenInvoice) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.OpeninvoicedataMerchantData) {
 		toSerialize["openinvoicedata.merchantData"] = o.OpeninvoicedataMerchantData
 	}

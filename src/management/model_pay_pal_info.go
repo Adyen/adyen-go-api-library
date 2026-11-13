@@ -134,8 +134,8 @@ func (o PayPalInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayPalInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayPalInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DirectCapture) {
 		toSerialize["directCapture"] = o.DirectCapture
 	}

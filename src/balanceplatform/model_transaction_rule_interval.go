@@ -243,8 +243,8 @@ func (o TransactionRuleInterval) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransactionRuleInterval) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransactionRuleInterval) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DayOfMonth) {
 		toSerialize["dayOfMonth"] = o.DayOfMonth
 	}
@@ -318,3 +318,25 @@ func (o *TransactionRuleInterval) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TransactionRuleInterval.DayOfWeek.
+const (
+	TransactionRuleIntervalDayOfWeekFriday    = "friday"
+	TransactionRuleIntervalDayOfWeekMonday    = "monday"
+	TransactionRuleIntervalDayOfWeekSaturday  = "saturday"
+	TransactionRuleIntervalDayOfWeekSunday    = "sunday"
+	TransactionRuleIntervalDayOfWeekThursday  = "thursday"
+	TransactionRuleIntervalDayOfWeekTuesday   = "tuesday"
+	TransactionRuleIntervalDayOfWeekWednesday = "wednesday"
+)
+
+// Values allowed for TransactionRuleInterval.Type.
+const (
+	TransactionRuleIntervalTypeDaily          = "daily"
+	TransactionRuleIntervalTypeLifetime       = "lifetime"
+	TransactionRuleIntervalTypeMonthly        = "monthly"
+	TransactionRuleIntervalTypePerTransaction = "perTransaction"
+	TransactionRuleIntervalTypeRolling        = "rolling"
+	TransactionRuleIntervalTypeSliding        = "sliding"
+	TransactionRuleIntervalTypeWeekly         = "weekly"
+)

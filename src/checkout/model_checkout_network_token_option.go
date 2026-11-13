@@ -114,8 +114,8 @@ func (o CheckoutNetworkTokenOption) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutNetworkTokenOption) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutNetworkTokenOption) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.IncludeCryptogram) {
 		toSerialize["includeCryptogram"] = o.IncludeCryptogram
 	}

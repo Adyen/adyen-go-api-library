@@ -103,8 +103,8 @@ func (o EstimationTrackingData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o EstimationTrackingData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o EstimationTrackingData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["estimatedArrivalTime"] = o.EstimatedArrivalTime
 	toSerialize["type"] = o.Type
 	return toSerialize, nil
@@ -155,3 +155,8 @@ func (o *EstimationTrackingData) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for EstimationTrackingData.Type.
+const (
+	EstimationTrackingDataTypeEstimation = "estimation"
+)

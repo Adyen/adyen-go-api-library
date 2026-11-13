@@ -100,8 +100,8 @@ func (o SessionAmountUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SessionAmountUpdate) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SessionAmountUpdate) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["currency"] = o.Currency
 	toSerialize["value"] = o.Value
 	return toSerialize, nil

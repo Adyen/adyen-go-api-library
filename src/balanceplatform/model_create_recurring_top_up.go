@@ -222,8 +222,8 @@ func (o CreateRecurringTopUp) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateRecurringTopUp) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreateRecurringTopUp) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["counterparty"] = o.Counterparty
 	toSerialize["description"] = o.Description
 	if !common.IsNil(o.ReferenceForBeneficiary) {
@@ -282,3 +282,9 @@ func (o *CreateRecurringTopUp) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for CreateRecurringTopUp.Status.
+const (
+	CreateRecurringTopUpStatusActive   = "active"
+	CreateRecurringTopUpStatusInactive = "inactive"
+)

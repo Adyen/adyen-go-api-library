@@ -169,8 +169,8 @@ func (o TransactionNotificationRequestV4) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransactionNotificationRequestV4) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransactionNotificationRequestV4) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -227,3 +227,8 @@ func (o *TransactionNotificationRequestV4) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TransactionNotificationRequestV4.Type.
+const (
+	TransactionNotificationRequestV4TypeBalancePlatformTransactionCreated = "balancePlatform.transaction.created"
+)

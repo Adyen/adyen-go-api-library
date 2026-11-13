@@ -107,8 +107,8 @@ func (o VippsInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o VippsInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o VippsInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["logo"] = o.Logo
 	if !common.IsNil(o.SubscriptionCancelUrl) {
 		toSerialize["subscriptionCancelUrl"] = o.SubscriptionCancelUrl

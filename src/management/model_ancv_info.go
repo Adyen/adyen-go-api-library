@@ -73,8 +73,8 @@ func (o AncvInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AncvInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AncvInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["shopId"] = o.ShopId
 	return toSerialize, nil
 }

@@ -387,8 +387,8 @@ func (o DisputeEventNotification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DisputeEventNotification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DisputeEventNotification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Arn) {
 		toSerialize["arn"] = o.Arn
 	}
@@ -467,3 +467,13 @@ func (o *DisputeEventNotification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for DisputeEventNotification.Type.
+const (
+	DisputeEventNotificationTypeFraud          = "fraud"
+	DisputeEventNotificationTypeNotDelivered   = "notDelivered"
+	DisputeEventNotificationTypeDuplicate      = "duplicate"
+	DisputeEventNotificationTypeNotAsDescribed = "notAsDescribed"
+	DisputeEventNotificationTypeCancelled      = "cancelled"
+	DisputeEventNotificationTypeOther          = "other"
+)

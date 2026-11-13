@@ -146,8 +146,8 @@ func (o CapabilityProblemEntityRecursive) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CapabilityProblemEntityRecursive) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CapabilityProblemEntityRecursive) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Documents) {
 		toSerialize["documents"] = o.Documents
 	}
@@ -205,3 +205,11 @@ func (o *CapabilityProblemEntityRecursive) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CapabilityProblemEntityRecursive.Type.
+const (
+	CapabilityProblemEntityRecursiveTypeBankAccount = "BankAccount"
+	CapabilityProblemEntityRecursiveTypeDocument    = "Document"
+	CapabilityProblemEntityRecursiveTypeLegalEntity = "LegalEntity"
+	CapabilityProblemEntityRecursiveTypeProduct     = "product"
+)

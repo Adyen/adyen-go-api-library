@@ -148,8 +148,8 @@ func (o Hardware) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Hardware) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Hardware) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DisplayMaximumBackLight) {
 		toSerialize["displayMaximumBackLight"] = o.DisplayMaximumBackLight
 	}

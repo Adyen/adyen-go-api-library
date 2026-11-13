@@ -481,8 +481,8 @@ func (o BulkAddress) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BulkAddress) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BulkAddress) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.City) {
 		toSerialize["city"] = o.City
 	}

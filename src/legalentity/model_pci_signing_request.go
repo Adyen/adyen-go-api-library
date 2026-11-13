@@ -100,8 +100,8 @@ func (o PciSigningRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PciSigningRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PciSigningRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["pciTemplateReferences"] = o.PciTemplateReferences
 	toSerialize["signedBy"] = o.SignedBy
 	return toSerialize, nil

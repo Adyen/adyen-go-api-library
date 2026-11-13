@@ -118,8 +118,8 @@ func (o TransactionDescriptionInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransactionDescriptionInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransactionDescriptionInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DoingBusinessAsName) {
 		toSerialize["doingBusinessAsName"] = o.DoingBusinessAsName
 	}
@@ -174,3 +174,10 @@ func (o *TransactionDescriptionInfo) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TransactionDescriptionInfo.Type.
+const (
+	TransactionDescriptionInfoTypeAppend  = "append"
+	TransactionDescriptionInfoTypeDynamic = "dynamic"
+	TransactionDescriptionInfoTypeFixed   = "fixed"
+)

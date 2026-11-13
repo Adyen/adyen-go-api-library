@@ -80,8 +80,8 @@ func (o WebDataExemption) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WebDataExemption) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WebDataExemption) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Reason) {
 		toSerialize["reason"] = o.Reason
 	}
@@ -133,3 +133,9 @@ func (o *WebDataExemption) isValidReason() bool {
 	}
 	return false
 }
+
+// Values allowed for WebDataExemption.Reason.
+const (
+	WebDataExemptionReasonNoOnlinePresence             = "noOnlinePresence"
+	WebDataExemptionReasonNotCollectedDuringOnboarding = "notCollectedDuringOnboarding"
+)

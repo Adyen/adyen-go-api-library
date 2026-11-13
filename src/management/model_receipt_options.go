@@ -216,8 +216,8 @@ func (o ReceiptOptions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ReceiptOptions) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ReceiptOptions) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.HeaderLine1) {
 		toSerialize["headerLine1"] = o.HeaderLine1
 	}

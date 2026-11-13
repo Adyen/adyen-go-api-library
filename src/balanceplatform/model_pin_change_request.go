@@ -154,8 +154,8 @@ func (o PinChangeRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PinChangeRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PinChangeRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["encryptedKey"] = o.EncryptedKey
 	toSerialize["encryptedPinBlock"] = o.EncryptedPinBlock
 	toSerialize["paymentInstrumentId"] = o.PaymentInstrumentId

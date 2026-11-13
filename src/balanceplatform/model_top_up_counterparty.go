@@ -73,8 +73,8 @@ func (o TopUpCounterparty) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TopUpCounterparty) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TopUpCounterparty) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["transferInstrumentId"] = o.TransferInstrumentId
 	return toSerialize, nil
 }

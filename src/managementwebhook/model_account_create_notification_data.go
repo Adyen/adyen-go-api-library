@@ -188,8 +188,8 @@ func (o AccountCreateNotificationData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AccountCreateNotificationData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AccountCreateNotificationData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["capabilities"] = o.Capabilities
 	toSerialize["companyId"] = o.CompanyId
 	if !common.IsNil(o.LegalEntityId) {

@@ -11,7 +11,7 @@ package balanceplatform
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -70,7 +70,7 @@ func (a *NetworkTokensApi) GetNetworkToken(ctx context.Context, r NetworkTokensA
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -79,7 +79,7 @@ func (a *NetworkTokensApi) GetNetworkToken(ctx context.Context, r NetworkTokensA
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -88,7 +88,7 @@ func (a *NetworkTokensApi) GetNetworkToken(ctx context.Context, r NetworkTokensA
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -97,7 +97,7 @@ func (a *NetworkTokensApi) GetNetworkToken(ctx context.Context, r NetworkTokensA
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -140,7 +140,7 @@ Updates the status of the network token.
 @return *http.Response, error
 */
 func (a *NetworkTokensApi) UpdateNetworkToken(ctx context.Context, r NetworkTokensApiUpdateNetworkTokenInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/networkTokens/{networkTokenId}"
 	path = strings.Replace(path, "{"+"networkTokenId"+"}", url.PathEscape(common.ParameterValueToString(r.networkTokenId, "networkTokenId")), -1)
 	queryParams := url.Values{}
@@ -162,7 +162,7 @@ func (a *NetworkTokensApi) UpdateNetworkToken(ctx context.Context, r NetworkToke
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -171,7 +171,7 @@ func (a *NetworkTokensApi) UpdateNetworkToken(ctx context.Context, r NetworkToke
 	}
 	if httpRes.StatusCode == 403 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -180,7 +180,7 @@ func (a *NetworkTokensApi) UpdateNetworkToken(ctx context.Context, r NetworkToke
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -189,7 +189,7 @@ func (a *NetworkTokensApi) UpdateNetworkToken(ctx context.Context, r NetworkToke
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError

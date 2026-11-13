@@ -79,8 +79,8 @@ func (o SplitDcc) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SplitDcc) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SplitDcc) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountHolderPercentage) {
 		toSerialize["accountHolderPercentage"] = o.AccountHolderPercentage
 	}

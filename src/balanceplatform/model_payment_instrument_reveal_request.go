@@ -100,8 +100,8 @@ func (o PaymentInstrumentRevealRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentInstrumentRevealRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentInstrumentRevealRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["encryptedKey"] = o.EncryptedKey
 	toSerialize["paymentInstrumentId"] = o.PaymentInstrumentId
 	return toSerialize, nil

@@ -79,8 +79,8 @@ func (o Href) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Href) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Href) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Href) {
 		toSerialize["href"] = o.Href
 	}

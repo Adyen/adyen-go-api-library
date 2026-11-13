@@ -107,8 +107,8 @@ func (o GetTaxFormResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o GetTaxFormResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o GetTaxFormResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["content"] = o.Content
 	if !common.IsNil(o.ContentType) {
 		toSerialize["contentType"] = o.ContentType
@@ -161,3 +161,8 @@ func (o *GetTaxFormResponse) isValidContentType() bool {
 	}
 	return false
 }
+
+// Values allowed for GetTaxFormResponse.ContentType.
+const (
+	GetTaxFormResponseContentTypeApplicationPdf = "application/pdf"
+)

@@ -127,8 +127,8 @@ func (o SupplyDefenseDocumentRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SupplyDefenseDocumentRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SupplyDefenseDocumentRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["defenseDocuments"] = o.DefenseDocuments
 	toSerialize["disputePspReference"] = o.DisputePspReference
 	toSerialize["merchantAccountCode"] = o.MerchantAccountCode

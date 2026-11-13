@@ -106,8 +106,8 @@ func (o WalletProviderDeviceType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WalletProviderDeviceType) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WalletProviderDeviceType) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["operation"] = o.Operation
 	if !common.IsNil(o.Value) {
 		toSerialize["value"] = o.Value
@@ -150,3 +150,15 @@ func (v *NullableWalletProviderDeviceType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+// Values allowed for WalletProviderDeviceType.Value items.
+const (
+	WalletProviderDeviceTypeValueCARD             = "CARD"
+	WalletProviderDeviceTypeValueMOBILEPHONE      = "MOBILE_PHONE"
+	WalletProviderDeviceTypeValueOTHER            = "OTHER"
+	WalletProviderDeviceTypeValuePC               = "PC"
+	WalletProviderDeviceTypeValueTABLETOREREADER  = "TABLET_OR_EREADER"
+	WalletProviderDeviceTypeValueUNKNOWN          = "UNKNOWN"
+	WalletProviderDeviceTypeValueWATCHORWRISTBAND = "WATCH_OR_WRISTBAND"
+	WalletProviderDeviceTypeValueWEARABLE         = "WEARABLE"
+)

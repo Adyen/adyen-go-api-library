@@ -310,8 +310,8 @@ func (o PixPayByBankRiskSignals) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PixPayByBankRiskSignals) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PixPayByBankRiskSignals) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ConfidenceScore) {
 		toSerialize["confidenceScore"] = o.ConfidenceScore
 	}

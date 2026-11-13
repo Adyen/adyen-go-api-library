@@ -216,8 +216,8 @@ func (o PaymentInstrumentUpdateRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentInstrumentUpdateRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentInstrumentUpdateRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BalanceAccountId) {
 		toSerialize["balanceAccountId"] = o.BalanceAccountId
 	}
@@ -290,3 +290,24 @@ func (o *PaymentInstrumentUpdateRequest) isValidStatusReason() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentInstrumentUpdateRequest.Status.
+const (
+	PaymentInstrumentUpdateRequestStatusActive    = "active"
+	PaymentInstrumentUpdateRequestStatusClosed    = "closed"
+	PaymentInstrumentUpdateRequestStatusInactive  = "inactive"
+	PaymentInstrumentUpdateRequestStatusSuspended = "suspended"
+)
+
+// Values allowed for PaymentInstrumentUpdateRequest.StatusReason.
+const (
+	PaymentInstrumentUpdateRequestStatusReasonAccountClosure  = "accountClosure"
+	PaymentInstrumentUpdateRequestStatusReasonDamaged         = "damaged"
+	PaymentInstrumentUpdateRequestStatusReasonEndOfLife       = "endOfLife"
+	PaymentInstrumentUpdateRequestStatusReasonExpired         = "expired"
+	PaymentInstrumentUpdateRequestStatusReasonLost            = "lost"
+	PaymentInstrumentUpdateRequestStatusReasonOther           = "other"
+	PaymentInstrumentUpdateRequestStatusReasonStolen          = "stolen"
+	PaymentInstrumentUpdateRequestStatusReasonSuspectedFraud  = "suspectedFraud"
+	PaymentInstrumentUpdateRequestStatusReasonTransactionRule = "transactionRule"
+)

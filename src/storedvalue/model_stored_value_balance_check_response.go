@@ -216,8 +216,8 @@ func (o StoredValueBalanceCheckResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredValueBalanceCheckResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoredValueBalanceCheckResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CurrentBalance) {
 		toSerialize["currentBalance"] = o.CurrentBalance
 	}
@@ -281,3 +281,11 @@ func (o *StoredValueBalanceCheckResponse) isValidResultCode() bool {
 	}
 	return false
 }
+
+// Values allowed for StoredValueBalanceCheckResponse.ResultCode.
+const (
+	StoredValueBalanceCheckResponseResultCodeSuccess          = "Success"
+	StoredValueBalanceCheckResponseResultCodeRefused          = "Refused"
+	StoredValueBalanceCheckResponseResultCodeError            = "Error"
+	StoredValueBalanceCheckResponseResultCodeNotEnoughBalance = "NotEnoughBalance"
+)

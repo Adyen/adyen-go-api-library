@@ -531,8 +531,8 @@ func (o MerchantRiskIndicator) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MerchantRiskIndicator) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MerchantRiskIndicator) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AddressMatch) {
 		toSerialize["addressMatch"] = o.AddressMatch
 	}
@@ -632,3 +632,22 @@ func (o *MerchantRiskIndicator) isValidDeliveryTimeframe() bool {
 	}
 	return false
 }
+
+// Values allowed for MerchantRiskIndicator.DeliveryAddressIndicator.
+const (
+	MerchantRiskIndicatorDeliveryAddressIndicatorShipToBillingAddress  = "shipToBillingAddress"
+	MerchantRiskIndicatorDeliveryAddressIndicatorShipToVerifiedAddress = "shipToVerifiedAddress"
+	MerchantRiskIndicatorDeliveryAddressIndicatorShipToNewAddress      = "shipToNewAddress"
+	MerchantRiskIndicatorDeliveryAddressIndicatorShipToStore           = "shipToStore"
+	MerchantRiskIndicatorDeliveryAddressIndicatorDigitalGoods          = "digitalGoods"
+	MerchantRiskIndicatorDeliveryAddressIndicatorGoodsNotShipped       = "goodsNotShipped"
+	MerchantRiskIndicatorDeliveryAddressIndicatorOther                 = "other"
+)
+
+// Values allowed for MerchantRiskIndicator.DeliveryTimeframe.
+const (
+	MerchantRiskIndicatorDeliveryTimeframeElectronicDelivery    = "electronicDelivery"
+	MerchantRiskIndicatorDeliveryTimeframeSameDayShipping       = "sameDayShipping"
+	MerchantRiskIndicatorDeliveryTimeframeOvernightShipping     = "overnightShipping"
+	MerchantRiskIndicatorDeliveryTimeframeTwoOrMoreDaysShipping = "twoOrMoreDaysShipping"
+)

@@ -501,8 +501,8 @@ func (o PayoutRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayoutRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayoutRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["amount"] = o.Amount
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
@@ -587,3 +587,11 @@ func (o *PayoutRequest) isValidShopperInteraction() bool {
 	}
 	return false
 }
+
+// Values allowed for PayoutRequest.ShopperInteraction.
+const (
+	PayoutRequestShopperInteractionEcommerce = "Ecommerce"
+	PayoutRequestShopperInteractionContAuth  = "ContAuth"
+	PayoutRequestShopperInteractionMoto      = "Moto"
+	PayoutRequestShopperInteractionPOS       = "POS"
+)

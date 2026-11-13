@@ -148,8 +148,8 @@ func (o SubjectErasureByPspReferenceRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SubjectErasureByPspReferenceRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SubjectErasureByPspReferenceRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ForceErasure) {
 		toSerialize["forceErasure"] = o.ForceErasure
 	}

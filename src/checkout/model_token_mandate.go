@@ -738,8 +738,8 @@ func (o TokenMandate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TokenMandate) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TokenMandate) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountIdType) {
 		toSerialize["accountIdType"] = o.AccountIdType
 	}
@@ -865,3 +865,34 @@ func (o *TokenMandate) isValidRetryPolicy() bool {
 	}
 	return false
 }
+
+// Values allowed for TokenMandate.AmountRule.
+const (
+	TokenMandateAmountRuleMax   = "max"
+	TokenMandateAmountRuleExact = "exact"
+)
+
+// Values allowed for TokenMandate.BillingAttemptsRule.
+const (
+	TokenMandateBillingAttemptsRuleOn     = "on"
+	TokenMandateBillingAttemptsRuleBefore = "before"
+	TokenMandateBillingAttemptsRuleAfter  = "after"
+)
+
+// Values allowed for TokenMandate.Frequency.
+const (
+	TokenMandateFrequencyAdhoc      = "adhoc"
+	TokenMandateFrequencyDaily      = "daily"
+	TokenMandateFrequencyWeekly     = "weekly"
+	TokenMandateFrequencyBiWeekly   = "biWeekly"
+	TokenMandateFrequencyMonthly    = "monthly"
+	TokenMandateFrequencyQuarterly  = "quarterly"
+	TokenMandateFrequencyHalfYearly = "halfYearly"
+	TokenMandateFrequencyYearly     = "yearly"
+)
+
+// Values allowed for TokenMandate.RetryPolicy.
+const (
+	TokenMandateRetryPolicyTrue  = "true"
+	TokenMandateRetryPolicyFalse = "false"
+)

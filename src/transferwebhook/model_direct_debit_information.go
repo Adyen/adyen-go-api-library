@@ -183,8 +183,8 @@ func (o DirectDebitInformation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DirectDebitInformation) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DirectDebitInformation) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DateOfSignature) {
 		toSerialize["dateOfSignature"] = o.DateOfSignature
 	}

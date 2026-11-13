@@ -162,8 +162,8 @@ func (o TopUpConfigurationEventRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TopUpConfigurationEventRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TopUpConfigurationEventRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,9 @@ func (o *TopUpConfigurationEventRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for TopUpConfigurationEventRequest.Type.
+const (
+	TopUpConfigurationEventRequestTypeBalancePlatformBalanceAccountRecurringTopUpCreated = "balancePlatform.balanceAccount.recurringTopUp.created"
+	TopUpConfigurationEventRequestTypeBalancePlatformBalanceAccountRecurringTopUpDeleted = "balancePlatform.balanceAccount.recurringTopUp.deleted"
+)

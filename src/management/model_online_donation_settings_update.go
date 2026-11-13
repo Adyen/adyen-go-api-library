@@ -224,8 +224,8 @@ func (o OnlineDonationSettingsUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OnlineDonationSettingsUpdate) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o OnlineDonationSettingsUpdate) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if o.DefaultAmount.IsSet() {
 		toSerialize["defaultAmount"] = o.DefaultAmount.Get()
 	}

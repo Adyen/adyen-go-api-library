@@ -897,8 +897,8 @@ func (o StoredPaymentMethodResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredPaymentMethodResource) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoredPaymentMethodResource) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Alias) {
 		toSerialize["alias"] = o.Alias
 	}

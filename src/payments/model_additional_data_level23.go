@@ -624,8 +624,8 @@ func (o AdditionalDataLevel23) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalDataLevel23) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalDataLevel23) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.EnhancedSchemeDataCustomerReference) {
 		toSerialize["enhancedSchemeData.customerReference"] = o.EnhancedSchemeDataCustomerReference
 	}

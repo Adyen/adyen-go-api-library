@@ -148,8 +148,8 @@ func (o PermitRestriction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PermitRestriction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PermitRestriction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MaxAmount) {
 		toSerialize["maxAmount"] = o.MaxAmount
 	}

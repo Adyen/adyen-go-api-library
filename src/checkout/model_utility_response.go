@@ -80,8 +80,8 @@ func (o UtilityResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UtilityResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UtilityResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.OriginKeys) {
 		toSerialize["originKeys"] = o.OriginKeys
 	}

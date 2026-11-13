@@ -80,8 +80,8 @@ func (o MandatePartyIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MandatePartyIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MandatePartyIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.FullName) {
 		toSerialize["fullName"] = o.FullName
 	}

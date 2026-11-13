@@ -896,8 +896,8 @@ func (o TransactionRuleRestrictions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TransactionRuleRestrictions) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TransactionRuleRestrictions) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ActiveNetworkTokens) {
 		toSerialize["activeNetworkTokens"] = o.ActiveNetworkTokens
 	}

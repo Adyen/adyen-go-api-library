@@ -433,8 +433,8 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Transaction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Transaction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountHolder"] = o.AccountHolder
 	toSerialize["amount"] = o.Amount
 	toSerialize["balanceAccount"] = o.BalanceAccount
@@ -506,3 +506,9 @@ func (o *Transaction) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for Transaction.Status.
+const (
+	TransactionStatusBooked  = "booked"
+	TransactionStatusPending = "pending"
+)

@@ -215,8 +215,8 @@ func (o VerificationError) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o VerificationError) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o VerificationError) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}
@@ -280,3 +280,11 @@ func (o *VerificationError) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for VerificationError.Type.
+const (
+	VerificationErrorTypeDataMissing   = "dataMissing"
+	VerificationErrorTypeDataReview    = "dataReview"
+	VerificationErrorTypeInvalidInput  = "invalidInput"
+	VerificationErrorTypePendingStatus = "pendingStatus"
+)

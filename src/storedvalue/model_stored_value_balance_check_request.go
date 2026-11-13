@@ -295,8 +295,8 @@ func (o StoredValueBalanceCheckRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o StoredValueBalanceCheckRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o StoredValueBalanceCheckRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
 	}
@@ -363,3 +363,11 @@ func (o *StoredValueBalanceCheckRequest) isValidShopperInteraction() bool {
 	}
 	return false
 }
+
+// Values allowed for StoredValueBalanceCheckRequest.ShopperInteraction.
+const (
+	StoredValueBalanceCheckRequestShopperInteractionEcommerce = "Ecommerce"
+	StoredValueBalanceCheckRequestShopperInteractionContAuth  = "ContAuth"
+	StoredValueBalanceCheckRequestShopperInteractionMoto      = "Moto"
+	StoredValueBalanceCheckRequestShopperInteractionPOS       = "POS"
+)

@@ -213,8 +213,8 @@ func (o MasterpassDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o MasterpassDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o MasterpassDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -285,3 +285,15 @@ func (o *MasterpassDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for MasterpassDetails.FundingSource.
+const (
+	MasterpassDetailsFundingSourceCredit  = "credit"
+	MasterpassDetailsFundingSourceDebit   = "debit"
+	MasterpassDetailsFundingSourcePrepaid = "prepaid"
+)
+
+// Values allowed for MasterpassDetails.Type.
+const (
+	MasterpassDetailsTypeMasterpass = "masterpass"
+)

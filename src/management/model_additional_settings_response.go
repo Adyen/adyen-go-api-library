@@ -148,8 +148,8 @@ func (o AdditionalSettingsResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AdditionalSettingsResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AdditionalSettingsResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ExcludeEventCodes) {
 		toSerialize["excludeEventCodes"] = o.ExcludeEventCodes
 	}

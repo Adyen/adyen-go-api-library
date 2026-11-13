@@ -114,8 +114,8 @@ func (o WifiProfiles) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WifiProfiles) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WifiProfiles) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Profiles) {
 		toSerialize["profiles"] = o.Profiles
 	}

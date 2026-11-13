@@ -115,7 +115,7 @@ Requests to this endpoint are subject to rate limits:
 @return *http.Response, error
 */
 func (a *BusinessLinesApi) DeleteBusinessLine(ctx context.Context, r BusinessLinesApiDeleteBusinessLineInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/businessLines/{id}"
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
 	queryParams := url.Values{}

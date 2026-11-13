@@ -114,8 +114,8 @@ func (o AccelInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AccelInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AccelInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.ProcessingType) {
 		toSerialize["processingType"] = o.ProcessingType
 	}
@@ -170,3 +170,10 @@ func (o *AccelInfo) isValidProcessingType() bool {
 	}
 	return false
 }
+
+// Values allowed for AccelInfo.ProcessingType.
+const (
+	AccelInfoProcessingTypeBillpay = "billpay"
+	AccelInfoProcessingTypeEcom    = "ecom"
+	AccelInfoProcessingTypePos     = "pos"
+)

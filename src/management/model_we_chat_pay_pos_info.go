@@ -100,8 +100,8 @@ func (o WeChatPayPosInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o WeChatPayPosInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o WeChatPayPosInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["contactPersonName"] = o.ContactPersonName
 	toSerialize["email"] = o.Email
 	return toSerialize, nil

@@ -154,8 +154,8 @@ func (o Association) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Association) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Association) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["entityId"] = o.EntityId
 	toSerialize["entityType"] = o.EntityType
 	toSerialize["scaDeviceId"] = o.ScaDeviceId

@@ -245,8 +245,8 @@ func (o PaymentInstrumentRequirement) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentInstrumentRequirement) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentInstrumentRequirement) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -320,3 +320,14 @@ func (o *PaymentInstrumentRequirement) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentInstrumentRequirement.PaymentInstrumentType.
+const (
+	PaymentInstrumentRequirementPaymentInstrumentTypeBankAccount = "BankAccount"
+	PaymentInstrumentRequirementPaymentInstrumentTypeCard        = "Card"
+)
+
+// Values allowed for PaymentInstrumentRequirement.Type.
+const (
+	PaymentInstrumentRequirementTypePaymentInstrumentRequirement = "paymentInstrumentRequirement"
+)

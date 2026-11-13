@@ -73,8 +73,8 @@ func (o DynamicOfferRepayment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DynamicOfferRepayment) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DynamicOfferRepayment) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["term"] = o.Term
 	return toSerialize, nil
 }

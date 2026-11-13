@@ -420,8 +420,8 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentMethod) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentMethod) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Apps) {
 		toSerialize["apps"] = o.Apps
 	}
@@ -503,3 +503,10 @@ func (o *PaymentMethod) isValidFundingSource() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentMethod.FundingSource.
+const (
+	PaymentMethodFundingSourceCredit  = "credit"
+	PaymentMethodFundingSourceDebit   = "debit"
+	PaymentMethodFundingSourcePrepaid = "prepaid"
+)

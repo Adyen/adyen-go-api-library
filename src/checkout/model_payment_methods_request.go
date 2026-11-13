@@ -655,8 +655,8 @@ func (o PaymentMethodsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentMethodsRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentMethodsRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdditionalData) {
 		toSerialize["additionalData"] = o.AdditionalData
 	}
@@ -766,3 +766,17 @@ func (o *PaymentMethodsRequest) isValidStoreFiltrationMode() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentMethodsRequest.Channel.
+const (
+	PaymentMethodsRequestChannelIOS     = "iOS"
+	PaymentMethodsRequestChannelAndroid = "Android"
+	PaymentMethodsRequestChannelWeb     = "Web"
+)
+
+// Values allowed for PaymentMethodsRequest.StoreFiltrationMode.
+const (
+	PaymentMethodsRequestStoreFiltrationModeExclusive  = "exclusive"
+	PaymentMethodsRequestStoreFiltrationModeInclusive  = "inclusive"
+	PaymentMethodsRequestStoreFiltrationModeSkipFilter = "skipFilter"
+)

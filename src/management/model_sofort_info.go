@@ -100,8 +100,8 @@ func (o SofortInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SofortInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SofortInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["currencyCode"] = o.CurrencyCode
 	toSerialize["logo"] = o.Logo
 	return toSerialize, nil

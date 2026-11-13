@@ -186,8 +186,8 @@ func (o AffirmDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AffirmDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AffirmDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -248,3 +248,8 @@ func (o *AffirmDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AffirmDetails.Type.
+const (
+	AffirmDetailsTypeAffirm = "affirm"
+)

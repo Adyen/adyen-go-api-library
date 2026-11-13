@@ -80,8 +80,8 @@ func (o DisbursementInfoUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DisbursementInfoUpdate) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DisbursementInfoUpdate) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Repayment) {
 		toSerialize["repayment"] = o.Repayment
 	}

@@ -1462,8 +1462,8 @@ func (o PaymentLinkRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentLinkRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentLinkRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AllowedPaymentMethods) {
 		toSerialize["allowedPaymentMethods"] = o.AllowedPaymentMethods
 	}
@@ -1641,3 +1641,26 @@ func (o *PaymentLinkRequest) isValidStorePaymentMethodMode() bool {
 	}
 	return false
 }
+
+// Values allowed for PaymentLinkRequest.RecurringProcessingModel.
+const (
+	PaymentLinkRequestRecurringProcessingModelCardOnFile            = "CardOnFile"
+	PaymentLinkRequestRecurringProcessingModelSubscription          = "Subscription"
+	PaymentLinkRequestRecurringProcessingModelUnscheduledCardOnFile = "UnscheduledCardOnFile"
+)
+
+// Values allowed for PaymentLinkRequest.RequiredShopperFields items.
+const (
+	PaymentLinkRequestRequiredShopperFieldsBillingAddress  = "billingAddress"
+	PaymentLinkRequestRequiredShopperFieldsDeliveryAddress = "deliveryAddress"
+	PaymentLinkRequestRequiredShopperFieldsShopperEmail    = "shopperEmail"
+	PaymentLinkRequestRequiredShopperFieldsShopperName     = "shopperName"
+	PaymentLinkRequestRequiredShopperFieldsTelephoneNumber = "telephoneNumber"
+)
+
+// Values allowed for PaymentLinkRequest.StorePaymentMethodMode.
+const (
+	PaymentLinkRequestStorePaymentMethodModeAskForConsent = "askForConsent"
+	PaymentLinkRequestStorePaymentMethodModeDisabled      = "disabled"
+	PaymentLinkRequestStorePaymentMethodModeEnabled       = "enabled"
+)

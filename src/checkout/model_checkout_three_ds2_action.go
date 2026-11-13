@@ -277,8 +277,8 @@ func (o CheckoutThreeDS2Action) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutThreeDS2Action) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutThreeDS2Action) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AuthorisationToken) {
 		toSerialize["authorisationToken"] = o.AuthorisationToken
 	}
@@ -346,3 +346,8 @@ func (o *CheckoutThreeDS2Action) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CheckoutThreeDS2Action.Type.
+const (
+	CheckoutThreeDS2ActionTypeThreeDS2 = "threeDS2"
+)

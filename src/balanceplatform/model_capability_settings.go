@@ -216,8 +216,8 @@ func (o CapabilitySettings) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CapabilitySettings) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CapabilitySettings) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AmountPerIndustry) {
 		toSerialize["amountPerIndustry"] = o.AmountPerIndustry
 	}
@@ -281,3 +281,17 @@ func (o *CapabilitySettings) isValidInterval() bool {
 	}
 	return false
 }
+
+// Values allowed for CapabilitySettings.FundingSource items.
+const (
+	CapabilitySettingsFundingSourceCredit  = "credit"
+	CapabilitySettingsFundingSourceDebit   = "debit"
+	CapabilitySettingsFundingSourcePrepaid = "prepaid"
+)
+
+// Values allowed for CapabilitySettings.Interval.
+const (
+	CapabilitySettingsIntervalDaily   = "daily"
+	CapabilitySettingsIntervalMonthly = "monthly"
+	CapabilitySettingsIntervalWeekly  = "weekly"
+)

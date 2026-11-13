@@ -114,8 +114,8 @@ func (o NotificationUrl) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NotificationUrl) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NotificationUrl) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.LocalUrls) {
 		toSerialize["localUrls"] = o.LocalUrls
 	}

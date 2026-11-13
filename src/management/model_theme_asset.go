@@ -127,8 +127,8 @@ func (o ThemeAsset) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThemeAsset) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThemeAsset) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["model"] = o.Model
 	toSerialize["type"] = o.Type
 	toSerialize["url"] = o.Url

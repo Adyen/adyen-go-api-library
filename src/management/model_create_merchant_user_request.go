@@ -263,8 +263,8 @@ func (o CreateMerchantUserRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CreateMerchantUserRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CreateMerchantUserRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AccountGroups) {
 		toSerialize["accountGroups"] = o.AccountGroups
 	}

@@ -250,8 +250,8 @@ func (o Company) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Company) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Company) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Homepage) {
 		toSerialize["homepage"] = o.Homepage
 	}

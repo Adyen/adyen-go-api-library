@@ -281,8 +281,8 @@ func (o DeliveryAddress) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DeliveryAddress) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DeliveryAddress) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["city"] = o.City
 	toSerialize["country"] = o.Country
 	if !common.IsNil(o.FirstName) {

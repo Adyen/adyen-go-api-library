@@ -100,8 +100,8 @@ func (o BalanceAccountConfigurations) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceAccountConfigurations) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceAccountConfigurations) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["balanceAccountPayoutSchedules"] = o.BalanceAccountPayoutSchedules
 	toSerialize["link"] = o.Link
 	return toSerialize, nil

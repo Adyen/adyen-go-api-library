@@ -79,8 +79,8 @@ func (o FraudCheckResultWrapper) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FraudCheckResultWrapper) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o FraudCheckResultWrapper) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.FraudCheckResult) {
 		toSerialize["FraudCheckResult"] = o.FraudCheckResult
 	}

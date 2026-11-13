@@ -80,8 +80,8 @@ func (o CheckoutForwardAccountUpdateResult) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutForwardAccountUpdateResult) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutForwardAccountUpdateResult) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Result) {
 		toSerialize["result"] = o.Result
 	}
@@ -133,3 +133,13 @@ func (o *CheckoutForwardAccountUpdateResult) isValidResult() bool {
 	}
 	return false
 }
+
+// Values allowed for CheckoutForwardAccountUpdateResult.Result.
+const (
+	CheckoutForwardAccountUpdateResultResultCardChanged              = "CardChanged"
+	CheckoutForwardAccountUpdateResultResultCardExpiryChanged        = "CardExpiryChanged"
+	CheckoutForwardAccountUpdateResultResultCloseAccount             = "CloseAccount"
+	CheckoutForwardAccountUpdateResultResultContactCardAccountHolder = "ContactCardAccountHolder"
+	CheckoutForwardAccountUpdateResultResultError                    = "Error"
+	CheckoutForwardAccountUpdateResultResultNoChange                 = "NoChange"
+)

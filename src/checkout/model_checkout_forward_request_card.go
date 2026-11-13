@@ -390,8 +390,8 @@ func (o CheckoutForwardRequestCard) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutForwardRequestCard) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutForwardRequestCard) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Cvc) {
 		toSerialize["cvc"] = o.Cvc
 	}
@@ -470,3 +470,8 @@ func (o *CheckoutForwardRequestCard) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CheckoutForwardRequestCard.Type.
+const (
+	CheckoutForwardRequestCardTypeScheme = "scheme"
+)

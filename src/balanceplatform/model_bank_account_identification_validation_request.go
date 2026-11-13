@@ -72,8 +72,8 @@ func (o BankAccountIdentificationValidationRequest) MarshalJSON() ([]byte, error
 	return json.Marshal(toSerialize)
 }
 
-func (o BankAccountIdentificationValidationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BankAccountIdentificationValidationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["accountIdentification"] = o.AccountIdentification
 	return toSerialize, nil
 }

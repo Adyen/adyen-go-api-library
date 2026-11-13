@@ -73,8 +73,8 @@ func (o PinChangeResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PinChangeResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PinChangeResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["status"] = o.Status
 	return toSerialize, nil
 }
@@ -124,3 +124,10 @@ func (o *PinChangeResponse) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for PinChangeResponse.Status.
+const (
+	PinChangeResponseStatusCompleted   = "completed"
+	PinChangeResponseStatusPending     = "pending"
+	PinChangeResponseStatusUnavailable = "unavailable"
+)

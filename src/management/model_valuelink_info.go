@@ -168,8 +168,8 @@ func (o ValuelinkInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ValuelinkInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ValuelinkInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AlternateMerchantNumber) {
 		toSerialize["alternateMerchantNumber"] = o.AlternateMerchantNumber
 	}
@@ -226,3 +226,9 @@ func (o *ValuelinkInfo) isValidPinSupport() bool {
 	}
 	return false
 }
+
+// Values allowed for ValuelinkInfo.PinSupport.
+const (
+	ValuelinkInfoPinSupportPIN   = "PIN"
+	ValuelinkInfoPinSupportNOPIN = "NO PIN"
+)

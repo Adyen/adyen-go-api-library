@@ -118,8 +118,8 @@ func (o UninstallAndroidAppDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UninstallAndroidAppDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UninstallAndroidAppDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AppId) {
 		toSerialize["appId"] = o.AppId
 	}
@@ -174,3 +174,8 @@ func (o *UninstallAndroidAppDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for UninstallAndroidAppDetails.Type.
+const (
+	UninstallAndroidAppDetailsTypeUninstallAndroidApp = "UninstallAndroidApp"
+)

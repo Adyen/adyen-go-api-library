@@ -182,8 +182,8 @@ func (o Device) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Device) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Device) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
@@ -244,3 +244,10 @@ func (o *Device) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for Device.Type.
+const (
+	DeviceTypeIos     = "ios"
+	DeviceTypeAndroid = "android"
+	DeviceTypeBrowser = "browser"
+)

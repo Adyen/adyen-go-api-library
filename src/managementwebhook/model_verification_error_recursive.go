@@ -182,8 +182,8 @@ func (o VerificationErrorRecursive) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o VerificationErrorRecursive) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o VerificationErrorRecursive) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Code) {
 		toSerialize["code"] = o.Code
 	}
@@ -244,3 +244,11 @@ func (o *VerificationErrorRecursive) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for VerificationErrorRecursive.Type.
+const (
+	VerificationErrorRecursiveTypeDataMissing   = "dataMissing"
+	VerificationErrorRecursiveTypeDataReview    = "dataReview"
+	VerificationErrorRecursiveTypeInvalidInput  = "invalidInput"
+	VerificationErrorRecursiveTypePendingStatus = "pendingStatus"
+)

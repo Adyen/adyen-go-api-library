@@ -11,7 +11,7 @@ package balanceplatform
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
@@ -76,7 +76,7 @@ func (a *ManagedPayoutSchedulesApi) ApplyManagedSchedule(ctx context.Context, r 
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -85,7 +85,7 @@ func (a *ManagedPayoutSchedulesApi) ApplyManagedSchedule(ctx context.Context, r 
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -94,7 +94,7 @@ func (a *ManagedPayoutSchedulesApi) ApplyManagedSchedule(ctx context.Context, r 
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -103,7 +103,7 @@ func (a *ManagedPayoutSchedulesApi) ApplyManagedSchedule(ctx context.Context, r 
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -142,7 +142,7 @@ Delete a payout schedule applied to a balance account.
 @return *http.Response, error
 */
 func (a *ManagedPayoutSchedulesApi) DeleteBalanceAccountManagedSchedule(ctx context.Context, r ManagedPayoutSchedulesApiDeleteBalanceAccountManagedScheduleInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/balanceAccounts/{balanceAccountId}/payoutSchedules/{id}"
 	path = strings.Replace(path, "{"+"balanceAccountId"+"}", url.PathEscape(common.ParameterValueToString(r.balanceAccountId, "balanceAccountId")), -1)
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
@@ -165,7 +165,7 @@ func (a *ManagedPayoutSchedulesApi) DeleteBalanceAccountManagedSchedule(ctx cont
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -174,7 +174,7 @@ func (a *ManagedPayoutSchedulesApi) DeleteBalanceAccountManagedSchedule(ctx cont
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -183,7 +183,7 @@ func (a *ManagedPayoutSchedulesApi) DeleteBalanceAccountManagedSchedule(ctx cont
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -192,7 +192,7 @@ func (a *ManagedPayoutSchedulesApi) DeleteBalanceAccountManagedSchedule(ctx cont
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return httpRes, decodeError
@@ -254,7 +254,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalanceAccountManagedScheduleById(ctx con
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -263,7 +263,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalanceAccountManagedScheduleById(ctx con
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -272,7 +272,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalanceAccountManagedScheduleById(ctx con
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -281,7 +281,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalanceAccountManagedScheduleById(ctx con
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -306,7 +306,7 @@ func (r ManagedPayoutSchedulesApiGetBalanceAccountManagedSchedulesInput) Currenc
 	return r
 }
 
-// The &#x60;cursor&#x60; returned in the links of the previous response.
+// The `cursor` returned in the links of the previous response.
 func (r ManagedPayoutSchedulesApiGetBalanceAccountManagedSchedulesInput) Cursor(cursor string) ManagedPayoutSchedulesApiGetBalanceAccountManagedSchedulesInput {
 	r.cursor = &cursor
 	return r
@@ -370,7 +370,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalanceAccountManagedSchedules(ctx contex
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -379,7 +379,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalanceAccountManagedSchedules(ctx contex
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -388,7 +388,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalanceAccountManagedSchedules(ctx contex
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -397,7 +397,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalanceAccountManagedSchedules(ctx contex
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -459,7 +459,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalancePlatformManagedScheduleById(ctx co
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -468,7 +468,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalancePlatformManagedScheduleById(ctx co
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -477,7 +477,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalancePlatformManagedScheduleById(ctx co
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -486,7 +486,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalancePlatformManagedScheduleById(ctx co
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -565,7 +565,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalancePlatformManagedSchedules(ctx conte
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -574,7 +574,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalancePlatformManagedSchedules(ctx conte
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -583,7 +583,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalancePlatformManagedSchedules(ctx conte
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -592,7 +592,7 @@ func (a *ManagedPayoutSchedulesApi) GetBalancePlatformManagedSchedules(ctx conte
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -618,7 +618,7 @@ func (r ManagedPayoutSchedulesApiGetPayoutScheduleExecutionsInput) Offset(offset
 	return r
 }
 
-// Contains a comma-separated list of payout statuses. If included, the response returns only executed payouts that currently have one of the specified statuses.  Possible statuses: - **succeeded**: The payout was sent successfully. - **failed**: The payout was not sent due to an error. - **skipped**: The payout was not triggered as expected.  Examples: &#x60;results&#x3D;succeeded&#x60;, &#x60;results&#x3D;failed,skipped&#x60;
+// Contains a comma-separated list of payout statuses. If included, the response returns only executed payouts that currently have one of the specified statuses.  Possible statuses: - **succeeded**: The payout was sent successfully. - **failed**: The payout was not sent due to an error. - **skipped**: The payout was not triggered as expected.  Examples: `results=succeeded`, `results=failed,skipped`
 func (r ManagedPayoutSchedulesApiGetPayoutScheduleExecutionsInput) Results(results string) ManagedPayoutSchedulesApiGetPayoutScheduleExecutionsInput {
 	r.results = &results
 	return r
@@ -684,7 +684,7 @@ func (a *ManagedPayoutSchedulesApi) GetPayoutScheduleExecutions(ctx context.Cont
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -693,7 +693,7 @@ func (a *ManagedPayoutSchedulesApi) GetPayoutScheduleExecutions(ctx context.Cont
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -702,7 +702,7 @@ func (a *ManagedPayoutSchedulesApi) GetPayoutScheduleExecutions(ctx context.Cont
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -711,7 +711,7 @@ func (a *ManagedPayoutSchedulesApi) GetPayoutScheduleExecutions(ctx context.Cont
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -779,7 +779,7 @@ func (a *ManagedPayoutSchedulesApi) UpdateBalanceAccountManagedSchedule(ctx cont
 
 	if httpRes.StatusCode == 401 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -788,7 +788,7 @@ func (a *ManagedPayoutSchedulesApi) UpdateBalanceAccountManagedSchedule(ctx cont
 	}
 	if httpRes.StatusCode == 404 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -797,7 +797,7 @@ func (a *ManagedPayoutSchedulesApi) UpdateBalanceAccountManagedSchedule(ctx cont
 	}
 	if httpRes.StatusCode == 422 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError
@@ -806,7 +806,7 @@ func (a *ManagedPayoutSchedulesApi) UpdateBalanceAccountManagedSchedule(ctx cont
 	}
 	if httpRes.StatusCode == 500 {
 		var serviceError common.RestServiceError
-		body, _ := ioutil.ReadAll(httpRes.Body)
+		body, _ := io.ReadAll(httpRes.Body)
 		decodeError := json.Unmarshal([]byte(body), &serviceError)
 		if decodeError != nil {
 			return *res, httpRes, decodeError

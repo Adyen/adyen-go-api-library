@@ -600,8 +600,8 @@ func (o BalanceAccountConfiguration) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceAccountConfiguration) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceAccountConfiguration) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["balanceAccountId"] = o.BalanceAccountId
 	toSerialize["balancePlatformPayoutScheduleId"] = o.BalancePlatformPayoutScheduleId
 	toSerialize["createdAt"] = o.CreatedAt

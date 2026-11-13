@@ -250,8 +250,8 @@ func (o ApplicationInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ApplicationInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ApplicationInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdyenLibrary) {
 		toSerialize["adyenLibrary"] = o.AdyenLibrary
 	}

@@ -190,8 +190,8 @@ func (o CheckoutErrorResponseEntity) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutErrorResponseEntity) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutErrorResponseEntity) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["errorCode"] = o.ErrorCode
 	toSerialize["errorType"] = o.ErrorType
 	toSerialize["message"] = o.Message

@@ -134,8 +134,8 @@ func (o DefenseReason) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DefenseReason) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DefenseReason) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.DefenseDocumentTypes) {
 		toSerialize["defenseDocumentTypes"] = o.DefenseDocumentTypes
 	}

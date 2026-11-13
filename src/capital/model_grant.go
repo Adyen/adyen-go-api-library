@@ -215,8 +215,8 @@ func (o Grant) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Grant) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Grant) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["balances"] = o.Balances
 	if !common.IsNil(o.Counterparty) {
 		toSerialize["counterparty"] = o.Counterparty

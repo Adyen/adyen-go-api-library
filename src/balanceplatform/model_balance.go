@@ -222,8 +222,8 @@ func (o Balance) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Balance) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Balance) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["available"] = o.Available
 	toSerialize["balance"] = o.Balance
 	toSerialize["currency"] = o.Currency

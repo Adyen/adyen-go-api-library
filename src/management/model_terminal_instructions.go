@@ -80,8 +80,8 @@ func (o TerminalInstructions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TerminalInstructions) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TerminalInstructions) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AdyenAppRestart) {
 		toSerialize["adyenAppRestart"] = o.AdyenAppRestart
 	}

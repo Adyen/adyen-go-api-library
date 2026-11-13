@@ -186,8 +186,8 @@ func (o CellulantDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CellulantDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CellulantDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -248,3 +248,8 @@ func (o *CellulantDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CellulantDetails.Type.
+const (
+	CellulantDetailsTypeCellulant = "cellulant"
+)

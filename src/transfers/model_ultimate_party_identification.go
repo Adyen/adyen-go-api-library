@@ -390,8 +390,8 @@ func (o UltimatePartyIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o UltimatePartyIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o UltimatePartyIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Address) {
 		toSerialize["address"] = o.Address
 	}
@@ -470,3 +470,10 @@ func (o *UltimatePartyIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for UltimatePartyIdentification.Type.
+const (
+	UltimatePartyIdentificationTypeIndividual   = "individual"
+	UltimatePartyIdentificationTypeOrganization = "organization"
+	UltimatePartyIdentificationTypeUnknown      = "unknown"
+)

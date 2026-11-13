@@ -168,8 +168,8 @@ func (o CertificateLoadingRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CertificateLoadingRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CertificateLoadingRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["merchantAccount"] = o.MerchantAccount
 	toSerialize["setupToken"] = o.SetupToken
 	if !common.IsNil(o.Store) {

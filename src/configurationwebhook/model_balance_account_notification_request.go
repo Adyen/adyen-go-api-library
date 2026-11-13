@@ -162,8 +162,8 @@ func (o BalanceAccountNotificationRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BalanceAccountNotificationRequest) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BalanceAccountNotificationRequest) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["data"] = o.Data
 	toSerialize["environment"] = o.Environment
 	if !common.IsNil(o.Timestamp) {
@@ -218,3 +218,9 @@ func (o *BalanceAccountNotificationRequest) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for BalanceAccountNotificationRequest.Type.
+const (
+	BalanceAccountNotificationRequestTypeBalancePlatformBalanceAccountUpdated = "balancePlatform.balanceAccount.updated"
+	BalanceAccountNotificationRequestTypeBalancePlatformBalanceAccountCreated = "balancePlatform.balanceAccount.created"
+)

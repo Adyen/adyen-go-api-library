@@ -148,8 +148,8 @@ func (o AccelResponseInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AccelResponseInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AccelResponseInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.NetworkProcessingMode) {
 		toSerialize["networkProcessingMode"] = o.NetworkProcessingMode
 	}
@@ -216,3 +216,16 @@ func (o *AccelResponseInfo) isValidProcessingType() bool {
 	}
 	return false
 }
+
+// Values allowed for AccelResponseInfo.NetworkProcessingMode.
+const (
+	AccelResponseInfoNetworkProcessingModeAuth = "auth"
+	AccelResponseInfoNetworkProcessingModeSale = "sale"
+)
+
+// Values allowed for AccelResponseInfo.ProcessingType.
+const (
+	AccelResponseInfoProcessingTypeBillpay = "billpay"
+	AccelResponseInfoProcessingTypeEcom    = "ecom"
+	AccelResponseInfoProcessingTypePos     = "pos"
+)

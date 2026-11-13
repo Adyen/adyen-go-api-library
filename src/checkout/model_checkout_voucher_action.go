@@ -753,8 +753,8 @@ func (o CheckoutVoucherAction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutVoucherAction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutVoucherAction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AlternativeReference) {
 		toSerialize["alternativeReference"] = o.AlternativeReference
 	}
@@ -864,3 +864,8 @@ func (o *CheckoutVoucherAction) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for CheckoutVoucherAction.Type.
+const (
+	CheckoutVoucherActionTypeVoucher = "voucher"
+)

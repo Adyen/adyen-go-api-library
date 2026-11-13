@@ -250,8 +250,8 @@ func (o TaxCalculation) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o TaxCalculation) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o TaxCalculation) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MerchantAccount) {
 		toSerialize["merchantAccount"] = o.MerchantAccount
 	}

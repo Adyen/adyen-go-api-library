@@ -73,8 +73,8 @@ func (o PaymentsAppResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PaymentsAppResponse) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PaymentsAppResponse) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["paymentsApps"] = o.PaymentsApps
 	return toSerialize, nil
 }

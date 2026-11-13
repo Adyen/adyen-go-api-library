@@ -136,8 +136,8 @@ func (o IbanAccountIdentification) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o IbanAccountIdentification) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o IbanAccountIdentification) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Bic) {
 		toSerialize["bic"] = o.Bic
 	}
@@ -191,3 +191,8 @@ func (o *IbanAccountIdentification) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for IbanAccountIdentification.Type.
+const (
+	IbanAccountIdentificationTypeIban = "iban"
+)

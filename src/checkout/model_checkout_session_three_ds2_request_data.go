@@ -182,8 +182,8 @@ func (o CheckoutSessionThreeDS2RequestData) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CheckoutSessionThreeDS2RequestData) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CheckoutSessionThreeDS2RequestData) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.HomePhone) {
 		toSerialize["homePhone"] = o.HomePhone
 	}
@@ -244,3 +244,13 @@ func (o *CheckoutSessionThreeDS2RequestData) isValidThreeDSRequestorChallengeInd
 	}
 	return false
 }
+
+// Values allowed for CheckoutSessionThreeDS2RequestData.ThreeDSRequestorChallengeInd.
+const (
+	CheckoutSessionThreeDS2RequestDataThreeDSRequestorChallengeInd01 = "01"
+	CheckoutSessionThreeDS2RequestDataThreeDSRequestorChallengeInd02 = "02"
+	CheckoutSessionThreeDS2RequestDataThreeDSRequestorChallengeInd03 = "03"
+	CheckoutSessionThreeDS2RequestDataThreeDSRequestorChallengeInd04 = "04"
+	CheckoutSessionThreeDS2RequestDataThreeDSRequestorChallengeInd05 = "05"
+	CheckoutSessionThreeDS2RequestDataThreeDSRequestorChallengeInd06 = "06"
+)

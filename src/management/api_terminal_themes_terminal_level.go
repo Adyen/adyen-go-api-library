@@ -51,7 +51,7 @@ To make this request, your API credential must have the following [role](https:/
 @return *http.Response, error
 */
 func (a *TerminalThemesTerminalLevelApi) ApplyTerminalThemeForTerminal(ctx context.Context, r TerminalThemesTerminalLevelApiApplyTerminalThemeForTerminalInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/terminals/{terminalId}/terminalThemes/{id}/apply"
 	path = strings.Replace(path, "{"+"terminalId"+"}", url.PathEscape(common.ParameterValueToString(r.terminalId, "terminalId")), -1)
 	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
@@ -108,7 +108,7 @@ To make this request, your API credential must have the following [role](https:/
 @return *http.Response, error
 */
 func (a *TerminalThemesTerminalLevelApi) UnapplyTerminalThemeForTerminal(ctx context.Context, r TerminalThemesTerminalLevelApiUnapplyTerminalThemeForTerminalInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/terminals/{terminalId}/terminalThemes/unapply"
 	path = strings.Replace(path, "{"+"terminalId"+"}", url.PathEscape(common.ParameterValueToString(r.terminalId, "terminalId")), -1)
 	queryParams := url.Values{}

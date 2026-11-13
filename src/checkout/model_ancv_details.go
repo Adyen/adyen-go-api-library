@@ -258,8 +258,8 @@ func (o AncvDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AncvDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o AncvDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BeneficiaryId) {
 		toSerialize["beneficiaryId"] = o.BeneficiaryId
 	}
@@ -326,3 +326,8 @@ func (o *AncvDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for AncvDetails.Type.
+const (
+	AncvDetailsTypeAncv = "ancv"
+)

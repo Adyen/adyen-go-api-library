@@ -216,8 +216,8 @@ func (o SupportedCardTypes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SupportedCardTypes) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o SupportedCardTypes) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Credit) {
 		toSerialize["credit"] = o.Credit
 	}

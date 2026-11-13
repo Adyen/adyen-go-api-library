@@ -114,8 +114,8 @@ func (o DataCenter) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DataCenter) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DataCenter) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.LivePrefix) {
 		toSerialize["livePrefix"] = o.LivePrefix
 	}

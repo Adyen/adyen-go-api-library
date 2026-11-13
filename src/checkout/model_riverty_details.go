@@ -457,8 +457,8 @@ func (o RivertyDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RivertyDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o RivertyDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BillingAddress) {
 		toSerialize["billingAddress"] = o.BillingAddress
 	}
@@ -541,3 +541,11 @@ func (o *RivertyDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for RivertyDetails.Type.
+const (
+	RivertyDetailsTypeRiverty                = "riverty"
+	RivertyDetailsTypeRivertyAccount         = "riverty_account"
+	RivertyDetailsTypeRivertyInstallments    = "riverty_installments"
+	RivertyDetailsTypeSepadirectdebitRiverty = "sepadirectdebit_riverty"
+)

@@ -141,8 +141,8 @@ func (o Repayment) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Repayment) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Repayment) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["basisPoints"] = o.BasisPoints
 	if !common.IsNil(o.Term) {
 		toSerialize["term"] = o.Term

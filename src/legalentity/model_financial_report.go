@@ -250,8 +250,8 @@ func (o FinancialReport) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o FinancialReport) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o FinancialReport) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AnnualTurnover) {
 		toSerialize["annualTurnover"] = o.AnnualTurnover
 	}

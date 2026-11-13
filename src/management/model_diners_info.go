@@ -177,8 +177,8 @@ func (o DinersInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DinersInfo) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DinersInfo) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.MidNumber) {
 		toSerialize["midNumber"] = o.MidNumber
 	}
@@ -237,3 +237,9 @@ func (o *DinersInfo) isValidServiceLevel() bool {
 	}
 	return false
 }
+
+// Values allowed for DinersInfo.ServiceLevel.
+const (
+	DinersInfoServiceLevelNoContract      = "noContract"
+	DinersInfoServiceLevelGatewayContract = "gatewayContract"
+)

@@ -79,7 +79,7 @@ func (dst *ScheduleTerminalActionsRequestActionDetails) UnmarshalJSON(data []byt
 	dst.UninstallAndroidCertificateDetails = nil
 
 	// use discriminator value to speed up the lookup
-	var jsonDict map[string]interface{}
+	var jsonDict map[string]any
 	err = common.NewStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
@@ -262,7 +262,7 @@ func (src ScheduleTerminalActionsRequestActionDetails) MarshalJSON() ([]byte, er
 }
 
 // Get the actual instance
-func (obj *ScheduleTerminalActionsRequestActionDetails) GetActualInstance() interface{} {
+func (obj *ScheduleTerminalActionsRequestActionDetails) GetActualInstance() any {
 	if obj == nil {
 		return nil
 	}

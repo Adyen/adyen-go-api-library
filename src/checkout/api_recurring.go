@@ -27,7 +27,7 @@ type RecurringApiDeleteTokenForStoredPaymentDetailsInput struct {
 	merchantAccount       *string
 }
 
-// Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. &gt; Your reference must not include personally identifiable information (PII), for example name or email address.
+// Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
 func (r RecurringApiDeleteTokenForStoredPaymentDetailsInput) ShopperReference(shopperReference string) RecurringApiDeleteTokenForStoredPaymentDetailsInput {
 	r.shopperReference = &shopperReference
 	return r
@@ -64,7 +64,7 @@ To make this request, your API credential must have the following [role](https:/
 @return *http.Response, error
 */
 func (a *RecurringApi) DeleteTokenForStoredPaymentDetails(ctx context.Context, r RecurringApiDeleteTokenForStoredPaymentDetailsInput) (*http.Response, error) {
-	var res interface{}
+	var res any
 	path := "/storedPaymentMethods/{storedPaymentMethodId}"
 	path = strings.Replace(path, "{"+"storedPaymentMethodId"+"}", url.PathEscape(common.ParameterValueToString(r.storedPaymentMethodId, "storedPaymentMethodId")), -1)
 	queryParams := url.Values{}
@@ -152,7 +152,7 @@ type RecurringApiGetTokensForStoredPaymentDetailsInput struct {
 	merchantAccount  *string
 }
 
-// Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. &gt; Your reference must not include personally identifiable information (PII), for example name or email address.
+// Your reference to uniquely identify this shopper, for example user ID or account ID. Minimum length: 3 characters. > Your reference must not include personally identifiable information (PII), for example name or email address.
 func (r RecurringApiGetTokensForStoredPaymentDetailsInput) ShopperReference(shopperReference string) RecurringApiGetTokensForStoredPaymentDetailsInput {
 	r.shopperReference = &shopperReference
 	return r

@@ -114,8 +114,8 @@ func (o Policy) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Policy) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Policy) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Resources) {
 		toSerialize["resources"] = o.Resources
 	}

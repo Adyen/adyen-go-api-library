@@ -352,8 +352,8 @@ func (o BankAccount) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o BankAccount) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o BankAccount) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BankAccountNumber) {
 		toSerialize["bankAccountNumber"] = o.BankAccountNumber
 	}

@@ -217,8 +217,8 @@ func (o Recurring) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o Recurring) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o Recurring) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.Contract) {
 		toSerialize["contract"] = o.Contract
 	}
@@ -291,3 +291,20 @@ func (o *Recurring) isValidTokenService() bool {
 	}
 	return false
 }
+
+// Values allowed for Recurring.Contract.
+const (
+	RecurringContractONECLICK          = "ONECLICK"
+	RecurringContractONECLICKRECURRING = "ONECLICK,RECURRING"
+	RecurringContractRECURRING         = "RECURRING"
+	RecurringContractPAYOUT            = "PAYOUT"
+	RecurringContractEXTERNAL          = "EXTERNAL"
+)
+
+// Values allowed for Recurring.TokenService.
+const (
+	RecurringTokenServiceVISATOKENSERVICE = "VISATOKENSERVICE"
+	RecurringTokenServiceMCTOKENSERVICE   = "MCTOKENSERVICE"
+	RecurringTokenServiceAMEXTOKENSERVICE = "AMEXTOKENSERVICE"
+	RecurringTokenServiceTOKENSHARING     = "TOKEN_SHARING"
+)

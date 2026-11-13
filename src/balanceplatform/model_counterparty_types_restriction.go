@@ -107,8 +107,8 @@ func (o CounterpartyTypesRestriction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o CounterpartyTypesRestriction) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o CounterpartyTypesRestriction) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["operation"] = o.Operation
 	if !common.IsNil(o.Value) {
 		toSerialize["value"] = o.Value
@@ -151,3 +151,11 @@ func (v *NullableCounterpartyTypesRestriction) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+// Values allowed for CounterpartyTypesRestriction.Value items.
+const (
+	CounterpartyTypesRestrictionValueBalanceAccount     = "balanceAccount"
+	CounterpartyTypesRestrictionValueBankAccount        = "bankAccount"
+	CounterpartyTypesRestrictionValueCard               = "card"
+	CounterpartyTypesRestrictionValueTransferInstrument = "transferInstrument"
+)

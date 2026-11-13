@@ -389,8 +389,8 @@ func (o PayPalDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o PayPalDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o PayPalDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -476,3 +476,15 @@ func (o *PayPalDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for PayPalDetails.Subtype.
+const (
+	PayPalDetailsSubtypeExpress  = "express"
+	PayPalDetailsSubtypeRedirect = "redirect"
+	PayPalDetailsSubtypeSdk      = "sdk"
+)
+
+// Values allowed for PayPalDetails.Type.
+const (
+	PayPalDetailsTypePaypal = "paypal"
+)

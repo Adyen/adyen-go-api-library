@@ -353,8 +353,8 @@ func (o NetworkToken) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o NetworkToken) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o NetworkToken) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.BrandVariant) {
 		toSerialize["brandVariant"] = o.BrandVariant
 	}
@@ -430,3 +430,11 @@ func (o *NetworkToken) isValidStatus() bool {
 	}
 	return false
 }
+
+// Values allowed for NetworkToken.Status.
+const (
+	NetworkTokenStatusActive    = "active"
+	NetworkTokenStatusInactive  = "inactive"
+	NetworkTokenStatusSuspended = "suspended"
+	NetworkTokenStatusClosed    = "closed"
+)

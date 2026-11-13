@@ -2,6 +2,7 @@ package common
 
 import (
 	"fmt"
+	"log/slog"
 	"net/http"
 	"time"
 )
@@ -102,6 +103,11 @@ type Config struct {
 	Log4XXError bool `json:"log4XXError,omitempty"`
 	// when true logs 5XX errors on stdout
 	Log5XXError bool `json:"log5XXError,omitempty"`
+	// Logger receives the request and response dumps enabled by Debug (at debug level) and the
+	// error response bodies enabled by Log3XXError, Log4XXError, and Log5XXError (at warn level,
+	// error level for 5XX). When nil, dumps go to the standard log package and error response
+	// bodies to stdout.
+	Logger *slog.Logger `json:"-"`
 }
 
 func (c *Config) GetCheckoutEndpoint() (string, error) {

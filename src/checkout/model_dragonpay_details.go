@@ -202,8 +202,8 @@ func (o DragonpayDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o DragonpayDetails) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o DragonpayDetails) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.CheckoutAttemptId) {
 		toSerialize["checkoutAttemptId"] = o.CheckoutAttemptId
 	}
@@ -263,3 +263,11 @@ func (o *DragonpayDetails) isValidType() bool {
 	}
 	return false
 }
+
+// Values allowed for DragonpayDetails.Type.
+const (
+	DragonpayDetailsTypeDragonpayEbanking       = "dragonpay_ebanking"
+	DragonpayDetailsTypeDragonpayOtcBanking     = "dragonpay_otc_banking"
+	DragonpayDetailsTypeDragonpayOtcNonBanking  = "dragonpay_otc_non_banking"
+	DragonpayDetailsTypeDragonpayOtcPhilippines = "dragonpay_otc_philippines"
+)

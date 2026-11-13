@@ -100,8 +100,8 @@ func (o OwnerEntity) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o OwnerEntity) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o OwnerEntity) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	toSerialize["id"] = o.Id
 	toSerialize["type"] = o.Type
 	return toSerialize, nil

@@ -250,8 +250,8 @@ func (o ThreeDS2CardRangeDetail) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ThreeDS2CardRangeDetail) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
+func (o ThreeDS2CardRangeDetail) ToMap() (map[string]any, error) {
+	toSerialize := map[string]any{}
 	if !common.IsNil(o.AcsInfoInd) {
 		toSerialize["acsInfoInd"] = o.AcsInfoInd
 	}
