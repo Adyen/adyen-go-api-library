@@ -1,8 +1,8 @@
 {
   "service": "managementwebhooks",
   "project": "go",
-  "generatedAt": "2026-09-28T10:18:01Z",
-  "openapiCommitSha": "1f65c97e26bafa8f7a5d35931b26e16edeec345e",
-  "automationCommitSha": "db93bc35548c7c9d6aff97d76a513634967fd304",
-  "libraryCommitSha": "91a97e53ca75e4df4a7e3db346bd27d982e08965"
+  "generatedAt": "2026-11-13T11:21:55Z",
+  "openapiCommitSha": "ee0cdd3511442c12c49394636e75be31e46cd915",
+  "automationCommitSha": "ae7e57613c3a29391a4adb4ff02e9ddda4611b16",
+  "libraryCommitSha": "f96755ef625d239477ff4a41940994aeb77f1cdc"
 }
