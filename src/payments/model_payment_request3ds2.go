@@ -90,7 +90,7 @@ type PaymentRequest3ds2 struct {
 	ThreeDS2Result      *ThreeDS2Result      `json:"threeDS2Result,omitempty"`
 	// The ThreeDS2Token that was returned in the /authorise call.
 	ThreeDS2Token *string `json:"threeDS2Token,omitempty"`
-	// Required to trigger the [authentication-only flow](https://docs.adyen.com/online-payments/3d-secure/authentication-only/). If set to **true**, you will only perform the 3D Secure 2 authentication, and will not proceed to the payment authorization.Default: **false**.
+	// Required to trigger the [authentication-only flow](https://docs.adyen.com/online-payments/3d-secure/authentication-only/). If set to **true**, you will only perform the 3D Secure 2 authentication, and will not proceed to the payment authorization.  Default: **false**.
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
 	// The reference value to aggregate sales totals in reporting. When not specified, the store field is used (if available).
 	TotalsGroup *string `json:"totalsGroup,omitempty"`

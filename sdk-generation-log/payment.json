@@ -1,8 +1,8 @@
 {
   "service": "payment",
   "project": "go",
-  "generatedAt": "2026-07-27T10:29:24Z",
-  "openapiCommitSha": "2f7d0e1961772ee974be4ed268282cf2ba8f6e03",
-  "automationCommitSha": "0c108bd8050cf480d2710b78b770afdfbdd89397",
-  "libraryCommitSha": "770e5486c9466329699322894e5f93fe6a39684e"
+  "generatedAt": "2026-11-18T10:23:14Z",
+  "openapiCommitSha": "63f87f80250b7c5c0f006fbb123fb49c9e84a93b",
+  "automationCommitSha": "ae7e57613c3a29391a4adb4ff02e9ddda4611b16",
+  "libraryCommitSha": "12a458cae6524bde564e5e868a0a695af9edef7a"
 }
