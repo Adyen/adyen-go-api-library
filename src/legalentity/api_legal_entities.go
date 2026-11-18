@@ -299,6 +299,51 @@ func (a *LegalEntitiesApi) GetLegalEntity(ctx context.Context, r LegalEntitiesAp
 	return *res, httpRes, err
 }
 
+// All parameters accepted by LegalEntitiesApi.RequestPeriodicReview
+type LegalEntitiesApiRequestPeriodicReviewInput struct {
+	id string
+}
+
+/*
+Prepare a request for RequestPeriodicReview
+@param id The unique identifier of the legal entity.
+@return LegalEntitiesApiRequestPeriodicReviewInput
+*/
+func (a *LegalEntitiesApi) RequestPeriodicReviewInput(id string) LegalEntitiesApiRequestPeriodicReviewInput {
+	return LegalEntitiesApiRequestPeriodicReviewInput{
+		id: id,
+	}
+}
+
+/*
+RequestPeriodicReview Request periodic data review.
+
+Requests a periodic data review for the legal entity of the user specified in the path.
+
+@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+@param r LegalEntitiesApiRequestPeriodicReviewInput - Request parameters, see RequestPeriodicReviewInput
+@return *http.Response, error
+*/
+func (a *LegalEntitiesApi) RequestPeriodicReview(ctx context.Context, r LegalEntitiesApiRequestPeriodicReviewInput) (*http.Response, error) {
+	var res interface{}
+	path := "/legalEntities/{id}/requestPeriodicReview"
+	path = strings.Replace(path, "{"+"id"+"}", url.PathEscape(common.ParameterValueToString(r.id, "id")), -1)
+	queryParams := url.Values{}
+	headerParams := make(map[string]string)
+	httpRes, err := common.SendAPIRequest(
+		ctx,
+		a.Client,
+		nil,
+		res,
+		http.MethodPost,
+		a.BasePath()+path,
+		queryParams,
+		headerParams,
+	)
+
+	return httpRes, err
+}
+
 // All parameters accepted by LegalEntitiesApi.UpdateLegalEntity
 type LegalEntitiesApiUpdateLegalEntityInput struct {
 	id                         string

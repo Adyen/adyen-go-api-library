@@ -20,7 +20,7 @@ var _ common.MappedNullable = &SoleProprietorship{}
 // SoleProprietorship struct for SoleProprietorship
 type SoleProprietorship struct {
 	// The two-character [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code of the governing country.
-	CountryOfGoverningLaw string `json:"countryOfGoverningLaw"`
+	CountryOfGoverningLaw *string `json:"countryOfGoverningLaw,omitempty"`
 	// The date when the legal arrangement was incorporated in YYYY-MM-DD format.
 	DateOfIncorporation *string `json:"dateOfIncorporation,omitempty"`
 	// The registered name, if different from the `name`.
@@ -29,12 +29,14 @@ type SoleProprietorship struct {
 	DoingBusinessAsAbsent common.NullableBool `json:"doingBusinessAsAbsent,omitempty"`
 	// The information from the financial report of the sole proprietorship.
 	FinancialReports []FinancialReport `json:"financialReports,omitempty"`
-	// The legal name.
+	// The legal name. Must be at least 3 characters.  Only the following special characters are allowed: **,**, **-**, **—**, **.**, **;**, **:**, **&**, **?**, **@**, **(**, **)**, **\"**, **'**, **!**, **\\**, **+**, **_/_**. Accents and non-Latin scripts are allowed.  The field cannot contain emojis, only one repeated character (unless two characters long), only symbols, only numbers, only spaces, or **fictitious names** such as **John Doe** or **N/A**.  For more information, see [validations on fields](https://docs.adyen.com/platforms/onboard-users/onboarding-versions/onboarding-v4/#validations).
 	Name                     string   `json:"name"`
 	PrincipalPlaceOfBusiness *Address `json:"principalPlaceOfBusiness,omitempty"`
 	RegisteredAddress        Address  `json:"registeredAddress"`
 	// The registration number.
 	RegistrationNumber *string `json:"registrationNumber,omitempty"`
+	// Indicates if the `registeredAddress` is a place of residence, instead of a business address.  Set to **true** if the address is a place of residence. The default value is **false**.
+	ResidentialAddressIndicator common.NullableBool `json:"residentialAddressIndicator,omitempty"`
 	// The tax information is absent.
 	TaxAbsent common.NullableBool `json:"taxAbsent,omitempty"`
 	// The tax information of the entity.
@@ -49,9 +51,8 @@ type SoleProprietorship struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSoleProprietorship(countryOfGoverningLaw string, name string, registeredAddress Address) *SoleProprietorship {
+func NewSoleProprietorship(name string, registeredAddress Address) *SoleProprietorship {
 	this := SoleProprietorship{}
-	this.CountryOfGoverningLaw = countryOfGoverningLaw
 	this.Name = name
 	this.RegisteredAddress = registeredAddress
 	return &this
@@ -65,28 +66,36 @@ func NewSoleProprietorshipWithDefaults() *SoleProprietorship {
 	return &this
 }
 
-// GetCountryOfGoverningLaw returns the CountryOfGoverningLaw field value
+// GetCountryOfGoverningLaw returns the CountryOfGoverningLaw field value if set, zero value otherwise.
 func (o *SoleProprietorship) GetCountryOfGoverningLaw() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.CountryOfGoverningLaw) {
 		var ret string
 		return ret
 	}
-
-	return o.CountryOfGoverningLaw
+	return *o.CountryOfGoverningLaw
 }
 
-// GetCountryOfGoverningLawOk returns a tuple with the CountryOfGoverningLaw field value
+// GetCountryOfGoverningLawOk returns a tuple with the CountryOfGoverningLaw field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SoleProprietorship) GetCountryOfGoverningLawOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.CountryOfGoverningLaw) {
 		return nil, false
 	}
-	return &o.CountryOfGoverningLaw, true
+	return o.CountryOfGoverningLaw, true
 }
 
-// SetCountryOfGoverningLaw sets field value
+// HasCountryOfGoverningLaw returns a boolean if a field has been set.
+func (o *SoleProprietorship) HasCountryOfGoverningLaw() bool {
+	if o != nil && !common.IsNil(o.CountryOfGoverningLaw) {
+		return true
+	}
+
+	return false
+}
+
+// SetCountryOfGoverningLaw gets a reference to the given string and assigns it to the CountryOfGoverningLaw field.
 func (o *SoleProprietorship) SetCountryOfGoverningLaw(v string) {
-	o.CountryOfGoverningLaw = v
+	o.CountryOfGoverningLaw = &v
 }
 
 // GetDateOfIncorporation returns the DateOfIncorporation field value if set, zero value otherwise.
@@ -340,6 +349,49 @@ func (o *SoleProprietorship) SetRegistrationNumber(v string) {
 	o.RegistrationNumber = &v
 }
 
+// GetResidentialAddressIndicator returns the ResidentialAddressIndicator field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SoleProprietorship) GetResidentialAddressIndicator() bool {
+	if o == nil || common.IsNil(o.ResidentialAddressIndicator.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.ResidentialAddressIndicator.Get()
+}
+
+// GetResidentialAddressIndicatorOk returns a tuple with the ResidentialAddressIndicator field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SoleProprietorship) GetResidentialAddressIndicatorOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ResidentialAddressIndicator.Get(), o.ResidentialAddressIndicator.IsSet()
+}
+
+// HasResidentialAddressIndicator returns a boolean if a field has been set.
+func (o *SoleProprietorship) HasResidentialAddressIndicator() bool {
+	if o != nil && o.ResidentialAddressIndicator.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetResidentialAddressIndicator gets a reference to the given NullableBool and assigns it to the ResidentialAddressIndicator field.
+func (o *SoleProprietorship) SetResidentialAddressIndicator(v bool) {
+	o.ResidentialAddressIndicator.Set(&v)
+}
+
+// SetResidentialAddressIndicatorNil sets the value for ResidentialAddressIndicator to be an explicit nil
+func (o *SoleProprietorship) SetResidentialAddressIndicatorNil() {
+	o.ResidentialAddressIndicator.Set(nil)
+}
+
+// UnsetResidentialAddressIndicator ensures that no value is present for ResidentialAddressIndicator, not even an explicit nil
+func (o *SoleProprietorship) UnsetResidentialAddressIndicator() {
+	o.ResidentialAddressIndicator.Unset()
+}
+
 // GetTaxAbsent returns the TaxAbsent field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *SoleProprietorship) GetTaxAbsent() bool {
 	if o == nil || common.IsNil(o.TaxAbsent.Get()) {
@@ -489,7 +541,9 @@ func (o SoleProprietorship) MarshalJSON() ([]byte, error) {
 
 func (o SoleProprietorship) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["countryOfGoverningLaw"] = o.CountryOfGoverningLaw
+	if !common.IsNil(o.CountryOfGoverningLaw) {
+		toSerialize["countryOfGoverningLaw"] = o.CountryOfGoverningLaw
+	}
 	if !common.IsNil(o.DateOfIncorporation) {
 		toSerialize["dateOfIncorporation"] = o.DateOfIncorporation
 	}
@@ -509,6 +563,9 @@ func (o SoleProprietorship) ToMap() (map[string]interface{}, error) {
 	toSerialize["registeredAddress"] = o.RegisteredAddress
 	if !common.IsNil(o.RegistrationNumber) {
 		toSerialize["registrationNumber"] = o.RegistrationNumber
+	}
+	if o.ResidentialAddressIndicator.IsSet() {
+		toSerialize["residentialAddressIndicator"] = o.ResidentialAddressIndicator.Get()
 	}
 	if o.TaxAbsent.IsSet() {
 		toSerialize["taxAbsent"] = o.TaxAbsent.Get()
