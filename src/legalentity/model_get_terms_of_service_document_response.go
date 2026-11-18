@@ -29,7 +29,7 @@ type GetTermsOfServiceDocumentResponse struct {
 	TermsOfServiceDocumentFormat *string `json:"termsOfServiceDocumentFormat,omitempty"`
 	// The unique identifier of the Terms of Service document.
 	TermsOfServiceDocumentId *string `json:"termsOfServiceDocumentId,omitempty"`
-	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee** *  **adyenPccr** *  **adyenChargeCard** *  **kycOnInvite**
+	// The type of Terms of Service.  Possible values: *  **adyenForPlatformsManage** *  **adyenIssuing** *  **adyenForPlatformsAdvanced** *  **adyenCapital** *  **adyenCapitalCashAdvance** *  **adyenAccount** *  **adyenCard** *  **adyenFranchisee** *  **adyenPccr** *  **adyenChargeCard** *  **kycOnInvite** *  **directDebit**
 	Type *string `json:"type,omitempty"`
 }
 
@@ -310,7 +310,7 @@ func (v *NullableGetTermsOfServiceDocumentResponse) UnmarshalJSON(src []byte) er
 }
 
 func (o *GetTermsOfServiceDocumentResponse) isValidType() bool {
-	var allowedEnumValues = []string{"adyenAccount", "adyenCapital", "adyenCard", "adyenChargeCard", "adyenForPlatformsAdvanced", "adyenForPlatformsManage", "adyenFranchisee", "adyenIssuing", "adyenPccr", "kycOnInvite"}
+	var allowedEnumValues = []string{"adyenAccount", "adyenCapital", "adyenCapitalCashAdvance", "adyenCard", "adyenChargeCard", "adyenForPlatformsAdvanced", "adyenForPlatformsManage", "adyenFranchisee", "adyenIssuing", "adyenPccr", "directDebit", "kycOnInvite"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true
