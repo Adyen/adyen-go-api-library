@@ -458,7 +458,7 @@ func (v *NullableDisputeEventNotification) UnmarshalJSON(src []byte) error {
 }
 
 func (o *DisputeEventNotification) isValidType() bool {
-	var allowedEnumValues = []string{"fraud", "notDelivered", "duplicate", "other"}
+	var allowedEnumValues = []string{"fraud", "notDelivered", "duplicate", "notAsDescribed", "cancelled", "other"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true
