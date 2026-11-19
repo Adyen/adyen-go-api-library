@@ -15,11 +15,19 @@ import (
 
 // ScheduleTerminalActionsRequestActionDetails - Information about the action to take.
 type ScheduleTerminalActionsRequestActionDetails struct {
+	ForceRebootDetails                 *ForceRebootDetails
 	InstallAndroidAppDetails           *InstallAndroidAppDetails
 	InstallAndroidCertificateDetails   *InstallAndroidCertificateDetails
 	ReleaseUpdateDetails               *ReleaseUpdateDetails
 	UninstallAndroidAppDetails         *UninstallAndroidAppDetails
 	UninstallAndroidCertificateDetails *UninstallAndroidCertificateDetails
+}
+
+// ForceRebootDetailsAsScheduleTerminalActionsRequestActionDetails is a convenience function that returns ForceRebootDetails wrapped in ScheduleTerminalActionsRequestActionDetails
+func ForceRebootDetailsAsScheduleTerminalActionsRequestActionDetails(v *ForceRebootDetails) ScheduleTerminalActionsRequestActionDetails {
+	return ScheduleTerminalActionsRequestActionDetails{
+		ForceRebootDetails: v,
+	}
 }
 
 // InstallAndroidAppDetailsAsScheduleTerminalActionsRequestActionDetails is a convenience function that returns InstallAndroidAppDetails wrapped in ScheduleTerminalActionsRequestActionDetails
@@ -61,6 +69,19 @@ func UninstallAndroidCertificateDetailsAsScheduleTerminalActionsRequestActionDet
 func (dst *ScheduleTerminalActionsRequestActionDetails) UnmarshalJSON(data []byte) error {
 	var err error
 	match := 0
+	// try to unmarshal data into ForceRebootDetails
+	err = json.Unmarshal(data, &dst.ForceRebootDetails)
+	if err == nil {
+		jsonForceRebootDetails, _ := json.Marshal(dst.ForceRebootDetails)
+		if string(jsonForceRebootDetails) == "{}" || !dst.ForceRebootDetails.isValidType() { // empty struct
+			dst.ForceRebootDetails = nil
+		} else {
+			match++
+		}
+	} else {
+		dst.ForceRebootDetails = nil
+	}
+
 	// try to unmarshal data into InstallAndroidAppDetails
 	err = json.Unmarshal(data, &dst.InstallAndroidAppDetails)
 	if err == nil {
@@ -128,6 +149,7 @@ func (dst *ScheduleTerminalActionsRequestActionDetails) UnmarshalJSON(data []byt
 
 	if match > 1 { // more than 1 match
 		// reset to nil
+		dst.ForceRebootDetails = nil
 		dst.InstallAndroidAppDetails = nil
 		dst.InstallAndroidCertificateDetails = nil
 		dst.ReleaseUpdateDetails = nil
@@ -144,6 +166,10 @@ func (dst *ScheduleTerminalActionsRequestActionDetails) UnmarshalJSON(data []byt
 
 // Marshal data from the first non-nil pointers in the struct to JSON
 func (src ScheduleTerminalActionsRequestActionDetails) MarshalJSON() ([]byte, error) {
+	if src.ForceRebootDetails != nil {
+		return json.Marshal(&src.ForceRebootDetails)
+	}
+
 	if src.InstallAndroidAppDetails != nil {
 		return json.Marshal(&src.InstallAndroidAppDetails)
 	}
@@ -172,6 +198,10 @@ func (obj *ScheduleTerminalActionsRequestActionDetails) GetActualInstance() inte
 	if obj == nil {
 		return nil
 	}
+	if obj.ForceRebootDetails != nil {
+		return obj.ForceRebootDetails
+	}
+
 	if obj.InstallAndroidAppDetails != nil {
 		return obj.InstallAndroidAppDetails
 	}
