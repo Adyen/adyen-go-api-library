@@ -27,6 +27,8 @@ type Balance struct {
 	Currency string `json:"currency"`
 	// The sum of the transactions that will be settled in the future.
 	Pending *int64 `json:"pending,omitempty"`
+	// The balance that will become the available balance after the pending balance is settled.  The pending available balance is equal to the lower of the following: - The `pending` balance - The `pending` balance plus the `available` balance.
+	PendingAvailable *int64 `json:"pendingAvailable,omitempty"`
 	// The balance currently held in reserve.
 	Reserved int64 `json:"reserved"`
 }
@@ -156,6 +158,38 @@ func (o *Balance) SetPending(v int64) {
 	o.Pending = &v
 }
 
+// GetPendingAvailable returns the PendingAvailable field value if set, zero value otherwise.
+func (o *Balance) GetPendingAvailable() int64 {
+	if o == nil || common.IsNil(o.PendingAvailable) {
+		var ret int64
+		return ret
+	}
+	return *o.PendingAvailable
+}
+
+// GetPendingAvailableOk returns a tuple with the PendingAvailable field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Balance) GetPendingAvailableOk() (*int64, bool) {
+	if o == nil || common.IsNil(o.PendingAvailable) {
+		return nil, false
+	}
+	return o.PendingAvailable, true
+}
+
+// HasPendingAvailable returns a boolean if a field has been set.
+func (o *Balance) HasPendingAvailable() bool {
+	if o != nil && !common.IsNil(o.PendingAvailable) {
+		return true
+	}
+
+	return false
+}
+
+// SetPendingAvailable gets a reference to the given int64 and assigns it to the PendingAvailable field.
+func (o *Balance) SetPendingAvailable(v int64) {
+	o.PendingAvailable = &v
+}
+
 // GetReserved returns the Reserved field value
 func (o *Balance) GetReserved() int64 {
 	if o == nil {
@@ -195,6 +229,9 @@ func (o Balance) ToMap() (map[string]interface{}, error) {
 	toSerialize["currency"] = o.Currency
 	if !common.IsNil(o.Pending) {
 		toSerialize["pending"] = o.Pending
+	}
+	if !common.IsNil(o.PendingAvailable) {
+		toSerialize["pendingAvailable"] = o.PendingAvailable
 	}
 	toSerialize["reserved"] = o.Reserved
 	return toSerialize, nil

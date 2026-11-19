@@ -1,0 +1,8 @@
+{
+  "service": "configurationwebhooks",
+  "project": "go",
+  "generatedAt": "2026-11-13T11:22:01Z",
+  "openapiCommitSha": "ee0cdd3511442c12c49394636e75be31e46cd915",
+  "automationCommitSha": "ae7e57613c3a29391a4adb4ff02e9ddda4611b16",
+  "libraryCommitSha": "f96755ef625d239477ff4a41940994aeb77f1cdc"
+}
