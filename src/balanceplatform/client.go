@@ -21,7 +21,11 @@ type APIClient struct {
 
 	AccountHoldersApi *AccountHoldersApi
 
+	AuthorizedCardUsersApi *AuthorizedCardUsersApi
+
 	BalanceAccountsApi *BalanceAccountsApi
+
+	BalancesApi *BalancesApi
 
 	BankAccountValidationApi *BankAccountValidationApi
 
@@ -43,7 +47,15 @@ type APIClient struct {
 
 	PlatformApi *PlatformApi
 
+	SCAAssociationManagementApi *SCAAssociationManagementApi
+
+	SCADeviceManagementApi *SCADeviceManagementApi
+
 	TransactionRulesApi *TransactionRulesApi
+
+	TransferLimitsBalanceAccountLevelApi *TransferLimitsBalanceAccountLevelApi
+
+	TransferLimitsBalancePlatformLevelApi *TransferLimitsBalancePlatformLevelApi
 
 	TransferRoutesApi *TransferRoutesApi
 }
@@ -58,7 +70,9 @@ func NewAPIClient(client *common.Client) *APIClient {
 
 	// API Services
 	c.AccountHoldersApi = (*AccountHoldersApi)(&c.common)
+	c.AuthorizedCardUsersApi = (*AuthorizedCardUsersApi)(&c.common)
 	c.BalanceAccountsApi = (*BalanceAccountsApi)(&c.common)
+	c.BalancesApi = (*BalancesApi)(&c.common)
 	c.BankAccountValidationApi = (*BankAccountValidationApi)(&c.common)
 	c.CardOrdersApi = (*CardOrdersApi)(&c.common)
 	c.GrantAccountsApi = (*GrantAccountsApi)(&c.common)
@@ -69,7 +83,11 @@ func NewAPIClient(client *common.Client) *APIClient {
 	c.PaymentInstrumentGroupsApi = (*PaymentInstrumentGroupsApi)(&c.common)
 	c.PaymentInstrumentsApi = (*PaymentInstrumentsApi)(&c.common)
 	c.PlatformApi = (*PlatformApi)(&c.common)
+	c.SCAAssociationManagementApi = (*SCAAssociationManagementApi)(&c.common)
+	c.SCADeviceManagementApi = (*SCADeviceManagementApi)(&c.common)
 	c.TransactionRulesApi = (*TransactionRulesApi)(&c.common)
+	c.TransferLimitsBalanceAccountLevelApi = (*TransferLimitsBalanceAccountLevelApi)(&c.common)
+	c.TransferLimitsBalancePlatformLevelApi = (*TransferLimitsBalancePlatformLevelApi)(&c.common)
 	c.TransferRoutesApi = (*TransferRoutesApi)(&c.common)
 
 	return c

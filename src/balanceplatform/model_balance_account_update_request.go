@@ -19,7 +19,7 @@ var _ common.MappedNullable = &BalanceAccountUpdateRequest{}
 
 // BalanceAccountUpdateRequest struct for BalanceAccountUpdateRequest
 type BalanceAccountUpdateRequest struct {
-	// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/#/balanceplatform/latest/post/accountHolders__resParam_id) associated with the balance account.
+	// The unique identifier of the [account holder](https://docs.adyen.com/api-explorer/balanceplatform/latest/post/accountHolders#responses-200-id) associated with the balance account.
 	AccountHolderId *string `json:"accountHolderId,omitempty"`
 	// A human-readable description of the balance account. You can use this parameter to distinguish between multiple balance accounts under an account holder.
 	Description *string `json:"description,omitempty"`

@@ -25,7 +25,7 @@ type TransferRoute struct {
 	Country *string `json:"country,omitempty"`
 	// The three-character ISO currency code of transfer. For example, **USD** or **EUR**.
 	Currency *string `json:"currency,omitempty"`
-	// The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Possible values:  * **regular**: for normal, low-value transactions.  * **fast**: a faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: the fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: for instant funds transfers in [SEPA countries](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: for high-value transfers to a recipient in a different country.  * **internal**: for transfers to an Adyen-issued business bank account (by bank account number/IBAN).
+	// The priority for the bank transfer. This sets the speed at which the transfer is sent and the fees that you have to pay. Possible values:  * **regular**: For normal, low-value transactions.  * **fast**: A faster way to transfer funds, but the fees are higher. Recommended for high-priority, low-value transactions.  * **wire**: The fastest way to transfer funds, but this has the highest fees. Recommended for high-priority, high-value transactions.  * **instant**: For instant funds transfers within the United States and in [SEPA locations](https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html).  * **crossBorder**: For high-value transfers to a recipient in a different country.  * **internal**: For transfers to an Adyen-issued business bank account (by bank account number/IBAN).
 	Priority *string `json:"priority,omitempty"`
 	// A set of rules defined by clearing houses and banking partners. Your transfer request must adhere to these rules to ensure successful initiation of transfer. Based on the priority, one or more requirements may be returned. Each requirement is defined with a `type` and `description`.
 	Requirements []TransferRouteRequirementsInner `json:"requirements,omitempty"`
@@ -273,7 +273,7 @@ func (v *NullableTransferRoute) UnmarshalJSON(src []byte) error {
 }
 
 func (o *TransferRoute) isValidCategory() bool {
-	var allowedEnumValues = []string{"bank", "card", "grants", "internal", "issuedCard", "migration", "platformPayment", "topUp", "upgrade"}
+	var allowedEnumValues = []string{"bank", "card", "grants", "interest", "internal", "issuedCard", "migration", "platformPayment", "topUp", "upgrade"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetCategory() == allowed {
 			return true

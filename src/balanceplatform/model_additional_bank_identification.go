@@ -21,7 +21,7 @@ var _ common.MappedNullable = &AdditionalBankIdentification{}
 type AdditionalBankIdentification struct {
 	// The value of the additional bank identification.
 	Code *string `json:"code,omitempty"`
-	// The type of additional bank identification, depending on the country.  Possible values:   * **gbSortCode**: The 6-digit [UK sort code](https://en.wikipedia.org/wiki/Sort_code), without separators or spaces  * **usRoutingNumber**: The 9-digit [routing number](https://en.wikipedia.org/wiki/ABA_routing_transit_number), without separators or spaces.
+	// The type of additional bank identification, depending on the country.  Possible values:   * **auBsbCode**: The 6-digit [Australian Bank State Branch (BSB) code](https://en.wikipedia.org/wiki/Bank_state_branch), without separators or spaces.  * **caRoutingNumber**: The 9-digit [Canadian routing number](https://en.wikipedia.org/wiki/Routing_number_(Canada)), in EFT format, without separators or spaces.  * **gbSortCode**: The 6-digit [UK sort code](https://en.wikipedia.org/wiki/Sort_code), without separators or spaces  * **usRoutingNumber**: The 9-digit [routing number](https://en.wikipedia.org/wiki/ABA_routing_transit_number), without separators or spaces.
 	Type *string `json:"type,omitempty"`
 }
 
@@ -162,7 +162,7 @@ func (v *NullableAdditionalBankIdentification) UnmarshalJSON(src []byte) error {
 }
 
 func (o *AdditionalBankIdentification) isValidType() bool {
-	var allowedEnumValues = []string{"gbSortCode", "usRoutingNumber"}
+	var allowedEnumValues = []string{"auBsbCode", "caRoutingNumber", "gbSortCode", "usRoutingNumber"}
 	for _, allowed := range allowedEnumValues {
 		if o.GetType() == allowed {
 			return true
