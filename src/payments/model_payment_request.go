@@ -98,10 +98,12 @@ type PaymentRequest struct {
 	Splits []Split `json:"splits,omitempty"`
 	// Required for Adyen for Platforms integrations if you are a platform model. This is your [reference](https://docs.adyen.com/api-explorer/Management/3/post/merchants/(merchantId)/stores#request-reference) (on [balance platform](https://docs.adyen.com/platforms)) or the [storeReference](https://docs.adyen.com/api-explorer/Account/latest/post/updateAccountHolder#request-accountHolderDetails-storeDetails-storeReference) (in the [classic integration](https://docs.adyen.com/classic-platforms/processing-payments/route-payment-to-store/#route-a-payment-to-a-store)) for the ecommerce or point-of-sale store that is processing the payment.
 	Store *string `json:"store,omitempty"`
+	// When enrolling a new user, this field determines whether to store the shopper's card in their Click to Pay profile. When this is set to **True**, the request must include `shopperEmail`, `shopperName`, and `telephoneNumber`.
+	StoreClickToPayProfile *bool `json:"storeClickToPayProfile,omitempty"`
 	// The shopper's telephone number.  The phone number must include a plus sign (+) and a country code (1-3 digits), followed by the number (4-15 digits). If the value you provide does not follow the guidelines, we do not submit it for authentication. > Required for Visa and JCB transactions that require 3D Secure 2 authentication, if you did not include the `shopperEmail`.
 	TelephoneNumber     *string              `json:"telephoneNumber,omitempty"`
 	ThreeDS2RequestData *ThreeDS2RequestData `json:"threeDS2RequestData,omitempty"`
-	// Required to trigger the [authentication-only flow](https://docs.adyen.com/online-payments/3d-secure/authentication-only/). If set to **true**, you will only perform the 3D Secure 2 authentication, and will not proceed to the payment authorization.Default: **false**.
+	// Required to trigger the [authentication-only flow](https://docs.adyen.com/online-payments/3d-secure/authentication-only/). If set to **true**, you will only perform the 3D Secure 2 authentication, and will not proceed to the payment authorization.  Default: **false**.
 	ThreeDSAuthenticationOnly *bool `json:"threeDSAuthenticationOnly,omitempty"`
 	// The reference value to aggregate sales totals in reporting. When not specified, the store field is used (if available).
 	TotalsGroup *string `json:"totalsGroup,omitempty"`
@@ -1677,6 +1679,38 @@ func (o *PaymentRequest) SetStore(v string) {
 	o.Store = &v
 }
 
+// GetStoreClickToPayProfile returns the StoreClickToPayProfile field value if set, zero value otherwise.
+func (o *PaymentRequest) GetStoreClickToPayProfile() bool {
+	if o == nil || common.IsNil(o.StoreClickToPayProfile) {
+		var ret bool
+		return ret
+	}
+	return *o.StoreClickToPayProfile
+}
+
+// GetStoreClickToPayProfileOk returns a tuple with the StoreClickToPayProfile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentRequest) GetStoreClickToPayProfileOk() (*bool, bool) {
+	if o == nil || common.IsNil(o.StoreClickToPayProfile) {
+		return nil, false
+	}
+	return o.StoreClickToPayProfile, true
+}
+
+// HasStoreClickToPayProfile returns a boolean if a field has been set.
+func (o *PaymentRequest) HasStoreClickToPayProfile() bool {
+	if o != nil && !common.IsNil(o.StoreClickToPayProfile) {
+		return true
+	}
+
+	return false
+}
+
+// SetStoreClickToPayProfile gets a reference to the given bool and assigns it to the StoreClickToPayProfile field.
+func (o *PaymentRequest) SetStoreClickToPayProfile(v bool) {
+	o.StoreClickToPayProfile = &v
+}
+
 // GetTelephoneNumber returns the TelephoneNumber field value if set, zero value otherwise.
 func (o *PaymentRequest) GetTelephoneNumber() string {
 	if o == nil || common.IsNil(o.TelephoneNumber) {
@@ -1987,6 +2021,9 @@ func (o PaymentRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !common.IsNil(o.Store) {
 		toSerialize["store"] = o.Store
+	}
+	if !common.IsNil(o.StoreClickToPayProfile) {
+		toSerialize["storeClickToPayProfile"] = o.StoreClickToPayProfile
 	}
 	if !common.IsNil(o.TelephoneNumber) {
 		toSerialize["telephoneNumber"] = o.TelephoneNumber
