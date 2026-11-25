@@ -1,0 +1,8 @@
+{
+  "service": "capital",
+  "project": "go",
+  "generatedAt": "2026-11-25T08:15:53Z",
+  "openapiCommitSha": "7280e1fdc07c5a2464fe0b268f893df8afaa410c",
+  "automationCommitSha": "ae7e57613c3a29391a4adb4ff02e9ddda4611b16",
+  "libraryCommitSha": "12a458cae6524bde564e5e868a0a695af9edef7a"
+}
