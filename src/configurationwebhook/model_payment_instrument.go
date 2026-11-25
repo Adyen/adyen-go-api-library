@@ -21,7 +21,7 @@ var _ common.MappedNullable = &PaymentInstrument{}
 type PaymentInstrument struct {
 	// Contains optional, additional business account details. Returned when you create a payment instrument with `type` **bankAccount**.
 	// Deprecated since Configuration webhooks v2
-	// Please use `bankAccount` object instead
+	/* Please use `bankAccount` object instead */
 	AdditionalBankAccountIdentifications []PaymentInstrumentAdditionalBankAccountIdentificationsInner `json:"additionalBankAccountIdentifications,omitempty"`
 	// The unique identifier of the [balance account](https://docs.adyen.com/api-explorer/#/balanceplatform/v1/post/balanceAccounts__resParam_id) associated with the payment instrument.
 	BalanceAccountId string              `json:"balanceAccountId"`
@@ -74,7 +74,7 @@ func NewPaymentInstrumentWithDefaults() *PaymentInstrument {
 
 // GetAdditionalBankAccountIdentifications returns the AdditionalBankAccountIdentifications field value if set, zero value otherwise.
 // Deprecated since Configuration webhooks v2
-// Please use `bankAccount` object instead
+/* Please use `bankAccount` object instead */
 func (o *PaymentInstrument) GetAdditionalBankAccountIdentifications() []PaymentInstrumentAdditionalBankAccountIdentificationsInner {
 	if o == nil || common.IsNil(o.AdditionalBankAccountIdentifications) {
 		var ret []PaymentInstrumentAdditionalBankAccountIdentificationsInner
@@ -86,7 +86,7 @@ func (o *PaymentInstrument) GetAdditionalBankAccountIdentifications() []PaymentI
 // GetAdditionalBankAccountIdentificationsOk returns a tuple with the AdditionalBankAccountIdentifications field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // Deprecated since Configuration webhooks v2
-// Please use `bankAccount` object instead
+/* Please use `bankAccount` object instead */
 func (o *PaymentInstrument) GetAdditionalBankAccountIdentificationsOk() ([]PaymentInstrumentAdditionalBankAccountIdentificationsInner, bool) {
 	if o == nil || common.IsNil(o.AdditionalBankAccountIdentifications) {
 		return nil, false
@@ -105,7 +105,7 @@ func (o *PaymentInstrument) HasAdditionalBankAccountIdentifications() bool {
 
 // SetAdditionalBankAccountIdentifications gets a reference to the given []PaymentInstrumentAdditionalBankAccountIdentificationsInner and assigns it to the AdditionalBankAccountIdentifications field.
 // Deprecated since Configuration webhooks v2
-// Please use `bankAccount` object instead
+/* Please use `bankAccount` object instead */
 func (o *PaymentInstrument) SetAdditionalBankAccountIdentifications(v []PaymentInstrumentAdditionalBankAccountIdentificationsInner) {
 	o.AdditionalBankAccountIdentifications = v
 }

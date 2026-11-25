@@ -38,22 +38,23 @@ type Card struct {
 	// Last last four digits of the card number.
 	LastFour *string `json:"lastFour,omitempty"`
 	// The primary account number (PAN) of the card. > The PAN is masked by default and returned only for single-use virtual cards.
-	Number string `json:"number"`
-	// Allocates a specific product range for either a physical or a virtual card. Possible values: **fullySupported**, **secureCorporate**. >Reach out to your Adyen contact to get the values relevant for your integration.
+	Number *string `json:"number,omitempty"`
+	// The 3DS configuration of the physical or the virtual card. Possible values: **fullySupported**, **secureCorporate**. > Reach out to your Adyen contact to get the values relevant for your integration.
 	ThreeDSecure *string `json:"threeDSecure,omitempty"`
+	// Specifies how many times the card can be used. Possible values: **singleUse**, **multiUse**.  > Reach out to your Adyen contact to determine the value relevant for your integration.
+	Usage *string `json:"usage,omitempty"`
 }
 
 // NewCard instantiates a new Card object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCard(brand string, brandVariant string, cardholderName string, formFactor string, number string) *Card {
+func NewCard(brand string, brandVariant string, cardholderName string, formFactor string) *Card {
 	this := Card{}
 	this.Brand = brand
 	this.BrandVariant = brandVariant
 	this.CardholderName = cardholderName
 	this.FormFactor = formFactor
-	this.Number = number
 	return &this
 }
 
@@ -385,28 +386,36 @@ func (o *Card) SetLastFour(v string) {
 	o.LastFour = &v
 }
 
-// GetNumber returns the Number field value
+// GetNumber returns the Number field value if set, zero value otherwise.
 func (o *Card) GetNumber() string {
-	if o == nil {
+	if o == nil || common.IsNil(o.Number) {
 		var ret string
 		return ret
 	}
-
-	return o.Number
+	return *o.Number
 }
 
-// GetNumberOk returns a tuple with the Number field value
+// GetNumberOk returns a tuple with the Number field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Card) GetNumberOk() (*string, bool) {
-	if o == nil {
+	if o == nil || common.IsNil(o.Number) {
 		return nil, false
 	}
-	return &o.Number, true
+	return o.Number, true
 }
 
-// SetNumber sets field value
+// HasNumber returns a boolean if a field has been set.
+func (o *Card) HasNumber() bool {
+	if o != nil && !common.IsNil(o.Number) {
+		return true
+	}
+
+	return false
+}
+
+// SetNumber gets a reference to the given string and assigns it to the Number field.
 func (o *Card) SetNumber(v string) {
-	o.Number = v
+	o.Number = &v
 }
 
 // GetThreeDSecure returns the ThreeDSecure field value if set, zero value otherwise.
@@ -439,6 +448,38 @@ func (o *Card) HasThreeDSecure() bool {
 // SetThreeDSecure gets a reference to the given string and assigns it to the ThreeDSecure field.
 func (o *Card) SetThreeDSecure(v string) {
 	o.ThreeDSecure = &v
+}
+
+// GetUsage returns the Usage field value if set, zero value otherwise.
+func (o *Card) GetUsage() string {
+	if o == nil || common.IsNil(o.Usage) {
+		var ret string
+		return ret
+	}
+	return *o.Usage
+}
+
+// GetUsageOk returns a tuple with the Usage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Card) GetUsageOk() (*string, bool) {
+	if o == nil || common.IsNil(o.Usage) {
+		return nil, false
+	}
+	return o.Usage, true
+}
+
+// HasUsage returns a boolean if a field has been set.
+func (o *Card) HasUsage() bool {
+	if o != nil && !common.IsNil(o.Usage) {
+		return true
+	}
+
+	return false
+}
+
+// SetUsage gets a reference to the given string and assigns it to the Usage field.
+func (o *Card) SetUsage(v string) {
+	o.Usage = &v
 }
 
 func (o Card) MarshalJSON() ([]byte, error) {
@@ -476,9 +517,14 @@ func (o Card) ToMap() (map[string]interface{}, error) {
 	if !common.IsNil(o.LastFour) {
 		toSerialize["lastFour"] = o.LastFour
 	}
-	toSerialize["number"] = o.Number
+	if !common.IsNil(o.Number) {
+		toSerialize["number"] = o.Number
+	}
 	if !common.IsNil(o.ThreeDSecure) {
 		toSerialize["threeDSecure"] = o.ThreeDSecure
+	}
+	if !common.IsNil(o.Usage) {
+		toSerialize["usage"] = o.Usage
 	}
 	return toSerialize, nil
 }
