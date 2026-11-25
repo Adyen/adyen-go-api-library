@@ -1,8 +1,8 @@
 {
   "service": "transferwebhooks",
   "project": "go",
-  "generatedAt": "2026-10-01T11:54:20Z",
-  "openapiCommitSha": "3a4da2601f5967a88fe540a4176f3c1d249f72de",
-  "automationCommitSha": "db93bc35548c7c9d6aff97d76a513634967fd304",
-  "libraryCommitSha": "6a7d16c729f5888f118873c6beecd1c5cfba336f"
+  "generatedAt": "2026-11-25T08:15:44Z",
+  "openapiCommitSha": "7280e1fdc07c5a2464fe0b268f893df8afaa410c",
+  "automationCommitSha": "ae7e57613c3a29391a4adb4ff02e9ddda4611b16",
+  "libraryCommitSha": "12a458cae6524bde564e5e868a0a695af9edef7a"
 }
