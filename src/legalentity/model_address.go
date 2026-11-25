@@ -19,7 +19,7 @@ var _ common.MappedNullable = &Address{}
 
 // Address struct for Address
 type Address struct {
-	// The name of the city. Required if `stateOrProvince` is provided.  If you specify the city, you must also send `postalCode` and `street`.
+	// The name of the city. Required if `stateOrProvince` is provided.  If you specify the city, you must also send `postalCode` and `street`.  The city name must be at least 3 characters. If the city name contains only repeated characters, the minimum length is two characters. For example, Aa is accepted, but Aaaa is not.  For more information, see [validations on fields](https://docs.adyen.com/platforms/onboard-users/onboarding-versions/onboarding-v4/#validations).
 	City *string `json:"city,omitempty"`
 	// The two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code.
 	Country string `json:"country"`
@@ -27,7 +27,7 @@ type Address struct {
 	PostalCode *string `json:"postalCode,omitempty"`
 	// The two-letter ISO 3166-2 state or province code. For example, **CA** in the US. Required for Australia and New Zealand.  If you specify the state or province, you must also send `city`, `postalCode`, and `street`.
 	StateOrProvince *string `json:"stateOrProvince,omitempty"`
-	// The name of the street, and the house or building number. Required if `stateOrProvince` and/or `city` is provided.
+	// The name of the street, and the house or building number. Must be at least 3 characters. Required if `stateOrProvince` and/or `city` is provided. For more information, see [validations on fields](https://docs.adyen.com/platforms/onboard-users/onboarding-versions/onboarding-v4/#validations).
 	Street *string `json:"street,omitempty"`
 	// The apartment, unit, or suite number.
 	Street2 *string `json:"street2,omitempty"`
